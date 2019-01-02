@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 496 496" style="enable-background:new 0 0 496 496;" xml:space="preserve">
+<g>
+	<path d="M360,176h32v-16h-32V96h-44.2c2.7-7.5,4.2-15.6,4.2-24c0-39.7-32.3-72-72-72c-39.7,0-72,32.3-72,72c0,8.4,1.5,16.5,4.2,24
+		H136v64h-32v16h32v64H24v48h24v192H32v16h432v-16h-16V288h24v-48H360V176z M136,480H64V288h72V480z M136,272H40v-16h96V272z
+		 M248,16c30.9,0,56,25.1,56,56s-25.1,56-56,56s-56-25.1-56-56S217.1,16,248,16z M152,112h36.2c4.1,6,9,11.4,14.7,16H152V112z
+		 M240,480h-40v-88h40V480z M296,480h-40v-88h40V480z M344,480h-32V376H184v104h-32V176h192V480z M344,160H152v-16h192V160z
+		 M344,128h-50.8c5.7-4.6,10.6-10,14.7-16H344V128z M432,480h-72V288h72V480z M456,256v16h-96v-16H456z"/>
+	<polygon points="240,112 256,112 256,80 288,80 288,64 256,64 256,32 240,32 240,64 208,64 208,80 240,80 	"/>
+	<rect x="376" y="312" width="40" height="16"/>
+	<rect x="376" y="344" width="40" height="16"/>
+	<rect x="376" y="376" width="40" height="16"/>
+	<rect x="376" y="408" width="40" height="16"/>
+	<rect x="376" y="440" width="40" height="16"/>
+	<rect x="80" y="312" width="40" height="16"/>
+	<rect x="80" y="344" width="40" height="16"/>
+	<rect x="80" y="376" width="40" height="16"/>
+	<rect x="80" y="408" width="40" height="16"/>
+	<rect x="80" y="440" width="40" height="16"/>
+	<rect y="480" width="16" height="16"/>
+	<rect x="480" y="480" width="16" height="16"/>
+	<rect x="184" y="208" width="16" height="16"/>
+	<rect x="184" y="248" width="16" height="16"/>
+	<rect x="184" y="288" width="16" height="16"/>
+	<rect x="184" y="328" width="16" height="16"/>
+	<rect x="240" y="208" width="16" height="16"/>
+	<rect x="240" y="248" width="16" height="16"/>
+	<rect x="240" y="288" width="16" height="16"/>
+	<rect x="240" y="328" width="16" height="16"/>
+	<rect x="296" y="208" width="16" height="16"/>
+	<rect x="296" y="248" width="16" height="16"/>
+	<rect x="296" y="288" width="16" height="16"/>
+	<rect x="296" y="328" width="16" height="16"/>
+</g>
+</svg>
