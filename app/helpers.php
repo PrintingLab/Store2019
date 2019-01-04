@@ -8,21 +8,37 @@ function presentPrice($price)
 }
 function printingPrice($price)
 {
-    // return '$'.number_format($price,2);
     $url = public_path()."/storage/jsonconfig/priceprintinglab.json";
     $json = file_get_contents($url);
     $json_data = json_decode($json, true);
-    // echo $json_data[0]->name;
       foreach ($json_data as $value) {
           if ($price >=$value['Pinicial'] && $price <=$value['Pfinal']) {
               $newprice =($price*$value['porcentaje'])/100;
-    // echo 'New peice: '.$newprice.', 4over price: '.$price.', porcent: %'.$value['porcentaje'];
              return  $newprice;
           }
 
      }
 
 }
+
+function printingtax($postalcode)
+{
+    $url = public_path()."/storage/jsonconfig/zips.json";
+    $json = file_get_contents($url);
+    $json_data = json_decode($json, true);
+      foreach ($json_data as $value) {
+         if ($postalcode == $value) {
+            $taxval  = 'cart.tax';
+            break;
+         }else {
+            $taxval  = 'cart.ziptax';
+         }
+     }
+return  $taxval;
+}
+
+
+
 function presentDate($date)
 {
     return Carbon::parse($date)->format('M d, Y');
@@ -38,17 +54,33 @@ function productImage($path)
     return $path && file_exists('storage/'.$path) ? asset('storage/'.$path) : asset('img/not-found.jpg');
 }
 
+function getshipingNumbers()
+{
+    foreach (Cart::content() as $item){
+        $price =  $item->options->shiping;
+    }
+    if (isset($price)) {
+       return $price;
+    }
+    
+}
+
+
+
 function getNumbers()
 {
+    //tax for zip funtion 
+   // printingtax("07061");
     $tax = config('cart.tax') / 100;
     $discount = session()->get('coupon')['discount'] ?? 0;
     $code = session()->get('coupon')['name'] ?? null;
     $newSubtotal = (Cart::subtotal() - $discount);
+    $shiping = getshipingNumbers();
     if ($newSubtotal < 0) {
         $newSubtotal = 0;
     }
     $newTax = $newSubtotal * $tax;
-    $newTotal = $newSubtotal * (1 + $tax);
+    $newTotal = ($newSubtotal * (1 + $tax)) + getshipingNumbers();
 
     return collect([
         'tax' => $tax,
@@ -57,6 +89,7 @@ function getNumbers()
         'newSubtotal' => $newSubtotal,
         'newTax' => $newTax,
         'newTotal' => $newTotal,
+        'shiping' => $shiping,
     ]);
 }
 function get4overprices($UUID,$runsize,$colorspec,$TurnAroundTime)
@@ -70,7 +103,6 @@ function get4overprices($UUID,$runsize,$colorspec,$TurnAroundTime)
  
       foreach ($result2['entities'] as $value) {
         if ($value['product_option_group_name'] == 'Turn Around Time') {
-           //$value['product_baseprice'];
            $TurnAroundTimeoptions = $value['options'];
           }
        }
@@ -113,7 +145,6 @@ function call4overcurl($uri,$method,$separator,$json) {
     $public_key = 'printinglab';
     $private_key = '4HT62RVQ';
     if ($method == 'GET' || $method == 'DELETE') {
-    //Authenticate
     $apiPath=$uri.$separator.'apikey='.$public_key.'&signature='.hash_hmac('sha256', $method, hash('sha256', $private_key)).'&max=1000';
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,$apiPath);
@@ -127,10 +158,8 @@ function call4overcurl($uri,$method,$separator,$json) {
     $result = curl_exec($ch);
     curl_close($ch);
     return $result;
-     // return (json_decode($response, true));
     }
     if ($method == 'POST'){
-   //Authenticate
   $apiPath=$uri.$separator.'apikey='.$public_key.'&signature='.hash_hmac('sha256', $method, hash('sha256', $private_key)).'&max=500';
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL,$apiPath);

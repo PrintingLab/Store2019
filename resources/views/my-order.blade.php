@@ -91,6 +91,10 @@
                                     <td>{{ presentPrice($order->billing_tax) }}</td>
                                 </tr>
                                 <tr>
+                                    <td>Shipping</td>
+                                    <td>{{ presentPrice($order->shipping_Value) }}</td>
+                                </tr>
+                                <tr>
                                     <td>Total</td>
                                     <td>{{ presentPrice($order->billing_total) }}</td>
                                 </tr>
@@ -117,7 +121,7 @@
                                     <div>
                                         <a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a>
                                     </div>
-                                    <div>{{ presentPrice($product->price) }}</div>
+                                    <div>{{$product->pivot->product_decription}}</div>
                                     <div>Quantity: {{ $product->pivot->quantity }}</div>
                                 </div>
                             </div>

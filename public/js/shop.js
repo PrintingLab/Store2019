@@ -24,7 +24,7 @@ shopApp.controller('shopcontroller',function($scope,$http,$document){
         {"Pinicial":3, "Pfinal":3.99,"porcentaje":800},
         {"Pinicial":4, "Pfinal":4.99,"porcentaje":700},
         {"Pinicial":5, "Pfinal":5.99,"porcentaje":600},
-        {"Pinicial":6, "Pfinal":6.99,"porcentaje":550},
+        {"Pinicial":6, "Pfinal":9.99,"porcentaje":550},
         {"Pinicial":10, "Pfinal":14.99,"porcentaje":500},
         {"Pinicial":15, "Pfinal":19.99,"porcentaje":450},
         {"Pinicial":20, "Pfinal":24.99,"porcentaje":400},
@@ -110,7 +110,7 @@ $scope.stockname = function (name) {
                 break;
                 case "18PTC1S":
             $("#stock option[value='" + name + "']").remove() 
-                break;
+                break; 
                 case "4/1":
             $("#side option[value='" + name + "']").remove() 
                 break;
@@ -307,7 +307,7 @@ $scope.builderTurnAround = function () {
 }
 $scope.priceformat = function (format) {
     
-   return "$"+format
+   return "$"+$scope.pricetransform(format)
 }
 $scope.TurnAroundTimeprice = function (endurl) {
     $http({

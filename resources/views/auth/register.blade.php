@@ -33,7 +33,27 @@
 
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password"
                     required>
+                    <div class="form-group">
+                        <input placeholder="Address" type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" required>
+                    </div>
 
+                    <div class="half-form"> 
+                        <div class="form-group">
+                            <input placeholder="City" type="text" class="form-control" id="city" name="city" value="{{ old('city') }}" ng-model="city"  required>
+                        </div>
+                        <div class="form-group">
+                            <input placeholder="Province" type="text" class="form-control" id="province" name="province" value="{{ old('province') }}"   required>
+                        </div>
+                    </div> 
+                    <div class="half-form">
+                        <div class="form-group">
+                            <input placeholder="Postal Code" type="text" class="form-control" id="postalcode" name="postalcode" value="{{ old('postalcode') }}"  required>
+                        </div>
+                        <div class="form-group">
+                            <input placeholder="Phone" type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" required>
+                        </div>
+
+                        </div>
                 <div class="login-container">
                     <button type="submit" class="auth-button">Create Account</button>
                     <div class="already-have-container">

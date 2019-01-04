@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel Ecommerce Example</title>
+        <title>PrintingLab</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat%7CRoboto:300,400,700" rel="stylesheet">
@@ -21,50 +21,20 @@
             <header class="with-background">
                 <div class="top-nav container">
                     <div class="top-nav-left">
-                        <div class="logo">Ecommerce</div>
+                        <div class="logo">PrintingLab</div>
                         {{ menu('main', 'partials.menus.main') }}
                     </div>
                     <div class="top-nav-right">
                         @include('partials.menus.main-right')
                     </div>
                 </div> <!-- end top-nav -->
-                <div class="hero container">
-                    <div class="hero-copy">
-                        <h1>Laravel Ecommerce Demo</h1>
-                        <p>Includes multiple products, categories, a shopping cart and a checkout system with Stripe integration.</p>
-                        <div class="hero-buttons">
-                            <a href="https://www.youtube.com/playlist?list=PLEhEHUEU3x5oPTli631ZX9cxl6cU_sDaR" class="button button-white">Screencasts</a>
-                            <a href="https://github.com/drehimself/laravel-ecommerce-example" class="button button-white">GitHub</a>
-                        </div>
-                    </div> <!-- end hero-copy -->
-
-                    <div class="hero-image">
-                        <img src="img/macbook-pro-laravel.png" alt="hero image">
-                    </div> <!-- end hero-image -->
-                </div> <!-- end hero -->
+               
             </header>
 
             <div class="featured-section">
 
                 <div class="container">
-                    <h1 class="text-center">Laravel Ecommerce</h1>
-
-                    <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore vitae nisi, consequuntur illum dolores cumque pariatur quis provident deleniti nesciunt officia est reprehenderit sunt aliquid possimus temporibus enim eum hic lorem.</p>
-
-                    <div class="text-center button-container">
-                        <a href="#" class="button">Featured</a>
-                        <a href="#" class="button">On Sale</a>
-                    </div>
-
-                    {{-- <div class="tabs">
-                        <div class="tab">
-                            Featured
-                        </div>
-                        <div class="tab">
-                            On Sale
-                        </div>
-                    </div> --}}
-
+                    <h1 class="text-center">Printinglab</h1>
                     <div class="products text-center">
                         @foreach ($products as $product)
                             <div class="product">
@@ -84,7 +54,7 @@
 
             </div> <!-- end featured-section -->
 
-            <blog-posts></blog-posts>
+            <!-- <blog-posts></blog-posts> -->
 
             @include('partials.footer')
 

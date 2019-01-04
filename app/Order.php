@@ -8,7 +8,7 @@ class Order extends Model
 {
     protected $fillable = [
         'user_id', 'billing_email', 'billing_name', 'billing_address', 'billing_city',
-        'billing_province', 'billing_postalcode', 'billing_phone', 'billing_name_on_card', 'billing_discount', 'billing_discount_code', 'billing_subtotal', 'billing_tax', 'billing_total', 'payment_gateway', 'error',
+        'billing_province', 'billing_postalcode', 'billing_phone', 'billing_name_on_card', 'billing_discount', 'billing_discount_code', 'billing_subtotal', 'billing_tax', 'billing_total', 'payment_gateway','shipping_Type', 'shipping_Value', 'error',
     ];
 
     public function user()
@@ -18,6 +18,6 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Product')->withPivot('quantity');
+        return $this->belongsToMany('App\Product')->withPivot(['quantity','product_decription']);
     }
 }

@@ -12,6 +12,8 @@ use App\Http\Requests\CheckoutRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Cartalyst\Stripe\Exception\CardErrorException;
+use net\authorize\api\contract\v1 as AnetAPI;
+use net\authorize\api\controller as AnetController;
 
 class CheckoutController extends Controller
 {
@@ -104,6 +106,95 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function AuthorizeCheckout(CheckoutRequest $request)
+    {
+
+//         API LOGIN ID 
+// 6J9W7nvZtm8
+// TRANSACTION KEY 
+// 284zmBQz6y5KF57f
+// KEY 
+// Simon
+// Simon
+        //$merchantAuthentication->setName('2E3z6KruR');
+		//$merchantAuthentication->setTransactionKey('48Cy6rk4H82xD6b9');
+        //production
+		//$merchantAuthentication->setName('3qe3N33vB3');
+		//$merchantAuthentication->setTransactionKey('6pu9mhm9Q573N8HR');
+
+
+        // Common setup for API credentials
+        $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
+        $merchantAuthentication->setName(config('services.authorize.login'));
+        $merchantAuthentication->setTransactionKey(config('services.authorize.key'));
+        $refId = 'ref'.time();
+// Create the payment data for a credit card
+          $creditCard = new AnetAPI\CreditCardType();
+          $creditCard->setCardNumber($request->cnumber);
+          $expiry = $request->card_expiry_year . '-' . $request->card_expiry_month;
+          $creditCard->setExpirationDate($expiry);
+          $paymentOne = new AnetAPI\PaymentType();
+          $paymentOne->setCreditCard($creditCard);
+// Create a transaction
+          $transactionRequestType = new AnetAPI\TransactionRequestType();
+          $transactionRequestType->setTransactionType("authCaptureTransaction");
+          $transactionRequestType->setAmount(getNumbers()->get('newTotal'));
+          $transactionRequestType->setPayment($paymentOne);
+          $Transrequest = new AnetAPI\CreateTransactionRequest();
+          $Transrequest->setMerchantAuthentication($merchantAuthentication);
+          $Transrequest->setRefId( $refId);
+          $Transrequest->setTransactionRequest($transactionRequestType);
+          $controller = new AnetController\CreateTransactionController($Transrequest);
+          $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
+           if ($response != null)
+            {
+
+              $tresponse = $response->getTransactionResponse();
+              if (($tresponse != null) && ($tresponse->getResponseCode()=="1") || ($tresponse->getResponseCode()=="4"))
+              {
+                $order = $this->addToOrdersTables($request, null);
+                
+                //Mail::send(new OrderPlaced($order));
+                // decrease the quantities of all the products in the cart
+                //$this->decreaseQuantities();
+                Cart::instance('default')->destroy();
+                session()->forget('coupon');
+                return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
+              }
+              else
+              {
+                  dd($tresponse);
+                    $error =$tresponse->getErrors();
+                    return back()->withErrors('An error occurred: '.$error[0]->getErrorText());  
+              
+               
+              }
+            }
+            else
+            {
+              echo  "Charge Credit Card Null response returned";
+            }
+        
+
+
+
+            //return back()->withErrors('An error occurred with the message: '.$result->message);
+}
+
+
+
+public function updateShiping(Request $request)
+    {
+        foreach (Cart::content() as $item){
+            $option = $item->options->merge(['shiping' => $request->shipingcost,'shipingTp' => $request->shipingtype]);
+            Cart::update($item->rowId, ['options' => $option]);
+            
+        }
+
+        return response()->json(['success' => Cart::content()]);
+        
+    }
+
     public function paypalCheckout(Request $request)
     {
         // Check race condition when there are less items available to purchase
@@ -121,20 +212,20 @@ class CheckoutController extends Controller
         $nonce = $request->payment_method_nonce;
 
         $result = $gateway->transaction()->sale([
-            'amount' => getNumbers()->get('newTotal'),
+            'amount' => number_format(getNumbers()->get('newTotal'),2, '.', ''),
             'paymentMethodNonce' => $nonce,
             'options' => [
                 'submitForSettlement' => true
             ]
         ]);
-
         $transaction = $result->transaction;
 
         if ($result->success) {
             $order = $this->addToOrdersTablesPaypal(
                 $transaction->paypal['payerEmail'],
                 $transaction->paypal['payerFirstName'].' '.$transaction->paypal['payerLastName'],
-                null
+                null,
+                $request
             );
 
             //Mail::send(new OrderPlaced($order));
@@ -147,10 +238,12 @@ class CheckoutController extends Controller
 
             return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
         } else {
+           
             $order = $this->addToOrdersTablesPaypal(
                 $transaction->paypal['payerEmail'],
                 $transaction->paypal['payerFirstName'].' '.$transaction->paypal['payerLastName'],
-                $result->message
+                $result->message,
+                $request
             );
 
             return back()->withErrors('An error occurred with the message: '.$result->message);
@@ -170,12 +263,15 @@ class CheckoutController extends Controller
             'billing_postalcode' => $request->postalcode,
             'billing_phone' => $request->phone,
             'billing_name_on_card' => $request->name_on_card,
+            'shipping_Type' => $request->Shippingmethod,
+            'shipping_Value' => getNumbers()->get('shiping'),
             'billing_discount' => getNumbers()->get('discount'),
             'billing_discount_code' => getNumbers()->get('code'),
             'billing_subtotal' => getNumbers()->get('newSubtotal'),
             'billing_tax' => getNumbers()->get('newTax'),
             'billing_total' => getNumbers()->get('newTotal'),
             'error' => $error,
+            'payment_gateway' => 'Authorize.net',
         ]);
 
         // Insert into order_product table
@@ -183,20 +279,33 @@ class CheckoutController extends Controller
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $item->id,
-                'quantity' => $item->qty,
+                'product_decription' => $item->options->decription,
+                'quantity' => $item->options->quantity,
+                'colorspecuuid' => $item->options->colorspecuuid,
+                'imgF' => $item->options->imgF,
+                'imgB' => $item->options->imgB,
+                'optionuuid' => $item->options->optionuuid,
+                'produtcode' => $item->options->produtcode,
+                'produtid' => $item->options->produtid,
+                'runsizeuuid' => $item->options->runsizeuuid,
+                'side' => $item->options->side,
+                'tat' => $item->options->tat,
             ]);
         }
 
         return $order;
     }
 
-    protected function addToOrdersTablesPaypal($email, $name, $error)
+    protected function addToOrdersTablesPaypal($email, $name, $error,$request)
     {
+
         // Insert into orders table
         $order = Order::create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
             'billing_email' => $email,
             'billing_name' => $name,
+            'shipping_Type' => $request->Shippingmethod,
+            'shipping_Value' => getNumbers()->get('shiping'),
             'billing_discount' => getNumbers()->get('discount'),
             'billing_discount_code' => getNumbers()->get('code'),
             'billing_subtotal' => getNumbers()->get('newSubtotal'),
@@ -211,7 +320,17 @@ class CheckoutController extends Controller
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $item->id,
-                'quantity' => $item->qty,
+                'product_decription' => $item->options->decription,
+                'quantity' => $item->options->quantity,
+                'colorspecuuid' => $item->options->colorspecuuid,
+                'imgF' => $item->options->imgF,
+                'imgB' => $item->options->imgB,
+                'optionuuid' => $item->options->optionuuid,
+                'produtcode' => $item->options->produtcode,
+                'produtid' => $item->options->produtid,
+                'runsizeuuid' => $item->options->runsizeuuid,
+                'side' => $item->options->side,
+                'tat' => $item->options->tat,
             ]);
         }
 
@@ -222,8 +341,7 @@ class CheckoutController extends Controller
     {
         foreach (Cart::content() as $item) {
             $product = Product::find($item->id);
-
-            $product->update(['quantity' => $product->quantity - $item->qty]);
+            $product->update(['quantity' => $product->quantity - $item->options->quantity]);
         }
     }
 

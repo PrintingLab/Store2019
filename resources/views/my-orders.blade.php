@@ -65,8 +65,7 @@
                         <div>
                             <div class="order-header-items">
                                 <div><a href="{{ route('orders.show', $order->id) }}">Order Details</a></div>
-                                <div>|</div>
-                                <div><a href="#">Invoice</a></div>
+                               
                             </div>
                         </div>
                     </div>
@@ -78,7 +77,7 @@
                                     <div>
                                         <a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a>
                                     </div>
-                                    <div>{{ presentPrice($product->price) }}</div>
+                                    <div>{{$product->pivot->product_decription}}</div>
                                     <div>Quantity: {{ $product->pivot->quantity }}</div>
                                 </div>
                             </div>

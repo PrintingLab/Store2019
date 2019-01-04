@@ -21,6 +21,9 @@ Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->mid
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 Route::post('/paypal-checkout', 'CheckoutController@paypalCheckout')->name('checkout.paypal');
 
+Route::post('/checkout-Authorize', 'CheckoutController@AuthorizeCheckout')->name('checkout.Authorize');
+
+
 Route::get('/guestCheckout', 'CheckoutController@index')->name('guestCheckout.index');
 
 
@@ -37,6 +40,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/search', 'ShopController@search')->name('search');
 Route::post('/sendtocart', 'ShopController@sendtocart')->name('sendtocart');
+Route::post('/shipingupdate', 'CheckoutController@updateShiping')->name('shipingupdate');
 Route::post('/4overproducts', 'ShopController@call_4over_curl')->name('4overproducts');
 Route::post('/computeshipping', 'ShopController@Getshipingquotes')->name('computeshipping');
 Route::get('/search-algolia', 'ShopController@searchAlgolia')->name('search-algolia');

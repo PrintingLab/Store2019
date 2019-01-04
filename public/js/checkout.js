@@ -85,6 +85,18 @@ $scope.Continueorder = function (a,c,s,z) {
 
 }
 
+$scope.shipingupdate = function (value,type) {
+    $scope.ShippingMethod=type
+    $http({
+        method:'post',
+        url:'/shipingupdate',
+        data: {shipingcost:value,shipingtype:type},
+    }).then(function mySuccess(response) {
+    console.log(response.data)
+
+    })
+}
+
 $scope.setaddres = function (a,c,s,z) {
     $scope.address=a
     $scope.city=c
