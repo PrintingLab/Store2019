@@ -28,10 +28,10 @@ function printingtax($postalcode)
     $json_data = json_decode($json, true);
       foreach ($json_data as $value) {
          if ($postalcode == $value) {
-            $taxval  = 'cart.tax';
+            $taxval  = 0;
             break;
          }else {
-            $taxval  = 'cart.ziptax';
+            $taxval  = 0;
          }
      }
 return  $taxval;
@@ -65,13 +65,42 @@ function getshipingNumbers()
     
 }
 
+function getPrintingsides($prttime)
+{
+   switch ($prttime) {
+       case '4/0':
+           return 'Front Only';
+           break;
+       case '4/4':
+           return 'Front and Back';
+           break;
+       default:
+           'N/A';
+           break;
+   }
+}
+
+function getPrintingTime($prttime)
+{
+    $method = 'GET';
+    $separator ='?';
+    $json = '';
+    $uri='https://api.4over.com/printproducts/optiongroups/f80e8179-b264-42ce-9f80-bb258a09a1fe/options';
+    $result = json_decode(call4overcurl($uri,$method,$separator,$json), true);
+    foreach ($result['entities'] as $value) {
+        if ($value['option_name'] == $prttime) {
+           return $value['option_description'];
+          }
+       }
+}
+
 
 
 function getNumbers()
 {
     //tax for zip funtion 
-   // printingtax("07061");
-    $tax = config('cart.tax') / 100;
+    
+    $tax = 0 / 100;
     $discount = session()->get('coupon')['discount'] ?? 0;
     $code = session()->get('coupon')['name'] ?? null;
     $newSubtotal = (Cart::subtotal() - $discount);

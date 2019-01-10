@@ -12,7 +12,7 @@
 
 <div class="container textoscontainer">
 <div class="row col-md-12">
-    <h2><strong>{{$productDESCRIPTION}}</strong></h2>
+    <h2><strong>{{$productDESCRIPTION}}</strong></h2> 
   </div>
   <div class="divfile">
 @if ($productSIDE == '4/4')
@@ -25,9 +25,12 @@
     <input hidden type="text" name="prdRunsize" value="{{$productRUNSIZE}}" readonly>
     <input hidden type="text" name="prdside" value="{{$productSIDE}}" readonly>
     <input hidden type="text" name="prdTurnAroundTime" value="{{$productTATIME}}" readonly>
-    <input  type="text" name="option_uuid" value="{{$optionuuid}}" readonly>
-    <input  type="text" name="colorspec_uuid" value="{{$colorspecuuid}}" readonly>
-    <input  type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
+    <input hidden type="text" name="option_uuid" value="{{$optionuuid}}" readonly>
+    <input hidden type="text" name="colorspec_uuid" value="{{$colorspecuuid}}" readonly>
+    <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
+    <input type="hidden" name="typedesigned" value="1">
+    <input hidden type="text" name="comentario" value="N/A" readonly>
+    
 <div class="row">
   <div class="col-md-6">
     <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>
@@ -35,14 +38,24 @@
     <p>Remember, select only two files at the same time.</p>
   </div>
   <div class="col-md-6">
-    <ul id="fileList">
-    </ul>
-    <div class="fileM">
-      <p>UPLOAD FILE</p>
-      <input type="file" id="archivoM" name="fileM[]"  required multiple >
-    </div>
-  </div>
-</div>
+            <div class="filex">
+              <div class="outputx">
+                <p></p>
+              </div>
+              <p>UPLOAD YOUR FILE - FRONT</p>
+              <input type="file" id="archivox" name="file21"  required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="filey">
+              <div class="outputy">
+                <p></p>
+              </div>
+              <p>UPLOAD YOUR FILE- BACK</p>
+              <input type="file" id="archivoy" name="file22" required>
+            </div>
+          </div>
+          </div>
 <div class="info-UP">
   <h3><strong>Select a Proofing Option</strong></h3>
   <p>
@@ -63,7 +76,7 @@
 </form>
 @endif
 @if ($productSIDE == '4/0')
-                <form action="{{ route('cart.store', $produto) }}"  method="post" accept-charset="utf-8" onsubmit="return validatevacio();" enctype="multipart/form-data" >
+  <form action="{{ route('cart.store', $produto) }}"  method="post" accept-charset="utf-8" onsubmit="return validatevacio();" enctype="multipart/form-data" >
   {{csrf_field()}}
   <input hidden type="text" name="prddesc" value="{{$productDESCRIPTION}}" readonly>
   <input hidden type="text" name="prdtprice" value="{{$productPRICE}}" readonly>
@@ -72,9 +85,11 @@
     <input hidden type="text" name="prdRunsize" value="{{$productRUNSIZE}}" readonly>
     <input hidden type="text" name="prdside" value="{{$productSIDE}}" readonly>
     <input hidden type="text" name="prdTurnAroundTime" value="{{$productTATIME}}" readonly>
-    <input  type="text" name="option_uuid" value="{{$optionuuid}}" readonly>
-    <input  type="text" name="colorspec_uuid" value="{{$colorspecuuid}}" readonly>
-    <input  type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
+    <input hidden type="text" name="option_uuid" value="{{$optionuuid}}" readonly>
+    <input hidden type="text" name="colorspec_uuid" value="{{$colorspecuuid}}" readonly>
+    <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
+    <input hidden type="text" name="comentario" value="N/A" readonly>
+    <input type="hidden" name="typedesigned" value="1">
   <div class="row">
     <div class="col-md-6">
       <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>

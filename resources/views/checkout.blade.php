@@ -43,30 +43,30 @@
 
             </script>
             <div>
-                <form action="{{ route('checkout.Authorize') }}" method="POST" id="payment-form">
+                <form action="{{ route('checkout.Authorize') }}" method="POST" id="payment-form" name="checkoutform">
                     {{ csrf_field() }}
                 
                     <div ng-show="PaymentDetails">
                     <h2>Billing Details</h2>
 
                     <div class="form-group">
-                        <label for="email">Email Address</label>
+                        <label for="email">Email Address*</label>
                         @if (auth()->user())
                             <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" readonly>
                         @else
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" ng-model="email" required>
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">Name*</label>
                         @if (auth()->user())
-                        <input type="text" class="form-control" id="name" name="name" value="{{ auth()->user()->name }}" required>
+                        <input type="text" ng-init="name = '{{ auth()->user()->name }}'" class="form-control" id="name" name="name" value="{{ auth()->user()->name }}" ng-model="name" required>
                         @else
-                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" ng-model="name" required>
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="address">Address</label>
+                        <label for="address">Address*</label>
                         @if (auth()->user())
                         <input type="text" ng-init="address = '{{ auth()->user()->Address }}'" class="form-control" id="address" name="address" ng-model="address" required>
                         @else
@@ -75,7 +75,7 @@
                     </div>
                     <div class="half-form"> 
                         <div class="form-group">
-                            <label for="city">City</label>
+                            <label for="city">City*</label>
                             @if (auth()->user())
                             <input type="text"  ng-init="city = '{{ auth()->user()->City }}'"  class="form-control" id="city" name="city" ng-model="city"  required>
                             @else
@@ -83,7 +83,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="province">Province</label>
+                            <label for="province">Province*</label>
                             @if (auth()->user())
                             <input type="text"  ng-init="province = '{{ auth()->user()->Province }}'" class="form-control" id="province" name="province"  ng-model="province"  required>
                             @else
@@ -93,22 +93,24 @@
                     </div> <!-- end half-form -->
                     <div class="half-form">
                         <div class="form-group">
-                            <label for="postalcode">Postal Code</label>
+                            <label for="postalcode">Postal Code*</label>
                             @if (auth()->user())
-                            <input type="text"  ng-init="postalcode = '{{ auth()->user()->PostalCode }}'" class="form-control" id="postalcode" name="postalcode" ng-model="postalcode" ng-change="computeshipping()" required>
+                            <input type="text"  ng-init="postalcode = '{{ auth()->user()->PostalCode }}'" class="form-control" id="postalcode" name="postalcode" ng-model="postalcode" ng-change="computeshipping()" maxlength="5" minlength="5" required>
                             @else
-                            <input type="text"  ng-init="postalcode = '{{ old('postalcode') }}'" class="form-control" id="postalcode" name="postalcode" value="{{ old('postalcode') }}" ng-model="postalcode" ng-change="computeshipping()" required>
+                            <input type="text"  ng-init="postalcode = '{{ old('postalcode') }}'" class="form-control" id="postalcode" name="postalcode" value="{{ old('postalcode') }}" ng-model="postalcode" maxlength="5" ng-change="computeshipping()" required>
                             @endif
+                           
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone</label>
+                            <label for="phone">Phone*</label>
                             @if (auth()->user())
-                            <input type="text"  ng-init="phone = '{{ auth()->user()->Phone }}'" class="form-control" id="phone" name="phone"  ng-model="phone" required>
+                            <input type="text"  ng-init="phone = '{{ auth()->user()->Phone }}'" class="form-control validate" placeholder="800-000-0000" id="phone" name="phone"  ng-model="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="12" required>
+                            <span ng-show="checkoutform.phone.$touched && checkoutform.phone.$invalid">Please match the requested format.</span>
                             @else
                             <input type="text"  ng-init="phone = '{{ old('phone') }}'" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" ng-model="phone" required>
                             @endif
                         </div>
-                        <input hidden type="text" class="form-control" id="ShippingMethod" name="Shippingmethod" value="@{{ShippingMethod}}" required>
+                        <input hidden  type="text" class="form-control validate" id="ShippingMethod" name="Shippingmethod" value="@{{ShippingMethod}}" required>
                      </div> <!-- end half-form -->
                      <div class="spacer"></div>
                      @if (Cart::count() > 1)
@@ -134,44 +136,61 @@ This may take a few moments.</p>
             <div class="shippingResult" id="div_shipping" ng-repeat="ship in shipping_options | unique: 'service_name'">
                 <label class="col-md-12 label-result">
                     <div class="shippingServices clearfix">
-                        <input id="ship_FEDEX_GROUND" type="radio" class="shipRadio" style="outline: none;" name="shipping_selected" value=" @{{(ship.service_price)}}" ng-click="shipingupdate(ship.service_price,ship.service_name)">&nbsp;
+                        <input id="ShippingMethodlist" type="radio" class="shipRadio" name="shipping_selected" ng-model="ShippingMethodlist" value="@{{ship.service_name}}" ng-click="shipingupdate(ship.service_price,ship.service_name)" >&nbsp;
+                        <pre hidden ng-if="$first" ng-init="shipingupdate(ship.service_price,ship.service_name)"></pre>
                         <!--checking of local pickup options-->
-                         <label for="ship_FEDEX_GROUND" class="shipping-cost shipping-rate-wrap" style="float:right">
+                         <label for="ShippingMethodlist" class="shipping-cost shipping-rate-wrap" style="float:right">
                               @{{(ship.service_price)}}
                             </label>
-                          <label for="ship_FEDEX_GROUND" class="shipping-detail">@{{ship.service_name}}&nbsp;</label>
+                          <label for="ShippingMethodlist" class="shipping-detail">@{{ship.service_name}}&nbsp;</label>
                      </div>
                 </label>
             </div>
+            <span ng-show="preloader" >This product will be available from @{{addressoptions.city}}, @{{addressoptions.state}} <br>
+              Estimated Production Completion Date: @{{productionestimate}}</span>
                     <div class="spacer"></div>
                    
                     </div>
 <div class="PaymentDetails" ng-hide="PaymentDetails">
 <h2>Payment Details</h2>
-                <div class="form-group">
-                    <label for="cnumber">Card Number</label>
-                    <input type="text" class="form-control" id="cnumber" name="cnumber" placeholder="Enter Card Number">
+<div class="card-details">
+<img src="{{ asset('img/settings/payments-checkout.png') }}" alt="card allowed" >
+<div class="spacer"></div>
+            <div class="row">
+            
+              <div class="form-group col-sm-7">
+                <label for="card_name">Name on Card*</label>
+                <input id="card_name" type="text" class="form-control" placeholder="Name on Card" aria-label="Card Holder" aria-describedby="basic-addon1" name="card_name">
+              </div>
+              <div class="form-group col-sm-5">
+                <label for="">Expiration Date*</label>
+                <div class="input-group expiration-date">
+                  <input type="text" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month">
+                  <span class="date-separator"></span>
+                  <input type="text" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year">
                 </div>
-                <div class="form-group">
-                  <label for="card-expiry-month">Expiration Month</label>
-                  {{ Form::selectMonth(null, null, ['name' => 'card_expiry_month', 'class' => 'form-control', 'required']) }}
-                </div>
-                <div class="form-group">
-                  <label for="card-expiry-year">Expiration Year</label>
-                  {{ Form::selectYear(null, date('Y'), date('Y') + 10, null, ['name' => 'card_expiry_year', 'class' => 'form-control', 'required']) }}
-                </div>
-                <div class="form-group">
-                    <label for="ccode">Card Code</label>
-                    <input type="text" class="form-control" id="ccode" name="ccode" placeholder="Enter Card Code">
-                </div>
+              </div>
+              <div class="form-group col-sm-8">
+                <label for="card-number">Card Number*</label>
+                <input type="text" class="form-control" id="cnumber" name="cnumber" placeholder="Enter Card Number" aria-label="Card Holder" aria-describedby="basic-addon1">
+              </div>
+              <div class="form-group col-sm-4">
+                <label for="cvc">CVC*</label>
+                <input type="text" class="form-control"  id="ccode" name="ccode" placeholder="Enter Card Code" aria-label="Card Holder" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
                     <div class="spacer"></div>
                     <button type="submit" id="complete-order" class="button-primary full-width">Complete Order</button>
 
 </div>
-              
+
 
                     </form>
-                    <button  id="Continue-order" class="button-primary full-width" ng-click="Continueorder()">Continue</button>
+                    <div class="alert alert-warning" role="alert" ng-hide="dangermesagge">
+  @{{danger}}
+</div>
+                    <button  id="Continue-order" class="button-primary full-width" ng-click="Continueorder()" ng-hide="Continuehide" ng-disabled="Continuebtn">Continue</button>
 <!-- Modal -->
 <div class="modal fade" id="candidates" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -215,6 +234,11 @@ This may take a few moments.</p>
                                     <div id="bt-dropin"></div>
                                 </div>
                             </section>
+                            <input hidden  type="text" class="form-control"  name="address" value="@{{address}}" required>
+                            <input hidden  type="text" class="form-control"  name="city" value="@{{city}}" required>
+                            <input hidden  type="text" class="form-control"  name="province" value="@{{province}}" required>
+                            <input hidden  type="text" class="form-control"  name="postalcode" value="@{{postalcode}}" required>
+                            <input hidden  type="text" class="form-control"  name="phone" value="@{{phone}}" required>
                             <input hidden type="text" class="form-control" id="ShippingMethod" name="Shippingmethod" value="@{{ShippingMethod}}" required>
                             <input id="nonce" name="payment_method_nonce" type="hidden" />
                             <button class="button-primary" type="submit"><span>Pay with PayPal</span></button>
@@ -231,12 +255,18 @@ This may take a few moments.</p>
                             <div class="checkout-item-details">
                                 <div class="checkout-table-item">{{ $item->name }}</div>
                                 <div class="checkout-table-description">{{ $item->options->decription }}</div>
-                                
+                                <div class="checkout-table-item">Quantity</div>
+                                <div class="checkout-table-description">{{ $item->options->quantity }}</div>
+                                <div class="checkout-table-item">Printed Side</div>
+                                <div class="checkout-table-description">{{ getPrintingsides($item->options->side)}}</div>
+                                <div class="checkout-table-item">Turnaround</div>
+                                <div class="checkout-table-description">{{ getPrintingTime($item->options->tat) }}</div>
                             </div>
                         </div> <!-- end checkout-table -->
 
                         <div class="checkout-table-row-right">
-                            <div class="checkout-table-quantity">{{ $item->options->quantity }}</div>
+                        
+                            <div class="checkout-table-quantity">{{ presentPrice($item->price)}}</div>
                         </div>
                     </div> <!-- end checkout-table-row -->
                     @endforeach
@@ -252,7 +282,7 @@ This may take a few moments.</p>
                             <hr>
                             New Subtotal <br>
                         @endif
-                        Tax ({{config('cart.tax')}}%)<br>
+                        Tax (@{{taxpercent}}%)<br>
                         Shipping <br>
                         <span class="checkout-totals-total">Total</span>
 
@@ -263,11 +293,11 @@ This may take a few moments.</p>
                         @if (session()->has('coupon'))
                             -{{ presentPrice($discount) }} <br>
                             <hr>
-                            {{ presentPrice($newSubtotal) }} <br>
+                            @{{presentPrice(NewSubtotal)}} <br>
                         @endif
-                        {{ presentPrice($newTax) }} <br>
-                        {{ presentPrice(getshipingNumbers()) }} <br>
-                        <span class="checkout-totals-total">{{ presentPrice($newTotal) }}</span>
+                        @{{presentPrice(newTax)}} <br>
+                        @{{presentPrice(shiping)}} <br>
+                        <span class="checkout-totals-total">@{{ presentPrice(newTotal) }}</span>
 
                     </div>
                 </div> <!-- end checkout-totals -->

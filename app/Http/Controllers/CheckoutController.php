@@ -121,8 +121,6 @@ class CheckoutController extends Controller
         //production
 		//$merchantAuthentication->setName('3qe3N33vB3');
 		//$merchantAuthentication->setTransactionKey('6pu9mhm9Q573N8HR');
-
-
         // Common setup for API credentials
         $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
         $merchantAuthentication->setName(config('services.authorize.login'));
@@ -133,13 +131,23 @@ class CheckoutController extends Controller
           $creditCard->setCardNumber($request->cnumber);
           $expiry = $request->card_expiry_year . '-' . $request->card_expiry_month;
           $creditCard->setExpirationDate($expiry);
+          $creditCard->setCardCode($request->ccode);
           $paymentOne = new AnetAPI\PaymentType();
           $paymentOne->setCreditCard($creditCard);
+// Set the customer's Bill To address
+$customerAddress = new AnetAPI\CustomerAddressType();
+$customerAddress->setFirstName($request->card_name);
+$customerAddress->setAddress($request->address);
+$customerAddress->setCity($request->city);
+$customerAddress->setState($request->province);
+$customerAddress->setZip($request->postalcode);
+$customerAddress->setCountry("USA");
 // Create a transaction
           $transactionRequestType = new AnetAPI\TransactionRequestType();
           $transactionRequestType->setTransactionType("authCaptureTransaction");
           $transactionRequestType->setAmount(getNumbers()->get('newTotal'));
           $transactionRequestType->setPayment($paymentOne);
+          $transactionRequestType->setBillTo($customerAddress);
           $Transrequest = new AnetAPI\CreateTransactionRequest();
           $Transrequest->setMerchantAuthentication($merchantAuthentication);
           $Transrequest->setRefId( $refId);
@@ -152,7 +160,7 @@ class CheckoutController extends Controller
               $tresponse = $response->getTransactionResponse();
               if (($tresponse != null) && ($tresponse->getResponseCode()=="1") || ($tresponse->getResponseCode()=="4"))
               {
-                $order = $this->addToOrdersTables($request, null);
+                $order = $this->addToOrdersTables($request, null,$tresponse->getTransId());
                 
                 //Mail::send(new OrderPlaced($order));
                 // decrease the quantities of all the products in the cart
@@ -163,7 +171,7 @@ class CheckoutController extends Controller
               }
               else
               {
-                  dd($tresponse);
+
                     $error =$tresponse->getErrors();
                     return back()->withErrors('An error occurred: '.$error[0]->getErrorText());  
               
@@ -185,13 +193,16 @@ class CheckoutController extends Controller
 
 public function updateShiping(Request $request)
     {
-        foreach (Cart::content() as $item){
-            $option = $item->options->merge(['shiping' => $request->shipingcost,'shipingTp' => $request->shipingtype]);
-            Cart::update($item->rowId, ['options' => $option]);
-            
-        }
 
-        return response()->json(['success' => Cart::content()]);
+        if (isset($request->shipingcost) && isset($request->shipingtype)) {
+            foreach (Cart::content() as $item){
+                $option = $item->options->merge(['shiping' => $request->shipingcost,'shipingTp' => $request->shipingtype]);
+                Cart::update($item->rowId, ['options' => $option]);
+                
+            }
+        }
+       
+        return response()->json(['zuccess' => Cart::content(),'Total'=>getNumbers()->get('newTotal'),'Tax'=>getNumbers()->get('newTax'),'NewSubtotal'=>getNumbers()->get('newSubtotal'),'shiping'=>getNumbers()->get('shiping'),'tax'=>getNumbers()->get('tax')]);
         
     }
 
@@ -225,11 +236,11 @@ public function updateShiping(Request $request)
                 $transaction->paypal['payerEmail'],
                 $transaction->paypal['payerFirstName'].' '.$transaction->paypal['payerLastName'],
                 null,
-                $request
+                $request,
+                $transaction->paypal['paymentId']
             );
-
+            
             //Mail::send(new OrderPlaced($order));
-
             // decrease the quantities of all the products in the cart
             //$this->decreaseQuantities();
 
@@ -243,14 +254,15 @@ public function updateShiping(Request $request)
                 $transaction->paypal['payerEmail'],
                 $transaction->paypal['payerFirstName'].' '.$transaction->paypal['payerLastName'],
                 $result->message,
-                $request
+                $request,
+                $transaction->paypal['paymentId']
             );
 
             return back()->withErrors('An error occurred with the message: '.$result->message);
         }
     }
 
-    protected function addToOrdersTables($request, $error)
+    protected function addToOrdersTables($request, $error,$TransId)
     {
         // Insert into orders table
         $order = Order::create([
@@ -272,6 +284,7 @@ public function updateShiping(Request $request)
             'billing_total' => getNumbers()->get('newTotal'),
             'error' => $error,
             'payment_gateway' => 'Authorize.net',
+            'payment_id' => $TransId,
         ]);
 
         // Insert into order_product table
@@ -296,14 +309,18 @@ public function updateShiping(Request $request)
         return $order;
     }
 
-    protected function addToOrdersTablesPaypal($email, $name, $error,$request)
+    protected function addToOrdersTablesPaypal($email, $name, $error,$request,$paytId)
     {
-
         // Insert into orders table
         $order = Order::create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
             'billing_email' => $email,
             'billing_name' => $name,
+            'billing_address' => $request->address,
+            'billing_city' => $request->city,
+            'billing_province' => $request->province,
+            'billing_postalcode' => $request->postalcode,
+            'billing_phone' => $request->phone,
             'shipping_Type' => $request->Shippingmethod,
             'shipping_Value' => getNumbers()->get('shiping'),
             'billing_discount' => getNumbers()->get('discount'),
@@ -313,6 +330,7 @@ public function updateShiping(Request $request)
             'billing_total' => getNumbers()->get('newTotal'),
             'error' => $error,
             'payment_gateway' => 'paypal',
+            'payment_id' => $paytId,
         ]);
 
         // Insert into order_product table

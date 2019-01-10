@@ -1,8 +1,4 @@
 
-
-
-/storage/*.key
-
 /.idea
 /.vagrant
 Homestead.json

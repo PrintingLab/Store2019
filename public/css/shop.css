@@ -159,3 +159,12 @@
     margin: 15px; 
 
   }
+
+  .price-per-piece{
+    font-size: 12px
+  }
+  .Calculating{
+    position: absolute;
+    top:30%;
+    left: -20%;
+  }

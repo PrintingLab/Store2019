@@ -6,7 +6,7 @@ use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
-
+use Illuminate\Support\Facades\Config;
 class ShopController extends Controller
 {
 
@@ -91,7 +91,8 @@ class ShopController extends Controller
 
         array_push($shipers,$result);
         }
-        return response()->json(['success'=>$shipers]);
+        Config::set('cart.tax', printingtax($request->postalcode) );
+        return response()->json(['success'=>$shipers,'taxpercent'=>config('cart.tax')]);
       }
     }
    

@@ -80,7 +80,10 @@
                            </i>
                         </div>
                     </div>
+                    <p class="Calculating "> Loading options...
+This may take a few seconds.</p>
                 </div>
+                
                 <div ng-hide="moreoptions">
               <form id="list_view_filter" name="list_view_filter">
 					<input type="hidden" id="id_category" name="id_category" value="1">
@@ -108,10 +111,10 @@
 							         Corners: 
 							    </div> <!-- end filter_name -->
 							    <div class="filter_select" >
-                                <select name="roundcorners" id="roundcorners" >
-                                        <option value="">Standard Corners</option>
-                                        <option value="Round">Round Corners</option> 
-								    </select>
+                                <select name="roundcorners" id="roundcorners">
+                                        <option id="idStandard" value="Standard">Standard Corners</option>
+                                        <option id="idRound" value="Round">Round Corners</option> 
+								</select>
 							    </div> <!-- end filter-select -->
 							    <div class="clear"></div>
 						    </div> <!-- end jt_filters -->
@@ -121,7 +124,7 @@
 							    </div> <!-- end filter_name -->
 							    <div class="filter_select">
 								    <select name="coating" id="coating">
-                                    <option value="@{{op.product_code}}" ng-repeat="op in Coatingarray | filter:{product_description:roundcorners}| filter:{product_description:roundcorners} | unique: 'option'">@{{op.option}}</option>
+                                    <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist">@{{op.option}}</option>
 								    </select>
 							    </div> <!-- end filter-select -->
 							    <div class="clear"></div>
@@ -161,7 +164,8 @@
           <div class="product-section-price">
 <label for="product-section-price">Printing Cost:</label>
             <img src="{{ asset('img/settings/gif-load-13.gif') }}" alt="" ng-hide="priceshow" >
-            <input id="product-section-price" value="@{{priceformat(buildprice)}}" ng-show="priceshow" readonly disabled>          
+            <input id="product-section-price" value="@{{priceformat(buildprice)}}" ng-show="priceshow" readonly disabled>
+            <div class="price-per-piece" ng-show="priceshow">( Only $@{{priceperpiece}} each )</div>          
 </div class="formoptions">
             </div> 
             <p>&nbsp;</p>
@@ -171,27 +175,27 @@
                     <input hidden type="text" name="prddesc" value="@{{productdesc}}" readonly>
                     <input hidden type="text" name="prdtcode" value="@{{productcode}}" readonly>
                     <input hidden type="text" name="prdtID" value="@{{productuuid}}" readonly>
-                    <input hidden type="text" name="prdtprice" value="@{{buildprice}}" readonly>
+                    <input hidden type="text" name="prdtprice" value="@{{pricetosend(buildprice)}}" readonly>
                     <input hidden type="text" name="prdRunsize" value="@{{quantyti}}" readonly>
                     <input hidden type="text" name="prdside" value="@{{side}}" readonly>
                     <input hidden type="text" name="prdTurnAroundTime" value="@{{TurnAroundTime}}" readonly>
-                    <input  type="text" name="option_uuid" value="@{{option_uuid}}" readonly>
-                    <input  type="text" name="colorspec_uuid" value="@{{colorspec_uuid}}" readonly>
-                    <input  type="text" name="runsize_uuid" value="@{{runsize_uuid}}" readonly>
-                    <button type="submit" name="sendbtn" value="op1" class="button button-plain">UPLOAD YOUR FILE & ORDER NOW</button>
-                    <button hidden type="submit" name="sendbtn" value="op2" class="button button-plain">CREATE YOUR DESIGN ONLINE</button>
-                    <button type="submit" name="sendbtn" value="op3" class="button button-plain">WE DESIGN IT FOR YOU</button>
+                    <input hidden type="text" name="option_uuid" value="@{{option_uuid}}" readonly>
+                    <input hidden type="text" name="colorspec_uuid" value="@{{colorspec_uuid}}" readonly>
+                    <input hidden type="text" name="runsize_uuid" value="@{{runsize_uuid}}" readonly>
+                    <button type="submit" name="sendbtn" value="op1" class="button button-plain" ng-disabled="btndisigned">UPLOAD YOUR FILE & ORDER NOW</button>
+                    <button hidden type="submit" name="sendbtn" value="op2" class="button button-plain" ng-disabled="btndisigned">CREATE YOUR DESIGN ONLINE</button>
+                    <button type="submit" name="sendbtn" value="op3" class="button button-plain" ng-disabled="btndisigned">WE DESIGN IT FOR YOU</button>
                 </form>
             @endif
-            <p>Estimate Shipping Cost and Delivery Date</p>
-        <input id="zip_code" ng-model="zip_code">
+       <!--     <p>Estimate Shipping Cost and Delivery Date</p>
+         <input id="zip_code" ng-model="zip_code">
         <button id="compute_shipping_btn" ng-click="computeshipping()" >Show options</button>
         <div class="shippingResult" id="div_shipping" ng-repeat="ship in shipping_options">
 
                         <label class="col-md-12 label-result">
                             <div class="shippingServices clearfix">
                                 <input id="ship_FEDEX_GROUND" type="radio" class="shipRadio" style="outline: none;" checked="checked" name="shipping_selected" value="11.21|FEDEX_GROUND|0||4">&nbsp;
-                                <!--checking of local pickup options-->
+                               
                                     <label for="ship_FEDEX_GROUND" class="shipping-cost shipping-rate-wrap" style="float:right">
                                            @{{ship.service_price}}
                                     </label>
@@ -200,8 +204,9 @@
                         </label>
                        
             </div>
-        </div>
+        </div> -->
 
+        
     </div> <!-- end product-section -->
 </div>
     @include('partials.might-like')

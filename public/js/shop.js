@@ -45,7 +45,7 @@ shopApp.controller('shopcontroller',function($scope,$http,$document){
         {"Pinicial":201, "Pfinal":380.99,"porcentaje":175},
         {"Pinicial":381, "Pfinal":560.99,"porcentaje":170},
         {"Pinicial":561, "Pfinal":740.99,"porcentaje":165},
-        {"Pinicial":741, "Pfinal":10000,"porcentaje":160}
+        {"Pinicial":741, "Pfinal":100000,"porcentaje":160}
           ]
     $scope.stoknames=[
         {"Name":"100GLC", "value":"100lb Gloss Cover"}, 
@@ -62,14 +62,16 @@ shopApp.controller('shopcontroller',function($scope,$http,$document){
         {"Name":"4/4 (4 color both sides)", "value":"Front and Back"},
         {"Name":"32PTUC", "value":"32 Point"},
         {"Name":"18PTC1S", "value":"Premium + (18pt)"},
-        {"Name":"18PTC1S", "value":"Premium + (18pt)"}
+        {"Name":"18PTC1S", "value":"Premium + (18pt)"},
+        {"Name":"70LB", "value":"70LB"}
       ]
-
+      $scope.btndisigned=true
     $scope.priceshow=false
     $scope.moreoptions=true
     $scope.showcorners=true
     $scope.prdselect1=$('#coating').val();
     $scope.Dimensions=$('#dimensions').val();
+    $scope.Coatingarraylist=[]
     $scope.roundcorners=$('#roundcorners').val();
 $scope.load4overproducts = function () {
     $scope.prtdarray=prtd
@@ -80,6 +82,7 @@ $scope.load4overproducts = function () {
             data: {endpoint:endurl},
         }).then(function mySuccess(response) {
              $scope.products=response.data.success.entities;
+             console.log($scope.products)
            //$scope.builderchangue()
            setTimeout(function(){  $scope.builderbydimencion() }, 100);
             
@@ -87,15 +90,23 @@ $scope.load4overproducts = function () {
                 console.log(response.statusText);
         });
 }();
+$scope.pricetosend = function(val) {
+    // pricetransform($scope.buildprice)
+     return $scope.buildprice
+ }
+ 
 $scope.pricetransform = function (inprice) {
     for (let index = 0; index < $scope.rangeofprices.length; index++) {
         if (inprice >= $scope.rangeofprices[index].Pinicial && inprice <= $scope.rangeofprices[index].Pfinal ) {
-            console.log(((parseFloat(inprice)*parseFloat($scope.rangeofprices[index].porcentaje))/100).toFixed(2))
             return ((parseFloat(inprice)*parseFloat($scope.rangeofprices[index].porcentaje))/100).toFixed(2);
         }
     }
 
 }
+
+
+
+
 $scope.stockname = function (name) {
     if (prtdname == "Business Cards") {
         switch (name) {
@@ -140,8 +151,6 @@ $scope.baseprice = function (endurl) {
 }
 $scope.builderchangue = function () {
     var matches = $scope.$eval('products | filter:prdselect1 ');
-    //  If 'filter' didn't find any matching records, its result will be an array of 0 records.
-    
     if (matches.length == 0) {
         console.log("null")
     }else{
@@ -156,6 +165,7 @@ $scope.builderchangue = function () {
 $scope.builderbydimencion = function () {
     $scope.stockarry=[]
     var matches = $scope.$eval('products | filter:Dimensions');
+    console.log($scope.Dimensions)
     if (matches.length == 0) {
         console.log("null")
     }else{
@@ -170,6 +180,29 @@ $scope.builderbydimencion = function () {
     $scope.Stock=$('#stock').val();
     $scope.builderbyStock()
 }
+$scope.roundcornerfilter = function () {
+if ($scope.roundcorners == "Round") {
+    var macht = $scope.$eval("Coatingarray | filter:{product_description:'Round'}");
+    if (macht.length==0) {
+        $("#roundcorners option[value='Round']").remove() 
+        $scope.Coatingarraylist = $scope.$eval("Coatingarray | filter:{product_description:'! Round'}");
+    }else{
+        $scope.Coatingarraylist = macht
+        $scope.$apply()
+    }  
+}else {
+    var macht=$scope.$eval("Coatingarray | filter:{product_description:'! Round'}");
+    if (macht.length==0) {
+        $("#roundcorners option[value='Standard']").remove() 
+        $scope.Coatingarraylist = $scope.$eval("Coatingarray | filter:{product_description:'Round'}");
+    }else{
+        $scope.Coatingarraylist = macht
+        $scope.$apply()
+    }   
+    $scope.$apply()
+}
+}
+
 $scope.builderbyStock = function () {
     $scope.Coatingarray=[]
     var matches = $scope.$eval('stockarry | filter:{product_code:Stock}');
@@ -177,10 +210,12 @@ $scope.builderbyStock = function () {
         console.log("null")
     }else{
         for (let index = 0; index < matches.length; index++) {
-            $scope.Coatingarray.push({product_option_groups:matches[index].product_option_groups,product_description:matches[index].product_description,product_code:matches[index].product_code,option:matches[index].product_description.toUpperCase().replace(prtdname.toUpperCase(),'').replace($scope.Stock.toUpperCase(),'').replace($scope.Dimensions.toUpperCase(),'').replace('ROUND','').replace('CORNER','').replace('RC','').replace('COVER','').replace('BUSINESS','').replace('CARD','').replace('CARDS','').replace('WITH','').replace('18PT C1S','').replace('UV','GLOSS').replace('100LB','').replace('SPOT','').replace('UV','GLOSS').replace('BC','').replace('14PT','').replace('LINEN','').replace('STIPPLE - WHITE','').replace('32PT','')})
+            $scope.Coatingarray.push({product_option_groups:matches[index].product_option_groups,product_description:matches[index].product_description,product_code:matches[index].product_code,option:matches[index].product_description.toUpperCase().replace(prtdname.toUpperCase(),'').replace($scope.Stock.toUpperCase(),'').replace($scope.Dimensions.toUpperCase(),'').replace('ROUND','').replace('CORNER','').replace('RC','').replace('COVER','').replace('BUSINESS','').replace('CARD','').replace('CARDS','').replace('WITH','').replace('18PT C1S','').replace('UV','FULL GLOSS').replace('100LB','').replace('SPOT','').replace('UV','FULL GLOSS').replace('BC','').replace('14PT','').replace('LINEN','').replace('STIPPLE - WHITE','').replace('32PT','')})
               $scope.$apply()
         }
+        $scope.Coatingarraylist = $scope.Coatingarray
         var matchescorner = $scope.$eval("Coatingarray | filter:{product_description:'Round'}");
+        var matchesnocorner = $scope.$eval("Coatingarray | filter:{product_description:'! Round'}");
         if (matchescorner.length == 0) {
             $scope.showcorners=true
             $scope.cornersval=""
@@ -189,6 +224,7 @@ $scope.builderbyStock = function () {
             $scope.showcorners=false
             $scope.cornersval="round"
             $scope.$apply()
+            $scope.roundcornerfilter()
         }
     }
     $scope.prdselect1=$('#coating').val();
@@ -200,51 +236,57 @@ $scope.optionbydimensions = function (endurl) {
         url:'/4overproducts',
         data: {endpoint:endurl},
     }).then(function mySuccess(response) {
-       // $scope.productbaseprice=response.data.success.entities;
         }, function myError(response) {
             console.log(response.statusText);
     });
 }
 $('#dimensions').change(function() {
     $scope.priceshow=false
+    $scope.btndisigned=true
     $scope.Dimensions=$(this).val()
     $scope.roundcorners=""
     $scope.builderbydimencion()
-    //$('#stock').val("14PT Uncoated")
 });
 $('#stock').change(function() {
     $scope.priceshow=false
+    $scope.btndisigned=true
     $scope.Stock=$(this).val()
     $scope.roundcorners=""
     $scope.builderbyStock()
 });
 $('#coating').change(function() {
     $scope.priceshow=false
+    $scope.btndisigned=true
     $scope.prdselect1=$(this).val()
     $scope.builderchangue()
 });
 
 $('#roundcorners').change(function() {
     $scope.priceshow=false
+    $scope.btndisigned=true
     $scope.roundcorners=$(this).val()
     $scope.$apply()
+    $scope.roundcornerfilter()
     $scope.builderprice()
 });
 
 $('#side').change(function() {
     $scope.priceshow=false
+    $scope.btndisigned=true
     $scope.side=$(this).val()
     $scope.builderprice()
 });
 
 $('#quantyti').change(function() {
     $scope.priceshow=false
+    $scope.btndisigned=true
     $scope.quantyti=$(this).val()
     $scope.builderprice()
 });
 
 $('#TurnAroundTime').change(function() { 
     $scope.priceshow=false
+    $scope.btndisigned=true
     $scope.TurnAroundTime=$(this).val()
     $scope.builderTurnAround()
 });
@@ -259,25 +301,23 @@ $scope.load4overproductsOptions = function (endurl) {
             var match=$scope.$eval("arrayproductprices | filter:{product_option_group_name:'Runsize'} ");
             var match2=$scope.$eval("arrayproductprices | filter:{product_option_group_name:'Colorspec'} ");
             var match3=$scope.$eval("arrayproductprices | filter:{product_option_group_name:'Turn Around Time'} ");
-            console.log(match)
+         
             $scope.productprices=match[0].options 
             $scope.productside=match2[0].options 
             $scope.productTurnAroundTime=match3[0].options
             setTimeout(function(){  $scope.quantyti=$('#quantyti').val();
             $scope.side=$('#side').val();
-            $scope.builderprice()  }, 500);
-            console.log($scope.productside)
+            $scope.builderprice()  }, 100);
+       
             }, function myError(response) {
                 console.log(response.statusText);
         });
 }
 $scope.builderprice = function (params) {
-    console.log($scope.side+" X "+$scope.quantyti)
+    
     var matches = $scope.$eval('productTurnAroundTime ');
     var matchesprice = $scope.$eval('productbaseprice | filter:quantyti | filter:side');
     $scope.productTurnAroundfilter=matches[0]
-    console.log($scope.productbaseprice)
-    console.log(matchesprice[0])
     $scope.firtprice=matchesprice[0].product_baseprice
 
   //  $scope.buildprice=parseFloat($scope.firtprice).toFixed(2); 
@@ -317,8 +357,12 @@ $scope.TurnAroundTimeprice = function (endurl) {
     }).then(function mySuccess(response) {
          if (response.data.success.entities[0].price== undefined) {
             $scope.buildprice =parseFloat($scope.firtprice).toFixed(2);
+            $scope.priceperpiece = ($scope.pricetransform($scope.buildprice)/$scope.quantyti).toFixed(2);
+            $scope.btndisigned=false
          }else{
             $scope.buildprice =parseFloat(parseFloat($scope.firtprice) + parseFloat(response.data.success.entities[0].price)).toFixed(2); 
+            $scope.priceperpiece = ($scope.pricetransform($scope.buildprice)/$scope.quantyti).toFixed(2);
+            $scope.btndisigned=false
          }
           $('#preloader').hide()
           $scope.priceshow=true
@@ -333,11 +377,10 @@ $scope.computeshipping = function () {
     for (let index = 0; index < $scope.arrayproductprices.length; index++) {
         
         for (let index1 = 0; index1 < $scope.arrayproductprices[index].options.length; index1++) {
-            console.log($scope.arrayproductprices[index].options[index1].option_uuid)
+
         }
         
     }
-    console.log($scope.arrayproductprices)
     $scope.option_uuid
     $scope.colorspec_uuid
     $scope.runsize_uuid 
@@ -351,8 +394,7 @@ $scope.computeshipping = function () {
     }).then(function mySuccess(response) {
         if (response.data.success.status == 'error') {
             console.log("error");  
-        }else{
-            console.log(response.data.success.job.facilities[0].shipping_options); 
+        }else{ 
            $scope.shipping_options=response.data.success.job.facilities[0].shipping_options 
            $scope.address=response.data.success.job.facilities[0].address
         }

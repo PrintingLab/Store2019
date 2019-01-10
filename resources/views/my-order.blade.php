@@ -57,13 +57,14 @@
                                 <div class="uppercase font-bold">Order ID</div>
                                 <div>{{ $order->id }}</div>
                             </div><div>
-                                <div class="uppercase font-bold">Total</div>
-                                <div>{{ presentPrice($order->billing_total) }}</div>
+                            <div class="uppercase font-bold">Pay ID</div>
+                                <div>{{$order->payment_id }}</div>
                             </div>
                         </div>
                         <div>
                             <div class="order-header-items">
-                                <div><a href="#">Invoice</a></div>
+                            <div class="uppercase font-bold">Total</div>
+                                <div>{{ presentPrice($order->billing_total) }}</div>
                             </div>
                         </div>
                     </div>
@@ -95,6 +96,14 @@
                                     <td>{{ presentPrice($order->shipping_Value) }}</td>
                                 </tr>
                                 <tr>
+                                    <td>Shipping  method</td>
+                                    <td>{{ $order->shipping_Type}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pay method</td>
+                                    <td>{{ $order->payment_gateway}}</td>
+                                </tr>
+                                <tr>
                                     <td>Total</td>
                                     <td>{{ presentPrice($order->billing_total) }}</td>
                                 </tr>
@@ -116,13 +125,19 @@
                     <div class="order-products">
                         @foreach ($products as $product)
                             <div class="order-product-item">
-                                <div><img src="{{ asset($product->image) }}" alt="Product Image"></div>
+                            <div><img src="../storage/Userfiles/{{$product->pivot->imgF}}" alt="Product Image">
+                                @if ($product->pivot->side == '4/4' )
+                                <img src="../storage/Userfiles/{{$product->pivot->imgB}}" alt="Product Image">
+                                @endif
+                            </div>
                                 <div>
                                     <div>
                                         <a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a>
                                     </div>
                                     <div>{{$product->pivot->product_decription}}</div>
                                     <div>Quantity: {{ $product->pivot->quantity }}</div>
+                                    <div>Printed Side: {{ getPrintingsides($product->pivot->side) }}</div>
+                                    <div>Turnaround: {{ getPrintingTime($product->pivot->tat) }}</div>
                                 </div>
                             </div>
                         @endforeach

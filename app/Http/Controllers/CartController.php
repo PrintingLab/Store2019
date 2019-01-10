@@ -33,7 +33,7 @@ class CartController extends Controller
             return view('upload')->with(['productID' =>$request->prdtID,'productCODE' =>$request->prdtcode,'productDESCRIPTION' =>$request->prddesc,'productRUNSIZE' =>$request->prdRunsize,'productSIDE' =>$request->prdside,'productTATIME' =>$request->prdTurnAroundTime,'productPRICE' =>$request->prdtprice,'produto'=>$product,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid]); 
         }
         if ($request->sendbtn=='op3') {
-            return view('we-designed')->with(['productID' =>$request->prdtID,'productCODE' =>$request->prdtcode,'productDESCRIPTION' =>$request->prddesc,'productRUNSIZE' =>$request->prdRunsize,'productSIDE' =>$request->prdside,'productTATIME' =>$request->prdTurnAroundTime,'produto'=>$product,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid]);
+            return view('we-designed')->with(['productID' =>$request->prdtID,'productCODE' =>$request->prdtcode,'productDESCRIPTION' =>$request->prddesc,'productRUNSIZE' =>$request->prdRunsize,'productSIDE' =>$request->prdside,'productTATIME' =>$request->prdTurnAroundTime,'productPRICE' =>$request->prdtprice,'produto'=>$product,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid]);
         }
 
        
@@ -54,26 +54,28 @@ class CartController extends Controller
         // if ($duplicates->isNotEmpty()) {
         //     return redirect()->route('cart.index')->with('success_message', 'Item is already in your cart!');
         // }
-        $produtprice = get4overprices($request->prdtID,$request->prdRunsize,$request->prdside,$request->prdTurnAroundTime);
-        if ($request->fileM[0]==null) {
+       // $produtprice = get4overprices($request->prdtID,$request->prdRunsize,$request->prdside,$request->prdTurnAroundTime);
+        if (isset($request->archivo)) {
         $filename="clt".$Authid."-".time()."-".date('Ymd');
         $imagenA=$request->archivo;
         $nombre_archivoF =$request->archivo->getClientOriginalExtension();
         $nombre_archivoF=$filename.'F.'.$nombre_archivoF;
         $imagenA->move('storage/Userfiles/',$nombre_archivoF);
-        Cart::add($product->id, $product->name, 1, printingPrice($produtprice),['shiping' =>  0,'shipingTp' => 'N/A','decription' =>  $request->prddesc,'imgF' =>$nombre_archivoF,'imgB' =>'N/A','side' =>$request->prdside,'quantity' =>$request->prdRunsize,'tat' =>$request->prdTurnAroundTime,'produtcode' =>$request->prdtcode,'produtid' =>$request->prdtID,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid]);
+        Cart::add($product->id, $product->name, 1, printingPrice($request->prdtprice),['shiping' =>  0,'shipingTp' => 'N/A','decription' =>  $request->prddesc,'imgF' =>$nombre_archivoF,'imgB' =>'N/A','side' =>$request->prdside,'quantity' =>$request->prdRunsize,'tat' =>$request->prdTurnAroundTime,'produtcode' =>$request->prdtcode,'produtid' =>$request->prdtID,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid]);
         return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
-        }else{
+        }
+        
+        if (isset($request->file22)){
             $filename="clt".$Authid."-".time()."-".date('Ymd');
-            $imagenF=$request->fileM[0];
-            $imagenB=$request->fileM[1];
-            $nombre_archivoF =$request->fileM[0]->getClientOriginalExtension();
-            $nombre_archivoB =$request->fileM[0]->getClientOriginalExtension();
+            $imagenF=$request->file21;
+            $imagenB=$request->file22;
+            $nombre_archivoF =$request->file21->getClientOriginalExtension();
+            $nombre_archivoB =$request->file22->getClientOriginalExtension();
             $nombre_archivoF=$filename.'F.'.$nombre_archivoF;
             $nombre_archivoB=$filename.'B.'.$nombre_archivoB;
             $imagenF->move('storage/Userfiles/',$nombre_archivoF);
             $imagenB->move('storage/Userfiles/',$nombre_archivoB);
-            Cart::add($product->id, $product->name, 1, printingPrice($produtprice),['shiping' => 0,'shipingTp' => 'N/A','decription' =>  $request->prddesc,'imgF' =>$nombre_archivoF,'imgB' =>$nombre_archivoB,'side' =>$request->prdside,'quantity' =>$request->prdRunsize,'tat' =>$request->prdTurnAroundTime,'produtcode' =>$request->prdtcode,'produtid' =>$request->prdtID,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid]);
+            Cart::add($product->id, $product->name, 1, printingPrice($request->prdtprice),['shiping' => 0,'shipingTp' => 'N/A','decription' =>  $request->prddesc,'imgF' =>$nombre_archivoF,'imgB' =>$nombre_archivoB,'side' =>$request->prdside,'quantity' =>$request->prdRunsize,'tat' =>$request->prdTurnAroundTime,'produtcode' =>$request->prdtcode,'produtid' =>$request->prdtID,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid]);
         return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
         }
         
