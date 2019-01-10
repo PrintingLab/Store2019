@@ -7,13 +7,13 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+<link rel="shortcut icon" href="imagenes/favicon-printing-lab.png" type="image/x-icon"/>
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+
 </head>
 <body >
     <div id="app">
@@ -73,11 +73,17 @@
             </div>
         </nav>
 
+
+
+
         @yield('content')
     </div>
 
+
+
+
     <!-- Scripts -->
-    
+
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

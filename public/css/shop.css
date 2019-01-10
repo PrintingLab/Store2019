@@ -8,7 +8,7 @@
     z-index: 1000;
   }
   #preloader {
-  
+
     top: 10%;
     left: 25%;
     width: 100%;
@@ -93,13 +93,13 @@
   .loader {
     position: relative;
   }
-  
+
   .yellow {
       font-size: 35px;
     color: #F4005B;
     animation: roundR 3s linear infinite;
   }
-  
+
   .black {
     font-size: 35px;
     top: 18px;
@@ -107,7 +107,7 @@
     position: absolute;
     animation: roundL 3s linear infinite;
   }
-  
+
   @keyframes roundR {
     0% {
       transform: rotate(0deg);
@@ -127,7 +127,7 @@
   .product-section-price input{
       color: #F4005B;
       border: none;
-      background: whitesmoke;
+      background: transparent;
       font-size: 35px;
       width: 40%;
       font-weight: 900;
@@ -137,16 +137,12 @@
     width: 35px;
 
 }
-  .product-section-information{
-    padding: 0px 10px;
-    background: whitesmoke;
-    position: relative;
-}
+
 
   .product-section-information select{
       height: 40px;
       border: 1px black solid;
-      width: 250px !important;
+      width: 100% !important;
       font-size: 15px;
   }
   .formoptions button{
@@ -156,7 +152,7 @@
     padding: 15px;
     background: #fff;
     border: 1px gray solid;
-    margin: 15px; 
+    margin: 15px;
 
   }
 

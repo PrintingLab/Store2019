@@ -1,15 +1,325 @@
 <header>
-    <div class="top-nav container">
-      <div class="top-nav-left">
-          <div class="logo"><a href="/shop"><img src="/img/printing-lab-logo-new-york-nj.png" alt="" style="width:50%"></a></div>
-          @if (! (request()->is('checkout') || request()->is('guestCheckout')))
-          {{ menu('main', 'partials.menus.main') }}
-          @endif
-      </div>
-      <div class="top-nav-right">
+
+  <div class="barsignage">
+    <img src="/img/signage.svg" alt="">
+    <span>ARE YOU LOOKING FOR SIGNAGE, VEHICLE GRAPHICS OR TRADE SHOWS? <a target="_blank" href="http://signslab.com/">CLICK HERE</a>
+    </span>
+    <img src="/img/signage.svg" alt="">
+  </div>
+  <div class="haderPc">
+    <div class="container">
+      <div class="row" id="menuPrincipal">
+        <div class="col-md-2 paddingCero">
+          <a href="/">
+            <img class="logo" src="/img/logo-printing-lab-new-york.svg" alt="">
+          </a>
+        </div>
+        <div class="col-md-1">
+          <div class="dropdown displayNone" id="btn_HambDisplayPc">
+            <button class="dropdown-toggle btn_hamburguesa" type="button" id="dropdownMenuButton2" data-toggle="dropdown">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="dropdown-menu  menu_H_allPP "  aria-labelledby="dropdownMenuButton2">
+              <div class="row">
+                <div class="col-md-6">
+                  <h6><strong>MARKETING PRODUCTS</strong></h6>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <ul class="list_dropdown">
+                        <li><a href="#">4D Lenticular Prints</a></li>
+                        <li><a href="#">Announcement Cards</a></li>
+                        <li><a href="#">Booklets</a></li>
+                        <li><a href="#">Bookmarks</a></li>
+                        <li><a href="#">Business Cards</a></li>
+                        <li><a href="#">Calendars</a></li>
+                        <li><a href="#">Catalogs</a></li>
+                        <li><a href="#">Counter Cards</a></li>
+                        <li><a href="#">Custom Orders</a></li>
+                        <li><a href="#">Door Hangers</a></li>
+                        <li><a href="#">Endur ACE</a></li>
+                        <li><a href="#">Envelope</a></li>
+                        <li><a href="#">Event Tickets</a></li>
+                        <li><a href="#">Flyers and Brochures</a></li>
+                        <li><a href="#">Greeting Cards</a></li>
+                        <li><a href="#">Hang Tags</a></li>
+                        <li><a href="#">Letterheads</a></li>
+                        <li><a href="#">Linen Uncoated</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6">
+                      <ul class="list_dropdown">
+                        <li><a href="#">Magnets</a></li>
+                        <li><a href="#">Menus</a></li>
+                        <li><a href="#">NCR Forms</a></li>
+                        <li><a href="#">Notepads</a></li>
+                        <li><a href="#">Plastic Cards</a></li>
+                        <li><a href="#">Postcards</a></li>
+                        <li><a href="#">Posters</a></li>
+                        <li><a href="#">Presentation Folders</a></li>
+                        <li><a href="#">Roll Labels</a></li>
+                        <li><a href="#">Sell Sheets</a></li>
+                        <li><a href="#">Stickers</a></li>
+                        <li><a href="#">Table Tent Cards</a></li>
+                        <li><a href="#">Tear Off Cards</a></li>
+                        <li><a href="#">Trading Cards</a></li>
+                        <li><a href="#">Window Cling</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h6><strong>CUSTOM APPAREL</strong></h6>
+                      <ul class="list_dropdown">
+                        <li><a href="#">Short Sleeve T-shirts</a></li>
+                        <li><a href="#">Long Sleeve T-shirts</a></li>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">Hoodies</a></li>
+                        <li><a href="#">Sweatshirts</a></li>
+                        <li><a href="#">Activewear</a></li>
+                        <li><a href="#">Polos</a></li>
+                        <li><a href="#">Jackets</a></li>
+                      </ul>
+                      <h6 style="margin-top: 5%;"><strong>LARGE FORMAT</strong></h6>
+                      <ul class="list_dropdown">
+                        <li><a href="#">Banners</a></li>
+                        <li><a href="#">Vinyl Graphics</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6 img_MenuDrop">
+                      <img  src="/img/bcards1.jpg" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 search">
+          <input placeholder="Search Products">
+          <span class="fa fa-search"></span>
+        </div>
+        <div class="col-md-5 row btn_3top">
+          <div class="col-md-4 paddingCero">
+              <img src="/img/call-icon.png" alt="">
+              <a href="tel:201-305-0404">201-305-0404</a>
+          </div>
           @if (! (request()->is('checkout') || request()->is('guestCheckout')))
           @include('partials.menus.main-right')
           @endif
+        </div>
       </div>
-    </div> <!-- end top-nav -->
+    </div>
+  </div>
+  <div class="headerMb">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="col-sm-12 col-12 row">
+          <div class=" col-sm-1 col-2 paddingCero">
+            <button type="button" class=" collapsed btn_hamburguesaMB" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            </button>
+          </div>
+          <div class=" col-sm-9 col-8 center paddingCero">
+            <img class="imgLogoH" src="/img/logo-printing-lab-new-york.svg" alt="">
+          </div>
+          <div class=" col-sm-2 col-2">
+            <ul class="optionsMenu">
+              <li>
+                <a href="tel:201-305-0404"><img src="/img/call-icon.png" alt=""></a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="/img/user-login-printing-lab.png" alt="">
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="/img/shopping-bag-printing-lab.png" alt="">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+          </form>
+          <ul class="nav navbar-nav">
+            <li class="dropdown center">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MARKETING PRODUCTS<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">4D Lenticular Prints</a></li>
+                <li><a href="#">Announcement Cards</a></li>
+                <li><a href="#">Booklets</a></li>
+                <li><a href="#">Bookmarks</a></li>
+                <li><a href="#">Business Cards</a></li>
+                <li><a href="#">Calendars</a></li>
+                <li><a href="#">Catalogs</a></li>
+                <li><a href="#">Counter Cards</a></li>
+                <li><a href="#">Custom Orders</a></li>
+                <li><a href="#">Door Hangers</a></li>
+                <li><a href="#">Endur ACE</a></li>
+                <li><a href="#">Envelope</a></li>
+                <li><a href="#">Event Tickets</a></li>
+                <li><a href="#">Flyers and Brochures</a></li>
+                <li><a href="#">Greeting Cards</a></li>
+                <li><a href="#">Hang Tags</a></li>
+                <li><a href="#">Letterheads</a></li>
+                <li><a href="#">Linen Uncoated</a></li>
+                <li><a href="#">Magnets</a></li>
+                <li><a href="#">Menus</a></li>
+                <li><a href="#">NCR Forms</a></li>
+                <li><a href="#">Notepads</a></li>
+                <li><a href="#">Plastic Cards</a></li>
+                <li><a href="#">Postcards</a></li>
+                <li><a href="#">Posters</a></li>
+                <li><a href="#">Presentation Folders</a></li>
+                <li><a href="#">Roll Labels</a></li>
+                <li><a href="#">Sell Sheets</a></li>
+                <li><a href="#">Stickers</a></li>
+                <li><a href="#">Table Tent Cards</a></li>
+                <li><a href="#">Tear Off Cards</a></li>
+                <li><a href="#">Trading Cards</a></li>
+                <li><a href="#">Window Cling</a></li>
+              </ul>
+            </li>
+            <li class="dropdown center">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CUSTOM APPAREL<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Short Sleeve T-shirts</a></li>
+                <li><a href="#">Long Sleeve T-shirts</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="#">Hoodies</a></li>
+                <li><a href="#">Sweatshirts</a></li>
+                <li><a href="#">Activewear</a></li>
+                <li><a href="#">Polos</a></li>
+                <li><a href="#">Jackets</a></li>
+              </ul>
+            </li>
+            <li class="dropdown center">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LARGE FORMAT<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Banners</a></li>
+                <li><a href="#">Vinyl Graphics</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 </header>
+
+<div class="border_Mplegable haderPc">
+  <div class="container center">
+    <div class="col-md-10">
+      <ul class="menuPlegable">
+        <li>
+          <div class="dropdown">
+            <button class="dropdown-toggle btn_allPP" type="button" id="dropdownMenuButton3" data-toggle="dropdown">
+              ALL PRINT PRODUCTS
+            </button>
+            <div class="dropdown-menu menu_drop_allPP"  aria-labelledby="dropdownMenuButton2">
+              <div class="row">
+                <div class="col-md-6">
+                  <h6><strong>MARKETING PRODUCTS</strong></h6>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <ul class="list_dropdown">
+                        <li><a href="#">4D Lenticular Prints</a></li>
+                        <li><a href="#">Announcement Cards</a></li>
+                        <li><a href="#">Booklets</a></li>
+                        <li><a href="#">Bookmarks</a></li>
+                        <li><a href="#">Business Cards</a></li>
+                        <li><a href="#">Calendars</a></li>
+                        <li><a href="#">Catalogs</a></li>
+                        <li><a href="#">Counter Cards</a></li>
+                        <li><a href="#">Custom Orders</a></li>
+                        <li><a href="#">Door Hangers</a></li>
+                        <li><a href="#">Endur ACE</a></li>
+                        <li><a href="#">Envelope</a></li>
+                        <li><a href="#">Event Tickets</a></li>
+                        <li><a href="#">Flyers and Brochures</a></li>
+                        <li><a href="#">Greeting Cards</a></li>
+                        <li><a href="#">Hang Tags</a></li>
+                        <li><a href="#">Letterheads</a></li>
+                        <li><a href="#">Linen Uncoated</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6">
+                      <ul class="list_dropdown">
+                        <li><a href="#">Magnets</a></li>
+                        <li><a href="#">Menus</a></li>
+                        <li><a href="#">NCR Forms</a></li>
+                        <li><a href="#">Notepads</a></li>
+                        <li><a href="#">Plastic Cards</a></li>
+                        <li><a href="#">Postcards</a></li>
+                        <li><a href="#">Posters</a></li>
+                        <li><a href="#">Presentation Folders</a></li>
+                        <li><a href="#">Roll Labels</a></li>
+                        <li><a href="#">Sell Sheets</a></li>
+                        <li><a href="#">Stickers</a></li>
+                        <li><a href="#">Table Tent Cards</a></li>
+                        <li><a href="#">Tear Off Cards</a></li>
+                        <li><a href="#">Trading Cards</a></li>
+                        <li><a href="#">Window Cling</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h6><strong>CUSTOM APPAREL</strong></h6>
+                      <ul class="list_dropdown">
+                        <li><a href="#">Short Sleeve T-shirts</a></li>
+                        <li><a href="#">Long Sleeve T-shirts</a></li>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">Hoodies</a></li>
+                        <li><a href="#">Sweatshirts</a></li>
+                        <li><a href="#">Activewear</a></li>
+                        <li><a href="#">Polos</a></li>
+                        <li><a href="#">Jackets</a></li>
+                      </ul>
+                      <h6 style="margin-top: 5%;"><strong>LARGE FORMAT</strong></h6>
+                      <ul class="list_dropdown">
+                        <li><a href="#">Banners</a></li>
+                        <li><a href="#">Vinyl Graphics</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6 img_MenuDrop">
+                      <img  src="/img/bcards1.jpg" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="#">
+            LARGE FORMAT
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            CUSTOM APPAREL
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            MARKETING PRODUCTS
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            CONTACT US
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
