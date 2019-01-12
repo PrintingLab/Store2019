@@ -26,7 +26,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <ul class="list_dropdown">
-                        <li><a href="#">4D Lenticular Prints</a></li>
+                        <li><a href="#">D Lenticular Prints</a></li>
                         <li><a href="#">Announcement Cards</a></li>
                         <li><a href="#">Booklets</a></li>
                         <li><a href="#">Bookmarks</a></li>

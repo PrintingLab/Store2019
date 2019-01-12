@@ -30,7 +30,7 @@
     <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
     <input type="hidden" name="typedesigned" value="1">
     <input hidden type="text" name="comentario" value="N/A" readonly>
-    
+    <input hidden type="text" name="optionstring" value="{{$optionstring}}" readonly>
 <div class="row">
   <div class="col-md-6">
     <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>
@@ -90,6 +90,7 @@
     <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
     <input hidden type="text" name="comentario" value="N/A" readonly>
     <input type="hidden" name="typedesigned" value="1">
+    <input hidden type="text" name="optionstring" value="{{$optionstring}}" readonly>
   <div class="row">
     <div class="col-md-6">
       <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>

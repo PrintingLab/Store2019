@@ -27,6 +27,7 @@
     <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
     <input hidden type="text" name="typedesigned" value="3">
     <input hidden type="text" name="selectRadios" value="N/A">
+    <input hidden type="text" name="optionstring" value="{{$optionstring}}" readonly>
     <div class="row">
       <div class="col-md-6">
         <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>

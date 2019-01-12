@@ -17,55 +17,10 @@ shopApp.filter('unique', function() {
  });
 
 shopApp.controller('shopcontroller',function($scope,$http,$document){
-    $scope.rangeofprices=[
-        {"Pinicial": 0.01, "Pfinal":0.99,"porcentaje":1500},
-        {"Pinicial":1, "Pfinal":1.99,"porcentaje":1200},
-        {"Pinicial":2, "Pfinal":2.99,"porcentaje":900},
-        {"Pinicial":3, "Pfinal":3.99,"porcentaje":800},
-        {"Pinicial":4, "Pfinal":4.99,"porcentaje":700},
-        {"Pinicial":5, "Pfinal":5.99,"porcentaje":600},
-        {"Pinicial":6, "Pfinal":9.99,"porcentaje":550},
-        {"Pinicial":10, "Pfinal":14.99,"porcentaje":500},
-        {"Pinicial":15, "Pfinal":19.99,"porcentaje":450},
-        {"Pinicial":20, "Pfinal":24.99,"porcentaje":400},
-        {"Pinicial":25, "Pfinal":29.99,"porcentaje":350},
-        {"Pinicial":30, "Pfinal":34.99,"porcentaje":300},
-        {"Pinicial":35, "Pfinal":39.99,"porcentaje":290},
-        {"Pinicial":40, "Pfinal":44.99,"porcentaje":280},
-        {"Pinicial":45, "Pfinal":49.99,"porcentaje":270},
-        {"Pinicial":50, "Pfinal":54.99,"porcentaje":260},
-        {"Pinicial":55, "Pfinal":59.99,"porcentaje":250},
-        {"Pinicial":60, "Pfinal":74.99,"porcentaje":240},
-        {"Pinicial":75, "Pfinal":80.99,"porcentaje":230},
-        {"Pinicial":81, "Pfinal":100.9 ,"porcentaje":220},
-        {"Pinicial":101, "Pfinal":120.99,"porcentaje":210},
-        {"Pinicial":121, "Pfinal":140.99,"porcentaje":200},
-        {"Pinicial":141, "Pfinal":160.99,"porcentaje":190},
-        {"Pinicial":161, "Pfinal":200.99,"porcentaje":180},
-        {"Pinicial":201, "Pfinal":380.99,"porcentaje":175},
-        {"Pinicial":381, "Pfinal":560.99,"porcentaje":170},
-        {"Pinicial":561, "Pfinal":740.99,"porcentaje":165},
-        {"Pinicial":741, "Pfinal":100000,"porcentaje":160}
-          ]
-    $scope.stoknames=[
-        {"Name":"100GLC", "value":"100lb Gloss Cover"}, 
-        {"Name":"100LB", "value":"Linen"},
-        {"Name":"14PT", "value":"Standard (14pt)"},
-        {"Name":"14PTUC", "value":"Standard Uncoated (14pt)"},
-        {"Name":"16PT", "value":"Premium (16pt)"},
-        {"Name":"20PTCL", "value":"Clear Plastic (20pt)"},
-        {"Name":"20PTFR", "value":" Frosted Plastic (20pt)"},
-        {"Name":"20PTWH", "value":"White Plastic (20pt)"},
-        {"Name":"100LBWS", "value":"100lb White Stipple"},
-        {"Name":"100GLB", "value":"100lb Gloss Book"},
-        {"Name":"4/0 (4 color front)", "value":"Front Only"},
-        {"Name":"4/4 (4 color both sides)", "value":"Front and Back"},
-        {"Name":"32PTUC", "value":"32 Point"},
-        {"Name":"18PTC1S", "value":"Premium + (18pt)"},
-        {"Name":"18PTC1S", "value":"Premium + (18pt)"},
-        {"Name":"70LB", "value":"70LB"}
-      ]
-      $scope.btndisigned=true
+    $scope.rangeofprices=pricesarry
+    $scope.stoknames=stoknamearray
+    $scope.optioname=optionamearray
+    $scope.btndisigned=true
     $scope.priceshow=false
     $scope.moreoptions=true
     $scope.showcorners=true
@@ -107,7 +62,8 @@ $scope.pricetransform = function (inprice) {
 
 
 
-$scope.stockname = function (name) {
+$scope.stockname = function (name,id,idselect) {
+    var newname
     if (prtdname == "Business Cards") {
         switch (name) {
             case "100GLC":
@@ -123,7 +79,7 @@ $scope.stockname = function (name) {
             $("#stock option[value='" + name + "']").remove() 
                 break; 
                 case "4/1":
-            $("#side option[value='" + name + "']").remove() 
+            $("#"+idselect+" option[value='" + id + "']").remove() 
                 break;
             default:
                 break;
@@ -132,11 +88,30 @@ $scope.stockname = function (name) {
 
     for (let index = 0; index < $scope.stoknames.length; index++) {
         if ($scope.stoknames[index].Name == name) {
-            return $scope.stoknames[index].value
+            newname =  $scope.stoknames[index].value
         }
     }
+    
+    if (newname) {
+        return newname
+    }else{
+        return name
+    }
 }
-
+$scope.changeoptioname = function(name){
+    var newname
+    for (let index = 0; index < $scope.optioname.length; index++) {
+        if ($scope.optioname[index].Name == name) {
+            newname = $scope.optioname[index].value
+        }
+    }
+    if (newname) {
+        return newname
+    }else{
+        return name
+    }
+   
+}
 
 $scope.baseprice = function (endurl) {
             $http({
@@ -145,6 +120,7 @@ $scope.baseprice = function (endurl) {
                 data: {endpoint:endurl},
             }).then(function mySuccess(response) {
                 $scope.productbaseprice=response.data.success.entities;
+                console.log($scope.productbaseprice);
                 }, function myError(response) {
                     console.log(response.statusText);
             });
@@ -298,40 +274,57 @@ $scope.load4overproductsOptions = function (endurl) {
             data: {endpoint:endurl},
         }).then(function mySuccess(response) {
             $scope.arrayproductprices=response.data.success.entities
-            var match=$scope.$eval("arrayproductprices | filter:{product_option_group_name:'Runsize'} ");
-            var match2=$scope.$eval("arrayproductprices | filter:{product_option_group_name:'Colorspec'} ");
-            var match3=$scope.$eval("arrayproductprices | filter:{product_option_group_name:'Turn Around Time'} ");
-         
-            $scope.productprices=match[0].options 
-            $scope.productside=match2[0].options 
-            $scope.productTurnAroundTime=match3[0].options
-            setTimeout(function(){  $scope.quantyti=$('#quantyti').val();
-            $scope.side=$('#side').val();
-            $scope.builderprice()  }, 100);
-       
+           // console.log($scope.arrayproductprices)
+            setTimeout(function(){  $scope.optionschange() }, 100);
+            
             }, function myError(response) {
                 console.log(response.statusText);
         });
 }
+
+$scope.optionschange = function(){
+    $scope.priceshow=false
+$scope.productbuiloption=[]
+   for (let index = 0; index < $scope.arrayproductprices.length; index++) {
+       const element = $scope.arrayproductprices[index];
+       $scope.productbuiloption.push({option:element.product_option_group_name,id:$("#"+element.product_option_group_uuid+"").val(),name:$("#"+$("#"+element.product_option_group_uuid+"").val()+"").attr("name")})
+   }
+   var Runsize = $scope.$eval("productbuiloption | filter:{option:'Runsize'}");
+   var Colorspec = $scope.$eval("productbuiloption | filter:{option:'Colorspec'}");
+   var TurnAroundTime = $scope.$eval("productbuiloption | filter:{option:'Turn Around Time'}");
+   var TurnAroundTimes = $scope.$eval("arrayproductprices | filter:'Turn Around Time'");
+   $scope.Runsize=Runsize[0].id
+   $scope.Colorspec=Colorspec[0].id
+   $scope.TurnAroundTime=TurnAroundTime[0].id
+   $scope.productTurnAroundTime=TurnAroundTimes[0].options
+   $scope.optionstring=JSON.stringify($scope.productbuiloption,null,"")
+   $scope.builderprice()
+}
+
+
+
 $scope.builderprice = function (params) {
     
-    var matches = $scope.$eval('productTurnAroundTime ');
-    var matchesprice = $scope.$eval('productbaseprice | filter:quantyti | filter:side');
-    $scope.productTurnAroundfilter=matches[0]
-    $scope.firtprice=matchesprice[0].product_baseprice
-
-  //  $scope.buildprice=parseFloat($scope.firtprice).toFixed(2); 
-    $scope.$apply()
-    $scope.TurnAroundTime=$('#TurnAroundTime').val();
+    for (let index = 0; index < $scope.productbaseprice.length; index++) {
+        const priceloop = $scope.productbaseprice[index];
+            if (priceloop.colorspec_uuid == $scope.Colorspec && priceloop.runsize_uuid == $scope.Runsize) {
+                $scope.firtprice=priceloop.product_baseprice
+            }
+        
+    }
     $scope.builderTurnAround()
 }
 $scope.builderTurnAround = function () {
     for (let index = 0; index < $scope.productTurnAroundTime.length; index++) {
-       if ($scope.productTurnAroundTime[index].colorspec == $scope.side && $scope.productTurnAroundTime[index].runsize == $scope.quantyti && $scope.productTurnAroundTime[index].option_name == $scope.TurnAroundTime ) {
+       if ($scope.productTurnAroundTime[index].colorspec_uuid == $scope.Colorspec && $scope.productTurnAroundTime[index].runsize_uuid == $scope.Runsize && $scope.productTurnAroundTime[index].option_uuid == $scope.TurnAroundTime ) {
         $scope.TurnAroundTimeprice($scope.productTurnAroundTime[index].option_prices)
         $scope.option_uuid= $scope.productTurnAroundTime[index].option_uuid
         $scope.colorspec_uuid= $scope.productTurnAroundTime[index].colorspec_uuid
         $scope.runsize_uuid =$scope.productTurnAroundTime[index].runsize_uuid
+        $scope.quantyti= $scope.productTurnAroundTime[index].runsize
+        $scope.side= $scope.productTurnAroundTime[index].colorspec
+        $scope.TurnAroundval =$scope.productTurnAroundTime[index].option_name
+        console.log($scope.productTurnAroundTime[index].option_prices)
        }
     }
     // $http({ 
@@ -374,8 +367,7 @@ $scope.TurnAroundTimeprice = function (endurl) {
 }
 
 $scope.computeshipping = function () {
-    for (let index = 0; index < $scope.arrayproductprices.length; index++) {
-        
+    for (let index = 0; index < $scope.arrayproductprices.length; index++) { 
         for (let index1 = 0; index1 < $scope.arrayproductprices[index].options.length; index1++) {
 
         }

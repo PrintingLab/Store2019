@@ -138,6 +138,11 @@
                                     <div>Quantity: {{ $product->pivot->quantity }}</div>
                                     <div>Printed Side: {{ getPrintingsides($product->pivot->side) }}</div>
                                     <div>Turnaround: {{ getPrintingTime($product->pivot->tat) }}</div>
+                                    @foreach (json_decode($product->pivot->Optionstring, true) as $key)
+                                        @if(isset($key['id']))
+                                          <div>{{$key['option']}}: {{$key['name']}}</div>
+                                         @endif
+                                     @endforeach
                                 </div>
                             </div>
                         @endforeach

@@ -14,7 +14,7 @@
         <span>Shopping Cart</span>
     @endcomponent
 
-    <div class="cart-section container">
+    <div class="cart-section container" ng-controller="cartcontroller">
         <div>
             @if (session()->has('success_message'))
                 <div class="alert alert-success">
@@ -33,7 +33,7 @@
 
             @if (Cart::count() > 0)
 
-            <h2>{{ Cart::count() }} item(s) in Shopping Cart</h2>
+            <h2>{{ Cart::count() }} item(s) in @{{hello}}</h2>
 
             <div class="cart-table">
                 @foreach (Cart::content() as $item)
@@ -58,6 +58,8 @@
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <button type="submit" class="cart-options">Remove</button>
+                                <a href="" data-toggle="modal"  ng-click="editmodal('{{ $item->name }}','{{ $item->options->produtid}}')">
+                                               Edit</a>
                             </form>
                             <div class="checkout-table-row-right">
                             <div class="checkout-table-quantity">{{ $item->options->quantity }}</div>
@@ -76,6 +78,33 @@
                 </div> <!-- end cart-table-row -->
                 @endforeach
             </div> <!-- end cart-table -->
+<!-- Modal -->
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">@{{itemname}} Price Quote</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div ng-repeat="prdt in optionsproduct ">
+              <label for="@{{prdt.product_option_group_name}}">@{{prdt.product_option_group_name}}: </label>
+          <select name="" id="@{{prdt.product_option_group_name}}" >
+              <option value="" ng-repeat="prdtop in prdt.options">@{{prdtop .option_name}}</option>
+          </select>
+          </div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
             @if (! session()->has('coupon'))
 
@@ -190,7 +219,8 @@
 @endsection
 
 @section('extra-js')
-    <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/cart.js') }}"></script>
+    
     <script>
         (function(){
             const classname = document.querySelectorAll('.quantity')

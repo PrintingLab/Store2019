@@ -161,8 +161,8 @@ $customerAddress->setCountry("USA");
               if (($tresponse != null) && ($tresponse->getResponseCode()=="1") || ($tresponse->getResponseCode()=="4"))
               {
                 $order = $this->addToOrdersTables($request, null,$tresponse->getTransId());
-                
-                //Mail::send(new OrderPlaced($order));
+        
+                Mail::send(new OrderPlaced($order));
                 // decrease the quantities of all the products in the cart
                 //$this->decreaseQuantities();
                 Cart::instance('default')->destroy();
@@ -240,7 +240,7 @@ public function updateShiping(Request $request)
                 $transaction->paypal['paymentId']
             );
             
-            //Mail::send(new OrderPlaced($order));
+            Mail::send(new OrderPlaced($order));
             // decrease the quantities of all the products in the cart
             //$this->decreaseQuantities();
 
@@ -283,7 +283,7 @@ public function updateShiping(Request $request)
             'billing_tax' => getNumbers()->get('newTax'),
             'billing_total' => getNumbers()->get('newTotal'),
             'error' => $error,
-            'payment_gateway' => 'Authorize.net',
+            'payment_gateway' => 'Credit card',
             'payment_id' => $TransId,
         ]);
 
@@ -303,6 +303,9 @@ public function updateShiping(Request $request)
                 'runsizeuuid' => $item->options->runsizeuuid,
                 'side' => $item->options->side,
                 'tat' => $item->options->tat,
+                'Proofing' => $item->options->ProofingOption,
+                'comment' => $item->options->coment,
+                'Optionstring' => $item->options->optionstring,
             ]);
         }
 
@@ -349,6 +352,9 @@ public function updateShiping(Request $request)
                 'runsizeuuid' => $item->options->runsizeuuid,
                 'side' => $item->options->side,
                 'tat' => $item->options->tat,
+                'Proofing' => $item->options->ProofingOption,
+                'comment' => $item->options->coment,
+                'Optionstring' => $item->options->optionstring,
             ]);
         }
 

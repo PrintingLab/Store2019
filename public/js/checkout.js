@@ -24,7 +24,7 @@ shopApp.controller('checkoutcontroller',function($scope,$http,$document){
         $scope.shipingupdate()
         $scope.computeshipping()
     }, 200);
- 
+    $scope.processingpayment=true
     $scope.preloader=true
     $scope.dangermesagge=true
     $scope.PaymentDetails=true
@@ -135,8 +135,11 @@ $scope.shipingupdate = function (value,type) {
     })
 }
 
+$scope.processingpayment = function () {
+    $scope.processingpayment=false
+    }
+
 $scope.presentPrice = function (value) {
-    
 return '$'+value
 }
 $scope.setaddres = function (a,c,s,z) {

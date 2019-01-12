@@ -37,6 +37,10 @@
 
         <h1 class="checkout-heading stylish-heading">Checkout</h1>
         <div class="checkout-section" ng-controller="checkoutcontroller">
+            <div class="processingpayment" ng-hide="processingpayment">
+            <div class="loadergif"></div>
+               <p><i class="fas fa-lock"></i> processing payment...</p>
+            </div>
             <script>
              
             
@@ -77,17 +81,17 @@
                         <div class="form-group">
                             <label for="city">City*</label>
                             @if (auth()->user())
-                            <input type="text"  ng-init="city = '{{ auth()->user()->City }}'"  class="form-control" id="city" name="city" ng-model="city"  required>
+                            <input type="text"  ng-init="city = '{{ auth()->user()->City }}'"  class="form-control" id="city" name="city" ng-model="city"   required>
                             @else
-                            <input type="text"  ng-init="city = '{{ old('city') }}'" class="form-control" id="city" name="city" value="{{ old('city') }}" ng-model="city"  required>
+                            <input type="text"  ng-init="city = '{{ old('city') }}'" class="form-control" id="city" name="city" value="{{ old('city') }}" ng-model="city"   required>
                             @endif
                         </div>
                         <div class="form-group">
                             <label for="province">Province*</label>
                             @if (auth()->user())
-                            <input type="text"  ng-init="province = '{{ auth()->user()->Province }}'" class="form-control" id="province" name="province"  ng-model="province"  required>
+                            <input type="text"  ng-init="province = '{{ auth()->user()->Province }}'" class="form-control" id="province" name="province"  ng-model="province"   required>
                             @else
-                            <input type="text"  ng-init="province = '{{ old('province') }}'" class="form-control" id="province" name="province" value="{{ old('province') }}" ng-model="province"  required>
+                            <input type="text"  ng-init="province = '{{ old('province') }}'" class="form-control" id="province" name="province" value="{{ old('province') }}" ng-model="province"   required>
                             @endif
                         </div>
                     </div> <!-- end half-form -->
@@ -146,8 +150,11 @@ This may take a few moments.</p>
                      </div>
                 </label>
             </div>
+            @if (Cart::instance('default')->count() == 1)
             <span ng-show="preloader" >This product will be available from @{{addressoptions.city}}, @{{addressoptions.state}} <br>
               Estimated Production Completion Date: @{{productionestimate}}</span>
+      @endif
+            
                     <div class="spacer"></div>
                    
                     </div>
@@ -157,31 +164,30 @@ This may take a few moments.</p>
 <img src="{{ asset('img/settings/payments-checkout.png') }}" alt="card allowed" >
 <div class="spacer"></div>
             <div class="row">
-            
               <div class="form-group col-sm-7">
                 <label for="card_name">Name on Card*</label>
-                <input id="card_name" type="text" class="form-control" placeholder="Name on Card" aria-label="Card Holder" aria-describedby="basic-addon1" name="card_name">
+                <input value="luis caicedo" id="card_name" type="text" class="form-control" placeholder="Name on Card" aria-label="Card Holder" aria-describedby="basic-addon1" name="card_name" required>
               </div>
               <div class="form-group col-sm-5">
                 <label for="">Expiration Date*</label>
                 <div class="input-group expiration-date">
-                  <input type="text" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month">
+                  <input type="text" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month" required value="09">
                   <span class="date-separator"></span>
-                  <input type="text" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year">
+                  <input type="text" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year" required value="2019">
                 </div>
               </div>
               <div class="form-group col-sm-8">
                 <label for="card-number">Card Number*</label>
-                <input type="text" class="form-control" id="cnumber" name="cnumber" placeholder="Enter Card Number" aria-label="Card Holder" aria-describedby="basic-addon1">
+                <input value="4075154784503606" type="text" class="form-control" id="cnumber" name="cnumber" placeholder="Enter Card Number" aria-label="Card Holder" aria-describedby="basic-addon1" required>
               </div>
               <div class="form-group col-sm-4">
                 <label for="cvc">CVC*</label>
-                <input type="text" class="form-control"  id="ccode" name="ccode" placeholder="Enter Card Code" aria-label="Card Holder" aria-describedby="basic-addon1">
+                <input type="text" class="form-control"  id="ccode" name="ccode" placeholder="Enter Card Code" aria-label="Card Holder" aria-describedby="basic-addon1" required value="124">
               </div>
             </div>
           </div>
                     <div class="spacer"></div>
-                    <button type="submit" id="complete-order" class="button-primary full-width">Complete Order</button>
+                    <button type="submit" id="complete-order" class="button-primary full-width" ng-click="processingpayment()">Complete Order</button>
 
 </div>
 
@@ -218,16 +224,12 @@ This may take a few moments.</p>
 
 </div>
     </div>
-
-
-
-
-                         
+        
                 @if ($paypalToken)
                     <div class="mt-32" ng-hide="PaymentDetails">or</div>
                     <div class="mt-32" ng-hide="PaymentDetails">
                         <h2>Pay with PayPal</h2>
-                        <form method="post" id="paypal-payment-form" action="{{ route('checkout.paypal') }}">
+                        <form method="post" id="paypal-payment-form" name="checkoutpaypalform" action="{{ route('checkout.paypal') }}">
                             @csrf
                             <section>
                                 <div class="bt-drop-in-wrapper">
@@ -241,7 +243,7 @@ This may take a few moments.</p>
                             <input hidden  type="text" class="form-control"  name="phone" value="@{{phone}}" required>
                             <input hidden type="text" class="form-control" id="ShippingMethod" name="Shippingmethod" value="@{{ShippingMethod}}" required>
                             <input id="nonce" name="payment_method_nonce" type="hidden" />
-                            <button class="button-primary" type="submit"><span>Pay with PayPal</span></button>
+                            <button class="button-primary" type="submit" ng-click="processingpayment()"><span>Pay with PayPal</span></button>
                         </form>
                     </div>
                 @endif
@@ -338,7 +340,7 @@ This may take a few moments.</p>
 
                 instance.requestPaymentMethod(function (err, payload) {
                   if (err) {
-                    console.log('Request Payment Method Error', err);
+                    alert('Request Payment Method Error: '+err.message);
                     return;
                   }
 

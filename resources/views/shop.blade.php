@@ -138,8 +138,8 @@
         <div>
           <div class="container row">
             @forelse ($products as $product)
-            <div class="col-md-4 col-sm-4 col-6">
-                <div class="btnHoverI"  style="width: 100%;height: 250px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
+            <div class="col-md-4 col-12 col-6">
+                <div class="btnHoverI"  style="width: 100%;height: 250px ;background-position: center; background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
                   <div class="btn_info">
                     <a class="a_Shop" href="{{ route('shop.show', $product->slug) }}">SHOP NOW</a>
                   </div>
