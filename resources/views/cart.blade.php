@@ -217,6 +217,8 @@
 
     @section('extra-js')
     <script src="{{ asset('js/app.js') }}"></script>
+   <script src="{{ asset('js/cart.js') }}"></script>
+    
     <script>
     (function(){
       const classname = document.querySelectorAll('.quantity')

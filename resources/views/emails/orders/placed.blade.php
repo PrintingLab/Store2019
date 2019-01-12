@@ -3,20 +3,43 @@
 
 Thank you for your order.
 
-**Order ID:** {{ $order->id }}
+#Order ID: {{ $order->id }}#
 
-**Order Email:** {{ $order->billing_email }}
+**Customer Email: ** {{ $order->billing_email }} 
 
-**Order Name:** {{ $order->billing_name }}
+**Customer Name: ** {{ $order->billing_name }}
 
-**Order Total:** ${{ round($order->billing_total / 100, 2) }}
+**Customer  phone: ** {{$order->billing_phone }}
 
-**Items Ordered**
+
+**Shipping  address: **
+{{$order->billing_address }},
+{{$order->billing_city }}, {{$order->billing_province }}
+{{$order->billing_postalcode }}  
+
+**Shipping  method: ** {{$order->shipping_Type }}
+
+**Shipping: ** ${{$order->shipping_Value }}
+
+**Tax: ** ${{$order->billing_tax }}
+
+**Subtotal: ** ${{$order->billing_subtotal }}
+
+**Pay method: ** {{$order->payment_gateway }}
+
+**Pay method ID: ** {{$order->payment_id }}
+
+#Order Total: ${{$order->billing_total }}#
+
+**-Items Ordered-**
 
 @foreach ($order->products as $product)
-Name: {{ $product->name }} <br>
-Price: ${{ round($product->price / 100, 2)}} <br>
+Product: {{ $product->name }} <br>
+Description: {{ $product->pivot->product_decription }} <br>
 Quantity: {{ $product->pivot->quantity }} <br>
+Printed Side: {{ getPrintingsides($product->pivot->side) }} <br>
+Turnaround: {{ getPrintingTime($product->pivot->tat) }} <br>
+____________________________________________________________
 @endforeach
 
 You can get further details about your order by logging into our website.
@@ -27,6 +50,4 @@ Go to Website
 
 Thank you again for choosing us.
 
-Regards,<br>
-{{ config('app.name') }}
 @endcomponent

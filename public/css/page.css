@@ -630,6 +630,7 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
 
 
 .btn_formProduct{
+  border: none;
   background: #000;
   color: white;
   width: 80%;

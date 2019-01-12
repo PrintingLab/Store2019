@@ -116,8 +116,8 @@
                     </div> <!-- end filter_name -->
                     <div class="col-md-7 filter_select" >
                       <select name="roundcorners" id="roundcorners" >
-                        <option value="">Standard Corners</option>
-                        <option value="Round">Round Corners</option>
+                      <option id="idStandard" value="Standard">Standard Corners</option>
+                      <option id="idRound" value="Round">Round Corners</option> 
                       </select>
                     </div> <!-- end filter-select -->
                   </div>
@@ -129,58 +129,27 @@
                     </div> <!-- end filter_name -->
                     <div class="col-md-7 filter_select">
                       <select name="coating" id="coating">
-                        <option value="@{{op.product_code}}" ng-repeat="op in Coatingarray | filter:{product_description:roundcorners}| filter:{product_description:roundcorners} | unique: 'option'">@{{op.option}}</option>
+                        <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist">@{{op.option}}</option>
                       </select>
                     </div> <!-- end filter-select -->
                   </div>
                 </div> <!-- end jt_filters -->
               </fieldset>
             </form>
-            <div class="jt_filters">
+            <div >
+            <div class="jt_filters" ng-repeat="op in arrayproductprices | filter:{product_option_group_uuid:'!34f407f8-0b50-4227-9378-10fddefbe596'} | filter:{product_option_group_uuid:'!24865ffa-793d-43ea-b3b1-d1b5cf22268d'} | filter:{product_option_group_uuid:'!26ca0df3-0682-4f37-8979-409868e2df2d'} | filter:{product_option_group_uuid:'!b6f8d6b4-9909-4cd7-bbc0-b65b6e6460eb'} | filter:{product_option_group_uuid:'!ed16daf6-77e4-4133-8d65-3947d5d19f52'} | filter:{product_option_group_uuid:'!b19d4ac3-2d48-40c0-9729-e35af6846271'} | filter:{product_option_group_uuid:'!a2b94cf3-b6bc-4ae2-8c3a-3b04d4671e6e'} ">
               <div class="row">
                 <div class="col-md-5 filter_name">
-                  <strong>
-                    Printed Side:
-                  </strong>
+                <strong>@{{changeoptioname(op.product_option_group_name)}}:</strong> 
                 </div>
                 <div class="col-md-7">
-                  <select  name="" id="side">
-                    <option value="@{{op.capi_description.slice(0,3)}}" ng-repeat="op in productside">@{{stockname(op.capi_name)}}</option>
+                  <select   name="" id="@{{op.product_option_group_uuid}}" ng-click="optionschange()">
+                    <option id="@{{op2.option_uuid}}" name="@{{op2.option_name}}" value="@{{op2.option_uuid}}" ng-repeat="op2 in op.options | unique: 'option_name'">@{{changeoptioname(op2.option_name)}}</option>
+                    
                   </select>
                 </div>
               </div>
             </div>
-            <div class="jt_filters">
-              <div class="row">
-                <div class="col-md-5 filter_name">
-                  <strong>
-                    Quantity:
-                  </strong>
-                </div>
-                <div class="col-md-7">
-                  <select  name="" id="quantyti">
-                    <option value="@{{qty.option_description}}" ng-repeat="qty in productprices">
-                      @{{qty.option_name}}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="jt_filters">
-              <div class="row">
-                <div class="col-md-5 filter_name">
-                  <strong>
-                    Printing Time:
-                  </strong>
-                </div>
-                <div class="col-md-7">
-                  <select  name="" id="TurnAroundTime">
-                    <option value="@{{qty.option_name}}" ng-repeat="qty in productTurnAroundTime | filter:quantyti | filter:side | unique: 'option_description'">
-                      @{{qty.option_description}}
-                    </option>
-                  </select>
-                </div>
-              </div>
             </div>
             <div class="productSectionPrice row">
 
@@ -206,15 +175,17 @@
           <form action="{{route('cart.cartstep',$product)}}" id="fromBtn" class="center" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <input hidden type="text" name="prddesc" value="@{{productdesc}}" readonly>
-            <input hidden type="text" name="prdtcode" value="@{{productcode}}" readonly>
-            <input hidden type="text" name="prdtID" value="@{{productuuid}}" readonly>
-            <input hidden type="text" name="prdtprice" value="@{{pricetosend(buildprice)}}" readonly>
-            <input hidden type="text" name="prdRunsize" value="@{{quantyti}}" readonly>
-            <input hidden type="text" name="prdside" value="@{{side}}" readonly>
-            <input hidden type="text" name="prdTurnAroundTime" value="@{{TurnAroundTime}}" readonly>
-            <input hidden type="text" name="option_uuid" value="@{{option_uuid}}" readonly>
-            <input hidden type="text" name="colorspec_uuid" value="@{{colorspec_uuid}}" readonly>
-            <input hidden type="text" name="runsize_uuid" value="@{{runsize_uuid}}" readonly>
+                    <input hidden type="text" name="prdtcode" value="@{{productcode}}" readonly>
+                    <input hidden type="text" name="prdtID" value="@{{productuuid}}" readonly>
+                    <input hidden type="text" name="prdtprice" value="@{{pricetosend(buildprice)}}" readonly>
+                    <input hidden type="text" name="prdRunsize" value="@{{quantyti}}" readonly>
+                    <input hidden type="text" name="prdRunsizeid" value="@{{Runsize}}" readonly>
+                    <input hidden type="text" name="prdside" value="@{{side}}" readonly>
+                    <input hidden type="text" name="prdTurnAroundTime" value="@{{TurnAroundval}}" readonly>
+                    <input hidden type="text" name="option_uuid" value="@{{option_uuid}}" readonly>
+                    <input hidden type="text" name="colorspec_uuid" value="@{{Colorspec}}" readonly>
+                    <input hidden type="text" name="runsize_uuid" value="@{{runsize_uuid}}" readonly>
+                    <input hidden type="text" name="optionstring" value="@{{optionstring}}" readonly>
             <div class="col-md-12">
               <button  name="sendbtn" value="op1" class="btn_formProduct btn_op1" ng-disabled="btndisigned">UPLOAD YOUR FILE & ORDER NOW</button>
             </div>
