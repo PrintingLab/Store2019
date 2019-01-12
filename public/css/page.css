@@ -88,7 +88,7 @@ header{
 .menu_H_allPP{
   min-width: 690px;
   transform: translate3d(0px, 0px, 0px) !important;
-  top: 47.9px !important;
+  top: 51.9px !important;
   left: 0px !important;
   will-change: transform;
   border-top: none;
@@ -136,6 +136,12 @@ header{
   white-space: nowrap;
   font-size: 87%;
 }
+
+.cart-count{
+  margin-top: 3px;
+  position: absolute;
+}
+
 .btn-myAccount{
   background: transparent;
   border: 0;
@@ -264,7 +270,7 @@ button:focus  {
   }
   .menu_H_allPP {
     transform: translate3d(-146px, 0px, 0px) !important;
-    top: 61px !important;
+    top: 57px !important;
   }
   .menu_drop_allPP{
     top: 218% !important
@@ -803,9 +809,26 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
     padding: 12px 40px;
   }
 
-
-
   /*cart fin*/
+
+
+
+  /*checkout*/
+
+  .txtBotCheckout{
+    margin-top: 5%;
+    text-align: center;
+  }
+
+  .btnCheckoutContinue{
+    width: 50%;
+    background: black;
+    color: white;
+    border: none;
+    padding: 2%;
+  }
+
+  /*fin checkout*/
 
   /*footer*/
   footer{

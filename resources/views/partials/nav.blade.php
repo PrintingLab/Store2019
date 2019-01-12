@@ -27,7 +27,7 @@
                     <div class="col-md-6">
                       <ul class="list_dropdown">
 
-                        
+
 
                       </ul>
                     </div>
@@ -90,9 +90,7 @@
               <img src="/img/call-icon.png" alt="">
               <a href="tel:201-305-0404">201-305-0404</a>
           </div>
-          @if (! (request()->is('checkout') || request()->is('guestCheckout')))
           @include('partials.menus.main-right')
-          @endif
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Product;
 use App\OrderProduct;
-use App\Mail\OrderPlaced; 
+use App\Mail\OrderPlaced;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CheckoutRequest;
@@ -68,7 +68,7 @@ class CheckoutController extends Controller
         //     return back()->withErrors('Sorry! One of the items in your cart is no longer avialble.');
         // }
 
-  
+
 
         try {
             $charge = Stripe::charges()->create([
@@ -78,7 +78,7 @@ class CheckoutController extends Controller
                 'description' => 'Order',
                 'receipt_email' => $request->email,
                 'metadata' => [
-                    
+
                     'quantity' => Cart::instance('default')->count(),
                     'discount' => collect(session()->get('coupon'))->toJson(),
                 ],
@@ -109,11 +109,11 @@ class CheckoutController extends Controller
     public function AuthorizeCheckout(CheckoutRequest $request)
     {
 
-//         API LOGIN ID 
+//         API LOGIN ID
 // 6J9W7nvZtm8
-// TRANSACTION KEY 
+// TRANSACTION KEY
 // 284zmBQz6y5KF57f
-// KEY 
+// KEY
 // Simon
 // Simon
         //$merchantAuthentication->setName('2E3z6KruR');
@@ -161,7 +161,7 @@ $customerAddress->setCountry("USA");
               if (($tresponse != null) && ($tresponse->getResponseCode()=="1") || ($tresponse->getResponseCode()=="4"))
               {
                 $order = $this->addToOrdersTables($request, null,$tresponse->getTransId());
-                
+
                 //Mail::send(new OrderPlaced($order));
                 // decrease the quantities of all the products in the cart
                 //$this->decreaseQuantities();
@@ -173,16 +173,16 @@ $customerAddress->setCountry("USA");
               {
 
                     $error =$tresponse->getErrors();
-                    return back()->withErrors('An error occurred: '.$error[0]->getErrorText());  
-              
-               
+                    return back()->withErrors('An error occurred: '.$error[0]->getErrorText());
+
+
               }
             }
             else
             {
               echo  "Charge Credit Card Null response returned";
             }
-        
+
 
 
 
@@ -198,12 +198,12 @@ public function updateShiping(Request $request)
             foreach (Cart::content() as $item){
                 $option = $item->options->merge(['shiping' => $request->shipingcost,'shipingTp' => $request->shipingtype]);
                 Cart::update($item->rowId, ['options' => $option]);
-                
+
             }
         }
-       
+
         return response()->json(['zuccess' => Cart::content(),'Total'=>getNumbers()->get('newTotal'),'Tax'=>getNumbers()->get('newTax'),'NewSubtotal'=>getNumbers()->get('newSubtotal'),'shiping'=>getNumbers()->get('shiping'),'tax'=>getNumbers()->get('tax')]);
-        
+
     }
 
     public function paypalCheckout(Request $request)
@@ -239,7 +239,7 @@ public function updateShiping(Request $request)
                 $request,
                 $transaction->paypal['paymentId']
             );
-            
+
             //Mail::send(new OrderPlaced($order));
             // decrease the quantities of all the products in the cart
             //$this->decreaseQuantities();
@@ -249,7 +249,7 @@ public function updateShiping(Request $request)
 
             return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
         } else {
-           
+
             $order = $this->addToOrdersTablesPaypal(
                 $transaction->paypal['payerEmail'],
                 $transaction->paypal['payerFirstName'].' '.$transaction->paypal['payerLastName'],

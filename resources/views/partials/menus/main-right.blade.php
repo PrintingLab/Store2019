@@ -10,7 +10,8 @@
   </div>
 </div>
 @else
-<div class="Btn_Account col-md-4 ">
+<div class="Btn_Account col-md-6 ">
+
   <img src="/img/user-login-printing-lab.png" alt="">
   <button type="button" id="userName" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
     {{ Auth::user()->name }}
@@ -23,15 +24,18 @@
       </li>
     </div>
   </div>
+
   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
   </form>
   @endguest
-  <div class="col-md-4">
-    <img src="/img/shopping-bag-printing-lab.png" alt="">
-    <a href="{{ route('cart.index') }}">Cart
+  <div class="col-md-2">
+    <a href="{{ route('cart.index') }}">
+      <img src="/img/shopping-bag-printing-lab.png" alt="">
       @if (Cart::instance('default')->count() > 0)
-      <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
+      <span class="cart-count">
+        <span>{{ Cart::instance('default')->count() }}</span>
+      </span>
       @endif
     </a>
   </div>
