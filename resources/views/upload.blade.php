@@ -10,43 +10,48 @@
 
 @section('content')
 
-<div class="container textoscontainer">
-<div class="row col-md-12">
-    <h2><strong>{{$productDESCRIPTION}}</strong></h2> 
+<div class="container containerProducts">
+
+  <div class="col-md-12">
+    <h2><strong>Upload Your File & Order Now</strong></h2>
+    <h4><strong>{{$productDESCRIPTION}}</strong></h4>
   </div>
+
   <div class="divfile">
-@if ($productSIDE == '4/4')
+    @if ($productSIDE == '4/4')
     <form action="{{ route('cart.store', $produto) }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
       {{csrf_field()}}
       <input hidden type="text" name="prddesc" value="{{$productDESCRIPTION}}" readonly>
-  <input hidden type="text" name="prdtprice" value="{{$productPRICE}}" readonly>
-   <input hidden type="text" name="prdtcode" value="{{$productCODE}}" readonly>
-   <input hidden type="text" name="prdtID" value="{{$productID}}" readonly>
-    <input hidden type="text" name="prdRunsize" value="{{$productRUNSIZE}}" readonly>
-    <input hidden type="text" name="prdside" value="{{$productSIDE}}" readonly>
-    <input hidden type="text" name="prdTurnAroundTime" value="{{$productTATIME}}" readonly>
-    <input hidden type="text" name="option_uuid" value="{{$optionuuid}}" readonly>
-    <input hidden type="text" name="colorspec_uuid" value="{{$colorspecuuid}}" readonly>
-    <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
-    <input type="hidden" name="typedesigned" value="1">
-    <input hidden type="text" name="comentario" value="N/A" readonly>
-    
-<div class="row">
-  <div class="col-md-6">
-    <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>
-    <p><i>Only JPG,PNG,PDF,DOC,PPT</i></p>
-    <p>Remember, select only two files at the same time.</p>
-  </div>
-  <div class="col-md-6">
+      <input hidden type="text" name="prdtprice" value="{{$productPRICE}}" readonly>
+      <input hidden type="text" name="prdtcode" value="{{$productCODE}}" readonly>
+      <input hidden type="text" name="prdtID" value="{{$productID}}" readonly>
+      <input hidden type="text" name="prdRunsize" value="{{$productRUNSIZE}}" readonly>
+      <input hidden type="text" name="prdside" value="{{$productSIDE}}" readonly>
+      <input hidden type="text" name="prdTurnAroundTime" value="{{$productTATIME}}" readonly>
+      <input hidden type="text" name="option_uuid" value="{{$optionuuid}}" readonly>
+      <input hidden type="text" name="colorspec_uuid" value="{{$colorspecuuid}}" readonly>
+      <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
+      <input type="hidden" name="typedesigned" value="1">
+      <input hidden type="text" name="comentario" value="N/A" readonly>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>
+          <p><i>Only JPG,PNG,PDF,DOC,PPT</i></p>
+          <p>Remember, select only two files at the same time.</p>
+        </div>
+
+        <div class="col-md-6 ">
+          <div class="col-md-12 ">
             <div class="filex">
               <div class="outputx">
                 <p></p>
               </div>
               <p>UPLOAD YOUR FILE - FRONT</p>
-              <input type="file" id="archivox" name="file21"  required>
+              <input type="file" id="archivox" name="file21" required>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-12 divsInfuli">
             <div class="filey">
               <div class="outputy">
                 <p></p>
@@ -55,84 +60,79 @@
               <input type="file" id="archivoy" name="file22" required>
             </div>
           </div>
-          </div>
-<div class="info-UP">
-  <h3><strong>Select a Proofing Option</strong></h3>
-  <p>
-    Every print-ready file gets a 30 point automated and human review to ensure technical quality. Please choose one of the following:
-  </p>
-  <div class="form-check">
-    <input type="radio" name="selectRadios" value="Print ASAP" required><strong>Print ASAP</strong>
-    <p>If your file passes review, we will print it ASAP. If we find a problem we can't fix, we'll contact you.</p>
-  </div>
-  <div class="form-check">
-    <input type="radio" name="selectRadios" value="Wait - I want to receive and approve a free PDF proof" required><strong>Wait - I want to receive and approve a free PDF proof. </strong>
-    <p>We will email you a link to a PDF proof within 6 hours. Don't worry, we won't print your file until you check the PDF and approve it online. Be aware this could delay your order by a day or more.</p>
-  </div>
-</div>
-<div class="col-md-12 align-right">
-  <input type="submit" value="CONTINUE TO CHECKOUT" class="botoEupload">
-</div>
-</form>
-@endif
-@if ($productSIDE == '4/0')
-  <form action="{{ route('cart.store', $produto) }}"  method="post" accept-charset="utf-8" onsubmit="return validatevacio();" enctype="multipart/form-data" >
-  {{csrf_field()}}
-  <input hidden type="text" name="prddesc" value="{{$productDESCRIPTION}}" readonly>
-  <input hidden type="text" name="prdtprice" value="{{$productPRICE}}" readonly>
-   <input hidden type="text" name="prdtcode" value="{{$productCODE}}" readonly>
-   <input hidden type="text" name="prdtID" value="{{$productID}}" readonly>
-    <input hidden type="text" name="prdRunsize" value="{{$productRUNSIZE}}" readonly>
-    <input hidden type="text" name="prdside" value="{{$productSIDE}}" readonly>
-    <input hidden type="text" name="prdTurnAroundTime" value="{{$productTATIME}}" readonly>
-    <input hidden type="text" name="option_uuid" value="{{$optionuuid}}" readonly>
-    <input hidden type="text" name="colorspec_uuid" value="{{$colorspecuuid}}" readonly>
-    <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
-    <input hidden type="text" name="comentario" value="N/A" readonly>
-    <input type="hidden" name="typedesigned" value="1">
-  <div class="row">
-    <div class="col-md-6">
-      <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>
-      <p><i>Only JPG,PNG,PDF,DOC,PPT</i></p>
-    </div>
-    <div class="col-md-6">
-      <div class="file">
-        <div class="output">
-          <p></p>
         </div>
-        <p>UPLOAD FILE</p>
-        <input type="file" id="archivounouno" name="archivo" required>
       </div>
-    </div>
-  </div>
-  <div class="info-UP">
-    <h3><strong>Select a Proofing Option</strong></h3>
-    <p>
-      Every print-ready file gets a 30 point automated and human review to ensure technical quality. Please choose one of the following:
-    </p>
-    <div class="form-check">
-      <input type="radio" name="selectRadios" value="Print ASAP" required><strong>Print ASAP</strong>
-      <p>If your file passes review, we will print it ASAP. If we find a problem we can't fix, we'll contact you.</p>
-    </div>
-    <div class="form-check">
-      <input type="radio" name="selectRadios" value="Wait - I want to receive and approve a free PDF proof" required><strong>Wait - I want to receive and approve a free PDF proof. </strong>
-      <p>We will email you a link to a PDF proof within 6 hours. Don't worry, we won't print your file until you check the PDF and approve it online. Be aware this could delay your order by a day or more.</p>
-    </div>
-  </div>
-  <div class="col-md-12 align-right">
-    <input type="submit" value="CONTINUE TO CHECKOUT" class="botoEupload">
-  </div>
-</form>
+
+      <div class="info-UP">
+        <h3><strong>Select a Proofing Option</strong></h3>
+        <p>
+          Every print-ready file gets a 30 point automated and human review to ensure technical quality. Please choose one of the following:
+        </p>
+        <div class="form-check">
+          <input type="radio" name="selectRadios" value="Print ASAP" required><strong>Print ASAP</strong>
+          <p>If your file passes review, we will print it ASAP. If we find a problem we can't fix, we'll contact you.</p>
+        </div>
+        <div class="form-check">
+          <input type="radio" name="selectRadios" value="Wait - I want to receive and approve a free PDF proof" required><strong>Wait - I want to receive and approve a free PDF proof. </strong>
+          <p>We will email you a link to a PDF proof within 6 hours. Don't worry, we won't print your file until you check the PDF and approve it online. Be aware this could delay your order by a day or more.</p>
+        </div>
+      </div>
+      <div class="col-md-12 align_right_btn">
+        <input type="submit" value="CONTINUE TO CHECKOUT" class="botoEupload">
+      </div>
+    </form>
+    @endif
+    @if ($productSIDE == '4/0')
+    <form action="{{ route('cart.store', $produto) }}"  method="post" accept-charset="utf-8" onsubmit="return validatevacio();" enctype="multipart/form-data" >
+      {{csrf_field()}}
+      <input hidden type="text" name="prddesc" value="{{$productDESCRIPTION}}" readonly>
+      <input hidden type="text" name="prdtprice" value="{{$productPRICE}}" readonly>
+      <input hidden type="text" name="prdtcode" value="{{$productCODE}}" readonly>
+      <input hidden type="text" name="prdtID" value="{{$productID}}" readonly>
+      <input hidden type="text" name="prdRunsize" value="{{$productRUNSIZE}}" readonly>
+      <input hidden type="text" name="prdside" value="{{$productSIDE}}" readonly>
+      <input hidden type="text" name="prdTurnAroundTime" value="{{$productTATIME}}" readonly>
+      <input hidden type="text" name="option_uuid" value="{{$optionuuid}}" readonly>
+      <input hidden type="text" name="colorspec_uuid" value="{{$colorspecuuid}}" readonly>
+      <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
+      <input hidden type="text" name="comentario" value="N/A" readonly>
+      <input type="hidden" name="typedesigned" value="1">
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>
+          <p><i>Only JPG,PNG,PDF,DOC,PPT</i></p>
+        </div>
+        <div class="col-md-6">
+          <div class="file">
+            <div class="output">
+              <p></p>
+            </div>
+            <p>UPLOAD FILE</p>
+            <input type="file" id="archivounouno" name="archivo" required>
+          </div>
+        </div>
+      </div>
+      <div class="info-UP">
+        <h3><strong>Select a Proofing Option</strong></h3>
+        <p>
+          Every print-ready file gets a 30 point automated and human review to ensure technical quality. Please choose one of the following:
+        </p>
+        <div class="form-check">
+          <input type="radio" name="selectRadios" value="Print ASAP" required><strong>Print ASAP</strong>
+          <p>If your file passes review, we will print it ASAP. If we find a problem we can't fix, we'll contact you.</p>
+        </div>
+        <div class="form-check">
+          <input type="radio" name="selectRadios" value="Wait - I want to receive and approve a free PDF proof" required><strong>Wait - I want to receive and approve a free PDF proof. </strong>
+          <p>We will email you a link to a PDF proof within 6 hours. Don't worry, we won't print your file until you check the PDF and approve it online. Be aware this could delay your order by a day or more.</p>
+        </div>
+      </div>
+      <div class="col-md-12 align_right_btn">
+        <input type="submit" value="CONTINUE TO CHECKOUT" class="botoEupload">
+      </div>
+    </form>
     @endif
 
-  
-    
-
-
-
-<!-- ///////////////////////////////////////////////////// -->
-
-</div>
+  </div>
 </div>
 
 

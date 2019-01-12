@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Thank You')
+@section('title', 'We Design It For You')
 
 @section('extra-css')
 <link rel="stylesheet" href="css/loading-bar.css">
@@ -9,11 +9,14 @@
 @section('body-class', 'sticky-footer')
 
 @section('content')
-<div class="container textoscontainer">
+<div class="container containerProducts">
+
   <div class="row col-md-12 title-wedesign">
     <h2><strong>We Design It For You</strong></h2>
   </div>
-  <form  action="{{ route('cart.store', $produto) }}" name="formdata"  method="post" accept-charset="utf-8" enctype="multipart/form-data">
+
+
+  <form  action="{{route('cart.store',$produto)}}" name="formdata"  method="post" accept-charset="utf-8" enctype="multipart/form-data">
     {{csrf_field()}}
     <input hidden type="text" name="prddesc" value="{{$productDESCRIPTION}}" readonly>
   <input hidden type="text" name="prdtprice" value="{{$productPRICE}}" readonly>
@@ -27,12 +30,16 @@
     <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
     <input hidden type="text" name="typedesigned" value="3">
     <input hidden type="text" name="selectRadios" value="N/A">
+
     <div class="row">
+
       <div class="col-md-6">
         <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>
         <p><i>Only JPG,PNG,PDF,DOC,PPT</i></p>
       </div>
+
       <div class="col-md-6">
+
         <div class="row" style="text-align: -webkit-center;">
         @if ($productSIDE == '4/4')
           <div class="col-md-6">
@@ -67,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row containerProducts">
       <div class="col-md-12">
         <h5><strong>DETAILS ABOUT YOUR PRODUCT:</strong></h5>
       </div>
@@ -84,7 +91,7 @@
       </button>
     </div>
   </form>
-</div> 
+</div>
 @endsection
 @section('extra-js')
 <script>

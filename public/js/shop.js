@@ -1,9 +1,9 @@
 
 shopApp.filter('unique', function() {
     return function(collection, keyname) {
-       var output = [], 
+       var output = [],
            keys = [];
- 
+
        angular.forEach(collection, function(item) {
            var key = item[keyname];
            if(keys.indexOf(key) === -1) {
@@ -11,7 +11,7 @@ shopApp.filter('unique', function() {
                output.push(item);
            }
        });
- 
+
        return output;
     };
  });
@@ -48,7 +48,7 @@ shopApp.controller('shopcontroller',function($scope,$http,$document){
         {"Pinicial":741, "Pfinal":100000,"porcentaje":160}
           ]
     $scope.stoknames=[
-        {"Name":"100GLC", "value":"100lb Gloss Cover"}, 
+        {"Name":"100GLC", "value":"100lb Gloss Cover"},
         {"Name":"100LB", "value":"Linen"},
         {"Name":"14PT", "value":"Standard (14pt)"},
         {"Name":"14PTUC", "value":"Standard Uncoated (14pt)"},
@@ -85,7 +85,7 @@ $scope.load4overproducts = function () {
              console.log($scope.products)
            //$scope.builderchangue()
            setTimeout(function(){  $scope.builderbydimencion() }, 100);
-            
+
             }, function myError(response) {
                 console.log(response.statusText);
         });
@@ -94,7 +94,7 @@ $scope.pricetosend = function(val) {
     // pricetransform($scope.buildprice)
      return $scope.buildprice
  }
- 
+
 $scope.pricetransform = function (inprice) {
     for (let index = 0; index < $scope.rangeofprices.length; index++) {
         if (inprice >= $scope.rangeofprices[index].Pinicial && inprice <= $scope.rangeofprices[index].Pfinal ) {
@@ -114,20 +114,20 @@ $scope.stockname = function (name) {
             $("#stock option[value='" + name + "']").remove();
                 break;
             case "100LBWS":
-            $("#stock option[value='" + name + "']").remove();   
-                break;    
+            $("#stock option[value='" + name + "']").remove();
+                break;
             case "18PTC1S":
-            $("#stock option[value='" + name + "']").remove() 
+            $("#stock option[value='" + name + "']").remove()
                 break;
                 case "18PTC1S":
-            $("#stock option[value='" + name + "']").remove() 
-                break; 
+            $("#stock option[value='" + name + "']").remove()
+                break;
                 case "4/1":
-            $("#side option[value='" + name + "']").remove() 
+            $("#side option[value='" + name + "']").remove()
                 break;
             default:
                 break;
-        }  
+        }
     }
 
     for (let index = 0; index < $scope.stoknames.length; index++) {
@@ -158,9 +158,9 @@ $scope.builderchangue = function () {
         $scope.productcode=matches[0].product_code
         $scope.productdesc=matches[0].product_description
         $scope.baseprice(matches[0].product_base_prices)
-        $scope.load4overproductsOptions(matches[0].product_option_groups) 
+        $scope.load4overproductsOptions(matches[0].product_option_groups)
     }
-   
+
 }
 $scope.builderbydimencion = function () {
     $scope.stockarry=[]
@@ -170,11 +170,11 @@ $scope.builderbydimencion = function () {
         console.log("null")
     }else{
         for (let index = 0; index < matches.length; index++) {
-            if (matches[index].product_description.slice(0,3) =='LOW' || matches[index].product_description.slice(0,3) =='ALL' ) {   
+            if (matches[index].product_description.slice(0,3) =='LOW' || matches[index].product_description.slice(0,3) =='ALL' ) {
             }else{
                 $scope.stockarry.push({product_option_groups:matches[index].product_option_groups,product_description:matches[index].product_description,product_code:matches[index].product_code,option:matches[index].product_code.substr(0,matches[index].product_code.indexOf('-')),value:matches[index].product_code.substr(0,matches[index].product_code.indexOf('-'))})
                  $scope.$apply()
-            }   
+            }
         }
     }
     $scope.Stock=$('#stock').val();
@@ -184,21 +184,21 @@ $scope.roundcornerfilter = function () {
 if ($scope.roundcorners == "Round") {
     var macht = $scope.$eval("Coatingarray | filter:{product_description:'Round'}");
     if (macht.length==0) {
-        $("#roundcorners option[value='Round']").remove() 
+        $("#roundcorners option[value='Round']").remove()
         $scope.Coatingarraylist = $scope.$eval("Coatingarray | filter:{product_description:'! Round'}");
     }else{
         $scope.Coatingarraylist = macht
         $scope.$apply()
-    }  
+    }
 }else {
     var macht=$scope.$eval("Coatingarray | filter:{product_description:'! Round'}");
     if (macht.length==0) {
-        $("#roundcorners option[value='Standard']").remove() 
+        $("#roundcorners option[value='Standard']").remove()
         $scope.Coatingarraylist = $scope.$eval("Coatingarray | filter:{product_description:'Round'}");
     }else{
         $scope.Coatingarraylist = macht
         $scope.$apply()
-    }   
+    }
     $scope.$apply()
 }
 }
@@ -284,7 +284,7 @@ $('#quantyti').change(function() {
     $scope.builderprice()
 });
 
-$('#TurnAroundTime').change(function() { 
+$('#TurnAroundTime').change(function() {
     $scope.priceshow=false
     $scope.btndisigned=true
     $scope.TurnAroundTime=$(this).val()
@@ -301,26 +301,26 @@ $scope.load4overproductsOptions = function (endurl) {
             var match=$scope.$eval("arrayproductprices | filter:{product_option_group_name:'Runsize'} ");
             var match2=$scope.$eval("arrayproductprices | filter:{product_option_group_name:'Colorspec'} ");
             var match3=$scope.$eval("arrayproductprices | filter:{product_option_group_name:'Turn Around Time'} ");
-         
-            $scope.productprices=match[0].options 
-            $scope.productside=match2[0].options 
+
+            $scope.productprices=match[0].options
+            $scope.productside=match2[0].options
             $scope.productTurnAroundTime=match3[0].options
             setTimeout(function(){  $scope.quantyti=$('#quantyti').val();
             $scope.side=$('#side').val();
             $scope.builderprice()  }, 100);
-       
+
             }, function myError(response) {
                 console.log(response.statusText);
         });
 }
 $scope.builderprice = function (params) {
-    
+
     var matches = $scope.$eval('productTurnAroundTime ');
     var matchesprice = $scope.$eval('productbaseprice | filter:quantyti | filter:side');
     $scope.productTurnAroundfilter=matches[0]
     $scope.firtprice=matchesprice[0].product_baseprice
 
-  //  $scope.buildprice=parseFloat($scope.firtprice).toFixed(2); 
+  //  $scope.buildprice=parseFloat($scope.firtprice).toFixed(2);
     $scope.$apply()
     $scope.TurnAroundTime=$('#TurnAroundTime').val();
     $scope.builderTurnAround()
@@ -334,7 +334,7 @@ $scope.builderTurnAround = function () {
         $scope.runsize_uuid =$scope.productTurnAroundTime[index].runsize_uuid
        }
     }
-    // $http({ 
+    // $http({
     //     method:'post',
     //     url:'/4overproducts',
     //     data: {endpoint:endurl},
@@ -346,7 +346,7 @@ $scope.builderTurnAround = function () {
     // });
 }
 $scope.priceformat = function (format) {
-    
+
    return "$"+$scope.pricetransform(format)
 }
 $scope.TurnAroundTimeprice = function (endurl) {
@@ -360,7 +360,7 @@ $scope.TurnAroundTimeprice = function (endurl) {
             $scope.priceperpiece = ($scope.pricetransform($scope.buildprice)/$scope.quantyti).toFixed(2);
             $scope.btndisigned=false
          }else{
-            $scope.buildprice =parseFloat(parseFloat($scope.firtprice) + parseFloat(response.data.success.entities[0].price)).toFixed(2); 
+            $scope.buildprice =parseFloat(parseFloat($scope.firtprice) + parseFloat(response.data.success.entities[0].price)).toFixed(2);
             $scope.priceperpiece = ($scope.pricetransform($scope.buildprice)/$scope.quantyti).toFixed(2);
             $scope.btndisigned=false
          }
@@ -375,15 +375,15 @@ $scope.TurnAroundTimeprice = function (endurl) {
 
 $scope.computeshipping = function () {
     for (let index = 0; index < $scope.arrayproductprices.length; index++) {
-        
+
         for (let index1 = 0; index1 < $scope.arrayproductprices[index].options.length; index1++) {
 
         }
-        
+
     }
     $scope.option_uuid
     $scope.colorspec_uuid
-    $scope.runsize_uuid 
+    $scope.runsize_uuid
     $scope.productuuid
     $scope.zip_code
     endurl="https://api.4over.com/shippingquote"
@@ -393,16 +393,16 @@ $scope.computeshipping = function () {
         data: {endpoint:endurl,pruuid:$scope.productuuid,opuuid:$scope.option_uuid,couuid:$scope.colorspec_uuid,ruuuid:$scope.runsize_uuid,zip:$scope.zip_code,type:1},
     }).then(function mySuccess(response) {
         if (response.data.success.status == 'error') {
-            console.log("error");  
-        }else{ 
-           $scope.shipping_options=response.data.success.job.facilities[0].shipping_options 
+            console.log("error");
+        }else{
+           $scope.shipping_options=response.data.success.job.facilities[0].shipping_options
            $scope.address=response.data.success.job.facilities[0].address
         }
-        
+
         }, function myError(response) {
           console.log(response.statusText);
     });
-   
+
 }
 
 
@@ -411,3 +411,5 @@ $scope.computeshipping = function () {
 
 
 // presentPrice($newTax)
+
+//products validar

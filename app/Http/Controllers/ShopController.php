@@ -16,7 +16,7 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
+    {
         $pagination = 9;
         $categories = Category::all();
         //$fouroverproducts = call_4over_curl();
@@ -36,7 +36,7 @@ class ShopController extends Controller
         } else {
             $products = $products->paginate($pagination);
         }
-       
+
         return view('shop')->with([
             'products' => $products,
             'categories' => $categories,
@@ -46,7 +46,7 @@ class ShopController extends Controller
     }
 
     public function Getshipingquotes(Request $request) {
-        $method='POST'; 
+        $method='POST';
         $separator = '?';
       if ($request->type==1) {
         $json='{"product_info": {
@@ -56,7 +56,7 @@ class ShopController extends Controller
             "colorspec_uuid":"'.$request->couuid.'",
             "option_uuids": [
                 "'.$request->pruuid.'"
-                 ] 
+                 ]
             },
         "shipping_address": {
             "zipcode": "'.$request->zip.'"
@@ -76,7 +76,7 @@ class ShopController extends Controller
                 "colorspec_uuid":"'.$item->options->colorspecuuid.'",
                 "option_uuids": [
                     "'.$item->options->produtid.'"
-                     ] 
+                     ]
                 },
             "shipping_address": {
                 "address": "'.$request->address.'",
@@ -95,14 +95,14 @@ class ShopController extends Controller
         return response()->json(['success'=>$shipers,'taxpercent'=>config('cart.tax')]);
       }
     }
-   
+
     public function sendtocart(Request $request) {
         $returnHTML = view('cart.index')->with('success_message', 'Item was added to your cart!')->render();
         dd($returnHTML);
         return response()->json(['success'=>true,'html'=>$returnHTML]);
     }
     public function call_4over_curl(Request $request) {
-        $method='GET'; 
+        $method='GET';
         $separator = '?';
         $json='';
         $uri=$request->endpoint;
@@ -118,6 +118,9 @@ class ShopController extends Controller
      */
     public function show($slug)
     {
+
+
+
         $product = Product::where('slug', $slug)->firstOrFail();
         $mightAlsoLike = Product::where('slug', '!=', $slug)->mightAlsoLike()->get();
 

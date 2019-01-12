@@ -38,6 +38,11 @@ return  $taxval;
 }
 
 
+function extensioImg($imagen){
+  $result=  ltrim(strstr($imagen, '.'), '.');
+  return($result);
+}
+
 
 function presentDate($date)
 {
@@ -62,7 +67,7 @@ function getshipingNumbers()
     if (isset($price)) {
        return $price;
     }
-    
+
 }
 
 function getPrintingsides($prttime)
@@ -98,8 +103,8 @@ function getPrintingTime($prttime)
 
 function getNumbers()
 {
-    //tax for zip funtion 
-    
+    //tax for zip funtion
+
     $tax = 0 / 100;
     $discount = session()->get('coupon')['discount'] ?? 0;
     $code = session()->get('coupon')['name'] ?? null;
@@ -129,7 +134,7 @@ function get4overprices($UUID,$runsize,$colorspec,$TurnAroundTime)
       $enponit='https://api.4over.com/printproducts/products/'.$UUID.'/baseprices';
       $enponitoption='https://api.4over.com/printproducts/products/'.$UUID.'/optiongroups';
       $result2 = json_decode(call4overcurl($enponitoption,$method,$separator,$json), true);
- 
+
       foreach ($result2['entities'] as $value) {
         if ($value['product_option_group_name'] == 'Turn Around Time') {
            $TurnAroundTimeoptions = $value['options'];
@@ -154,9 +159,9 @@ function get4overprices($UUID,$runsize,$colorspec,$TurnAroundTime)
     }else {
            return number_format($firtprice, 2);
     }
-    
+
     }
-    
+
 }
 function getStockLevel($quantity)
 {
@@ -179,7 +184,7 @@ function call4overcurl($uri,$method,$separator,$json) {
     curl_setopt($ch, CURLOPT_URL,$apiPath);
     $args = array(
       'method' => $method,
-      'timeout' => 20       
+      'timeout' => 20
     );
     curl_setopt($ch, CURLOPT_HTTPHEADER, $args);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
@@ -199,6 +204,6 @@ function call4overcurl($uri,$method,$separator,$json) {
   curl_setopt($ch, CURLOPT_TIMEOUT, 60);
   $result = curl_exec($ch);
   curl_close($ch);
-  return $result; 
+  return $result;
     }
   }

@@ -36,39 +36,9 @@
       <div class="Div_allproduct2">
         <ul class="list_dropdown">
           <li><strong>MARKETING PRODUCTS</strong></li>
-          <li><a href="#">4D Lenticular Prints</a></li>
-          <li><a href="#">Announcement Cards</a></li>
-          <li><a href="#">Booklets</a></li>
-          <li><a href="#">Bookmarks</a></li>
-          <li><a href="#">Business Cards</a></li>
-          <li><a href="#">Calendars</a></li>
-          <li><a href="#">Catalogs</a></li>
-          <li><a href="#">Counter Cards</a></li>
-          <li><a href="#">Custom Orders</a></li>
-          <li><a href="#">Door Hangers</a></li>
-          <li><a href="#">Endur ACE</a></li>
-          <li><a href="#">Envelope</a></li>
-          <li><a href="#">Event Tickets</a></li>
-          <li><a href="#">Flyers and Brochures</a></li>
-          <li><a href="#">Greeting Cards</a></li>
-          <li><a href="#">Hang Tags</a></li>
-          <li><a href="#">Letterheads</a></li>
-          <li><a href="#">Linen Uncoated</a></li>
-          <li><a href="#">Magnets</a></li>
-          <li><a href="#">Menus</a></li>
-          <li><a href="#">NCR Forms</a></li>
-          <li><a href="#">Notepads</a></li>
-          <li><a href="#">Plastic Cards</a></li>
-          <li><a href="#">Postcards</a></li>
-          <li><a href="#">Posters</a></li>
-          <li><a href="#">Presentation Folders</a></li>
-          <li><a href="#">Roll Labels</a></li>
-          <li><a href="#">Sell Sheets</a></li>
-          <li><a href="#">Stickers</a></li>
-          <li><a href="#">Table Tent Cards</a></li>
-          <li><a href="#">Tear Off Cards</a></li>
-          <li><a href="#">Trading Cards</a></li>
-          <li><a href="#">Window Cling</a></li>
+
+          
+
         </ul>
         <ul class="list_dropdown">
           <li><strong>CUSTOM APPAREL</strong></li>
@@ -139,7 +109,7 @@
           <div class="container row">
             @forelse ($products as $product)
             <div class="col-md-4 col-sm-4 col-6">
-                <div class="btnHoverI"  style="width: 100%;height: 250px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
+                <div class="btnHoverI"  style="width: 100%;height: 175px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
                   <div class="btn_info">
                     <a class="a_Shop" href="{{ route('shop.show', $product->slug) }}">SHOP NOW</a>
                   </div>

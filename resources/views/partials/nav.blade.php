@@ -26,24 +26,9 @@
                   <div class="row">
                     <div class="col-md-6">
                       <ul class="list_dropdown">
-                        <li><a href="#">4D Lenticular Prints</a></li>
-                        <li><a href="#">Announcement Cards</a></li>
-                        <li><a href="#">Booklets</a></li>
-                        <li><a href="#">Bookmarks</a></li>
-                        <li><a href="#">Business Cards</a></li>
-                        <li><a href="#">Calendars</a></li>
-                        <li><a href="#">Catalogs</a></li>
-                        <li><a href="#">Counter Cards</a></li>
-                        <li><a href="#">Custom Orders</a></li>
-                        <li><a href="#">Door Hangers</a></li>
-                        <li><a href="#">Endur ACE</a></li>
-                        <li><a href="#">Envelope</a></li>
-                        <li><a href="#">Event Tickets</a></li>
-                        <li><a href="#">Flyers and Brochures</a></li>
-                        <li><a href="#">Greeting Cards</a></li>
-                        <li><a href="#">Hang Tags</a></li>
-                        <li><a href="#">Letterheads</a></li>
-                        <li><a href="#">Linen Uncoated</a></li>
+
+                        
+
                       </ul>
                     </div>
                     <div class="col-md-6">
