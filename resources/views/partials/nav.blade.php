@@ -75,7 +75,7 @@
           <span class="fa fa-search"></span>
         </div>
         <div class="col-md-5 row btn_3top">
-          <div class="col-md-4 paddingCero">
+          <div class="col-md-5 paddingCero">
               <img src="/img/call-icon.png" alt="">
               <a href="tel:201-305-0404">201-305-0404</a>
           </div>
@@ -84,6 +84,8 @@
       </div>
     </div>
   </div>
+
+
   <div class="headerMb">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -92,25 +94,101 @@
             <button type="button" class=" collapsed btn_hamburguesaMB" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             </button>
           </div>
-          <div class=" col-sm-9 col-8 center paddingCero">
+          <div class=" col-sm-4 col-8 center paddingCero">
             <img class="imgLogoH" src="/img/logo-printing-lab-new-york.svg" alt="">
           </div>
-          <div class=" col-sm-2 col-2">
-            <ul class="optionsMenu">
-              <li>
-                <a href="tel:201-305-0404"><img src="/img/call-icon.png" alt=""></a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="/img/user-login-printing-lab.png" alt="">
+          <div class=" col-sm-7 col-6 row btn_3topMovil">
+
+
+
+
+            <div class="col-sm-4 paddingCero">
+                <a href="tel:201-305-0404">
+                  <img src="/img/call-icon.png" alt="">
+                  201-305-0404
                 </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="/img/shopping-bag-printing-lab.png" alt="">
-                </a>
-              </li>
-            </ul>
+            </div>
+
+
+
+              @guest
+              <div class="Btn_Account col-sm-6 paddingCero">
+                <img src="/img/user-login-printing-lab.png" alt="">
+                <button type="button" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
+                  My Account
+                </button>
+                <div class="dropdown-menu center">
+                  <li><a href="{{ route('register') }}">Sign Up</a></li>
+                  <li><a href="{{ route('login') }}">Login</a></li>
+                </div>
+              </div>
+              @else
+              <div class="Btn_Account col-sm-5 row">
+
+                <div class="col-sm-2 paddingCero">
+                  <img class="imgUserbtn" src="/img/user-login-printing-lab.png" alt="">
+                </div>
+
+                <div class="col-sm-10">
+                  <p class="text_Userp">{{ Auth::user()->name }}</p>
+                  <button type="button" id="userName" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
+                    Account
+                  </button>
+
+                  <div class="dropdown-menu center">
+                    <li><a href="{{ route('users.edit') }}">Count</a></li>
+                    <li>
+                      <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout</a>
+                      </li>
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+                </form>
+                @endguest
+
+
+
+
+
+
+                <div class=" col-sm-3">
+                  <a href="{{ route('cart.index') }}">
+                    <img src="/img/shopping-bag-printing-lab.png" alt="">
+                    @if (Cart::instance('default')->count() > 0)
+                    <span class="cart-countMovil">
+                      <span>{{ Cart::instance('default')->count() }}</span>
+                    </span>
+                    @endif
+                  </a>
+                </div>
+
+                {{-- @foreach($items as $menu_item)
+                  <li>
+                    <a href="{{ $menu_item->link() }}">
+                      {{ $menu_item->title }}
+                      @if ($menu_item->title === 'Cart')
+                      @if (Cart::instance('default')->count() > 0)
+                      <span class="cart-countMovil"><span>{{ Cart::instance('default')->count() }}</span></span>
+                      @endif
+                      @endif
+                    </a>
+                  </li>
+                  @endforeach --}}
+
+
+
+
+
+
+
+
+
           </div>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

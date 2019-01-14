@@ -9,6 +9,7 @@ function getAllProducts(){
     return $allproducts;
   }
 
+
 function presentPrice($price)
 {
     return '$'.number_format($price, 2);
@@ -43,7 +44,6 @@ function printingtax($postalcode)
      }
 return  $taxval;
 }
-
 
 function extensioImg($imagen){
   $result=  ltrim(strstr($imagen, '.'), '.');

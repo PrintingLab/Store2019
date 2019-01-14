@@ -9,7 +9,7 @@
 @section('content')
 
 
-<div class="container">
+<div class="container ">
   @if (session()->has('success_message'))
   <div class="alert alert-success">
     {{ session()->get('success_message') }}
@@ -27,7 +27,7 @@
 </div>
 
 
-<div class="container " >
+<div class="container containerGeneral" >
   <div class="row">
     <div class="col-md-3 haderPc">
       <div class="Div_allproduct">
@@ -84,13 +84,13 @@
         <div id="carouselExampleIndicatorsMb" class="carousel slide " data-ride="carousel">
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img src="imagenes/mobile-slider-index-printing-lab-1.jpg">
+              <img src="/img/mobile-slider-index-printing-lab-1.jpg">
             </div>
             <div class="carousel-item">
-              <img src="imagenes/mobile-slider-index-printing-lab-2.jpg">
+              <img src="/img/mobile-slider-index-printing-lab-2.jpg">
             </div>
             <div class="carousel-item">
-              <img src="imagenes/mobile-slider-index-printing-lab-3.jpg">
+              <img src="/img/mobile-slider-index-printing-lab-3.jpg">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicatorsMb" data-slide="prev">
@@ -111,11 +111,11 @@
           <div class="container row">
             @forelse ($products as $product)
             <div class="col-md-4 col-sm-4 col-6">
-                <div class="btnHoverI"  style="width: 100%;height: 175px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
-                  <div class="btn_info">
-                    <a class="a_Shop" href="{{ route('shop.show', $product->slug) }}">SHOP NOW</a>
-                  </div>
+              <div class="btnHoverI"  style="width: 100%;height: 175px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
+                <div class="btn_info">
+                  <a class="a_Shop" href="{{ route('shop.show', $product->slug) }}">SHOP NOW</a>
                 </div>
+              </div>
               <a href="{{ route('shop.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
               <div class="product-price">from {{ $product->presentPrice() }}</div>
             </div>

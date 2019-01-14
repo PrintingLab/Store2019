@@ -1,8 +1,8 @@
 @guest
-<div class="Btn_Account col-md-4 paddingCero">
+<div class="Btn_Account col-md-5 col-sm-5 paddingCero">
   <img src="/img/user-login-printing-lab.png" alt="">
   <button type="button" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
-  My Account
+    My Account
   </button>
   <div class="dropdown-menu center">
     <li><a href="{{ route('register') }}">Sign Up</a></li>
@@ -10,26 +10,35 @@
   </div>
 </div>
 @else
-<div class="Btn_Account col-md-6 ">
+<div class="Btn_Account col-md-5 row">
 
-  <img src="/img/user-login-printing-lab.png" alt="">
-  <button type="button" id="userName" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
-    {{ Auth::user()->name }}
-  </button>
-  <div class="dropdown-menu center">
-    <li><a href="{{ route('users.edit') }}">Count</a></li>
-    <li>
-      <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        Logout</a>
-      </li>
+  <div class="col-md-2 paddingCero">
+    <img class="imgUserbtn" src="/img/user-login-printing-lab.png" alt="">
+  </div>
+
+  <div class="col-md-10 paddingCero">
+    <p class="text_Userp">{{ Auth::user()->name }}</p>
+    <button type="button" id="userName" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
+      Account
+    </button>
+
+    <div class="dropdown-menu center">
+      <li><a href="{{ route('users.edit') }}">Count</a></li>
+      <li>
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          Logout</a>
+        </li>
+      </div>
     </div>
+
+
   </div>
 
   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
   </form>
   @endguest
-  <div class="col-md-2">
+  <div class="col-md-2 col-sm-2">
     <a href="{{ route('cart.index') }}">
       <img src="/img/shopping-bag-printing-lab.png" alt="">
       @if (Cart::instance('default')->count() > 0)
@@ -55,9 +64,9 @@
 
 
     <script>
-/*var userName=document.getElementById('userName').text();*/
-let userName=$('#userName').text();
-primera=userName.split(' ');
-/*console.log(primera[4]);*/
-$('#userName').text(primera[4]);
+    /*var userName=document.getElementById('userName').text();*/
+    /*let userName=$('#userName').text();
+    primera=userName.split(' ');
+    /*console.log(primera[4]);*/
+    /*$('#userName').text(primera[4]);*/
     </script>
