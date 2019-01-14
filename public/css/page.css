@@ -132,19 +132,41 @@ header{
 
 
 /*union nuevo*/
-.btn_3top a{
+.btn_3top a, .btn_3top .btn-myAccount{
   white-space: nowrap;
-  font-size: 87%;
+  font-size: 100%;
 }
 
 .cart-count{
-  margin-top: 3px;
+  left: 37%;
   position: absolute;
+  background: var(--magenta);
+  color: white;
+  border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .btn-myAccount{
   background: transparent;
   border: 0;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.imgUserbtn{
+      max-width: fit-content;
+}
+
+.text_Userp{
+  border-bottom: 1px solid;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: "...";
 }
 
 /*fin*/
@@ -229,17 +251,37 @@ button:focus  {
   bottom: 0;
 }
 
+
+
 /*meida query header*/
+
 .btn_hamburguesaMB{
   width: 100px;
   height: 25px;
+  white-space: nowrap;
 }
+
 .imgLogoH {
   margin-top: 2px;
-  height: 30px;
 }
 
+.btn_3topMovil a, .btn_3topMovil .btn-myAccount{
+  white-space: nowrap;
+  font-size: 75%;
+}
 
+.cart-countMovil{
+  left: initial;
+      position: absolute;
+      background: var(--magenta);
+      color: white;
+      border-radius: 50%;
+      width: 19px;
+      height: 19px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+}
 
 @media (max-width:768px){
   .barsignage img {
@@ -262,6 +304,15 @@ button:focus  {
     width: auto;
     font-size:medium ;
   }
+}
+
+@media(max-width:900px){
+
+  .btn_3top a, .btn_3top .btn-myAccount {
+      white-space: nowrap;
+      font-size: 80%;
+  }
+
 }
 
 @media  (max-width:1200px){
@@ -291,7 +342,7 @@ button:focus  {
 
 /*index*/
 
-.index_container{
+.containerGeneral{
   margin-top: 2%;
 }
 
@@ -362,7 +413,7 @@ div.btn_info {
   background-color: rgba(31, 31, 31, 0.9);
   opacity:0;
   transition: opacity 0.5s;
-  padding: 100px 129px 0px 0px;
+  padding: 29% 129px 0px 0px;
 }
 
 .a_Shop{
@@ -388,6 +439,18 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   margin-top: 2%;
   text-align: center;
 }
+
+
+
+.page-item.active .page-link{
+  background-color: var(--magenta);
+  border-color: var(--magenta);
+}
+
+.page-link:focus {
+  box-shadow: 0 0 0 0 rgba(0,123,255,.25);
+}
+
 
 .Slide_GrandeIndex{
   width: 100%;
@@ -762,6 +825,9 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
 
   /*cart*/
 
+  .containerAlerts{
+    margin-top: 2%;
+  }
   .productRow{
     border-bottom: 2px solid #ececec;
     margin-top: 1%;

@@ -17,12 +17,12 @@
 <div class="container">
   <div>
     @if (session()->has('success_message'))
-    <div class="alert alert-success">
+    <div class="alert alert-success containerAlerts">
       {{ session()->get('success_message') }}
     </div>
     @endif
     @if(count($errors) > 0)
-    <div class="alert alert-danger">
+    <div class="alert alert-danger containerAlerts">
       <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -218,7 +218,7 @@
     @section('extra-js')
     <script src="{{ asset('js/app.js') }}"></script>
    <script src="{{ asset('js/cart.js') }}"></script>
-    
+
     <script>
     (function(){
       const classname = document.querySelectorAll('.quantity')
