@@ -20,6 +20,7 @@ shopApp.controller('shopcontroller',function($scope,$http,$document){
     $scope.rangeofprices=pricesarry
     $scope.stoknames=stoknamearray
     $scope.optioname=optionamearray
+    $scope.buildpricewedesing=0
     $scope.btndisigned=true
     $scope.priceshow=false
     $scope.moreoptions=true
@@ -45,10 +46,6 @@ $scope.load4overproducts = function () {
                 console.log(response.statusText);
         });
 }();
-$scope.pricetosend = function(val) {
-    // pricetransform($scope.buildprice)
-     return $scope.buildprice
- }
 
 $scope.pricetransform = function (inprice) {
     for (let index = 0; index < $scope.rangeofprices.length; index++) {
@@ -340,7 +337,8 @@ $scope.builderTurnAround = function () {
 }
 $scope.priceformat = function (format) {
 
-   return "$"+$scope.pricetransform(format)
+   var price =(parseFloat($scope.pricetransform(format))+$scope.buildpricewedesing).toFixed(2);
+   return "$"+price
 }
 $scope.TurnAroundTimeprice = function (endurl) {
     $http({
@@ -394,6 +392,42 @@ $scope.computeshipping = function () {
         }, function myError(response) {
           console.log(response.statusText);
     });
+
+}
+
+$scope.actionoptsend =function(key){
+    switch (key) {
+        case "op1":
+            $scope.optsend=key
+            $scope.buildpricewedesing=0
+            setTimeout(function(){  $('#fromBtn').submit(); }, 100);
+            break;
+        case "op2":
+            $scope.optsend=key
+            $scope.buildpricewedesing=0
+            setTimeout(function(){  $('#fromBtn').submit(); }, 100);
+            break;
+        case "op3":
+            $scope.optsend=key
+            $scope.buildpricewedesing=50
+            $.confirm({
+                title: 'We design it for you.',
+                content: 'If you take this service will cost $50 additional.',
+                draggable: false,
+                buttons: {
+                  confirm: function () {
+                      $('#fromBtn').submit();
+                  },
+                  cancel: function () {
+                    $scope.buildpricewedesing=0
+                    $scope.$apply()
+                  },
+                }
+              })
+            break;                
+        default:
+            break;
+    }
 
 }
 

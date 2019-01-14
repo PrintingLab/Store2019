@@ -30,6 +30,7 @@
     <input hidden type="text" name="runsize_uuid" value="{{$runsizeuuid}}" readonly>
     <input hidden type="text" name="typedesigned" value="3">
     <input hidden type="text" name="selectRadios" value="N/A">
+    <input hidden type="text" name="op" value="op3">
     <input hidden type="text" name="optionstring" value="{{$optionstring}}" readonly>
     <div class="row">
 

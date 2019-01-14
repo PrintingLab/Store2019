@@ -11,7 +11,7 @@ return [
     | Taxable interface and use the HasTax trait.
     |
     */
-
+    'wedesigned' => 50,
 
     /*
     |--------------------------------------------------------------------------

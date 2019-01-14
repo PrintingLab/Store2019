@@ -70,22 +70,24 @@
                 </div>
                 @endif
               </div>
-              <div class="col-sm-6 col-md-4">
+              <div class="col-sm-3 col-md-3">
                 <div class="cart-table-item"><a href=""><strong>{{ $item->name }}</strong></a></div>
                 <div class="cart-table-description">{{ $item->options->decription }}</div>
               </div>
-              <div class="col-sm-6 col-md-4 row">
-                <div class="col-6 col-sm-6 col-md-6 cart-table-actions">
+              <div class="col-sm-5 col-md-5 row">
+                <div class="col-8 col-sm-8 col-md-8 cart-table-actions">
                   <div class="checkout-table-row-right">
                     <div class="checkout-table-quantity"> <strong>Quantity:</strong> {{$item->options->quantity }}</div>
+                    <div class="checkout-table-quantity"> <strong>Printed Side:</strong> {{ getPrintingsides($item->options->side) }}</div>
+                    <div class="checkout-table-quantity"> <strong>Turnaround:</strong> {{ getPrintingTime($item->options->tat) }}</div>
                   </div>
                   <!-- <form action="{{ route('cart.switchToSaveForLater', $item->rowId) }}" method="POST">
                   {{ csrf_field() }}
                   <button type="submit" class="cart-options">Save for Later</button>
                 </form> -->
               </div>
-              <div class="col-6 col-sm-6 col-md-6">
-                <div>{{presentPrice($item->subtotal) }}</div>
+              <div class="col-4 col-sm-4 col-md-4">
+                <div class="productotalbold">{{presentPrice($item->subtotal) }}</div>
                 <form action="{{ route('cart.destroy', $item->rowId) }}" method="POST">
                   {{ csrf_field() }}
                   {{ method_field('DELETE') }}
@@ -130,7 +132,7 @@
               <hr>
               New Subtotal <br>
               @endif
-
+            
               <span class="cart-totals-total"><strong>Total</strong></span>
             </div>
 
@@ -142,7 +144,7 @@
               {{ presentPrice($newSubtotal) }} <br>
               @endif
 
-              <span class="cart-totals-total">{{ presentPrice($newTotal) }}</span>
+              <span class="cart-totals-total totalbold">{{ presentPrice($newTotal) }}</span>
             </div>
           </div>
 

@@ -81,7 +81,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="province">Province*</label>
+                            <label for="province">State*</label>
                             @if (auth()->user())
                             <input type="text"  ng-init="province = '{{ auth()->user()->Province }}'" class="form-control" id="province" name="province"  ng-model="province"   required>
                             @else
@@ -105,7 +105,8 @@
                             <input type="text"  ng-init="phone = '{{ auth()->user()->Phone }}'" class="form-control validate" placeholder="800-000-0000" id="phone" name="phone"  ng-model="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="12" required>
                             <span ng-show="checkoutform.phone.$touched && checkoutform.phone.$invalid">Please match the requested format.</span>
                             @else
-                            <input type="text"  ng-init="phone = '{{ old('phone') }}'" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" ng-model="phone" required>
+                            <input type="text"  ng-init="phone = '{{ old('phone') }}'" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" ng-model="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="12" required>
+                            <span ng-show="checkoutform.phone.$touched && checkoutform.phone.$invalid">Please match the requested format.</span>
                             @endif
                         </div>
                         <input hidden  type="text" class="form-control validate" id="ShippingMethod" name="Shippingmethod" value="@{{ShippingMethod}}" required>
@@ -279,7 +280,7 @@ This may take a few moments.</p>
               <hr>
               New Subtotal <br>
               @endif
-              Tax (@{{taxpercent}}%)<br>
+              Tax <br>
               Shipping <br>
               <span class="checkout-totals-total">Total</span>
 

@@ -8,11 +8,9 @@
     z-index: 1000;
   }
   #preloader {
-
-    top: 10%;
-    left: 25%;
+    margin: auto;
     width: 100%;
-    height: 250px;
+    height: 200px;
     z-index: 10;
     position: relative;
   }
@@ -30,6 +28,11 @@
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
     z-index: 10;
+  }
+  .flexloader{
+    position: absolute;
+    margin: auto;
+    left: 43%;
   }
   #loader:before {
     content: "";

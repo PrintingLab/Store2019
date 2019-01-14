@@ -34,6 +34,14 @@
 </div>
 
 <div class="container containerProducts">
+<div class="col-md-12">
+        <h1 class="titleProductint"><strong>{{ $product->name }}</strong></h1>
+      </div>
+      <ul>
+        @foreach (json_decode($product->details, true) as $detail)
+        <li  class="liDetails"><i class="fas fa-check"></i> {{ $detail }} </li>
+        @endforeach
+      </ul>
   <div class="row">
     <div class="col-md-6">
       <div class="product-section-image">
@@ -53,14 +61,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="col-md-12">
-        <h1 class="titleProductint"><strong>{{ $product->name }}</strong></h1>
-      </div>
-      <ul>
-        @foreach (json_decode($product->details, true) as $detail)
-        <li class="liDetails"><i class="fas fa-check"></i> {{ $detail }} </li>
-        @endforeach
-      </ul>
+     
       <div  class="container containerProductsint" ng-controller="shopcontroller">
         <script>
         var prtd = '{!!$product !!}'
@@ -77,6 +78,7 @@
                 </i>
               </div>
             </div>
+            <p style="text-align: center;padding-top: 70px;">Loading Options...  This may take a few seconds.</p>
           </div>
           <div ng-hide="moreoptions">
             <form id="list_view_filter" name="list_view_filter">
@@ -162,6 +164,7 @@
               <div class="col-md-6">
                 <img src="{{ asset('img/settings/gif-load-13.gif') }}" alt="" ng-hide="priceshow" >
                 <input id="product-section-price" value="@{{priceformat(buildprice)}}" ng-show="priceshow" readonly disabled>
+                <p style="text-align: right;" ng-show="priceshow">( Only $@{{priceperpiece}} each )</p>
               </div>
 
 
@@ -169,15 +172,14 @@
             </div>
           </div>
 
-          <input type="hidden"  id="ruta" name="" value="{{route('cart.cartstep',$product)}}">
-
           @if ($product->quantity > 0)
-          <form action="{{route('cart.cartstep',$product)}}" id="fromBtn" class="center" method="POST" enctype="multipart/form-data">
+          <form action="{{route('cart.cartstep',$product)}}" id="fromBtn" name="fromBtn" class="center" method="POST" enctype="multipart/form-data">
+            {{ csrf_field() }}
             {{ csrf_field() }}
             <input hidden type="text" name="prddesc" value="@{{productdesc}}" readonly>
                     <input hidden type="text" name="prdtcode" value="@{{productcode}}" readonly>
                     <input hidden type="text" name="prdtID" value="@{{productuuid}}" readonly>
-                    <input hidden type="text" name="prdtprice" value="@{{pricetosend(buildprice)}}" readonly>
+                    <input hidden type="text" name="prdtprice" value="@{{buildprice}}" readonly>
                     <input hidden type="text" name="prdRunsize" value="@{{quantyti}}" readonly>
                     <input hidden type="text" name="prdRunsizeid" value="@{{Runsize}}" readonly>
                     <input hidden type="text" name="prdside" value="@{{side}}" readonly>
@@ -186,14 +188,16 @@
                     <input hidden type="text" name="colorspec_uuid" value="@{{Colorspec}}" readonly>
                     <input hidden type="text" name="runsize_uuid" value="@{{runsize_uuid}}" readonly>
                     <input hidden type="text" name="optionstring" value="@{{optionstring}}" readonly>
+                    <input hidden type="text" name="sendbtn" value="@{{optsend}}" readonly>
             <div class="col-md-12">
-              <button  name="sendbtn" value="op1" class="btn_formProduct btn_op1" ng-disabled="btndisigned">UPLOAD YOUR FILE & ORDER NOW</button>
+              <button type="button" class="btn_formProduct btn_op1" ng-click="actionoptsend('op1')" ng-disabled="btndisigned">UPLOAD YOUR FILE & ORDER NOW</button>
             </div>
-            <button hidden  name="sendbtn" value="op2" class="btn_formProduct btn_op2" ng-disabled="btndisigned">CREATE YOUR DESIGN ONLINE</button>
+            <button  type="button" hidden   class="btn_formProduct btn_op2" ng-click="actionoptsend('op2')" ng-disabled="btndisigned">CREATE YOUR DESIGN ONLINE</button>
             <div class="col-md-12">
-              <button  name="sendbtn" value="op3" class="btn_formProduct btn_op3" ng-disabled="btndisigned">WE DESIGN IT FOR YOU</button>
+              <button type="button" class="btn_formProduct btn_op3" ng-click="actionoptsend('op3')" ng-disabled="btndisigned">WE DESIGN IT FOR YOU</button>
             </div>
           </form>
+          
           @endif
 
 
@@ -394,36 +398,6 @@
     this.classList.add('selected');
   }
 })();
-
-
-//validaciones
-/*
-
-$(".btn_op1").click(function(){
-  var ruta=$('#ruta').val();
-  console.log(ruta);
-  $('#fromBtn').attr('action', ruta);
-  $('#fromBtn').submit();
-});
-
-$(".btn_op3").click(function(){
-  $.confirm({
-    title: 'We design it for you.',
-    content: 'If you take this service will cost $50 additional.',
-    draggable: false,
-    buttons: {
-      confirm: function () {
-        var ruta=$('#ruta').val();
-        $('#fromBtn').attr('action', ruta);
-        $('#fromBtn').submit();
-      },
-      cancel: function () {
-      },
-    }
-  })
-});
-
-*/
 
 </script>
 <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->

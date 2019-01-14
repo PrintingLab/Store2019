@@ -1,6 +1,13 @@
 <?php
 
 use Carbon\Carbon;
+use App\Product;
+
+function getAllProducts(){
+    $allproducts = Product::all();
+   
+    return $allproducts;
+  }
 
 function presentPrice($price)
 {
@@ -28,7 +35,7 @@ function printingtax($postalcode)
     $json_data = json_decode($json, true);
       foreach ($json_data as $value) {
          if ($postalcode == $value) {
-            $taxval  = 0;
+            $taxval  = 6.32;
             break;
          }else {
             $taxval  = 0;
@@ -99,13 +106,15 @@ function getPrintingTime($prttime)
        }
 }
 
-
-
 function getNumbers()
 {
     //tax for zip funtion
-
-    $tax = 0 / 100;
+    $cookie_name="Zipcode";
+    if(!isset($_COOKIE[$cookie_name])) {
+        $tax = 0 / 100;
+   } else {
+    $tax = printingtax($_COOKIE[$cookie_name]) / 100;
+   }
     $discount = session()->get('coupon')['discount'] ?? 0;
     $code = session()->get('coupon')['name'] ?? null;
     $newSubtotal = (Cart::subtotal() - $discount);

@@ -26,49 +26,17 @@
                   <div class="row">
                     <div class="col-md-6">
                       <ul class="list_dropdown">
-<<<<<<< HEAD
+                      @foreach (getAllProducts() as $produc)
+                       <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
+                      @endforeach
 
 
-
-=======
-                        <li><a href="#">D Lenticular Prints</a></li>
-                        <li><a href="#">Announcement Cards</a></li>
-                        <li><a href="#">Booklets</a></li>
-                        <li><a href="#">Bookmarks</a></li>
-                        <li><a href="#">Business Cards</a></li>
-                        <li><a href="#">Calendars</a></li>
-                        <li><a href="#">Catalogs</a></li>
-                        <li><a href="#">Counter Cards</a></li>
-                        <li><a href="#">Custom Orders</a></li>
-                        <li><a href="#">Door Hangers</a></li>
-                        <li><a href="#">Endur ACE</a></li>
-                        <li><a href="#">Envelope</a></li>
-                        <li><a href="#">Event Tickets</a></li>
-                        <li><a href="#">Flyers and Brochures</a></li>
-                        <li><a href="#">Greeting Cards</a></li>
-                        <li><a href="#">Hang Tags</a></li>
-                        <li><a href="#">Letterheads</a></li>
-                        <li><a href="#">Linen Uncoated</a></li>
->>>>>>> master
+                        
                       </ul>
                     </div>
                     <div class="col-md-6">
                       <ul class="list_dropdown">
-                        <li><a href="#">Magnets</a></li>
-                        <li><a href="#">Menus</a></li>
-                        <li><a href="#">NCR Forms</a></li>
-                        <li><a href="#">Notepads</a></li>
-                        <li><a href="#">Plastic Cards</a></li>
-                        <li><a href="#">Postcards</a></li>
-                        <li><a href="#">Posters</a></li>
-                        <li><a href="#">Presentation Folders</a></li>
-                        <li><a href="#">Roll Labels</a></li>
-                        <li><a href="#">Sell Sheets</a></li>
-                        <li><a href="#">Stickers</a></li>
-                        <li><a href="#">Table Tent Cards</a></li>
-                        <li><a href="#">Tear Off Cards</a></li>
-                        <li><a href="#">Trading Cards</a></li>
-                        <li><a href="#">Window Cling</a></li>
+                        
                       </ul>
                     </div>
                   </div>
@@ -155,39 +123,9 @@
             <li class="dropdown center">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MARKETING PRODUCTS<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">4D Lenticular Prints</a></li>
-                <li><a href="#">Announcement Cards</a></li>
-                <li><a href="#">Booklets</a></li>
-                <li><a href="#">Bookmarks</a></li>
-                <li><a href="#">Business Cards</a></li>
-                <li><a href="#">Calendars</a></li>
-                <li><a href="#">Catalogs</a></li>
-                <li><a href="#">Counter Cards</a></li>
-                <li><a href="#">Custom Orders</a></li>
-                <li><a href="#">Door Hangers</a></li>
-                <li><a href="#">Endur ACE</a></li>
-                <li><a href="#">Envelope</a></li>
-                <li><a href="#">Event Tickets</a></li>
-                <li><a href="#">Flyers and Brochures</a></li>
-                <li><a href="#">Greeting Cards</a></li>
-                <li><a href="#">Hang Tags</a></li>
-                <li><a href="#">Letterheads</a></li>
-                <li><a href="#">Linen Uncoated</a></li>
-                <li><a href="#">Magnets</a></li>
-                <li><a href="#">Menus</a></li>
-                <li><a href="#">NCR Forms</a></li>
-                <li><a href="#">Notepads</a></li>
-                <li><a href="#">Plastic Cards</a></li>
-                <li><a href="#">Postcards</a></li>
-                <li><a href="#">Posters</a></li>
-                <li><a href="#">Presentation Folders</a></li>
-                <li><a href="#">Roll Labels</a></li>
-                <li><a href="#">Sell Sheets</a></li>
-                <li><a href="#">Stickers</a></li>
-                <li><a href="#">Table Tent Cards</a></li>
-                <li><a href="#">Tear Off Cards</a></li>
-                <li><a href="#">Trading Cards</a></li>
-                <li><a href="#">Window Cling</a></li>
+                 @foreach (getAllProducts() as $produc)
+                       <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
+                      @endforeach
               </ul>
             </li>
             <li class="dropdown center">
@@ -233,43 +171,14 @@
                   <div class="row">
                     <div class="col-md-6">
                       <ul class="list_dropdown">
-                        <li><a href="#">4D Lenticular Prints</a></li>
-                        <li><a href="#">Announcement Cards</a></li>
-                        <li><a href="#">Booklets</a></li>
-                        <li><a href="#">Bookmarks</a></li>
-                        <li><a href="#">Business Cards</a></li>
-                        <li><a href="#">Calendars</a></li>
-                        <li><a href="#">Catalogs</a></li>
-                        <li><a href="#">Counter Cards</a></li>
-                        <li><a href="#">Custom Orders</a></li>
-                        <li><a href="#">Door Hangers</a></li>
-                        <li><a href="#">Endur ACE</a></li>
-                        <li><a href="#">Envelope</a></li>
-                        <li><a href="#">Event Tickets</a></li>
-                        <li><a href="#">Flyers and Brochures</a></li>
-                        <li><a href="#">Greeting Cards</a></li>
-                        <li><a href="#">Hang Tags</a></li>
-                        <li><a href="#">Letterheads</a></li>
-                        <li><a href="#">Linen Uncoated</a></li>
+                      @foreach (getAllProducts() as $produc)
+                       <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
+                      @endforeach
                       </ul>
                     </div>
                     <div class="col-md-6">
                       <ul class="list_dropdown">
-                        <li><a href="#">Magnets</a></li>
-                        <li><a href="#">Menus</a></li>
-                        <li><a href="#">NCR Forms</a></li>
-                        <li><a href="#">Notepads</a></li>
-                        <li><a href="#">Plastic Cards</a></li>
-                        <li><a href="#">Postcards</a></li>
-                        <li><a href="#">Posters</a></li>
-                        <li><a href="#">Presentation Folders</a></li>
-                        <li><a href="#">Roll Labels</a></li>
-                        <li><a href="#">Sell Sheets</a></li>
-                        <li><a href="#">Stickers</a></li>
-                        <li><a href="#">Table Tent Cards</a></li>
-                        <li><a href="#">Tear Off Cards</a></li>
-                        <li><a href="#">Trading Cards</a></li>
-                        <li><a href="#">Window Cling</a></li>
+                    
                       </ul>
                     </div>
                   </div>

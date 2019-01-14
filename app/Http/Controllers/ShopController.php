@@ -20,6 +20,8 @@ class ShopController extends Controller
         $pagination = 9;
         $categories = Category::all();
         //$fouroverproducts = call_4over_curl();
+         $allproducts = Product::all();
+
         if (request()->category) {
             $products = Product::with('categories')->whereHas('categories', function ($query) {
                 $query->where('slug', request()->category);
@@ -36,12 +38,11 @@ class ShopController extends Controller
         } else {
             $products = $products->paginate($pagination);
         }
-
         return view('shop')->with([
             'products' => $products,
             'categories' => $categories,
             'categoryName' => $categoryName,
-            //'categoryName' => $fouroverproducts,
+            'Allproducts' => $allproducts,
         ]);
     }
 
@@ -91,7 +92,9 @@ class ShopController extends Controller
 
         array_push($shipers,$result);
         }
-        Config::set('cart.tax', printingtax($request->postalcode) );
+        $cookie_name = "Zipcode";
+        $cookie_value = $request->postalcode;
+        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
         return response()->json(['success'=>$shipers,'taxpercent'=>config('cart.tax')]);
       }
     }

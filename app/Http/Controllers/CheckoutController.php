@@ -201,7 +201,7 @@ public function updateShiping(Request $request)
 
             }
         }
-
+      
         return response()->json(['zuccess' => Cart::content(),'Total'=>getNumbers()->get('newTotal'),'Tax'=>getNumbers()->get('newTax'),'NewSubtotal'=>getNumbers()->get('newSubtotal'),'shiping'=>getNumbers()->get('shiping'),'tax'=>getNumbers()->get('tax')]);
 
     }

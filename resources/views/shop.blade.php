@@ -36,8 +36,10 @@
       <div class="Div_allproduct2">
         <ul class="list_dropdown">
           <li><strong>MARKETING PRODUCTS</strong></li>
-
           
+          @foreach ($Allproducts as $produc)
+          <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
+          @endforeach
 
         </ul>
         <ul class="list_dropdown">

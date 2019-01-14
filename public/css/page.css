@@ -562,7 +562,7 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 6%;
-  margin-top: 11%;
+  margin-top: 5%;
 }
 
 .product-section-information select{
@@ -689,7 +689,14 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   .filey > p:before{content: "\01F4C1";}
   .filey > p.change:before{content: "\01F4C2";}
 
-
+  .productotalbold{
+     font-weight: 600;
+     color: #F4005B
+  }
+  .totalbold{
+    font-weight: 900;
+    color: #F4005B
+ }
   .info-UP {
     margin-top: 7%;
   }
@@ -761,7 +768,9 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
 
 
   /*cart*/
-
+  .productRow img{
+    border: 1px #dee2e6 solid;
+  }
   .productRow{
     border-bottom: 2px solid #ececec;
     margin-top: 1%;
