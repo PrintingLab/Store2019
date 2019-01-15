@@ -50,9 +50,9 @@
                     <div class="form-group">
                         <label for="email">Email Address*</label>
                         @if (auth()->user())
-                            <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" readonly>
+                            <input type="email" ng-init="emailadrres = '{{ auth()->user()->email }}'" class="form-control" id="email" name="email"  ng-model="emailadrres" readonly>
                         @else
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" ng-model="email" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" ng-model="email" ng-model="emailadrres"  required>
                         @endif
                     </div>
                     <div class="form-group">
@@ -168,9 +168,9 @@ This may take a few moments.</p>
                   <div class="form-group col-sm-5">
                     <label for="">Expiration Date*</label>
                     <div class="input-group expiration-date">
-                      <input max="2" type="number" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month" required>
+                      <input  type="number" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month" required>
                       <span class="date-separator"></span>
-                      <input max="4" type="number" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year" required>
+                      <input  type="number" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year" required>
                     </div>
                   </div>
                   <div class="form-group col-sm-8">
@@ -232,6 +232,7 @@ This may take a few moments.</p>
                   <div id="bt-dropin"></div>
                 </div>
               </section>
+              <input   type="text" class="form-control"  name="email" value="@{{emailadrres}}" required>
               <input hidden  type="text" class="form-control"  name="address" value="@{{address}}" required>
               <input hidden  type="text" class="form-control"  name="city" value="@{{city}}" required>
               <input hidden  type="text" class="form-control"  name="province" value="@{{province}}" required>
