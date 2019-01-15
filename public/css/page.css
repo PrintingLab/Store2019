@@ -158,7 +158,7 @@ header{
 }
 
 .imgUserbtn{
-      max-width: fit-content;
+  max-width: fit-content;
 }
 
 .text_Userp{
@@ -270,18 +270,58 @@ button:focus  {
   font-size: 75%;
 }
 
+#telefonoMb p{
+  display: contents;
+}
+
 .cart-countMovil{
   left: initial;
-      position: absolute;
-      background: var(--magenta);
-      color: white;
-      border-radius: 50%;
-      width: 19px;
-      height: 19px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 600;
+  position: absolute;
+  background: var(--magenta);
+  color: white;
+  border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
 }
+
+
+@media (max-width:709px){
+  #telefonoMb p{
+    display: block;
+    font-size: 100%;
+  }
+}
+
+@media (max-width:575px){
+  #telefonoMb p{
+    display: contents;
+  }
+  .btnCartMb img{
+    max-width: initial;
+  }
+}
+
+@media (max-width:450px){
+
+  #telefonoMb{
+  max-width: 12%;
+  }
+
+  .Btn_Account{
+    max-width: 88%;
+  }
+  .btnCartMb{
+    max-width: 12%;
+  }
+
+  #telefonoMb p{
+    display: none;
+  }
+}
+
 
 @media (max-width:768px){
   .barsignage img {
@@ -309,8 +349,8 @@ button:focus  {
 @media(max-width:900px){
 
   .btn_3top a, .btn_3top .btn-myAccount {
-      white-space: nowrap;
-      font-size: 80%;
+    white-space: nowrap;
+    font-size: 80%;
   }
 
 }
@@ -711,8 +751,6 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   padding-bottom: 4%;
 }
 
-
-
 .divsInfuli{
   margin-top: 10%;
 }
@@ -753,13 +791,13 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   .filey > p.change:before{content: "\01F4C2";}
 
   .productotalbold{
-     font-weight: 600;
-     color: #F4005B
+    font-weight: 600;
+    color: #F4005B
   }
   .totalbold{
     font-weight: 900;
     color: #F4005B
- }
+  }
   .info-UP {
     margin-top: 7%;
   }
@@ -890,6 +928,24 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
     padding: 12px 40px;
   }
 
+  @media(max-width:419px){
+#coupon_code{
+width: 100%;
+}
+.btn_CodeApply{
+  margin-top: 3%;
+}
+  }
+
+@media(max-width:544px){
+.btn_Cshopping,.btn_Pcheckout{
+  margin-top: 3%;
+display: inherit;
+text-align: center;
+}
+
+}
+
   /*cart fin*/
 
 
@@ -910,6 +966,31 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   }
 
   /*fin checkout*/
+
+
+
+/*Profile*/
+.formInputProfile{
+  margin-bottom: 3%;
+}
+
+.my-profile input {
+    width: 70%;
+}
+
+/*end Profile*/
+
+
+/*Contact us*/
+.textoscontainer {padding-top: 145px; margin-bottom: 6%;}
+.titlecontact {font-size: 50px;font-weight: 700; margin-bottom: 5%;}
+.contactinput{border:0;outline:0;border-bottom:1px solid gray;margin-right:4%;margin-bottom:14%;width:100%;}
+.formselcontact {border: 0;width: 100%;border-bottom: 1px solid gray;outline: 0;margin-bottom: 14%;}
+.list-contac{list-style: none;}
+.botonsubmit {margin-top: 3%;background-color: #000;color: white;width: 232px;height: 55px;border: 0;}
+.fondocontacto {background: #F7F7F9;padding: 3%;margin-top: 3%;}
+
+/*end Contact us*/
 
   /*footer*/
   footer{

@@ -34,14 +34,14 @@
 </div>
 
 <div class="container containerProducts">
-<div class="col-md-12">
-        <h1 class="titleProductint"><strong>{{ $product->name }}</strong></h1>
-      </div>
-      <ul>
-        @foreach (json_decode($product->details, true) as $detail)
-        <li  class="liDetails"><i class="fas fa-check"></i> {{ $detail }} </li>
-        @endforeach
-      </ul>
+  <div class="col-md-12">
+    <h1 class="titleProductint"><strong>{{ $product->name }}</strong></h1>
+  </div>
+  <ul>
+    @foreach (json_decode($product->details, true) as $detail)
+    <li  class="liDetails"><i class="fas fa-check"></i> {{ $detail }} </li>
+    @endforeach
+  </ul>
   <div class="row">
     <div class="col-md-6">
       <div class="product-section-image">
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="col-md-6">
-     
+
       <div  class="container containerProductsint" ng-controller="shopcontroller">
         <script>
         var prtd = '{!!$product !!}'
@@ -118,8 +118,8 @@
                     </div> <!-- end filter_name -->
                     <div class="col-md-7 filter_select" >
                       <select name="roundcorners" id="roundcorners" >
-                      <option id="idStandard" value="Standard">Standard Corners</option>
-                      <option id="idRound" value="Round">Round Corners</option> 
+                        <option id="idStandard" value="Standard">Standard Corners</option>
+                        <option id="idRound" value="Round">Round Corners</option>
                       </select>
                     </div> <!-- end filter-select -->
                   </div>
@@ -139,19 +139,19 @@
               </fieldset>
             </form>
             <div >
-            <div class="jt_filters" ng-repeat="op in arrayproductprices | filter:{product_option_group_uuid:'!34f407f8-0b50-4227-9378-10fddefbe596'} | filter:{product_option_group_uuid:'!24865ffa-793d-43ea-b3b1-d1b5cf22268d'} | filter:{product_option_group_uuid:'!26ca0df3-0682-4f37-8979-409868e2df2d'} | filter:{product_option_group_uuid:'!b6f8d6b4-9909-4cd7-bbc0-b65b6e6460eb'} | filter:{product_option_group_uuid:'!ed16daf6-77e4-4133-8d65-3947d5d19f52'} | filter:{product_option_group_uuid:'!b19d4ac3-2d48-40c0-9729-e35af6846271'} | filter:{product_option_group_uuid:'!a2b94cf3-b6bc-4ae2-8c3a-3b04d4671e6e'} ">
-              <div class="row">
-                <div class="col-md-5 filter_name">
-                <strong>@{{changeoptioname(op.product_option_group_name)}}:</strong> 
-                </div>
-                <div class="col-md-7">
-                  <select   name="" id="@{{op.product_option_group_uuid}}" ng-click="optionschange()">
-                    <option id="@{{op2.option_uuid}}" name="@{{op2.option_name}}" value="@{{op2.option_uuid}}" ng-repeat="op2 in op.options | unique: 'option_name'">@{{changeoptioname(op2.option_name)}}</option>
-                    
-                  </select>
+              <div class="jt_filters" ng-repeat="op in arrayproductprices | filter:{product_option_group_uuid:'!34f407f8-0b50-4227-9378-10fddefbe596'} | filter:{product_option_group_uuid:'!24865ffa-793d-43ea-b3b1-d1b5cf22268d'} | filter:{product_option_group_uuid:'!26ca0df3-0682-4f37-8979-409868e2df2d'} | filter:{product_option_group_uuid:'!b6f8d6b4-9909-4cd7-bbc0-b65b6e6460eb'} | filter:{product_option_group_uuid:'!ed16daf6-77e4-4133-8d65-3947d5d19f52'} | filter:{product_option_group_uuid:'!b19d4ac3-2d48-40c0-9729-e35af6846271'} | filter:{product_option_group_uuid:'!a2b94cf3-b6bc-4ae2-8c3a-3b04d4671e6e'} ">
+                <div class="row">
+                  <div class="col-md-5 filter_name">
+                    <strong>@{{changeoptioname(op.product_option_group_name)}}:</strong>
+                  </div>
+                  <div class="col-md-7">
+                    <select   name="" id="@{{op.product_option_group_uuid}}" ng-click="optionschange()">
+                      <option id="@{{op2.option_uuid}}" name="@{{op2.option_name}}" value="@{{op2.option_uuid}}" ng-repeat="op2 in op.options | unique: 'option_name'">@{{changeoptioname(op2.option_name)}}</option>
+
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
             <div class="productSectionPrice row">
 
@@ -177,18 +177,18 @@
             {{ csrf_field() }}
             {{ csrf_field() }}
             <input hidden type="text" name="prddesc" value="@{{productdesc}}" readonly>
-                    <input hidden type="text" name="prdtcode" value="@{{productcode}}" readonly>
-                    <input hidden type="text" name="prdtID" value="@{{productuuid}}" readonly>
-                    <input hidden type="text" name="prdtprice" value="@{{buildprice}}" readonly>
-                    <input hidden type="text" name="prdRunsize" value="@{{quantyti}}" readonly>
-                    <input hidden type="text" name="prdRunsizeid" value="@{{Runsize}}" readonly>
-                    <input hidden type="text" name="prdside" value="@{{side}}" readonly>
-                    <input hidden type="text" name="prdTurnAroundTime" value="@{{TurnAroundval}}" readonly>
-                    <input hidden type="text" name="option_uuid" value="@{{option_uuid}}" readonly>
-                    <input hidden type="text" name="colorspec_uuid" value="@{{Colorspec}}" readonly>
-                    <input hidden type="text" name="runsize_uuid" value="@{{runsize_uuid}}" readonly>
-                    <input hidden type="text" name="optionstring" value="@{{optionstring}}" readonly>
-                    <input hidden type="text" name="sendbtn" value="@{{optsend}}" readonly>
+            <input hidden type="text" name="prdtcode" value="@{{productcode}}" readonly>
+            <input hidden type="text" name="prdtID" value="@{{productuuid}}" readonly>
+            <input hidden type="text" name="prdtprice" value="@{{buildprice}}" readonly>
+            <input hidden type="text" name="prdRunsize" value="@{{quantyti}}" readonly>
+            <input hidden type="text" name="prdRunsizeid" value="@{{Runsize}}" readonly>
+            <input hidden type="text" name="prdside" value="@{{side}}" readonly>
+            <input hidden type="text" name="prdTurnAroundTime" value="@{{TurnAroundval}}" readonly>
+            <input hidden type="text" name="option_uuid" value="@{{option_uuid}}" readonly>
+            <input hidden type="text" name="colorspec_uuid" value="@{{Colorspec}}" readonly>
+            <input hidden type="text" name="runsize_uuid" value="@{{runsize_uuid}}" readonly>
+            <input hidden type="text" name="optionstring" value="@{{optionstring}}" readonly>
+            <input hidden type="text" name="sendbtn" value="@{{optsend}}" readonly>
             <div class="col-md-12">
               <button type="button" class="btn_formProduct btn_op1" ng-click="actionoptsend('op1')" ng-disabled="btndisigned">UPLOAD YOUR FILE & ORDER NOW</button>
             </div>
@@ -197,12 +197,17 @@
               <button type="button" class="btn_formProduct btn_op3" ng-click="actionoptsend('op3')" ng-disabled="btndisigned">WE DESIGN IT FOR YOU</button>
             </div>
           </form>
-          
+
           @endif
 
 
         </div>
+        <button ng-click="categorias()">categotias</button>
+        <input type="text" ng-model="busca" >
+        <ul>
+          <li ng-repeat="cat in categoriaslist |filter:busca"><b>@{{cat.category_name}}</b> :  @{{cat.category_uuid}}</li><br>
 
+        </ul>
       </div> <!-- end product-section -->
 
 

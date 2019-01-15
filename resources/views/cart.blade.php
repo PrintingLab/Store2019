@@ -132,7 +132,7 @@
               <hr>
               New Subtotal <br>
               @endif
-            
+
               <span class="cart-totals-total"><strong>Total</strong></span>
             </div>
 

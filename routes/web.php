@@ -30,6 +30,16 @@ Route::get('/guestCheckout', 'CheckoutController@index')->name('guestCheckout.in
 Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
 
 
+
+Route::get('/about-us','PagesController@Aboutus');
+Route::get('/returns-and-refund','PagesController@ReturnsRefund');
+Route::get('/privacy-policy','PagesController@PrivacyPolicy');
+Route::get('/terms-and-conditions','PagesController@TermsConditions');
+
+Route::get('/contact-us','PagesController@ContactUs');
+Route::post('contact-us','PagesController@EnviarCorreoContactUs')->name('EmailContact');
+
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });

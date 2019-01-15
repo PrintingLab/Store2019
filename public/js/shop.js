@@ -76,7 +76,7 @@ $scope.stockname = function (name,id,idselect) {
             $("#stock option[value='" + name + "']").remove()
                 break;
                 case "4/1":
-            $("#"+idselect+" option[value='" + id + "']").remove() 
+            $("#"+idselect+" option[value='" + id + "']").remove()
                 break;
             default:
                 break;
@@ -88,7 +88,7 @@ $scope.stockname = function (name,id,idselect) {
             newname =  $scope.stoknames[index].value
         }
     }
-    
+
     if (newname) {
         return newname
     }else{
@@ -107,7 +107,7 @@ $scope.changeoptioname = function(name){
     }else{
         return name
     }
-   
+
 }
 
 $scope.baseprice = function (endurl) {
@@ -123,6 +123,7 @@ $scope.baseprice = function (endurl) {
             });
 }
 $scope.builderchangue = function () {
+  console.log($scope.products)
     var matches = $scope.$eval('products | filter:prdselect1 ');
     if (matches.length == 0) {
         console.log("null")
@@ -273,7 +274,7 @@ $scope.load4overproductsOptions = function (endurl) {
             $scope.arrayproductprices=response.data.success.entities
            // console.log($scope.arrayproductprices)
             setTimeout(function(){  $scope.optionschange() }, 100);
-            
+
             }, function myError(response) {
                 console.log(response.statusText);
         });
@@ -301,13 +302,13 @@ $scope.productbuiloption=[]
 
 
 $scope.builderprice = function (params) {
-    
+
     for (let index = 0; index < $scope.productbaseprice.length; index++) {
         const priceloop = $scope.productbaseprice[index];
             if (priceloop.colorspec_uuid == $scope.Colorspec && priceloop.runsize_uuid == $scope.Runsize) {
                 $scope.firtprice=priceloop.product_baseprice
             }
-        
+
     }
     $scope.builderTurnAround()
 }
@@ -365,7 +366,7 @@ $scope.TurnAroundTimeprice = function (endurl) {
 }
 
 $scope.computeshipping = function () {
-    for (let index = 0; index < $scope.arrayproductprices.length; index++) { 
+    for (let index = 0; index < $scope.arrayproductprices.length; index++) {
         for (let index1 = 0; index1 < $scope.arrayproductprices[index].options.length; index1++) {
 
         }
@@ -424,7 +425,7 @@ $scope.actionoptsend =function(key){
                   },
                 }
               })
-            break;                
+            break;
         default:
             break;
     }
