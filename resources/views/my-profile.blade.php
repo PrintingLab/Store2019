@@ -49,17 +49,17 @@
                 <form action="{{ route('users.update') }}" method="POST">
                     @method('patch')
                     @csrf
-                    <div class="form-control">
+                    <div class="formInputProfile">
                         <input id="name" type="text" name="name" value="{{ old('name', $user->name) }}" placeholder="Name" required>
                     </div>
-                    <div class="form-control">
+                    <div class="formInputProfile">
                         <input id="email" type="email" name="email" value="{{ old('email', $user->email) }}" placeholder="Email" required>
                     </div>
-                    <div class="form-control">
+                    <div class="formInputProfile">
                         <input id="password" type="password" name="password" placeholder="Password">
                         <div>Leave password blank to keep current password</div>
                     </div>
-                    <div class="form-control">
+                    <div class="formInputProfile">
                         <input id="password-confirm" type="password" name="password_confirmation" placeholder="Confirm Password">
                     </div>
                     <div>

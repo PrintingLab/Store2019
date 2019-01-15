@@ -1,4 +1,5 @@
 <footer>
+
   <div class="container">
     <div class="col-md-12 center">
       <img class="logo" src="/img/logo-printing-lab-new-york.svg" alt="">
@@ -6,19 +7,19 @@
     <div class="row centerjustify">
       <div class="col-md-8">
         <div class="row">
-          <div class="col-md-4 col-sm-4 col-4">
+          <div class="col-md-4 col-sm-4 col-6">
             <h6><strong>COMPANY</strong></h6>
             <li><a href="{{ url('/about-us') }}">About Us</a></li>
             <li><a href="contact-us">Contact Us</a> </li>
             <li><a href="work-with-us">Work With Us</a> </li>
           </div>
-          <div class="col-md-4 col-sm-4 col-4">
+          <div class="col-md-4 col-sm-4 col-6">
             <h6><strong>POLICY</strong></h6>
             <li><a href="{{ url('/returns-and-refund')}}">Returns & Refunds</a></li>
             <li><a href="{{ url('privacy-policy')}}">Privacy Policy</a> </li>
             <li><a href="{{url('terms-and-conditions') }}">Terms & Conditions</a></li>
           </div>
-          <div class="col-md-4 col-sm-4">
+          <div class="col-md-4 col-sm-4 col-6 center">
             <h6><strong>WE RECEIVED ALL CARDS.</strong></h6>
             <img src="/img/payments-footer.png" alt="">
             <H5><strong>GET SOCIAL WITH US</strong></H5>
@@ -35,4 +36,5 @@
       <p>© 2018 Printing Lab. All rights reserved</p>
     </div>
   </div>
+
 </footer>
