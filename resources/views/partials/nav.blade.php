@@ -28,7 +28,7 @@
                       <ul class="list_dropdown list_dropdown-brake">
                       @foreach (getAllProducts() as $produc)
                        <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
-                      @endforeach                     
+                      @endforeach
                       </ul>
                     </div>
                   </div>
@@ -66,7 +66,7 @@
         <form action="{{ route('search') }}" method="GET" class="search-form">
     <input type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box" placeholder="Search for product" required>
     <span class="fa fa-search"></span>
-</form>    
+</form>
         </div>
         <div class="col-md-5 row btn_3top">
           <div class="col-md-5 paddingCero">
@@ -91,44 +91,46 @@
           <div class=" col-sm-4 col-8 center paddingCero">
             <img class="imgLogoH" src="/img/logo-printing-lab-new-york.svg" alt="">
           </div>
-          <div class=" col-sm-7 col-6 row btn_3topMovil">
+          <div class=" col-sm-7 col-12 row btn_3topMovil">
 
 
 
 
-            <div class="col-sm-4 paddingCero">
+            <div class="col-sm-4 col-2 paddingCero" id="telefonoMb">
                 <a href="tel:201-305-0404">
                   <img src="/img/call-icon.png" alt="">
-                  201-305-0404
+                   <p>201-305-0404</p>
                 </a>
             </div>
 
 
 
               @guest
-              <div class="Btn_Account col-sm-6 paddingCero">
-                <img src="/img/user-login-printing-lab.png" alt="">
-                <button type="button" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
-                  My Account
-                </button>
-                <div class="dropdown-menu center">
-                  <li><a href="{{ route('register') }}">Sign Up</a></li>
-                  <li><a href="{{ route('login') }}">Login</a></li>
+              <div class="Btn_Account col-sm-6 col-8 paddingCero">
+                <div class="col-sm-2 paddingCero">
+                <img class="imgUserbtn" src="/img/user-login-printing-lab.png" alt="">
+                </div>
+                <div class="col-sm-10">
+                  <p></p>
+                  <button type="button" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
+                    My Account
+                  </button>
+                  <div class="dropdown-menu center">
+                    <li><a href="{{ route('register') }}">Sign Up</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                  </div>
                 </div>
               </div>
               @else
-              <div class="Btn_Account col-sm-5 row">
-
+              <div class="Btn_Account col-sm-6 col-8 paddingCero">
                 <div class="col-sm-2 paddingCero">
                   <img class="imgUserbtn" src="/img/user-login-printing-lab.png" alt="">
                 </div>
-
                 <div class="col-sm-10">
                   <p class="text_Userp">{{ Auth::user()->name }}</p>
                   <button type="button" id="userName" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
                   Your Account
                   </button>
-
                   <div class="dropdown-menu center">
                     <li><a href="{{ route('users.edit') }}">Dashboard</a></li>
                     <li>
@@ -137,21 +139,13 @@
                       </li>
                     </div>
                   </div>
-
-
                 </div>
-
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   {{ csrf_field() }}
                 </form>
                 @endguest
 
-
-
-
-
-
-                <div class=" col-sm-3">
+                <div class=" col-sm-2 col-2 btnCartMb">
                   <a href="{{ route('cart.index') }}">
                     <img src="/img/shopping-bag-printing-lab.png" alt="">
                     @if (Cart::instance('default')->count() > 0)
@@ -245,7 +239,7 @@
                       <ul class="list_dropdown list_dropdown-brake">
                       @foreach (getAllProducts() as $produc)
                        <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
-                      @endforeach                     
+                      @endforeach
                       </ul>
                     </div>
                   </div>
@@ -295,7 +289,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="contact-us">
             CONTACT US
           </a>
         </li>

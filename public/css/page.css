@@ -300,16 +300,29 @@ button:focus  {
 }
 
 
+
+.Btn_Account{
+  display: flex;
+}
+
 @media (max-width:709px){
   #telefonoMb p{
-    display: block;
-    font-size: 100%;
+    font-size: 75%;
   }
 }
 
+@media (max-width:606px){
+  #telefonoMb p{
+    margin-top: -4%;
+    display: block;
+    font-size: 95%;
+  }
+}
+
+
 @media (max-width:575px){
   #telefonoMb p{
-    display: contents;
+    display: none;
   }
   .btnCartMb img{
     max-width: initial;
@@ -318,16 +331,25 @@ button:focus  {
 
 @media (max-width:450px){
 
-  #telefonoMb{
+
+.btn_3topMovil{
+      /* display: -webkit-inline-box; */
+}
+
+.Btn_Account{
+  display: flex;
+}
+
+  /* #telefonoMb{
   max-width: 12%;
   }
 
   .Btn_Account{
-    max-width: 88%;
+    max-width: 76%;
   }
   .btnCartMb{
     max-width: 12%;
-  }
+  } */
 
   #telefonoMb p{
     display: none;
