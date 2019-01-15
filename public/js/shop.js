@@ -40,7 +40,7 @@ $scope.load4overproducts = function () {
              $scope.products=response.data.success.entities;
              console.log($scope.products)
            //$scope.builderchangue()
-           setTimeout(function(){  $scope.builderbydimencion() }, 100);
+           setTimeout(function(){  $scope.builderbydimencion() }, 500);
 
             }, function myError(response) {
                 console.log(response.statusText);
@@ -137,6 +137,7 @@ $scope.builderchangue = function () {
 }
 $scope.builderbydimencion = function () {
     $scope.stockarry=[]
+    console.log($scope.products)
     var matches = $scope.$eval('products | filter:Dimensions');
     console.log($scope.Dimensions)
     if (matches.length == 0) {
@@ -430,6 +431,22 @@ $scope.actionoptsend =function(key){
     }
 
 }
+
+$scope.categorias = function () {
+    endurl = "https://api.4over.com/printproducts/categories"
+    $http({
+        method:'post',
+        url:'/4overproducts',
+        data: {endpoint:endurl},
+    }).then(function mySuccess(response) {
+        $scope.categoriaslist= response.data.success.entities
+        }, function myError(response) {
+         //console.log(response.statusText);
+    });
+}
+
+
+
 
 
 })

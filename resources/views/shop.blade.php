@@ -103,14 +103,14 @@
       </div>
       <div class="h_featured">
         <h4 class="h4Feature">
-          FEATURED PRODUCTS
+        {{ $categoryName }}
         </h4>
       </div>
       <div class="productSection-Index center" >
         <div>
           <div class="container row">
             @forelse ($products as $product)
-            <div class="col-md-4 col-sm-4 col-6">
+            <div class="col-md-4 col-sm-4 col-12" >
               <div class="btnHoverI"  style="width: 100%;height: 175px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
                 <div class="btn_info">
                   <a class="a_Shop" href="{{ route('shop.show', $product->slug) }}">SHOP NOW</a>

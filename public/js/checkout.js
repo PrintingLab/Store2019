@@ -116,6 +116,7 @@ $scope.Continueorder = function () {
     
 }
 
+
 $scope.shipingupdate = function (value,type) {
     $scope.ShippingMethodlist=type
     $scope.ShippingMethod=type

@@ -202,7 +202,12 @@
 
 
         </div>
+        <!-- <button ng-click="categorias()">categotias</button>
+        <input type="text" ng-model="busca" >
+        <ul>
+ <li ng-repeat="cat in categoriaslist |filter:busca"><b>@{{cat.category_name}}</b> :  @{{cat.category_uuid}}</li><br> 
 
+</ul> -->
       </div> <!-- end product-section -->
 
 

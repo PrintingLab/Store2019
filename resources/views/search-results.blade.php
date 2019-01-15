@@ -43,16 +43,14 @@
                     <th>Name</th>
                     <th>Details</th>
                     <th>Description</th>
-                    <th>Price</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($products as $product)
                     <tr>
-                        <th><a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a></th>
-                        <td>{{ $product->details }}</td>
+                        <th style="width: 30%;"><a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a></th>
+                        <td><a href="{{ route('shop.show', $product->slug) }}"><img style="width: 40%;" src="{{ productImage($product->image) }}" alt="product"></a></td>
                         <td>{{ str_limit($product->description, 80) }}</td>
-                        <td>{{ $product->presentPrice() }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -66,7 +64,7 @@
 
 @section('extra-js')
     <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
-    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
-    <script src="{{ asset('js/algolia.js') }}"></script>
+    <script src="{{ asset('js/algolia.js') }}"></script> -->
 @endsection

@@ -22,21 +22,13 @@
             <div class="dropdown-menu  menu_H_allPP "  aria-labelledby="dropdownMenuButton2">
               <div class="row">
                 <div class="col-md-6">
-                  <h6><strong>MARKETING PRODUCTS</strong></h6>
+                  <h6><strong>MARKETINGPRODUCTS</strong></h6>
                   <div class="row">
-                    <div class="col-md-6">
-                      <ul class="list_dropdown">
+                    <div class="col-md-8">
+                      <ul class="list_dropdown list_dropdown-brake">
                       @foreach (getAllProducts() as $produc)
-                       <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
-                      @endforeach
-
-
-                        
-                      </ul>
-                    </div>
-                    <div class="col-md-6">
-                      <ul class="list_dropdown">
-                        
+                       <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
+                      @endforeach                     
                       </ul>
                     </div>
                   </div>
@@ -71,8 +63,10 @@
           </div>
         </div>
         <div class="col-md-4 search">
-          <input placeholder="Search Products">
-          <span class="fa fa-search"></span>
+        <form action="{{ route('search') }}" method="GET" class="search-form">
+    <input type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box" placeholder="Search for product" required>
+    <span class="fa fa-search"></span>
+</form>    
         </div>
         <div class="col-md-5 row btn_3top">
           <div class="col-md-5 paddingCero">
@@ -132,11 +126,11 @@
                 <div class="col-sm-10">
                   <p class="text_Userp">{{ Auth::user()->name }}</p>
                   <button type="button" id="userName" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
-                    Account
+                  Your Account
                   </button>
 
                   <div class="dropdown-menu center">
-                    <li><a href="{{ route('users.edit') }}">Count</a></li>
+                    <li><a href="{{ route('users.edit') }}">Dashboard</a></li>
                     <li>
                       <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout</a>
@@ -244,19 +238,14 @@
             </button>
             <div class="dropdown-menu menu_drop_allPP"  aria-labelledby="dropdownMenuButton2">
               <div class="row">
-                <div class="col-md-6">
-                  <h6><strong>MARKETING PRODUCTS</strong></h6>
+              <div class="col-md-6">
+                  <h6><strong>MARKETINGPRODUCTS</strong></h6>
                   <div class="row">
-                    <div class="col-md-6">
-                      <ul class="list_dropdown">
+                    <div class="col-md-8">
+                      <ul class="list_dropdown list_dropdown-brake">
                       @foreach (getAllProducts() as $produc)
-                       <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
-                      @endforeach
-                      </ul>
-                    </div>
-                    <div class="col-md-6">
-                      <ul class="list_dropdown">
-                    
+                       <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
+                      @endforeach                     
                       </ul>
                     </div>
                   </div>
@@ -291,17 +280,17 @@
           </div>
         </li>
         <li>
-          <a href="#">
+        <a href="{{ route('shop.index', ['category' => 'LARGE FORMAT']) }}">
             LARGE FORMAT
           </a>
         </li>
         <li>
-          <a href="#">
+        <a href="{{ route('shop.index', ['category' => 'CUSTOM APPAREL']) }}">
             CUSTOM APPAREL
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('shop.index', ['category' => 'MARKETING PRODUCTS']) }}">
             MARKETING PRODUCTS
           </a>
         </li>

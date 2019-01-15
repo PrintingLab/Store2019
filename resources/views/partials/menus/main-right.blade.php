@@ -19,11 +19,11 @@
   <div class="col-md-10 paddingCero">
     <p class="text_Userp">{{ Auth::user()->name }}</p>
     <button type="button" id="userName" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
-      Account
+    Your Account
     </button>
 
     <div class="dropdown-menu center">
-      <li><a href="{{ route('users.edit') }}">Count</a></li>
+      <li><a href="{{ route('users.edit') }}">Dashboard</a></li>
       <li>
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Logout</a>

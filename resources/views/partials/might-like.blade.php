@@ -1,4 +1,4 @@
-<!-- productos sugeridos
+
 <div class="might-like-section">
     <div class="container">
         <h2>You might also like...</h2>
@@ -14,4 +14,4 @@
         </div>
     </div>
 </div>
--->
+

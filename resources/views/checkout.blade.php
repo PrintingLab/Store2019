@@ -168,18 +168,18 @@ This may take a few moments.</p>
                   <div class="form-group col-sm-5">
                     <label for="">Expiration Date*</label>
                     <div class="input-group expiration-date">
-                      <input type="text" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month" required>
+                      <input max="2" type="number" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month" required>
                       <span class="date-separator"></span>
-                      <input type="text" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year" required>
+                      <input max="4" type="number" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year" required>
                     </div>
                   </div>
                   <div class="form-group col-sm-8">
                     <label for="card-number">Card Number*</label>
-                    <input type="text" class="form-control" id="cnumber" name="cnumber" placeholder="Enter Card Number" aria-label="Card Holder" aria-describedby="basic-addon1" required>
+                    <input type="number" class="form-control" id="cnumber" name="cnumber" placeholder="Enter Card Number" aria-label="Card Holder" aria-describedby="basic-addon1" required>
                   </div>
                   <div class="form-group col-sm-4">
                     <label for="cvc">CVC*</label>
-                    <input type="text" class="form-control"  id="ccode" name="ccode" placeholder="Enter Card Code" aria-label="Card Holder" aria-describedby="basic-addon1" required>
+                    <input type="password" class="form-control"  id="ccode" name="ccode" placeholder="Enter Card Code" aria-label="Card Holder" aria-describedby="basic-addon1" required>
                   </div>
                 </div>
               </div>
@@ -196,7 +196,7 @@ This may take a few moments.</p>
           <button  id="Continue-order" class="btnCheckoutContinue" ng-click="Continueorder()" ng-hide="Continuehide" ng-disabled="Continuebtn">Continue</button>
           <!-- Modal -->
           <div class="modal fade" id="candidates" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div style="top: 20%;" class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Shipping Address Validation</h5>
@@ -207,7 +207,7 @@ This may take a few moments.</p>
                 <div class="modal-body">
                   Sorry! We were not able to verify your shipping address. Please
                   please select one of our suggestions or modify it and try again
-                  <div class="suggestions" ng-repeat="adr in addresscandidates " ng-click="setaddres(adr.address,adr.city,adr.state,adr.zipcode)"> @{{adr.address}} @{{adr.city}},  @{{adr.state}} @{{adr.zipcode}}</div>
+                  <div class="suggestions" ng-repeat="adr in addresscandidates " ng-click="setaddres(adr.address,adr.city,adr.state,adr.zipcode)"> @{{adr.address}}, @{{adr.city}},  @{{adr.state}} @{{adr.zipcode}}</div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit Address</button>
