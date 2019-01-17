@@ -6,6 +6,13 @@
 @endsection
 @section('content')
 <div class="container containerProducts">
+
+	@if (session()->has('success_message'))
+	<div class="alert alert-success containerAlerts">
+		{{ session()->get('success_message') }}
+	</div>
+	@endif
+
 	<div class="row">
 		<div class="col-md-8">
 			<h2 class="titlecontact">Contact Us</h2>

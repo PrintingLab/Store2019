@@ -301,9 +301,7 @@ button:focus  {
 
 
 
-.Btn_Account{
-  display: flex;
-}
+
 
 @media (max-width:709px){
   #telefonoMb p{
@@ -377,6 +375,9 @@ button:focus  {
     padding: 0 3%;
     width: auto;
     font-size:medium ;
+  }
+  .Btn_Account{
+    display: flex;
   }
 }
 
@@ -1025,6 +1026,48 @@ text-align: center;
 .fondocontacto {background: #F7F7F9;padding: 3%;margin-top: 3%;}
 
 /*end Contact us*/
+
+
+/*work with us*/
+
+.ctn-txt{margin-top: -100px;color: white;}
+.ctn-txt h1{font-size: 50px;font-weight: 700;}
+.row.row-work-apparel {margin-top: 12%;margin-bottom: 6%;}
+
+@media(max-width:768px){
+.img-apparel{height: 295px;}
+}
+
+
+@media(max-width:475px){
+  .img-apparel{height: 200px;}
+  .ctn-txt {
+      margin-top: -165px;
+
+  }
+}
+
+@media(max-width:425px){
+.img-apparel{height: 168px;}
+.ctn-txt{display: none;}
+}
+.file_work{ margin-top: 5%;margin-bottom: 7%;width: 100%;position: relative;text-align: center;border: 1.5px solid;padding: 5% 4% 1% 4%;}
+.file_work > p{font-weight: 600;font-size: 14px;padding: 5px 5px 5px 5px;display:flex;justify-content:center;}
+.file_work input[type="file"]{position:absolute;top:0;left:0;width:100%;height:37px;opacity:0;cursor:pointer;}
+.file_work .output_work{width: 100%;height: auto;position: absolute;bottom: 0%;margin-bottom: -44px;border-radius: 5px;font-size: 14px;text-align: center;transition: all 0.6s;}
+.file_work .output_work p{text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
+.bnt_Swork{border-radius: 0px !important;background: #000;color: white;padding-bottom: 3%;padding-top: 3%;width: 32%;margin-top: 10%;border: none;}
+.row-work-apparel ul{padding: 0;}
+.row-work-apparel li{list-style:none;margin-bottom: 2%;}
+.row-work-apparel .col-md-4{background: #F7F7F9;height: 630px;  padding: 4% 2% 0% 2%;}
+.workinput{border: 0;outline: 0;border-bottom: 1px solid gray;margin-top: 4%;margin-bottom: 7%;width: 100%;background: transparent;}
+.select-work{border: 0;width: 100%;border-bottom: 1px solid gray;outline: 0;margin-top: 4%;margin-bottom: 6%;background: transparent;}
+.text-work{margin-top: 3%;box-shadow: none !important;border: 0;border-bottom: 1px solid gray !important;margin-bottom: 3%;background: transparent;width: 100%;}
+
+/*end*/
+
+
+
 
   /*footer*/
   footer{

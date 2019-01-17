@@ -1,11 +1,13 @@
-@extends('layouts.app')
-@section('title')
-Work With Us
+@extends('layout')
+@section('title', 'Work With Us')
+@section('extra-css')
+<link rel="stylesheet" href="{{ asset('css/algolia.css') }}">
+<script type="text/javascript" src="{!! asset('js/jquery-3.3.1.min.js') !!}"></script>
 @endsection
 @section('content')
 
 <div class="img-work">
-  <img class="img-apparel" src="images/Work-with-us-printing-lab.jpg" alt="">
+  <img class="img-apparel" src="img/Work-with-us-printing-lab.jpg" alt="">
 </div>
 
 <div class="container ctn-txt">
@@ -13,6 +15,13 @@ Work With Us
     <h1>WORK WITH US</h1>
   </div>
 </div>
+
+@if (session()->has('success_message'))
+<div class="alert alert-success containerAlerts">
+  {{ session()->get('success_message') }}
+</div>
+@endif
+
 <div class="container">
   <div class="row row-work-apparel">
     <div class="col-md-8 col-sm-8 col-12">
@@ -30,7 +39,8 @@ Work With Us
         </strong>
       </p>
       <p>The successful applicant must be a proven leader, fully capable of motivating and managing a team of sales representatives who must meet or exceed the targets set
-        by utilizing diversified strategies.</p>
+        by utilizing diversified strategies.
+      </p>
         <p>
           He/She must be detail oriented, reliable and organized, with excellent interpersonal skills.
         </p>
@@ -141,10 +151,10 @@ Work With Us
 
   @endsection
 
-@section('scripts')
+@section('extra-js')
 <script>
 $('#archivounouno').on('change', function(e){
-  //validación peso del archivo en by
+  //validación peso del archivo en by  
   var input = document.getElementById('archivounouno');
   var clicked = e.target;
   var file = clicked.files[0];
