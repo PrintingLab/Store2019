@@ -46,6 +46,23 @@ class ShopController extends Controller
         ]);
     }
 
+
+public function getjsonconfig(){
+        $urloptionsname = public_path()."/storage/jsonconfig/optionsname.json";
+        $urlpriceprintinglab = public_path()."/storage/jsonconfig/priceprintinglab.json";
+        $urlstokname = public_path()."/storage/jsonconfig/stokname.json";
+        $jsonoptionsname = file_get_contents($urloptionsname);
+        $jsonoptionsname_data = json_decode($jsonoptionsname, true);
+        $jsonpriceprintinglab = file_get_contents($urlpriceprintinglab);
+        $jsonpriceprintinglab_data = json_decode($jsonpriceprintinglab, true);
+        $jsonstokname = file_get_contents($urlstokname);
+        $jsonstokname_data = json_decode($jsonstokname, true);
+        return response()->json(['optionsname'=>$jsonoptionsname_data,'priceprintinglab'=>$jsonpriceprintinglab_data,'stokname'=>$jsonstokname_data]);
+} 
+
+
+
+
     public function Getshipingquotes(Request $request) {
         $method='POST';
         $separator = '?';

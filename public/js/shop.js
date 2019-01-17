@@ -1,25 +1,18 @@
 
-shopApp.filter('unique', function() {
-    return function(collection, keyname) {
-       var output = [],
-           keys = [];
-
-       angular.forEach(collection, function(item) {
-           var key = item[keyname];
-           if(keys.indexOf(key) === -1) {
-               keys.push(key);
-               output.push(item);
-           }
-       });
-
-       return output;
-    };
- });
-
 shopApp.controller('shopcontroller',function($scope,$http,$document){
-    $scope.rangeofprices=pricesarry
-    $scope.stoknames=stoknamearray
-    $scope.optioname=optionamearray
+    $scope.getjsonconfig = function () {
+        $http({
+            method:'get',
+            url:'/jsonconfig',
+        }).then(function mySuccess(response) {
+            console.log(response);
+            $scope.stoknames=response.data.stokname
+            $scope.optioname=response.data.optionsname
+            $scope.rangeofprices=response.data.priceprintinglab
+            }, function myError(response) {
+                console.log(response.statusText);
+        });
+}
     $scope.buildpricewedesing=0
     $scope.btndisigned=true
     $scope.priceshow=false
@@ -30,6 +23,7 @@ shopApp.controller('shopcontroller',function($scope,$http,$document){
     $scope.Coatingarraylist=[]
     $scope.roundcorners=$('#roundcorners').val();
 $scope.load4overproducts = function () {
+    $scope.getjsonconfig()
     $scope.prtdarray=prtd
     endurl='https://api.4over.com/printproducts/categories/'+apiID+'/products'
         $http({
@@ -185,7 +179,7 @@ $scope.builderbyStock = function () {
         console.log("null")
     }else{
         for (let index = 0; index < matches.length; index++) {
-            $scope.Coatingarray.push({product_option_groups:matches[index].product_option_groups,product_description:matches[index].product_description,product_code:matches[index].product_code,option:matches[index].product_description.toUpperCase().replace(prtdname.toUpperCase(),'').replace($scope.Stock.toUpperCase(),'').replace($scope.Dimensions.toUpperCase(),'').replace('ROUND','').replace('CORNER','').replace('RC','').replace('COVER','').replace('BUSINESS','').replace('CARD','').replace('CARDS','').replace('WITH','').replace('18PT C1S','').replace('UV','FULL GLOSS').replace('100LB','').replace('SPOT','').replace('UV','FULL GLOSS').replace('BC','').replace('14PT','').replace('LINEN','').replace('STIPPLE - WHITE','').replace('32PT','')})
+            $scope.Coatingarray.push({product_option_groups:matches[index].product_option_groups,product_description:matches[index].product_description,product_code:matches[index].product_code,option:matches[index].product_description.toUpperCase().replace(prtdname.toUpperCase(),'').replace($scope.Stock.toUpperCase(),'').replace($scope.Dimensions.toUpperCase(),'').replace('ROUND','').replace('CORNER','').replace('RC','').replace('COVER','').replace('BUSINESS','').replace('CARDS','').replace('CARD','').replace('WITH','').replace('18PT C1S','').replace('UV','FULL GLOSS').replace('100LB','').replace('SPOT','').replace('UV','FULL GLOSS').replace('BC','').replace('14PT','').replace('LINEN','').replace('32PT','').replace('SADDLE STITCH CALENDAR ON','').replace('CALENDAR ON','').replace('-','').replace('#','').replace('FLYERS','').replace('FLYER','').replace('AQ','AKUAFOIL')})
               $scope.$apply()
         }
         $scope.Coatingarraylist = $scope.Coatingarray

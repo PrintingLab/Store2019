@@ -107,6 +107,10 @@
                                     <td>Total</td>
                                     <td>{{ presentPrice($order->billing_total) }}</td>
                                 </tr>
+                                <tr>
+                                    <td>Order Status:</td>
+                                    <td class="{{OrderStatus($order->shipped) }}" >{{OrderStatus($order->shipped) }}</td>
+                                </tr>
                             </tbody>
                         </table>
 

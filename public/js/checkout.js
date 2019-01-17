@@ -29,6 +29,7 @@ shopApp.controller('checkoutcontroller',function($scope,$http,$document){
     $scope.dangermesagge=true
     $scope.PaymentDetails=true
     $scope.Continuebtn=true
+    $scope.inputratio=true
 $scope.computeshipping = function () {
    if ($scope.postalcode.length ==5) {
     $scope.shipping_options=[]
@@ -77,11 +78,11 @@ $scope.computeshipping = function () {
                 $scope.shipping_options.push({service_code:matches[0].service_code,service_name:matches[0].service_name,service_price:$scope.sumarry(matches)}) 
                }
                $scope.preloader=true
-              
+               $scope.Continuebtn=false
            }
         }
         }, function myError(response) {
-          console.log(response.statusText);
+          alert(response.statusText);
     }); 
    }
 
@@ -115,7 +116,10 @@ $scope.Continueorder = function () {
 
     
 }
-
+$scope.inputraiocheck = function (i) {
+    console.log(i)
+    $scope.inputratio=i
+}
 
 $scope.shipingupdate = function (value,type) {
     $scope.ShippingMethodlist=type
@@ -132,7 +136,7 @@ $scope.shipingupdate = function (value,type) {
     $scope.newTax=result.Tax.toFixed(2)
     $scope.NewSubtotal=result.NewSubtotal.toFixed(2)
     $scope.tax=result.tax.toFixed(2)
-    $scope.Continuebtn=false
+    
     })
 }
 

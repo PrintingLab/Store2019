@@ -44,19 +44,21 @@
         </ul>
         <ul class="list_dropdown">
           <li><strong>CUSTOM APPAREL</strong></li>
-          <li><a href="#">Short Sleeve T-shirts</a></li>
+          <li><a href="contact-us">Coming soon...</a></li>
+          <!-- <li><a href="#">Short Sleeve T-shirts</a></li>
           <li><a href="#">Long Sleeve T-shirts</a></li>
           <li><a href="#">Women</a></li>
           <li><a href="#">Hoodies</a></li>
           <li><a href="#">Sweatshirts</a></li>
           <li><a href="#">Activewear</a></li>
           <li><a href="#">Polos</a></li>
-          <li><a href="#">Jackets</a></li>
+          <li><a href="#">Jackets</a></li> -->
         </ul>
         <ul class="list_dropdown">
           <li><strong>LARGE FORMAT</strong></li>
-          <li><a href="#">Banners</a></li>
-          <li><a href="#">Vinyl Graphics</a></li>
+          <li><a href="contact-us">Coming soon...</a></li>
+          <!-- <li><a href="#">Banners</a></li>
+          <li><a href="#">Vinyl Graphics</a></li> -->
         </ul>
       </div>
     </div>
@@ -111,7 +113,7 @@
           <div class="container row">
             @forelse ($products as $product)
             <div class="col-md-4 col-sm-4 col-12" >
-              <div class="btnHoverI"  style="width: 100%;height: 175px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
+              <div class="btnHoverI"  style="border-top: 1px #e4e4e4 solid;border-right: 1px #e4e4e4 solid;border-left: 1px #e4e4e4 solid;width: 100%;height: 175px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
                 <div class="btn_info">
                   <a class="a_Shop" href="{{ route('shop.show', $product->slug) }}">SHOP NOW</a>
                 </div>

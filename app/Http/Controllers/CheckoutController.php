@@ -274,7 +274,7 @@ public function updateShiping(Request $request)
             'billing_province' => $request->province,
             'billing_postalcode' => $request->postalcode,
             'billing_phone' => $request->phone,
-            'billing_name_on_card' => $request->name_on_card,
+            'billing_name_on_card' => $request->card_name,
             'shipping_Type' => $request->Shippingmethod,
             'shipping_Value' => getNumbers()->get('shiping'),
             'billing_discount' => getNumbers()->get('discount'),
@@ -292,6 +292,7 @@ public function updateShiping(Request $request)
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $item->id,
+                'jobtype' => $item->options->typeitem,
                 'product_decription' => $item->options->decription,
                 'quantity' => $item->options->quantity,
                 'colorspecuuid' => $item->options->colorspecuuid,
@@ -314,12 +315,12 @@ public function updateShiping(Request $request)
 
     protected function addToOrdersTablesPaypal($email, $name, $error,$request,$paytId)
     {
-        dd($request);
         // Insert into orders table
         $order = Order::create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
             'billing_email' => $request->email,
             'billing_name' => $name,
+            'billing_name_on_card' => $name,
             'billing_address' => $request->address,
             'billing_city' => $request->city,
             'billing_province' => $request->province,
@@ -342,6 +343,7 @@ public function updateShiping(Request $request)
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $item->id,
+                'jobtype' => $item->options->typeitem,
                 'product_decription' => $item->options->decription,
                 'quantity' => $item->options->quantity,
                 'colorspecuuid' => $item->options->colorspecuuid,

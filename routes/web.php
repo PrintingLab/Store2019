@@ -47,7 +47,7 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/jsonconfig', 'ShopController@getjsonconfig')->name('jsonconfig');
 Route::get('/search', 'ShopController@search')->name('search');
 Route::post('/sendtocart', 'ShopController@sendtocart')->name('sendtocart');
 Route::post('/shipingupdate', 'CheckoutController@updateShiping')->name('shipingupdate');

@@ -146,6 +146,7 @@
       border: 1px black solid;
       width: 100% !important;
       font-size: 15px;
+      text-transform: uppercase
   }
   .formoptions button{
       widows: 320px;
@@ -165,4 +166,20 @@
     position: absolute;
     top:30%;
     left: -20%;
+  }
+
+  .producdetailsul{
+    width: 60%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width:450px){
+    .producdetailsul {
+      width: 100%;
+      height: 100%;
+    }
+
   }

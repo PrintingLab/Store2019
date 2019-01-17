@@ -36,6 +36,14 @@
 
         <h1 class="checkout-heading stylish-heading">Checkout</h1>
         <div class="checkout-section" ng-controller="checkoutcontroller">
+
+
+
+
+
+
+        
+        
             <div class="processingpayment" ng-hide="processingpayment">
             <div class="loadergif"></div>
                <p><i class="fas fa-lock"></i> processing payment...</p>
@@ -50,9 +58,9 @@
                     <div class="form-group">
                         <label for="email">Email Address*</label>
                         @if (auth()->user())
-                            <input type="email" ng-init="emailadrres = '{{ auth()->user()->email }}'" class="form-control" id="email" name="email"  ng-model="emailadrres" readonly>
+                            <input type="email" ng-init="email = '{{ auth()->user()->email }}'" class="form-control" id="email" name="email"  ng-model="email" readonly>
                         @else
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" ng-model="email" ng-model="emailadrres"  required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" ng-model="email"   required>
                         @endif
                     </div>
                     <div class="form-group">
@@ -147,7 +155,7 @@ This may take a few moments.</p>
             </div>
 
             <div class="txtBotCheckout">
-              <span ng-show="preloader" >This product will be available from @{{addressoptions.city}}, @{{addressoptions.state}} <br>
+              <span ng-hide="Continuebtn" >This product will be available from @{{addressoptions.city}}, @{{addressoptions.state}} <br>
                 Estimated Production Completion Date: @{{productionestimate}}</span>
                 <div class="spacer"></div>
             </div>
@@ -155,7 +163,9 @@ This may take a few moments.</p>
 
             </div>
             <div class="PaymentDetails" ng-hide="PaymentDetails">
-              <h2>Payment Details</h2>
+            <input class="inputratiopay" type="radio" name="true" ng-model="inputratio"  ng-value="true">
+              <h2 class="titlepay">Pay with Credit Card</h2>
+              <div ng-show="inputratio">
               <div class="card-details">
                 <img src="{{ asset('img/settings/payments-checkout.png') }}" alt="card allowed" >
                 <div class="spacer"></div>
@@ -187,6 +197,11 @@ This may take a few moments.</p>
               <button type="submit" id="complete-order" class="btnCheckoutContinue" ng-click="processingpayment()">Complete Order</button>
 
             </div>
+        </div>
+
+
+
+              
 
 
           </form>
@@ -222,9 +237,10 @@ This may take a few moments.</p>
             </div>
           </div>
           @if ($paypalToken)
-          <div class="mt-32" ng-hide="PaymentDetails">or</div>
           <div class="mt-32" ng-hide="PaymentDetails">
-            <h2>Pay with PayPal</h2>
+          <input class="inputratiopay" type="radio" name="false" ng-model="inputratio"  ng-value="false">
+            <h2 class="titlepay">Pay with PayPal</h2>
+            <div ng-hide="inputratio">
             <form method="post" id="paypal-payment-form" action="{{ route('checkout.paypal') }}">
               @csrf
               <section>
@@ -232,7 +248,7 @@ This may take a few moments.</p>
                   <div id="bt-dropin"></div>
                 </div>
               </section>
-              <input   type="text" class="form-control"  name="email" value="@{{emailadrres}}" required>
+              <input hidden  type="text" class="form-control"  name="email" value="@{{email}}" required>
               <input hidden  type="text" class="form-control"  name="address" value="@{{address}}" required>
               <input hidden  type="text" class="form-control"  name="city" value="@{{city}}" required>
               <input hidden  type="text" class="form-control"  name="province" value="@{{province}}" required>
@@ -242,9 +258,18 @@ This may take a few moments.</p>
               <input id="nonce" name="payment_method_nonce" type="hidden" />
               <button class="btnCheckoutContinue" type="submit" ng-click="processingpayment()"><span>Pay with PayPal</span></button>
             </form>
+        </div>
+            
           </div>
           @endif
         </div>
+
+
+        
+
+
+
+
         <div class="checkout-table-container">
           <h2>Your Order</h2>
           <div class="checkout-table">

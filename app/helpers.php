@@ -50,7 +50,26 @@ function extensioImg($imagen){
   return($result);
 }
 
-
+function OrderStatus($Status){
+    switch ($Status) {
+        case 0:
+            return 'Processing';
+            break;
+        case 1:
+            return 'Shipped';
+            break;
+       case 2:
+            return 'Completed';
+            break;
+       case 3:
+            return 'Canceled';
+            break; 
+    default:
+            'N/A';
+            break;
+    }
+    return($result);
+  }
 function presentDate($date)
 {
     return Carbon::parse($date)->format('M d, Y');
