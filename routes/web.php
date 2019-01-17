@@ -39,6 +39,8 @@ Route::get('/terms-and-conditions','PagesController@TermsConditions');
 Route::get('/contact-us','PagesController@ContactUs');
 Route::post('contact-us','PagesController@EnviarCorreoContactUs')->name('EmailContact');
 
+Route::get('/work-with-us','PagesController@WorkWithUs');
+Route::post('WorkEmail','PagesController@EnviarCorreoWorkWith')->name('WorkEmail');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

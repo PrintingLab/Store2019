@@ -1,10 +1,9 @@
-@extends('layout')
-@section('title', 'Work With Us')
-@section('extra-css')
-<link rel="stylesheet" href="{{ asset('css/algolia.css') }}">
-<script type="text/javascript" src="{!! asset('js/jquery-3.3.1.min.js') !!}"></script>
-@endsection
-@section('content')
+<?php $__env->startSection('title', 'Work With Us'); ?>
+<?php $__env->startSection('extra-css'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/algolia.css')); ?>">
+<script type="text/javascript" src="<?php echo asset('js/jquery-3.3.1.min.js'); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 <div class="img-work">
   <img class="img-apparel" src="img/Work-with-us-printing-lab.jpg" alt="">
@@ -16,11 +15,12 @@
   </div>
 </div>
 
-@if (session()->has('success_message'))
+<?php if(session()->has('success_message')): ?>
 <div class="alert alert-success containerAlerts">
-  {{ session()->get('success_message') }}
+  <?php echo e(session()->get('success_message')); ?>
+
 </div>
-@endif
+<?php endif; ?>
 
 <div class="container">
   <div class="row row-work-apparel">
@@ -108,8 +108,9 @@
         <p>Spanish (Required)</p>
       </div>
       <div class="col-md-4 col-sm-4 col-12">
-        <form class="" action="{{route('WorkEmail')}}" method="post" enctype="multipart/form-data">
-          {{csrf_field()}}
+        <form class="" action="<?php echo e(route('WorkEmail')); ?>" method="post" enctype="multipart/form-data">
+          <?php echo e(csrf_field()); ?>
+
           <div class="col-md-12">
             <h3><strong>JOIN US</strong></h3>
             <h6><strong>Please complete this form</strong></h6>
@@ -149,9 +150,9 @@
     </div>
   </div>
 
-  @endsection
+  <?php $__env->stopSection(); ?>
 
-@section('extra-js')
+<?php $__env->startSection('extra-js'); ?>
 <script>
 $('#archivounouno').on('change', function(e){
   //validación peso del archivo en by  
@@ -200,4 +201,6 @@ $('#archivounouno').on('change', function(e){
   }
 });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

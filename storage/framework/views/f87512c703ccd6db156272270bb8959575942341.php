@@ -26,9 +26,9 @@
                   <div class="row">
                     <div class="col-md-8">
                       <ul class="list_dropdown list_dropdown-brake">
-                        @foreach (getAllProducts() as $produc)
-                        <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
-                        @endforeach
+                        <?php $__currentLoopData = getAllProducts(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li style="display: -webkit-inline-box;"><a href="<?php echo e(route('shop.show', $produc->slug)); ?>"><?php echo e($produc->name); ?></a></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </ul>
                     </div>
                   </div>
@@ -38,21 +38,19 @@
                     <div class="col-md-6">
                       <h6><strong>CUSTOM APPAREL</strong></h6>
                       <ul class="list_dropdown">
-                      <li><a href="contact-us">Coming soon...</a></li>
-                        <!-- <li><a href="#">Short Sleeve T-shirts</a></li>
+                        <li><a href="#">Short Sleeve T-shirts</a></li>
                         <li><a href="#">Long Sleeve T-shirts</a></li>
                         <li><a href="#">Women</a></li>
                         <li><a href="#">Hoodies</a></li>
                         <li><a href="#">Sweatshirts</a></li>
                         <li><a href="#">Activewear</a></li>
                         <li><a href="#">Polos</a></li>
-                        <li><a href="#">Jackets</a></li> -->
+                        <li><a href="#">Jackets</a></li>
                       </ul>
                       <h6 style="margin-top: 5%;"><strong>LARGE FORMAT</strong></h6>
                       <ul class="list_dropdown">
-                      <li><a href="contact-us">Coming soon...</a></li>
-                        <!-- <li><a href="#">Banners</a></li>
-                        <li><a href="#">Vinyl Graphics</a></li> -->
+                        <li><a href="#">Banners</a></li>
+                        <li><a href="#">Vinyl Graphics</a></li>
                       </ul>
                     </div>
                     <div class="col-md-6 img_MenuDrop">
@@ -65,8 +63,8 @@
           </div>
         </div>
         <div class="col-md-4 search">
-          <form action="{{ route('search') }}" method="GET" class="search-form">
-            <input type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box" placeholder="Search for product" required>
+          <form action="<?php echo e(route('search')); ?>" method="GET" class="search-form">
+            <input type="text" name="query" id="query" value="<?php echo e(request()->input('query')); ?>" class="search-box" placeholder="Search for product" required>
             <span class="fa fa-search"></span>
           </form>
         </div>
@@ -75,7 +73,7 @@
             <img src="/img/call-icon.png" alt="">
             <a href="tel:201-305-0404">201-305-0404</a>
           </div>
-          @include('partials.menus.main-right')
+          <?php echo $__env->make('partials.menus.main-right', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         </div>
       </div>
     </div>
@@ -104,7 +102,7 @@
               </a>
             </div>
 
-            @guest
+            <?php if(auth()->guard()->guest()): ?>
             <div class="Btn_Account col-sm-6 col-8 paddingCero">
               <div class="col-sm-2 paddingCero">
                 <img class="imgUserbtn" src="/img/user-login-printing-lab.png" alt="">
@@ -115,58 +113,48 @@
                   My Account
                 </button>
                 <div class="dropdown-menu center">
-                  <li><a href="{{ route('register') }}">Sign Up</a></li>
-                  <li><a href="{{ route('login') }}">Login</a></li>
+                  <li><a href="<?php echo e(route('register')); ?>">Sign Up</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
                 </div>
               </div>
             </div>
-            @else
+            <?php else: ?>
             <div class="Btn_Account col-sm-6 col-8 paddingCero">
               <div class="col-sm-2 paddingCero">
                 <img class="imgUserbtn" src="/img/user-login-printing-lab.png" alt="">
               </div>
               <div class="col-sm-10">
-                <p class="text_Userp">{{ Auth::user()->name }}</p>
+                <p class="text_Userp"><?php echo e(Auth::user()->name); ?></p>
                 <button type="button" id="userName" class="btn-myAccount dropdown-toggle" data-toggle="dropdown">
                   Your Account
                 </button>
                 <div class="dropdown-menu center">
-                  <li><a href="{{ route('users.edit') }}">Dashboard</a></li>
+                  <li><a href="<?php echo e(route('users.edit')); ?>">Dashboard</a></li>
                   <li>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                       Logout</a>
                     </li>
                   </div>
                 </div>
               </div>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
+              <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                <?php echo e(csrf_field()); ?>
+
               </form>
-              @endguest
+              <?php endif; ?>
 
               <div class=" col-sm-2 col-2 btnCartMb">
-                <a href="{{ route('cart.index') }}">
+                <a href="<?php echo e(route('cart.index')); ?>">
                   <img src="/img/shopping-bag-printing-lab.png" alt="">
-                  @if (Cart::instance('default')->count() > 0)
+                  <?php if(Cart::instance('default')->count() > 0): ?>
                   <span class="cart-countMovil">
-                    <span>{{ Cart::instance('default')->count() }}</span>
+                    <span><?php echo e(Cart::instance('default')->count()); ?></span>
                   </span>
-                  @endif
+                  <?php endif; ?>
                 </a>
               </div>
 
-              {{-- @foreach($items as $menu_item)
-                <li>
-                  <a href="{{ $menu_item->link() }}">
-                    {{ $menu_item->title }}
-                    @if ($menu_item->title === 'Cart')
-                    @if (Cart::instance('default')->count() > 0)
-                    <span class="cart-countMovil"><span>{{ Cart::instance('default')->count() }}</span></span>
-                    @endif
-                    @endif
-                  </a>
-                </li>
-                @endforeach --}}
+              
 
 
 
@@ -178,36 +166,41 @@
 
               </div>
             </div>
-          </form>
-          <ul class="nav navbar-nav">
-            <li class="dropdown center">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MARKETING PRODUCTS<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                 @foreach (getAllProducts() as $produc)
-                       <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
-                      @endforeach
-              </ul>
-            </li>
-            <li class="dropdown center">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CUSTOM APPAREL<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-              <li><a href="contact-us">Coming soon...</a></li>
-                <!-- <li><a href="#">Short Sleeve T-shirts</a></li>
-                <li><a href="#">Long Sleeve T-shirts</a></li>
-                <li><a href="#">Women</a></li>
-                <li><a href="#">Hoodies</a></li>
-                <li><a href="#">Sweatshirts</a></li>
-                <li><a href="#">Activewear</a></li>
-                <li><a href="#">Polos</a></li>
-                <li><a href="#">Jackets</a></li> -->
-              </ul>
-            </li>
-            <li class="dropdown center">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LARGE FORMAT<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-              <li><a href="contact-us">Coming soon...</a></li>
-                <!-- <li><a href="#">Banners</a></li>
-                <li><a href="#">Vinyl Graphics</a></li> -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <form class="navbar-form navbar-left">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+              </form>
+              <ul class="nav navbar-nav">
+                <li class="dropdown center">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MARKETING PRODUCTS<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <?php $__currentLoopData = getAllProducts(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li><a href="<?php echo e(route('shop.show', $produc->slug)); ?>"><?php echo e($produc->name); ?></a></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  </ul>
+                </li>
+                <li class="dropdown center">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CUSTOM APPAREL<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Short Sleeve T-shirts</a></li>
+                    <li><a href="#">Long Sleeve T-shirts</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Hoodies</a></li>
+                    <li><a href="#">Sweatshirts</a></li>
+                    <li><a href="#">Activewear</a></li>
+                    <li><a href="#">Polos</a></li>
+                    <li><a href="#">Jackets</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown center">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LARGE FORMAT<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Banners</a></li>
+                    <li><a href="#">Vinyl Graphics</a></li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
@@ -231,9 +224,9 @@
                       <div class="row">
                         <div class="col-md-8">
                           <ul class="list_dropdown list_dropdown-brake">
-                            @foreach (getAllProducts() as $produc)
-                            <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
-                            @endforeach
+                            <?php $__currentLoopData = getAllProducts(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li style="display: -webkit-inline-box;"><a href="<?php echo e(route('shop.show', $produc->slug)); ?>"><?php echo e($produc->name); ?></a></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                           </ul>
                         </div>
                       </div>
@@ -268,17 +261,17 @@
               </div>
             </li>
             <li>
-              <a href="{{ route('shop.index', ['category' => 'LARGE FORMAT']) }}">
+              <a href="<?php echo e(route('shop.index', ['category' => 'LARGE FORMAT'])); ?>">
                 LARGE FORMAT
               </a>
             </li>
             <li>
-              <a href="{{ route('shop.index', ['category' => 'CUSTOM APPAREL']) }}">
+              <a href="<?php echo e(route('shop.index', ['category' => 'CUSTOM APPAREL'])); ?>">
                 CUSTOM APPAREL
               </a>
             </li>
             <li>
-              <a href="{{ route('shop.index', ['category' => 'MARKETING PRODUCTS']) }}">
+              <a href="<?php echo e(route('shop.index', ['category' => 'MARKETING PRODUCTS'])); ?>">
                 MARKETING PRODUCTS
               </a>
             </li>

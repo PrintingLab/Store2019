@@ -1,23 +1,16 @@
-@extends('layout')
-@section('title', 'Contact Us')
-@section('extra-css')
-<link rel="stylesheet" href="{{ asset('css/algolia.css') }}">
-<script type="text/javascript" src="{!! asset('js/jquery-3.3.1.min.js') !!}"></script>
-@endsection
-@section('content')
+<?php $__env->startSection('title', 'Contact Us'); ?>
+<?php $__env->startSection('extra-css'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/algolia.css')); ?>">
+<script type="text/javascript" src="<?php echo asset('js/jquery-3.3.1.min.js'); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <div class="container containerProducts">
-
-	@if (session()->has('success_message'))
-	<div class="alert alert-success containerAlerts">
-		{{ session()->get('success_message') }}
-	</div>
-	@endif
-
 	<div class="row">
 		<div class="col-md-8">
 			<h2 class="titlecontact">Contact Us</h2>
-			<form action="{{route('EmailContact')}}" method="post" accept-charset="utf-8">
-				{{csrf_field()}}
+			<form action="<?php echo e(route('EmailContact')); ?>" method="post" accept-charset="utf-8">
+				<?php echo e(csrf_field()); ?>
+
 				<div class="row">
 					<div class="col-md-4 col-sm-12">
 						<input class="contactinput" placeholder="Full Name*" type="text" name="nombre" required>
@@ -63,8 +56,8 @@
 		</div>
 	</div>
 </div>
-@endsection
-@section('scripts')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
 $('.botonsubmit').click(function(){
@@ -102,4 +95,6 @@ $('.botonsubmit').click(function(){
 	}
 });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
