@@ -57,6 +57,11 @@ Route::post('/4overproducts', 'ShopController@call_4over_curl')->name('4overprod
 Route::post('/computeshipping', 'ShopController@Getshipingquotes')->name('computeshipping');
 Route::get('/search-algolia', 'ShopController@searchAlgolia')->name('search-algolia');
 
+Route::get('/mailable',function(){
+    $order = App\Order::find(1);
+    return new App\Mail\OrderPlaced($order);
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/my-profile', 'UsersController@edit')->name('users.edit');
     Route::patch('/my-profile', 'UsersController@update')->name('users.update');

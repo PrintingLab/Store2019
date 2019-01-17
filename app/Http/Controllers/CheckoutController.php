@@ -314,10 +314,11 @@ public function updateShiping(Request $request)
 
     protected function addToOrdersTablesPaypal($email, $name, $error,$request,$paytId)
     {
+        dd($request);
         // Insert into orders table
         $order = Order::create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
-            'billing_email' => $email,
+            'billing_email' => $request->email,
             'billing_name' => $name,
             'billing_address' => $request->address,
             'billing_city' => $request->city,
@@ -357,7 +358,6 @@ public function updateShiping(Request $request)
                 'Optionstring' => $item->options->optionstring,
             ]);
         }
-
         return $order;
     }
 
