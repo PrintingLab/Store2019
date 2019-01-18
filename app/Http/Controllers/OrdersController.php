@@ -50,7 +50,7 @@ class OrdersController extends Controller
      */
     public function show(Order $order)
     {
-        if (auth()->id() !== $order->user_id) {
+        if (auth()->id() !== intval($order->user_id)) {
             return back()->withErrors('You do not have access to this!');
         }
 

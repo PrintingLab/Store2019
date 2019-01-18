@@ -21,7 +21,7 @@ Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->mid
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 Route::post('/paypal-checkout', 'CheckoutController@paypalCheckout')->name('checkout.paypal');
 
-Route::post('/checkout-Authorize', 'CheckoutController@AuthorizeCheckout')->name('checkout.Authorize');
+Route::post('/checkoutAuthorize', 'CheckoutController@AuthorizeCheckout')->name('checkoutAuthorize');
 
 
 Route::get('/guestCheckout', 'CheckoutController@index')->name('guestCheckout.index');

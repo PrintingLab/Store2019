@@ -6,6 +6,7 @@ use App\Order;
 use App\Product;
 use App\OrderProduct;
 use App\Mail\OrderPlaced;
+use App\Mail\OrderRecived;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CheckoutRequest;
@@ -106,7 +107,7 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function AuthorizeCheckout(CheckoutRequest $request)
+    public function AuthorizeCheckout(Request $request)
     {
 
 //         API LOGIN ID
@@ -122,6 +123,7 @@ class CheckoutController extends Controller
 		//$merchantAuthentication->setName('3qe3N33vB3');
 		//$merchantAuthentication->setTransactionKey('6pu9mhm9Q573N8HR');
         // Common setup for API credentials
+        $mode=config('services.authorize.mode');
         $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
         $merchantAuthentication->setName(config('services.authorize.login'));
         $merchantAuthentication->setTransactionKey(config('services.authorize.key'));
@@ -153,7 +155,13 @@ $customerAddress->setCountry("USA");
           $Transrequest->setRefId( $refId);
           $Transrequest->setTransactionRequest($transactionRequestType);
           $controller = new AnetController\CreateTransactionController($Transrequest);
-          $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
+          if ($mode=='SANDBOX') {
+            $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
+          }
+          if ($mode=='PRODUCTION') {
+            $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
+          }
+          
            if ($response != null)
             {
 
@@ -163,6 +171,7 @@ $customerAddress->setCountry("USA");
                 $order = $this->addToOrdersTables($request, null,$tresponse->getTransId());
         
                 Mail::send(new OrderPlaced($order));
+                Mail::send(new OrderRecived($order));
                 // decrease the quantities of all the products in the cart
                 //$this->decreaseQuantities();
                 Cart::instance('default')->destroy();
@@ -241,6 +250,7 @@ public function updateShiping(Request $request)
             );
             
             Mail::send(new OrderPlaced($order));
+            Mail::send(new OrderRecived($order));
             // decrease the quantities of all the products in the cart
             //$this->decreaseQuantities();
 
@@ -292,6 +302,7 @@ public function updateShiping(Request $request)
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $item->id,
+                'price' => $item->price,
                 'jobtype' => $item->options->typeitem,
                 'product_decription' => $item->options->decription,
                 'quantity' => $item->options->quantity,
@@ -343,6 +354,7 @@ public function updateShiping(Request $request)
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $item->id,
+                'price' => $item->price,
                 'jobtype' => $item->options->typeitem,
                 'product_decription' => $item->options->decription,
                 'quantity' => $item->options->quantity,

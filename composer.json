@@ -8,20 +8,22 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=5.6",
+        "ext-curl": "*",
         "algolia/algoliasearch-client-php": "^1.25",
+        "authorizenet/authorizenet": "~1.9.7",
         "braintree/braintree_php": "^3.38",
         "cartalyst/stripe-laravel": "^9.0",
+        "doctrine/collections": "^1.5",
         "fideloper/proxy": "~4.0",
         "hardevine/shoppingcart": "^2.5.1",
+        "jms/serializer": "1.7.0",
         "laravel/framework": "5.7.*",
         "laravel/scout": "^4.0",
         "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.4.0",
         "nicolaslopezj/searchable": "^1.9",
-        "tcg/voyager": "1.1.*",
-        "ext-curl": "*",
-        "authorizenet/authorizenet": "~1.9.6",
-        "laravelcollective/html": "^5.4.0"
+        "tcg/voyager": "1.1.*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

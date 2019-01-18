@@ -128,30 +128,31 @@
                     </div>
                     <div class="order-products">
                         @foreach ($products as $product)
-                            <div class="order-product-item">
+                        <h4> 
+                            <a href="{{ route('shop.show', $product->slug) }}"><b>{{ $product->name }}</b></a>
+                        </h4>
+     
+                            <div class="order-product-item" style="border-bottom: 1px #e4e4e4 solid;">
                             <div><img src="../storage/Userfiles/{{$product->pivot->imgF}}" alt="Product Image">
                                 @if ($product->pivot->side == '4/4' )
                                 <img src="../storage/Userfiles/{{$product->pivot->imgB}}" alt="Product Image">
                                 @endif
                             </div>
-                                <div>
-                                    <div>
-                                        <a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a>
-                                    </div>
-                                    <div>{{$product->pivot->product_decription}}</div>
-                                    <div>Quantity: {{ $product->pivot->quantity }}</div>
-                                    <div>Printed Side: {{ getPrintingsides($product->pivot->side) }}</div>
-                                    <div>Turnaround: {{ getPrintingTime($product->pivot->tat) }}</div>
+                                <div class="product_-brake">
                                     @foreach (json_decode($product->pivot->Optionstring, true) as $key)
                                         @if(isset($key['id']))
-                                          <div>{{$key['option']}}: {{$key['name']}}</div>
+                                          <p><b>{{Changeoptioname($key['option'])}}:</b> {{Changeoptioname($key['name'])}}</p>
                                          @endif
                                      @endforeach
+                                     <div><b>Proofing:</b> {{$product->pivot->Proofing}}</div>
+                                     <div><b>Job:</b> {{getdesignemode($product->pivot->jobtype)}}</div>
                                 </div>
+                             
                             </div>
+                            
                         @endforeach
 
-                    </div>
+                    </h1>
                 </div> <!-- end order-container -->
             </div>
 

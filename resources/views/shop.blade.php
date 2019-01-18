@@ -66,13 +66,19 @@
       <div id="carouselExampleIndicators" class="carousel slide haderPc" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active">
+          <a href="{{ route('shop.show', 'BusinesCards') }}">
             <img src="/img/Printinglab-banner-home.jpg">
+            </a>
           </div>
           <div class="carousel-item">
+          <a href="{{ route('shop.show', 'Hang Tags') }}">
             <img src="/img/Printinglab-banner-home2.jpg">
+            </a>
           </div>
           <div class="carousel-item">
+          <a href="{{ route('shop.show', 'Notepads') }}">
             <img src="/img/Printinglab-banner-home3.jpg">
+            </a>
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" data-slide="prev">
@@ -86,13 +92,19 @@
         <div id="carouselExampleIndicatorsMb" class="carousel slide " data-ride="carousel">
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
+            <a href="{{ route('shop.show', 'BusinesCards') }}">
               <img src="/img/mobile-slider-index-printing-lab-1.jpg">
+              </a>
             </div>
             <div class="carousel-item">
+            <a href="{{ route('shop.show', 'Hang Tags') }}">
               <img src="/img/mobile-slider-index-printing-lab-2.jpg">
+            </a>
             </div>
             <div class="carousel-item">
+            <a href="{{ route('shop.show', 'Notepads') }}">
               <img src="/img/mobile-slider-index-printing-lab-3.jpg">
+            </a>
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicatorsMb" data-slide="prev">

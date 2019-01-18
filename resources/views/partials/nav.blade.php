@@ -243,19 +243,11 @@
                         <div class="col-md-6">
                           <h6><strong>CUSTOM APPAREL</strong></h6>
                           <ul class="list_dropdown">
-                            <li><a href="#">Short Sleeve T-shirts</a></li>
-                            <li><a href="#">Long Sleeve T-shirts</a></li>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Hoodies</a></li>
-                            <li><a href="#">Sweatshirts</a></li>
-                            <li><a href="#">Activewear</a></li>
-                            <li><a href="#">Polos</a></li>
-                            <li><a href="#">Jackets</a></li>
+                          <li><a href="contact-us">Coming soon...</a></li>
                           </ul>
                           <h6 style="margin-top: 5%;"><strong>LARGE FORMAT</strong></h6>
                           <ul class="list_dropdown">
-                            <li><a href="#">Banners</a></li>
-                            <li><a href="#">Vinyl Graphics</a></li>
+                          <li><a href="contact-us">Coming soon...</a></li>
                           </ul>
                         </div>
                         <div class="col-md-6 img_MenuDrop">

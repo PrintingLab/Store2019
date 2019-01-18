@@ -65,7 +65,6 @@
                         <div>
                             <div class="order-header-items">
                                 <div><a href="{{ route('orders.show', $order->id) }}">Order Details</a></div>
-                               
                             </div>
                         </div>
                     </div>

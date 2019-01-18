@@ -322,14 +322,20 @@ button:focus  {
 }
 
 
-<<<<<<< HEAD
 .Btn_Account{
  
 }
-=======
+.product_-brake{
+  height: 285px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%
+}
 
->>>>>>> hernando
-
+.product_-brake b{
+  font-weight: bold;
+}
 @media (max-width:709px){
   #telefonoMb p{
     font-size: 75%;

@@ -1,11 +1,9 @@
 Serializer
 ==========
 
-.. image:: logo-small.png
-
 Introduction
 ------------
-This library allows you to (de-)serialize data of any complexity. Currently, it supports XML and JSON.
+This library allows you to (de-)serialize data of any complexity. Currently, it supports XML, JSON, and YAML.
 
 It also provides you with a rich tool-set to adapt the output to your specific needs.
 
@@ -15,7 +13,7 @@ Built-in features include:
 - Supports many built-in PHP types (such as dates)
 - Integrates with Doctrine ORM, et. al.
 - Supports versioning, e.g. for APIs
-- Configurable via XML, YAML, or Doctrine Annotations
+- Configurable via PHP, XML, YAML, or Doctrine Annotations
 
 Installation
 ------------
@@ -64,11 +62,11 @@ Documentation
 License
 -------
 
-The code is released under the business-friendly `MIT license`_.
+The code is released under the business-friendly `Apache2 license`_. 
 
 Documentation is subject to the `Attribution-NonCommercial-NoDerivs 3.0 Unported
 license`_.
 
-.. _MIT license: https://opensource.org/licenses/MIT
+.. _Apache2 license: http://www.apache.org/licenses/LICENSE-2.0.html
 .. _Attribution-NonCommercial-NoDerivs 3.0 Unported license: http://creativecommons.org/licenses/by-nc-nd/3.0/
 

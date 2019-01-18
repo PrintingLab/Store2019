@@ -268,7 +268,7 @@ $scope.load4overproductsOptions = function (endurl) {
         }).then(function mySuccess(response) {
             $scope.arrayproductprices=response.data.success.entities
            // console.log($scope.arrayproductprices)
-            setTimeout(function(){  $scope.optionschange() }, 100);
+            setTimeout(function(){  $scope.optionschange() }, 500);
 
             }, function myError(response) {
                 console.log(response.statusText);
@@ -291,13 +291,13 @@ $scope.productbuiloption=[]
    $scope.TurnAroundTime=TurnAroundTime[0].id
    $scope.productTurnAroundTime=TurnAroundTimes[0].options
    $scope.optionstring=JSON.stringify($scope.productbuiloption,null,"")
+   console.log($scope.productbuiloption)
    $scope.builderprice()
 }
 
 
 
 $scope.builderprice = function (params) {
-
     for (let index = 0; index < $scope.productbaseprice.length; index++) {
         const priceloop = $scope.productbaseprice[index];
             if (priceloop.colorspec_uuid == $scope.Colorspec && priceloop.runsize_uuid == $scope.Runsize) {

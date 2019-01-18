@@ -49,7 +49,7 @@
                <p><i class="fas fa-lock"></i> processing payment...</p>
             </div>
             <div>
-                <form action="{{ route('checkout.Authorize') }}" method="POST" id="payment-form" name="checkoutform">
+                <form action="{{ route('checkoutAuthorize') }}" method="POST" id="payment-form" name="checkoutform">
                     {{ csrf_field() }}
                 
                     <div ng-show="PaymentDetails">
@@ -155,8 +155,7 @@ This may take a few moments.</p>
             </div>
 
             <div class="txtBotCheckout">
-              <span ng-hide="Continuebtn" >This product will be available from @{{addressoptions.city}}, @{{addressoptions.state}} <br>
-                Estimated Production Completion Date: @{{productionestimate}}</span>
+              <span ng-hide="Continuebtn" >Estimated Production Completion Date: @{{productionestimate}}</span>
                 <div class="spacer"></div>
             </div>
 
@@ -173,23 +172,23 @@ This may take a few moments.</p>
 
                   <div class="form-group col-sm-7">
                     <label for="card_name">Name on Card*</label>
-                    <input id="card_name" type="text" class="form-control" placeholder="Name on Card" aria-label="Card Holder" aria-describedby="basic-addon1" name="card_name" required>
+                    <input id="card_name" type="text" class="form-control" placeholder="Name on Card" aria-label="Card Holder" aria-describedby="basic-addon1" name="card_name" value="Jose Miller" required>
                   </div>
                   <div class="form-group col-sm-5">
                     <label for="">Expiration Date*</label>
                     <div class="input-group expiration-date">
-                      <input  type="number" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month" required>
+                      <input  type="number" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month" value="10" required>
                       <span class="date-separator"></span>
-                      <input  type="number" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year" required>
+                      <input  type="number" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year" value="2025" required>
                     </div>
                   </div>
                   <div class="form-group col-sm-8">
                     <label for="card-number">Card Number*</label>
-                    <input type="number" class="form-control" id="cnumber" name="cnumber" placeholder="Enter Card Number" aria-label="Card Holder" aria-describedby="basic-addon1" required>
+                    <input type="number" class="form-control" id="cnumber" name="cnumber" placeholder="Enter Card Number" aria-label="Card Holder" aria-describedby="basic-addon1" value="4844110772597323" required>
                   </div>
                   <div class="form-group col-sm-4">
                     <label for="cvc">CVC*</label>
-                    <input type="password" class="form-control"  id="ccode" name="ccode" placeholder="Enter Card Code" aria-label="Card Holder" aria-describedby="basic-addon1" required>
+                    <input type="password" class="form-control"  id="ccode" name="ccode" placeholder="Enter Card Code" aria-label="Card Holder" aria-describedby="basic-addon1" value="377" required>
                   </div>
                 </div>
               </div>

@@ -177,8 +177,8 @@
               </fieldset>
             </form>
             <div>
-              <div class="jt_filters" ng-repeat="op in arrayproductprices | filter:{product_option_group_uuid:'!34f407f8-0b50-4227-9378-10fddefbe596'} | filter:{product_option_group_uuid:'!24865ffa-793d-43ea-b3b1-d1b5cf22268d'} | filter:{product_option_group_uuid:'!26ca0df3-0682-4f37-8979-409868e2df2d'} | filter:{product_option_group_uuid:'!b6f8d6b4-9909-4cd7-bbc0-b65b6e6460eb'} | filter:{product_option_group_uuid:'!ed16daf6-77e4-4133-8d65-3947d5d19f52'} | filter:{product_option_group_uuid:'!b19d4ac3-2d48-40c0-9729-e35af6846271'} | filter:{product_option_group_uuid:'!a2b94cf3-b6bc-4ae2-8c3a-3b04d4671e6e'} ">
-                <div class="row">
+              <div class="jt_filters prtd@{{op.product_option_group_uuid}}" ng-repeat="op in arrayproductprices | filter:{product_option_group_uuid:'!ed16daf6-77e4-4133-8d65-3947d5d19f52'}">
+                <div class="row ">
                   <div class="col-md-5 filter_name">
                     <strong>@{{changeoptioname(op.product_option_group_name)}}:</strong>
                   </div>
@@ -235,17 +235,17 @@
               <button type="button" class="btn_formProduct btn_op3" ng-click="actionoptsend('op3')" ng-disabled="btndisigned">WE DESIGN IT FOR YOU</button>
             </div>
           </form>
-
           @endif
-
-
         </div>
-        <!-- <button ng-click="categorias()">categotias</button>
+
+
+
+
+         <!-- <button ng-click="categorias()">categotias</button>
         <input type="text" ng-model="busca" >
         <ul>
- <li ng-repeat="cat in categoriaslist |filter:busca"><b>@{{cat.category_name}}</b> :  @{{cat.category_uuid}}</li><br> 
-
-</ul> -->
+           <li ng-repeat="cat in categoriaslist |filter:busca"><b>@{{cat.category_name}}</li><br> 
+        </ul>  -->
       </div> <!-- end product-section -->
 
 

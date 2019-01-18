@@ -44,6 +44,24 @@ function printingtax($postalcode)
      }
 return  $taxval;
 }
+function Changeoptioname($iname)
+{
+    $outname="";
+    $url = public_path()."/storage/jsonconfig/optionsname.json";
+    $json = file_get_contents($url);
+    $json_data = json_decode($json, true);
+      foreach ($json_data as $value) {
+          if ($iname ==$value['Name']) {
+              $outname =$value['value'];
+          }
+
+     }
+     if ($outname) {
+        return $outname;
+    }else{
+        return $iname;
+    }
+}
 
 function extensioImg($imagen){
   $result=  ltrim(strstr($imagen, '.'), '.');
@@ -110,6 +128,26 @@ function getPrintingsides($prttime)
            break;
    }
 }
+
+function getdesignemode($mode)
+{
+   switch ($mode) {
+       case 'op1':
+           return 'UPLOAD YOUR FILE & ORDER NOW';
+           break;
+       case 'op2':
+           return 'Online DESIGN';
+           break;
+        case 'op3':
+           return 'WE DESIGN IT FOR YOU';
+           break;
+       default:
+           'N/A';
+           break;
+   }
+}
+
+
 
 function getPrintingTime($prttime)
 {
