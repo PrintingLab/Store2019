@@ -1,6 +1,6 @@
 $('.carousel').carousel({
   pause:true,
-  interval: 40000
+  interval: 5000
 });
 
 document.getElementById('dropdownMenuButton2').addEventListener("click",Menubotton)

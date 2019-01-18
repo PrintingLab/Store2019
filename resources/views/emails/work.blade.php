@@ -14,10 +14,12 @@
     <strong>Nombre: </strong> {{$datos['nombre']}} <br>
     <strong>Phone: </strong> {{$datos['telefono']}}<br>
     <strong>Email client: </strong> {{$datos['email']}}<br>
-    <strong>Option: </strong>{{$datos['Options']}}<br>    
+    <strong>Option: </strong>{{$datos['Options']}}<br>
     <strong>Comment: </strong>
     <p>{{$datos['comentario']}}</p>
-    <img src="{{ $message->embed($datos['ruta']) }}">
+
+    
+
   </div>
 </body>
 </html>
