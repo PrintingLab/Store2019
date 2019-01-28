@@ -36,7 +36,7 @@
       <div class="Div_allproduct2">
         <ul class="list_dropdown">
           <li><strong>MARKETING PRODUCTS</strong></li>
-          
+
           @foreach ($Allproducts as $produc)
           <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
           @endforeach
@@ -392,8 +392,7 @@
         <p>
           Have a question or need help placing an order?
           <br>
-          Our printing specialists are available Monday-Fridat
-          and form 8am-5pm.
+          Our printing specialists are available Monday-Friday and form 8am-5pm.
         </p>
       </div>
     </div>

@@ -1,6 +1,6 @@
 $('.carousel').carousel({
   pause:true,
-  interval: 40000
+  interval: 5000
 });
 
 document.getElementById('dropdownMenuButton2').addEventListener("click",Menubotton)
@@ -27,3 +27,16 @@ $win.scroll(function(){
   }
 
 })
+
+
+$(window).scroll(function() {
+  if ($(this).scrollTop() > 200) {
+    $('.go-top').fadeIn(200);
+  } else {
+    $('.go-top').fadeOut(200);
+  }
+});
+$('.go-top').click(function(event) {
+  event.preventDefault();
+  $('html, body').animate({scrollTop: 0}, 300);
+});

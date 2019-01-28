@@ -133,7 +133,7 @@
           <div class="col-md-12">
             <textarea placeholder="Message*" id="text" class="text-work" rows="2" name="comentario" required></textarea>
           </div>
-          <div class="col-md-12">
+          <!--<div class="col-md-12">
             <div class="file_work">
               <p>Upload Your File</p>
               <input type="file" id="archivounouno" name="archivo">
@@ -141,7 +141,7 @@
                 <p></p>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="col-md-12 ">
             <input type="submit" value="SEND" class="bnt_Swork">
           </div>
@@ -155,7 +155,7 @@
 <?php $__env->startSection('extra-js'); ?>
 <script>
 $('#archivounouno').on('change', function(e){
-  //validación peso del archivo en by  
+  //validación peso del archivo en by
   var input = document.getElementById('archivounouno');
   var clicked = e.target;
   var file = clicked.files[0];
@@ -174,7 +174,7 @@ $('#archivounouno').on('change', function(e){
     })
   }else {
     var filePath = 	document.getElementById('archivounouno').value;
-    var allowedExtensions = /(.pdf|.PNG|.PDF|.jpeg|.doc|.docx)$/i;
+    var allowedExtensions = /(.pdf|.PNG|.PDF)$/i;
     //validacion extension
     if (!allowedExtensions.exec(filePath)) {
       $('.output_work p').text('');

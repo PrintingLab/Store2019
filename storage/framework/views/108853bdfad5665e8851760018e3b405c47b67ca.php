@@ -36,5 +36,7 @@
       <p>© 2018 Printing Lab. All rights reserved</p>
     </div>
   </div>
-
+  <a class="go-top" href="#">
+    <i class="fas fa-chevron-circle-up fa-2x"></i>
+  </a>
 </footer>

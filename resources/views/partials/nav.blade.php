@@ -1,10 +1,10 @@
 <header>
 
   <div class="barsignage">
-    <img src="/img/signage.svg" alt="">
+    
     <span>ARE YOU LOOKING FOR SIGNAGE, VEHICLE GRAPHICS OR TRADE SHOWS? <a target="_blank" href="http://signslab.com/">CLICK HERE</a>
     </span>
-    <img src="/img/signage.svg" alt="">
+
   </div>
   <div class="haderPc">
     <div class="container">
@@ -38,21 +38,11 @@
                     <div class="col-md-6">
                       <h6><strong>CUSTOM APPAREL</strong></h6>
                       <ul class="list_dropdown">
-                      <li><a href="contact-us">Coming soon...</a></li>
-                        <!-- <li><a href="#">Short Sleeve T-shirts</a></li>
-                        <li><a href="#">Long Sleeve T-shirts</a></li>
-                        <li><a href="#">Women</a></li>
-                        <li><a href="#">Hoodies</a></li>
-                        <li><a href="#">Sweatshirts</a></li>
-                        <li><a href="#">Activewear</a></li>
-                        <li><a href="#">Polos</a></li>
-                        <li><a href="#">Jackets</a></li> -->
+                        <li><a href="contact-us">Coming soon...</a></li>
                       </ul>
                       <h6 style="margin-top: 5%;"><strong>LARGE FORMAT</strong></h6>
                       <ul class="list_dropdown">
-                      <li><a href="contact-us">Coming soon...</a></li>
-                        <!-- <li><a href="#">Banners</a></li>
-                        <li><a href="#">Vinyl Graphics</a></li> -->
+                        <li><a href="contact-us">Coming soon...</a></li>
                       </ul>
                     </div>
                     <div class="col-md-6 img_MenuDrop">
@@ -80,7 +70,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="headerMb">
     <nav class="navbar navbar-default">
@@ -168,46 +157,35 @@
                 </li>
                 @endforeach --}}
 
-
-
-
-
-
-
-
-
               </div>
             </div>
-          </form>
-          <ul class="nav navbar-nav">
-            <li class="dropdown center">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MARKETING PRODUCTS<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                 @foreach (getAllProducts() as $produc)
-                       <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
-                      @endforeach
-              </ul>
-            </li>
-            <li class="dropdown center">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CUSTOM APPAREL<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-              <li><a href="contact-us">Coming soon...</a></li>
-                <!-- <li><a href="#">Short Sleeve T-shirts</a></li>
-                <li><a href="#">Long Sleeve T-shirts</a></li>
-                <li><a href="#">Women</a></li>
-                <li><a href="#">Hoodies</a></li>
-                <li><a href="#">Sweatshirts</a></li>
-                <li><a href="#">Activewear</a></li>
-                <li><a href="#">Polos</a></li>
-                <li><a href="#">Jackets</a></li> -->
-              </ul>
-            </li>
-            <li class="dropdown center">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LARGE FORMAT<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-              <li><a href="contact-us">Coming soon...</a></li>
-                <!-- <li><a href="#">Banners</a></li>
-                <li><a href="#">Vinyl Graphics</a></li> -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <form class="navbar-form navbar-left">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+              </form>
+              <ul class="nav navbar-nav">
+                <li class="dropdown center">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MARKETING PRODUCTS<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    @foreach (getAllProducts() as $produc)
+                    <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
+                    @endforeach
+                  </ul>
+                </li>
+                <li class="dropdown center">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CUSTOM APPAREL<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="contact-us">Coming soon...</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown center">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LARGE FORMAT<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="contact-us">Coming soon...</a></li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
@@ -243,19 +221,11 @@
                         <div class="col-md-6">
                           <h6><strong>CUSTOM APPAREL</strong></h6>
                           <ul class="list_dropdown">
-                            <li><a href="#">Short Sleeve T-shirts</a></li>
-                            <li><a href="#">Long Sleeve T-shirts</a></li>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Hoodies</a></li>
-                            <li><a href="#">Sweatshirts</a></li>
-                            <li><a href="#">Activewear</a></li>
-                            <li><a href="#">Polos</a></li>
-                            <li><a href="#">Jackets</a></li>
+                            <li><a href="contact-us">Coming soon...</a></li>
                           </ul>
                           <h6 style="margin-top: 5%;"><strong>LARGE FORMAT</strong></h6>
                           <ul class="list_dropdown">
-                            <li><a href="#">Banners</a></li>
-                            <li><a href="#">Vinyl Graphics</a></li>
+                            <li><a href="contact-us">Coming soon...</a></li>
                           </ul>
                         </div>
                         <div class="col-md-6 img_MenuDrop">
