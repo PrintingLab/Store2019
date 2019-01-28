@@ -123,12 +123,14 @@
       transform: rotate(-360deg);
     }
   }
-  
+  .shipping-detail{
+    font-weight: 600;
+  }
   .shippingServices{
-    padding: 5px;
+    padding: 4px;
     background: #fff;
     border: 1px gray solid;
-    margin: 5px; 
+    margin: 2px; 
 
   }
   .suggestions{
@@ -193,11 +195,18 @@
       transform: translateY(-50%);
   }
 
-  .titlepay{
-
-  }
   .inputratiopay{
     width: 20%;
     float: left;
     margin-top: 20px;
   }
+#processingpayment{
+  display: none
+}
+.checkout-table-item{
+  font-size: 15px;
+}
+.checkout-table-description{
+  font-size: 13px;
+}
+  

@@ -2,6 +2,31 @@ $("input[name='phone']").keyup(function() {
     $(this).val($(this).val().replace(/^(\d{3})(\d{3})(\d)+$/, "$1-$2-$3"));
 });
 
+$("input[name='card_expiry_month']").on('keypress',function(e) { 
+    var $that = $(this),
+    maxlength = $that.attr('maxlength')
+    if($.isNumeric(maxlength)){
+        if($that.val().length >= maxlength) { e.preventDefault(); return; }
+        $that.val($that.val().substr(0, maxlength));
+    };
+});
+$("input[name='card_expiry_year']").on('keypress',function(e) { 
+    var $that = $(this),
+    maxlength = $that.attr('maxlength')
+    if($.isNumeric(maxlength)){
+        if($that.val().length == maxlength) { e.preventDefault(); return; }
+        $that.val($that.val().substr(0, maxlength));
+    };
+});
+$("input[name='ccode']").on('keypress',function(e) { 
+    var $that = $(this),
+    maxlength = $that.attr('maxlength')
+    if($.isNumeric(maxlength)){
+        if($that.val().length == maxlength) { e.preventDefault(); return; }
+        $that.val($that.val().substr(0, maxlength));
+    };
+});
+
 shopApp.filter('unique', function() {
     return function(collection, keyname) {
        var output = [], 
@@ -24,7 +49,8 @@ shopApp.controller('checkoutcontroller',function($scope,$http,$document){
         $scope.shipingupdate()
         $scope.computeshipping()
     }, 200);
-    $scope.processingpayment=true
+    $('#processingpayment').hide()
+    //$scope.processingpayment=true
     $scope.preloader=true
     $scope.dangermesagge=true
     $scope.PaymentDetails=true
@@ -87,6 +113,53 @@ $scope.computeshipping = function () {
    }
 
 }
+
+$scope.authOnly = function () {
+
+    if ($('#ccode').val()!="") {
+        $scope.dangermesagge=true
+        $http({
+            method:'post',
+            url:'/AuthorizeAuthOnly',
+            data: {
+                cnumber:$('#cnumber').val(),
+                card_expiry_year:$('#card_expiry_year').val(),
+                card_expiry_month:$('#card_expiry_month').val(),
+                ccode:$('#ccode').val(),
+                card_name:$('#card_name').val(),
+                address:$scope.address,
+                city:$scope.city,
+                province:$scope.province,
+                postalcode:$scope.postalcode,
+                Phone:$scope.phone,
+            },
+        }).then(function mySuccess(response) {
+            result=response.data.success
+            if (result.ResultCode=="Ok") {
+                $('#processingpayment').show()
+                //$scope.processingpayment=false
+                $scope.dangermesagge=true
+                $scope.danger=result.getDescription
+                document.querySelector('#ID').value = result.getTransId
+               $('#payment-form').submit() 
+            }
+            if (result.ResultCode=="Error") {
+                $scope.dangermesagge=false
+                $scope.danger=result.Errormessage 
+    
+            }
+            console.log(result)
+        })
+    }else{
+        $scope.dangermesagge=false
+                $scope.danger="The cvv/cvc provided is invalid" 
+    }
+   
+}
+
+
+
+
 $scope.sumarry = function (arr) {
     var sum = 0
   for (let index = 0; index < arr.length; index++) {
@@ -107,6 +180,7 @@ $scope.Continueorder = function () {
       $scope.PaymentDetails=false
       $scope.Continuehide=true
       $scope.dangermesagge=true
+      tal = $scope.newTotal
   }else{
     $scope.danger="Please complete all requiered fields."
     $scope.dangermesagge=false
@@ -141,7 +215,8 @@ $scope.shipingupdate = function (value,type) {
 }
 
 $scope.processingpayment = function () {
-    $scope.processingpayment=false
+    $('#processingpayment').show()
+    //$scope.processingpayment=false
     }
 
 $scope.presentPrice = function (value) {

@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Thank You')
+@section('title', 'Upload')
 
 @section('extra-css')
 <link rel="stylesheet" href="css/loading-bar.css">
@@ -38,7 +38,7 @@
 
       <div class="row">
         <div class="col-md-6">
-          <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>
+          <h5><strong>UPLOAD AN EXAMPLE OF WHAT YOU WANT:</strong></h5>
           <p><i>Only JPG,PNG,PDF,DOC,PPT</i></p>
           <p>Remember, select only two files at the same time.</p>
         </div>
@@ -103,7 +103,7 @@
       <input hidden type="text" name="optionstring" value="{{$optionstring}}" readonly>
       <div class="row">
         <div class="col-md-6">
-          <h5><strong>UPLOAD AN EXANPLE OF WHAT YOU WANT:</strong></h5>
+          <h5><strong>UPLOAD AN EXAMPLE OF WHAT YOU WANT:</strong></h5>
           <p><i>Only JPG,PNG,PDF,DOC,PPT</i></p>
         </div>
         <div class="col-md-6">

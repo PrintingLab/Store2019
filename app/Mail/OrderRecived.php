@@ -36,9 +36,9 @@ class OrderRecived extends Mailable
      
     public function build()
     {
-        return $this->to('luiscaicedo.printinglab@gmail.com', $this->order->billing_name)
+        return $this->to(config('mail.from.address'), $this->order->billing_name)
                     ->bcc('contacto@tienda.printinglab.com')
-                    ->subject('Order for Printinglab.com')
+                    ->subject('New Order for Printinglab.com')
                     ->markdown('emails.orders.recived');
     }
 }

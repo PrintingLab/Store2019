@@ -14,6 +14,13 @@ function presentPrice($price)
 {
     return '$'.number_format($price, 2);
 }
+
+function GetTotalAmout()
+{
+    return number_format(getNumbers()->get('newTotal'),2, '.', '');
+}
+
+
 function printingPrice($price)
 {
     $url = public_path()."/storage/jsonconfig/priceprintinglab.json";
@@ -28,6 +35,7 @@ function printingPrice($price)
      }
 
 }
+
 
 function printingtax($postalcode)
 {

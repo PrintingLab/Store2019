@@ -690,22 +690,35 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   font-size: 14px;
 }
 
-
 /*mobile index*/
 
 .divsproductsMbI{
   padding: 0 0.5%;
 }
 
+@media(max-width:352px){
+  .pagination > li > span{
+    padding: 15px 19px;
+  }
+}
 @media(max-width:575px){
   .divsproductsMbI{
     padding: 0 15px;
   }
 }
 @media(max-width:768px){
+  
+  .reasons .col-md-4{
+    margin-top: 20px;
+  }
+  .reasons .col-md-3, .reasons .col-md-9{
+    text-align: center;
+  }
+  
   .reasons img {
     width: auto;
   }
+  
 }
 
 
@@ -804,6 +817,7 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
 
 
 .btn_formProduct{
+  cursor: pointer;
   border: none;
   background: #000;
   color: white;
@@ -811,9 +825,6 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   padding: 15px 10px 15px 10px;
   margin-bottom: 5px;
 }
-
-
-
 
 /*upload*/
 .divfile{
@@ -941,7 +952,12 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
 
   /*cart*/
   .productRow img{
+    max-height: 160px;
     border: 1px #dee2e6 solid;
+  }
+
+  .productRow label{
+    width: 100%
   }
   .containerAlerts{
     margin-top: 2%;
@@ -949,7 +965,7 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   .productRow{
     border-bottom: 2px solid #ececec;
     margin-top: 1%;
-    padding-top: 6%;
+    padding-top: 3%;
     padding-bottom: 1%;
   }
   .containerCodeCart{
@@ -1034,6 +1050,8 @@ text-align: center;
     color: white;
     border: none;
     padding: 2%;
+    cursor:pointer;
+    margin-bottom: 15px;
   }
 
   /*fin checkout*/
@@ -1046,7 +1064,8 @@ text-align: center;
 }
 
 .my-profile input {
-    width: 70%;
+    width: 100%;
+    margin-bottom: 10px !important;
 }
 
 /*end Profile*/

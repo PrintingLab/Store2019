@@ -32,14 +32,16 @@ New order recived from printinglab.com.
 #Order Total: {{presentPrice($order->billing_total)}}#
 
 **-Items Ordered-**
-
 @foreach ($order->products as $product)
-Product: {{ $product->name }} <br>
-Description: {{ $product->pivot->product_decription }} <br>
-Quantity: {{ $product->pivot->quantity }} <br>
-Printed Side: {{ getPrintingsides($product->pivot->side) }} <br>
-Turnaround: {{ getPrintingTime($product->pivot->tat) }} <br>
-Job: {{getdesignemode($product->pivot->jobtype)}} <br>
+<P>
+@foreach (json_decode($product->pivot->Optionstring, true) as $key)
+    @if(isset($key['id']))
+    {{Changeoptioname($key['option'])}}: {{Changeoptioname($key['name'])}}<br>
+    @endif
+ @endforeach
+ Proofing:  {{$product->pivot->Proofing}}<br>
+ Job: {{getdesignemode($product->pivot->jobtype)}} <br>
+ </p>
 <div>
     <a href="http://laravel.printinglab.com/storage/Userfiles/{{$product->pivot->imgF}}" download>Download File Front > </a><br>
      @if ($product->pivot->side == '4/4' )

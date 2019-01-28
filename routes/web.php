@@ -22,7 +22,7 @@ Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 Route::post('/paypal-checkout', 'CheckoutController@paypalCheckout')->name('checkout.paypal');
 
 Route::post('/checkoutAuthorize', 'CheckoutController@AuthorizeCheckout')->name('checkoutAuthorize');
-
+Route::post('/AuthorizeAuthOnly', 'CheckoutController@AuthorizeauthOnly')->name('AuthorizeAuthOnly');
 
 Route::get('/guestCheckout', 'CheckoutController@index')->name('guestCheckout.index');
 

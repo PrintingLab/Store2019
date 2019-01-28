@@ -65,16 +65,23 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
+    
     {
+      //  dd( $request);
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.auth()->id(),
             'password' => 'sometimes|nullable|string|min:6|confirmed',
+            'Address' => 'required|string|max:255',
+            'City' => 'required|string|max:255',
+            'Province' => 'required|string|max:255',
+            'PostalCode' => 'required|string|max:255',
+            'Phone' => 'required|string|max:255',
         ]);
 
         $user = auth()->user();
+        
         $input = $request->except('password', 'password_confirmation');
-
         if (! $request->filled('password')) {
             $user->fill($input)->save();
 

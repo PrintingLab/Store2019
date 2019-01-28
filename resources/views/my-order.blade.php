@@ -125,7 +125,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div> 
                     <div class="order-products">
                         @foreach ($products as $product)
                         <h4> 

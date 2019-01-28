@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Config;
 class ShopController extends Controller
 {
 
-    /**
+    /** 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -60,10 +60,7 @@ public function getjsonconfig(){
         return response()->json(['optionsname'=>$jsonoptionsname_data,'priceprintinglab'=>$jsonpriceprintinglab_data,'stokname'=>$jsonstokname_data]);
 } 
 
-
-
-
-    public function Getshipingquotes(Request $request) {
+public function Getshipingquotes(Request $request) {
         $method='POST';
         $separator = '?';
       if ($request->type==1) {
@@ -114,7 +111,7 @@ public function getjsonconfig(){
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
         return response()->json(['success'=>$shipers,'taxpercent'=>config('cart.tax')]);
       }
-    }
+}
 
     public function sendtocart(Request $request) {
         $returnHTML = view('cart.index')->with('success_message', 'Item was added to your cart!')->render();

@@ -44,7 +44,7 @@
 
         
         
-            <div class="processingpayment" ng-hide="processingpayment">
+            <div class="processingpayment" id="processingpayment" >
             <div class="loadergif"></div>
                <p><i class="fas fa-lock"></i> processing payment...</p>
             </div>
@@ -140,8 +140,8 @@ This may take a few moments.</p>
                 <div class="alert alert-warning" role="alert" ng-hide="dangermesagge">
   @{{danger}}
 </div>               
-            <div class="shippingResult" id="div_shipping" ng-repeat="ship in shipping_options | unique: 'service_name'">
-              <label class="col-md-12 label-result">
+            <div class="shippingResult" id="div_shipping" >
+              <label class="col-md-12 label-result" ng-repeat="ship in shipping_options | unique: 'service_name'">
                 <div class="shippingServices clearfix">
                   <input id="ShippingMethodlist" type="radio" class="shipRadio" name="shipping_selected" ng-model="ShippingMethodlist" value="@{{ship.service_name}}" ng-click="shipingupdate(ship.service_price,ship.service_name)" >&nbsp;
                   <pre hidden ng-if="$first" ng-init="shipingupdate(ship.service_price,ship.service_name)"></pre>
@@ -152,14 +152,21 @@ This may take a few moments.</p>
                   <label for="ShippingMethodlist" class="shipping-detail">@{{ship.service_name}}&nbsp;</label>
                 </div>
               </label>
+              <label class="col-md-12 label-result" ng-hide="Continuebtn">
+                <div class="shippingServices clearfix">
+                  <input id="ShippingMethodlist" type="radio" class="shipRadio" name="shipping_selected" value="Pick Up" ng-model="ShippingMethodlist" ng-click="shipingupdate(0,'Pick Up in office')" >&nbsp;
+                  <!--checking of local pickup options-->
+                  <label for="ShippingMethodlist" class="shipping-cost shipping-rate-wrap" style="float:right">
+                    Free
+                  </label>
+                  <label for="ShippingMethodlist" class="shipping-detail">Pick Up&nbsp;</label>
+                </div>
+              </label>
             </div>
-
             <div class="txtBotCheckout">
-              <span ng-hide="Continuebtn" >Estimated Production Completion Date: @{{productionestimate}}</span>
+              <!-- <span ng-hide="Continuebtn" >Estimated Production Completion Date: @{{productionestimate}}</span> -->
                 <div class="spacer"></div>
             </div>
-
-
             </div>
             <div class="PaymentDetails" ng-hide="PaymentDetails">
             <input class="inputratiopay" type="radio" name="true" ng-model="inputratio"  ng-value="true">
@@ -177,30 +184,35 @@ This may take a few moments.</p>
                   <div class="form-group col-sm-5">
                     <label for="">Expiration Date*</label>
                     <div class="input-group expiration-date">
-                      <input  type="number" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month" value="10" required>
+                      <input maxlength="2" min="1" max="12"  type="number" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1" name="card_expiry_month" id="card_expiry_month" value="10" required>
                       <span class="date-separator"></span>
-                      <input  type="number" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year" value="2025" required>
+                      <input maxlength="4" min="2019" max="2199"   type="number" class="form-control" placeholder="YYYY" aria-label="YYYY" aria-describedby="basic-addon1" name="card_expiry_year" id="card_expiry_year" value="2025" required>
                     </div>
                   </div>
-                  <div class="form-group col-sm-8">
+                  <div class="form-group col-sm-8 .card ">
                     <label for="card-number">Card Number*</label>
                     <input type="number" class="form-control" id="cnumber" name="cnumber" placeholder="Enter Card Number" aria-label="Card Holder" aria-describedby="basic-addon1" value="4844110772597323" required>
+                    <div class="field card">
+  <p>
+    <span class="card_icon"></span> </p>
+  <p class="status">
+    <span class="status_icon"></span>
+    <span class="status_message"></span>
+  </p>
+</div>
                   </div>
                   <div class="form-group col-sm-4">
                     <label for="cvc">CVC*</label>
-                    <input type="password" class="form-control"  id="ccode" name="ccode" placeholder="Enter Card Code" aria-label="Card Holder" aria-describedby="basic-addon1" value="377" required>
+                    <input  maxlength="3" type="password" class="form-control"  id="ccode" name="ccode" placeholder="Enter Card Code" aria-label="Card Holder" aria-describedby="basic-addon1" value="377" required>
+                    <input hidden   id="ID" name="ID" type="number">
+          
                   </div>
                 </div>
               </div>
-              <div class="spacer"></div>
-              <button type="submit" id="complete-order" class="btnCheckoutContinue" ng-click="processingpayment()">Complete Order</button>
-
+              <button type="button" id="complete-order" class="btnCheckoutContinue" ng-click="authOnly()" >Complete Order</button>
             </div>
         </div>
-
-
-
-              
+        
 
 
           </form>
@@ -243,10 +255,10 @@ This may take a few moments.</p>
             <form method="post" id="paypal-payment-form" action="{{ route('checkout.paypal') }}">
               @csrf
               <section>
-                <div class="bt-drop-in-wrapper">
-                  <div id="bt-dropin"></div>
-                </div>
+              <div id="paypal-button"></div>
               </section>
+              
+              <input hidden  type="text" class="form-control"  name="name" value="@{{name}}" required>
               <input hidden  type="text" class="form-control"  name="email" value="@{{email}}" required>
               <input hidden  type="text" class="form-control"  name="address" value="@{{address}}" required>
               <input hidden  type="text" class="form-control"  name="city" value="@{{city}}" required>
@@ -254,21 +266,14 @@ This may take a few moments.</p>
               <input hidden  type="text" class="form-control"  name="postalcode" value="@{{postalcode}}" required>
               <input hidden  type="text" class="form-control"  name="phone" value="@{{phone}}" required>
               <input hidden type="text" class="form-control" id="ShippingMethod" name="Shippingmethod" value="@{{ShippingMethod}}" required>
-              <input id="nonce" name="payment_method_nonce" type="hidden" />
-              <button class="btnCheckoutContinue" type="submit" ng-click="processingpayment()"><span>Pay with PayPal</span></button>
+              <input hidden id="nonce" name="payment_method_nonce" />
+              <button hidden id="paypaypal" class="btnCheckoutContinue" type="submit" ng-click="processingpayment()"><span>Pay with PayPal</span></button>
             </form>
         </div>
             
           </div>
           @endif
         </div>
-
-
-        
-
-
-
-
         <div class="checkout-table-container">
           <h2>Your Order</h2>
           <div class="checkout-table">
@@ -306,7 +311,7 @@ This may take a few moments.</p>
               New Subtotal <br>
               @endif
               Tax <br>
-              Shipping <br>
+              Shipping & Handling <br>
               <span class="checkout-totals-total">Total</span>
 
             </div>
@@ -325,53 +330,91 @@ This may take a few moments.</p>
             </div>
           </div> <!-- end checkout-totals -->
         </div>
-
       </div> <!-- end checkout-section -->
     </div>
     @endsection
     @section('extra-js')
     <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
     <script src="{{ asset('js/checkout.js') }}"></script>
-    <script>
-
-    (function(){
-
-      // PayPal Stuff
-      var form = document.querySelector('#paypal-payment-form');
-      var client_token = "{{ $paypalToken }}";
-
-      braintree.dropin.create({
-        authorization: client_token,
-        selector: '#bt-dropin',
-        paypal: {
-          flow: 'vault'
-        }
-      }, function (createErr, instance) {
-        if (createErr) {
-          console.log('Create Error', createErr);
-          return;
-        }
-
-        // remove credit card option
-        var elem = document.querySelector('.braintree-option__card');
-        elem.parentNode.removeChild(elem);
-
-        form.addEventListener('submit', function (event) {
-          event.preventDefault();
-
-          instance.requestPaymentMethod(function (err, payload) {
-            if (err) {
-              console.log('Request Payment Method Error', err);
-              return;
-            }
-
-            // Add the nonce to the form and submit
-            document.querySelector('#nonce').value = payload.nonce;
-            form.submit();
-          });
-        });
+    <script src="{{ asset('js/jquery.cardcheck.min.js') }}"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+var tal = '{!! GetTotalAmout() !!}'
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'ASfLjIwZvR8QO20sVyqH791VPa6Wh9F5SW8LHRlysgeBV_FFmrGmQCzjtlhzi1Zvu0tNJv4mPRJco_rB',
+      production: 'ASNhPa1qUllD7DwFN5OdZqd0WXqSJ07ko_KVI39LLyMWT1kiuCxpWBAY6U1ZuzhYTy2aSB0AH1yTpiZU'
+    },
+    
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+            label: 'pay',
+            size:  'responsive', // small | medium | large | responsive
+            shape: 'rect',   // pill | rect
+            color: 'blue'   // gold | blue | silver | black
+        },
+    // Set up a payment
+    payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: tal,
+            currency: 'USD'
+          }
+        }]
       });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        $('#nonce').val(data.paymentID)
+       // paypal-payment-form
+       $('#paypal-payment-form').submit() 
+      $('#processingpayment').show()
 
-    })();
+      });
+    }
+  }, '#paypal-button');
+
+      $('.card input').bind('focus', function() {
+  $('.card .status').hide();
+});
+$('.card input').bind('blur', function() {
+  $('.card .status').show();
+});
+$('#cnumber').cardcheck({
+  callback: function(result) {
+      var status = (result.validLen && result.validLuhn) ? 'valid' : 'invalid',
+          message = '',
+          types = '';
+      // Get the names of all accepted card types to use in the status message.
+      for (i in result.opts.types) {
+         types += result.opts.types[i].name + ", ";
+      }
+      types = types.substring(0, types.length-2);   
+      // Set status message
+      if (result.len < 1) {
+          message = 'Please provide a credit card number.';
+      } else if (!result.cardClass) {
+          message = 'We accept the following types of cards: ' + types + '.';
+      } else if (!result.validLen) {
+          message = 'Please check that this number matches your ' + result.cardName + ' (it appears to be the wrong number of digits.)';
+      } else if (!result.validLuhn) {
+          message = 'Please check that this number matches your ' + result.cardName + ' (did you mistype a digit?)';
+      } else {
+          message = '' + result.cardName + '.';
+      }
+   
+      // Show credit card icon
+      $('.card .card_icon').removeClass().addClass('card_icon ' + result.cardClass);
+      // Show status message
+      $('.card .status').removeClass('invalid valid').addClass(status).children('.status_message').text(message);
+  }
+
+});
     </script>
     @endsection

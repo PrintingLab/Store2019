@@ -22,8 +22,9 @@
         "laravel/scout": "^4.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
+        "netshell/paypal": "dev-master",
         "nicolaslopezj/searchable": "^1.9",
-        "tcg/voyager": "1.1.*"
+        "tcg/voyager": "^1.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -51,7 +52,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": ["laravel/dusk"]
+            "dont-discover": [
+                "laravel/dusk"
+            ]
         }
     },
     "scripts": {

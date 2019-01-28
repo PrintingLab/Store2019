@@ -11,12 +11,16 @@ use Session;
 class CartController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        $cookie_name = 'Zipcode';
+unset($_COOKIE[$cookie_name]);
+// empty value and expiration one hour before
+$res = setcookie($cookie_name, '', time() - 3600);
         $mightAlsoLike = Product::mightAlsoLike()->get();
         return view('cart')->with([
             'mightAlsoLike' => $mightAlsoLike,
@@ -29,15 +33,18 @@ class CartController extends Controller
     
     public function cartstep(Product $product,Request $request)
     {
-       
+       if ($product->name=="Booklets" || $product->name=="Calendars") {
+           $PrtdSide="4/0"; 
+       }else{
+           $PrtdSide=$request->prdside; 
+       }
+      // dd($PrtdSide);
         if ($request->sendbtn=='op1') {
-            return view('upload')->with(['productID' =>$request->prdtID,'productCODE' =>$request->prdtcode,'productDESCRIPTION' =>$request->prddesc,'productRUNSIZE' =>$request->prdRunsize,'productSIDE' =>$request->prdside,'productTATIME' =>$request->prdTurnAroundTime,'productPRICE' =>$request->prdtprice,'produto'=>$product,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid,'optionstring' =>$request->optionstring,'op'=>$request->sendbtn]); 
+            return view('upload')->with(['productID' =>$request->prdtID,'productCODE' =>$request->prdtcode,'productDESCRIPTION' =>$request->prddesc,'productRUNSIZE' =>$request->prdRunsize,'productSIDE' =>$PrtdSide,'productTATIME' =>$request->prdTurnAroundTime,'productPRICE' =>$request->prdtprice,'produto'=>$product,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid,'optionstring' =>$request->optionstring,'op'=>$request->sendbtn]); 
         }
         if ($request->sendbtn=='op3') {
-            return view('we-designed')->with(['productID' =>$request->prdtID,'productCODE' =>$request->prdtcode,'productDESCRIPTION' =>$request->prddesc,'productRUNSIZE' =>$request->prdRunsize,'productSIDE' =>$request->prdside,'productTATIME' =>$request->prdTurnAroundTime,'productPRICE' =>$request->prdtprice,'produto'=>$product,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid,'optionstring' =>$request->optionstring,'op'=>$request->sendbtn]);
-        }
-
-       
+            return view('we-designed')->with(['productID' =>$request->prdtID,'productCODE' =>$request->prdtcode,'productDESCRIPTION' =>$request->prddesc,'productRUNSIZE' =>$request->prdRunsize,'productSIDE' =>$PrtdSide,'productTATIME' =>$request->prdTurnAroundTime,'productPRICE' =>$request->prdtprice,'produto'=>$product,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid,'optionstring' =>$request->optionstring,'op'=>$request->sendbtn]);
+        }      
     }
 
     /**

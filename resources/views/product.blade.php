@@ -37,11 +37,13 @@
   <div class="col-md-12">
     <h1 class="titleProductint"><strong>{{ $product->name }}</strong></h1>
   </div>
+  <div class="col-md-12">
   <ul class="producdetailsul">
     @foreach (json_decode($product->details, true) as $detail)
     <li  class="liDetails"><i class="fas fa-check"></i> {{ $detail }} </li>
     @endforeach
   </ul>
+  </div>
   <div class="row">
     <div class="col-md-6">
       <div class="product-section-image">
@@ -66,35 +68,16 @@
         <a class="nav-link link-products active" data-toggle="pill" href="#home">DETAILS  <strong>/</strong></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link link-products " data-toggle="pill" href="#menu1">COATINGS <strong>/</strong></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link link-products " data-toggle="pill" href="#menu2">PAPER <strong>/</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link link-products " data-toggle="pill" href="#menu3">SPECS <strong>/</strong></a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link link-products " data-toggle="pill" href="#menu4">TEMPLATES </a>
       </li>
     </ul>
     <div class="tab-content tab-content-MP">
       <div id="home" class="container tab-pane active"><br>
-      {{$product->description}}
+      {!!$product->description!!}
       </div>
-      <div id="menu1" class="container tab-pane fade"><br>
-        
-      {{$product->coatings}} 
-      </div>
-      <div id="menu2" class="container tab-pane fade"><br>
-      {{$product->papers}}
-      </div>
-      <div id="menu3" class="container tab-pane fade"><br>
-      {{$product->specs}}
-      </div>
+      
       <div id="menu4" class="container tab-pane fade"><br>
-
+      {!!$product->description!!}
       </div>
     </div>
   </div>
@@ -143,7 +126,7 @@
                     </div> <!-- end filter_name -->
                     <!-- <div ng-repeat="op in stockarry  | unique: 'option'">@{{op.option}}</div>  -->
                     <div class="col-md-7 filter_select">
-                      <select name="stock" id="stock">
+                      <select name="stock" id="stock" ng-disabled="@{{stockarry.length==1}}">
                         <option value="@{{op.value}}" ng-repeat="op in stockarry  | unique: 'option'">@{{stockname(op.option)}}   </option>
                       </select>
                     </div> <!-- end filter-select -->
@@ -168,8 +151,8 @@
                       <strong> Coating: @{{prdselect3}}</strong>
                     </div> <!-- end filter_name -->
                     <div class="col-md-7 filter_select">
-                      <select name="coating" id="coating">
-                        <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist">@{{op.option}}</option>
+                      <select name="coating" id="coating" ng-disabled="@{{Coatingarraylist.length==1}}">
+                        <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist | filter:{product_code:'!16PT-4VBCUV-2X3.5'}">@{{op.option}}</option>
                       </select>
                     </div> <!-- end filter-select -->
                   </div>
@@ -183,33 +166,26 @@
                     <strong>@{{changeoptioname(op.product_option_group_name)}}:</strong>
                   </div>
                   <div class="col-md-7">
-                    <select   name="" id="@{{op.product_option_group_uuid}}" ng-click="optionschange()">
-                      <option id="@{{op2.option_uuid}}" name="@{{op2.option_name}}" value="@{{op2.option_uuid}}" ng-repeat="op2 in op.options | unique: 'option_name'">@{{changeoptioname(op2.option_name)}}</option>
-
+                    <select   name="" id="@{{op.product_option_group_uuid}}" ng-click="optionschange()" ng-disabled="@{{op.options.length==1}}">                    
+                      <option id="@{{op2.option_uuid}}" name="@{{op2.option_name}}" value="@{{op2.option_uuid}}" ng-repeat="op2 in op.options | filter:{option_uuid:'!2fd6ad29-756c-4927-a66f-b0c0116e31f9'} | unique: 'option_name'" >@{{changeoptioname(op2.option_name)}}</option>
                     </select>
                   </div>
                 </div>
               </div>
             </div>
             <div class="productSectionPrice row">
-
               <div class="col-md-6">
                 <strong>
                   <label for="product-section-price">Printing Cost:</label>
                 </strong>
               </div>
-
               <div class="col-md-6">
                 <img src="{{ asset('img/settings/gif-load-13.gif') }}" alt="" ng-hide="priceshow" >
                 <input id="product-section-price" value="@{{priceformat(buildprice)}}" ng-show="priceshow" readonly disabled>
                 <p style="text-align: right;" ng-show="priceshow">( Only $@{{priceperpiece}} each )</p>
               </div>
-
-
-
             </div>
           </div>
-
           @if ($product->quantity > 0)
           <form action="{{route('cart.cartstep',$product)}}" id="fromBtn" name="fromBtn" class="center" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
@@ -237,29 +213,14 @@
           </form>
           @endif
         </div>
-
-
-
-
          <!-- <button ng-click="categorias()">categotias</button>
         <input type="text" ng-model="busca" >
         <ul>
            <li ng-repeat="cat in categoriaslist |filter:busca"><b>@{{cat.category_name}}</li><br> 
         </ul>  -->
       </div> <!-- end product-section -->
-
-
-
     </div>
   </div>
-
-
-
-
-
-  
-
-
 </div>
 
 

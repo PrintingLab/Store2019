@@ -1,0 +1,15 @@
+RewriteEngine on
+# Cambiar sudominio.com por su nombre de dominio
+RewriteCond %{HTTP_HOST} ^(www.)?printinglab.com$
+# Cambiar 'subdirectory' por el nombre del subdirectorio que quiere usar
+RewriteCond %{REQUEST_URI} !^/public/
+# No cambiar estas lineas.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Cambiar 'subdirectory' por el nombre del subdirectorio que quiere usar
+RewriteRule ^(.*)$ /public/$1
+# Cambiar sudominio.com por su nombre de dominio
+# Cambiar 'subdirectory' por el nombre del subdirectorio que quiere usar
+# followed by / then the main file for your site, index.php, index.html, etc.
+RewriteCond %{HTTP_HOST} ^(www.)?sudominio.com$
+RewriteRule ^(/)?$ public/index.php [L]

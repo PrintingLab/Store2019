@@ -101,6 +101,104 @@ class CheckoutController extends Controller
         }
     }
 
+    public function AuthorizeauthOnly(Request $request)
+    {
+   
+        //return response()->json(['success'=>$request->card_expiry_month]);
+        $mode=config('services.authorize.mode');
+        $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
+        $merchantAuthentication->setName(config('services.authorize.login'));
+        $merchantAuthentication->setTransactionKey(config('services.authorize.key'));
+        $refId = 'ref'.time();
+// Create the payment data for a credit card
+          $creditCard = new AnetAPI\CreditCardType();
+          $creditCard->setCardNumber($request->cnumber);
+          $expiry = $request->card_expiry_year . '-' . $request->card_expiry_month;
+          $creditCard->setExpirationDate($expiry);
+          $creditCard->setCardCode($request->ccode);
+          $paymentOne = new AnetAPI\PaymentType();
+          $paymentOne->setCreditCard($creditCard);
+          $customerAddress = new AnetAPI\CustomerAddressType();
+          $customerAddress->setFirstName($request->card_name);
+          $customerAddress->setAddress($request->address);
+          $customerAddress->setCity($request->city);
+          $customerAddress->setState($request->province);
+          $customerAddress->setZip($request->postalcode);
+          $customerAddress->setCountry("USA");
+          // Create a transaction
+          $transactionRequestType = new AnetAPI\TransactionRequestType();
+          $transactionRequestType->setTransactionType("authOnlyTransaction");
+          $transactionRequestType->setAmount(getNumbers()->get('newTotal'));
+          $transactionRequestType->setPayment($paymentOne);
+          $transactionRequestType->setBillTo($customerAddress);
+          $request = new AnetAPI\CreateTransactionRequest();
+          $request->setMerchantAuthentication($merchantAuthentication);
+          $request->setRefId( $refId);
+          $request->setTransactionRequest($transactionRequestType);
+          $controller = new AnetController\CreateTransactionController($request);
+          if ($mode=='SANDBOX') {
+            $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
+          }
+          if ($mode=='PRODUCTION') {
+            $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
+          }
+          if ($response != null) {
+            // Set the customer's Bill To address
+			if ($response->getMessages()->getResultCode() == "Ok") {
+				$tresponse = $response->getTransactionResponse();
+
+				if ($tresponse != null && $tresponse->getMessages() != null) {
+					$array = array(
+						"ReferenceCode" => $response->getrefId(),
+						"ResultCode" => $response->getMessages()->getResultCode(),
+						"getResponseCode" => $tresponse->getResponseCode(),
+						"getAuthCode" => $tresponse->getAuthCode(),
+						"getTransId" => $tresponse->getTransId(),
+						"getCode" => $tresponse->getMessages()[0]->getCode(),
+						"getDescription" => $tresponse->getMessages()[0]->getDescription(),
+					);
+					return response()->json(['success'=>$array]);
+
+				} else {
+					if ($tresponse->getErrors() != null) {
+						$array = array(
+							"ResultCode" => $response->getMessages()->getResultCode(),
+							"Result" => 'Transaction Failed',
+							"Errorcode" => $tresponse->getErrors()[0]->getErrorCode(),
+							"Errormessage" => $tresponse->getErrors()[0]->getErrorText(),
+						);
+						return response()->json(['success'=>$array]);
+					}
+				}
+			} else {
+				$tresponse = $response->getTransactionResponse();
+				if ($tresponse != null && $tresponse->getErrors() != null) {
+					$array = array(
+						"ResultCode" => $response->getMessages()->getResultCode(),
+						"Result" => 'Transaction Failed',
+						"Errorcode" => $tresponse->getErrors()[0]->getErrorCode(),
+						"Errormessage" => $tresponse->getErrors()[0]->getErrorText(),
+					);
+					return response()->json(['success'=>$array]);
+				} else {
+					$array = array(
+						"ResultCode" => $response->getMessages()->getResultCode(),
+						"Result" => 'Transaction Failed',
+						"Errorcode" => 'Transaction Failed',
+						"Errormessage" => 'Transaction Failed',
+					);
+					return response()->json(['success'=>$array]);
+				}
+			}
+		} else {
+			return response()->json(['success'=>'No response returned']);
+		}
+    }
+
+
+
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -109,7 +207,6 @@ class CheckoutController extends Controller
      */
     public function AuthorizeCheckout(Request $request)
     {
-
 //         API LOGIN ID
 // 6J9W7nvZtm8
 // TRANSACTION KEY
@@ -125,31 +222,12 @@ class CheckoutController extends Controller
         // Common setup for API credentials
         $mode=config('services.authorize.mode');
         $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
+        $refId = 'ref'.time();
         $merchantAuthentication->setName(config('services.authorize.login'));
         $merchantAuthentication->setTransactionKey(config('services.authorize.key'));
-        $refId = 'ref'.time();
-// Create the payment data for a credit card
-          $creditCard = new AnetAPI\CreditCardType();
-          $creditCard->setCardNumber($request->cnumber);
-          $expiry = $request->card_expiry_year . '-' . $request->card_expiry_month;
-          $creditCard->setExpirationDate($expiry);
-          $creditCard->setCardCode($request->ccode);
-          $paymentOne = new AnetAPI\PaymentType();
-          $paymentOne->setCreditCard($creditCard);
-// Set the customer's Bill To address
-$customerAddress = new AnetAPI\CustomerAddressType();
-$customerAddress->setFirstName($request->card_name);
-$customerAddress->setAddress($request->address);
-$customerAddress->setCity($request->city);
-$customerAddress->setState($request->province);
-$customerAddress->setZip($request->postalcode);
-$customerAddress->setCountry("USA");
-// Create a transaction
           $transactionRequestType = new AnetAPI\TransactionRequestType();
-          $transactionRequestType->setTransactionType("authCaptureTransaction");
-          $transactionRequestType->setAmount(getNumbers()->get('newTotal'));
-          $transactionRequestType->setPayment($paymentOne);
-          $transactionRequestType->setBillTo($customerAddress);
+          $transactionRequestType->setTransactionType("priorAuthCaptureTransaction");
+          $transactionRequestType->setRefTransId($request->ID);
           $Transrequest = new AnetAPI\CreateTransactionRequest();
           $Transrequest->setMerchantAuthentication($merchantAuthentication);
           $Transrequest->setRefId( $refId);
@@ -217,38 +295,35 @@ public function updateShiping(Request $request)
 
     public function paypalCheckout(Request $request)
     {
+       // dd($request->nonce);
         // Check race condition when there are less items available to purchase
         // if ($this->productsAreNoLongerAvailable()) {
         //     return back()->withErrors('Sorry! One of the items in your cart is no longer avialble.');
         // }
 
-        $gateway = new \Braintree\Gateway([
-            'environment' => config('services.braintree.environment'),
-            'merchantId' => config('services.braintree.merchantId'),
-            'publicKey' => config('services.braintree.publicKey'),
-            'privateKey' => config('services.braintree.privateKey')
-        ]);
+        // $gateway = new \Braintree\Gateway([
+        //     'environment' => config('services.braintree.environment'),
+        //     'merchantId' => config('services.braintree.merchantId'),
+        //     'publicKey' => config('services.braintree.publicKey'),
+        //     'privateKey' => config('services.braintree.privateKey')
+        // ]);
 
-        $nonce = $request->payment_method_nonce;
+        // $nonce = $request->payment_method_nonce;
 
-        $result = $gateway->transaction()->sale([
-            'amount' => number_format(getNumbers()->get('newTotal'),2, '.', ''),
-            'paymentMethodNonce' => $nonce,
-            'options' => [
-                'submitForSettlement' => true
-            ]
-        ]);
-        $transaction = $result->transaction;
-
-        if ($result->success) {
+        // $result = $gateway->transaction()->sale([
+        //     'amount' => number_format(getNumbers()->get('newTotal'),2, '.', ''),
+        //     'paymentMethodNonce' => $nonce,
+        //     'options' => [
+        //         'submitForSettlement' => true
+        //     ]
+        // ]);
+        // $transaction = $result->transaction;
             $order = $this->addToOrdersTablesPaypal(
-                $transaction->paypal['payerEmail'],
-                $transaction->paypal['payerFirstName'].' '.$transaction->paypal['payerLastName'],
+                $request->email,
+                $request->name,
                 null,
-                $request,
-                $transaction->paypal['paymentId']
-            );
-            
+                $request
+            );      
             Mail::send(new OrderPlaced($order));
             Mail::send(new OrderRecived($order));
             // decrease the quantities of all the products in the cart
@@ -258,18 +333,6 @@ public function updateShiping(Request $request)
             session()->forget('coupon');
 
             return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
-        } else {
-
-            $order = $this->addToOrdersTablesPaypal(
-                $transaction->paypal['payerEmail'],
-                $transaction->paypal['payerFirstName'].' '.$transaction->paypal['payerLastName'],
-                $result->message,
-                $request,
-                $transaction->paypal['paymentId']
-            );
-
-            return back()->withErrors('An error occurred with the message: '.$result->message);
-        }
     }
 
     protected function addToOrdersTables($request, $error,$TransId)
@@ -324,13 +387,13 @@ public function updateShiping(Request $request)
         return $order;
     }
 
-    protected function addToOrdersTablesPaypal($email, $name, $error,$request,$paytId)
+    protected function addToOrdersTablesPaypal($email, $name, $error,$request)
     {
         // Insert into orders table
         $order = Order::create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
             'billing_email' => $request->email,
-            'billing_name' => $name,
+            'billing_name' => $request->name,
             'billing_name_on_card' => $name,
             'billing_address' => $request->address,
             'billing_city' => $request->city,
@@ -346,7 +409,7 @@ public function updateShiping(Request $request)
             'billing_total' => getNumbers()->get('newTotal'),
             'error' => $error,
             'payment_gateway' => 'paypal',
-            'payment_id' => $paytId,
+            'payment_id' =>  $request->payment_method_nonce,
         ]);
 
         // Insert into order_product table
