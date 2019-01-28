@@ -62,25 +62,53 @@
         @endif
       </div>
       <!-- Tabs -->
-  <div class="container tabs-products">
-    <ul class="nav nav-pills" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link link-products active" data-toggle="pill" href="#home">DETAILS  <strong>/</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link link-products " data-toggle="pill" href="#menu4">TEMPLATES </a>
-      </li>
-    </ul>
-    <div class="tab-content tab-content-MP">
-      <div id="home" class="container tab-pane active"><br>
-      {!!$product->description!!}
+      <div class="container tabs-products">
+        <ul class="nav nav-pills" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link link-products active" data-toggle="pill" href="#home">DETAILS  <strong>/</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-products " data-toggle="pill" href="#menu4">TEMPLATES </a>
+          </li>
+        </ul>
+        <div class="tab-content tab-content-MP">
+          <div id="home" class="container tab-pane active"><br>
+            {!!$product->description!!}
+          </div>
+          <div id="menu1" class="container tab-pane fade"><br>
+            {{$product->coatings}}
+          </div>
+          <div id="menu4" class="container tab-pane fade"><br>
+
+            <div class="col-md-12">
+              <h5>EPS</h5>
+              <ul class="ulTabTemplete">
+                @foreach (productsTempleteEps($product->templates) as $archivo)
+                <li>
+                  <a href="{{ '../'.$product->templates .'eps/'. $archivo }}" download><i class="fas fa-download"></i>{{$archivo}}</a>
+                </li>
+                @endforeach
+              </ul>
+            </div>
+
+            <div class="col-md-12" style="margin-top: 5%;">
+              @if( (typeFile($product->templates)) == 'jpg' )
+              <h5>JPG</h5>
+              @else
+              <h5>PSD</h5>
+              @endif
+              <ul class="ulTabTemplete">
+                @foreach ( productsTempleteJpg($product->templates) as $archivo  )
+                <li>
+                  <a href="{{ '../'.$product->templates .'jpg/'. $archivo }}" download><i class="fas fa-download"></i>{{$archivo}}</a>
+                </li>
+                @endforeach
+              </ul>
+            </div>
+
+          </div>
+        </div>
       </div>
-      
-      <div id="menu4" class="container tab-pane fade"><br>
-      {!!$product->description!!}
-      </div>
-    </div>
-  </div>
     </div>
     <div class="col-md-6">
       <div  class="container containerProductsint" ng-controller="shopcontroller">

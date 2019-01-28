@@ -35,7 +35,7 @@
       <div class="Div_allproduct2">
         <ul class="list_dropdown">
           <li><strong>MARKETING PRODUCTS</strong></li>
-          
+
           <?php $__currentLoopData = $Allproducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <li><a href="<?php echo e(route('shop.show', $produc->slug)); ?>"><?php echo e($produc->name); ?></a></li>
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -391,8 +391,7 @@
         <p>
           Have a question or need help placing an order?
           <br>
-          Our printing specialists are available Monday-Fridat
-          and form 8am-5pm.
+          Our printing specialists are available Monday-Friday and form 8am-5pm.
         </p>
       </div>
     </div>
