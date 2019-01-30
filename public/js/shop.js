@@ -12,6 +12,7 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             console.log(response.statusText);
         });
     }
+    $scope.specs=prtdCoatings
     $scope.buildpricewedesing = 0
     $scope.btndisigned = true
     $scope.priceshow = false
@@ -21,6 +22,10 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
     $scope.Dimensions = $('#dimensions').val();
     $scope.Coatingarraylist = []
     $scope.roundcorners = $('#roundcorners').val();
+    $scope.selectedGenres = ","; 
+    
+
+
     $scope.load4overproducts = function () {
         $scope.getjsonconfig()
         $scope.prtdarray = prtd
@@ -28,9 +33,7 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
         $http({
             method: 'post',
             url: '/4overproducts',
-            data: {
-                endpoint: endurl
-            },
+            data: {endpoint: endurl},
         }).then(function mySuccess(response) {
             $scope.products = response.data.success.entities;
             console.log($scope.products)
@@ -52,34 +55,20 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
         }
 
     }
-
-
-
-
-    $scope.stockname = function (name, id, idselect) {
+    $scope.stockname = function (name) {
         var newname
-        if (prtdname == "Business Cards") {
-            switch (name) {
-                case "100GLC":
-                    $("#stock option[value='" + name + "']").remove();
-                    break;
-                case "100LBWS":
-                    $("#stock option[value='" + name + "']").remove();
-                    break;
-                case "18PTC1S":
-                    $("#stock option[value='" + name + "']").remove()
-                    break;
-                case "18PTC1S":
-                    $("#stock option[value='" + name + "']").remove()
-                    break;
-                case "4/1":
-                    $("#" + idselect + " option[value='" + id + "']").remove()
-                    break;
-                default:
-                    break;
+        var stocknames
+        if (prtdStock) {
+            stocknames = JSON.parse(prtdStock)
+            for (let index = 0; index < stocknames.length; index++) {
+                const element = stocknames[index];
+                if (name==element) { 
+                   $("#stock option[value='" + name + "']").remove();
+                }
             }
+        }else{
+            console.log("empty")
         }
-
         for (let index = 0; index < $scope.stoknames.length; index++) {
             if ($scope.stoknames[index].Name == name) {
                 newname = $scope.stoknames[index].value
@@ -92,6 +81,22 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             return name
         }
     }
+
+    $scope.CoatingsName = function(expected,code){
+        var CoatingName
+        if (prtdCoatings) {
+            CoatingName = JSON.parse(prtdCoatings)
+            for (let index = 0; index < CoatingName.length; index++) {
+                const element = CoatingName[index];
+                console.log(code)
+                if (expected==element) { 
+                   $("#coating option[value='" +code+ "']").remove();
+                }
+            }
+        } 
+        return expected
+       // $("#coating option[value='" + code + "']").remove();
+      }; 
     $scope.changeoptioname = function (name) {
         var newname
         for (let index = 0; index < $scope.optioname.length; index++) {

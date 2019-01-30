@@ -90,7 +90,6 @@
                 @endforeach
               </ul>
             </div>
-
             <div class="col-md-12" style="margin-top: 5%;">
               @if( (typeFile($product->templates)) == 'jpg' )
               <h5>JPG</h5>
@@ -113,9 +112,11 @@
     <div class="col-md-6">
       <div  class="container containerProductsint" ng-controller="shopcontroller">
         <script>
-        var prtd = '{!!$product !!}'
-        var apiID = '{!!$product->apiID !!}'
-        var prtdname = '{!!$product->name  !!}'
+        var prtd = '{!!$product !!}'                           
+        var apiID = '{!!$product->apiID !!}'                           
+        var prtdname = '{!!$product->name !!}'                           
+        var prtdStock = '{!!$product->coatings !!}'                           
+        var prtdCoatings = "{!!$product->specs !!}"                           
         </script>
         <div class="product-section-information" Style="position:relative">
           <div id="preloader">
@@ -127,6 +128,7 @@
                 </i>
               </div>
             </div>
+            
             <p style="text-align: center;padding-top: 70px;">Loading Options...  This may take a few seconds.</p>
           </div>
           <div ng-hide="moreoptions">
@@ -179,9 +181,11 @@
                       <strong> Coating: @{{prdselect3}}</strong>
                     </div> <!-- end filter_name -->
                     <div class="col-md-7 filter_select">
+                     
                       <select name="coating" id="coating" ng-disabled="@{{Coatingarraylist.length==1}}">
-                        <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist | filter:{product_code:'!16PT-4VBCUV-2X3.5'}">@{{op.option}}</option>
+                        <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist | filter:specs | filter:{product_code:'!16PT-4VBCUV-2X3.5'}">@{{op.option}}</option>
                       </select>
+                    
                     </div> <!-- end filter-select -->
                   </div>
                 </div> <!-- end jt_filters -->
