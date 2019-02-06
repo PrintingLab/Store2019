@@ -86,14 +86,16 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
         var CoatingName
         if (prtdCoatings) {
             CoatingName = JSON.parse(prtdCoatings)
-            for (let index = 0; index < CoatingName.length; index++) {
-                const element = CoatingName[index];
-                console.log(code)
-                if (expected==element) { 
-                   $("#coating option[value='" +code+ "']").remove();
-                }
-            }
-        } 
+             for (let index = 0; index < CoatingName.length; index++) {
+                 const element = CoatingName[index];
+                 //$("#coating option[value='"+element+"']").remove()
+                 if (expected.replace(/ /g, "")==element.replace(/ /g, "")) {
+                    $("#coating option[value='"+code+"']").remove() 
+                 }
+             }
+            
+        }
+
         return expected
        // $("#coating option[value='" + code + "']").remove();
       }; 
@@ -199,11 +201,13 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
                     product_option_groups: matches[index].product_option_groups,
                     product_description: matches[index].product_description,
                     product_code: matches[index].product_code,
-                    option: matches[index].product_description.toUpperCase().replace(prtdname.toUpperCase(), '').replace($scope.Stock.toUpperCase(), '').replace($scope.Dimensions.toUpperCase(), '').replace('ROUND', '').replace('CORNER', '').replace('RC', '').replace('COVER', '').replace('BUSINESS', '').replace('CARDS', '').replace('CARD', '').replace('WITH', '').replace('18PT C1S', '').replace('UV', 'FULL GLOSS').replace('100LB', '').replace('SPOT', '').replace('UV', 'FULL GLOSS').replace('BC', '').replace('14PT', '').replace('LINEN', '').replace('32PT', '').replace('SADDLE STITCH CALENDAR ON', '').replace('CALENDAR ON', '').replace('-', '').replace('#', '').replace('FLYERS', '').replace('FLYER', '').replace('AQ', 'AKUAFOIL')
+                    option: matches[index].product_description.toUpperCase().replace($scope.Stock.toUpperCase(), '').replace($scope.Dimensions.toUpperCase(), '').replace('ROUND', '').replace('CORNER', '').replace('RC', '').replace('COVER', '').replace('BUSINESS', '').replace('CARDS', '').replace('CARD', '').replace('WITH', '').replace('18PT C1S', '').replace('UV', 'FULL GLOSS').replace('100LB', '').replace('SPOT', '').replace('UV', 'FULL GLOSS').replace('BC', '').replace('14PT', '').replace('LINEN', '').replace('32PT', '').replace('SADDLE STITCH CALENDAR ON', '').replace('CALENDAR ON', '').replace('-', '').replace('#', '').replace('FLYERS', '').replace('FLYER', '').replace('AQ', 'AKUAFOIL').replace('SOCIAL', '').replace('POST', '')
                 })
                 $scope.$apply()
             }
+            
             $scope.Coatingarraylist = $scope.Coatingarray
+
             var matchescorner = $scope.$eval("Coatingarray | filter:{product_description:'Round'}");
             var matchesnocorner = $scope.$eval("Coatingarray | filter:{product_description:'! Round'}");
             if (matchescorner.length == 0) {
@@ -217,8 +221,10 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
                 $scope.roundcornerfilter()
             }
         }
+        
         $scope.prdselect1 = $('#coating').val();
         $scope.builderchangue()
+     
     }
     $scope.optionbydimensions = function (endurl) {
         $http({
@@ -261,25 +267,26 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
         $scope.builderprice()
     });
 
-    $('#side').change(function () {
+    $('#38d33954-5a42-4112-a905-215eb827e62c').change(function () {
+         $scope.priceshow = false
+        $scope.btndisigned = true
+        $scope.Colorspec = $(this).val()
+         $scope.builderprice()
+       // alert($(this).val())
+    });
+
+    $('#87e09691-ef33-4cf4-8f17-48af06ce84f4').change(function () {
+        $scope.Runsize = $(this).val()
         $scope.priceshow = false
         $scope.btndisigned = true
-        $scope.side = $(this).val()
         $scope.builderprice()
     });
 
-    $('#quantyti').change(function () {
-        $scope.priceshow = false
-        $scope.btndisigned = true
-        $scope.quantyti = $(this).val()
-        $scope.builderprice()
-    });
-
-    $('#TurnAroundTime').change(function () {
-        $scope.priceshow = false
-        $scope.btndisigned = true
+    $('#f80e8179-b264-42ce-9f80-bb258a09a1fe').change(function () {
         $scope.TurnAroundTime = $(this).val()
-        $scope.builderTurnAround()
+        $scope.priceshow = false
+        $scope.btndisigned = true
+        $scope.builderprice()
     });
 
     $scope.load4overproductsOptions = function (endurl) {
@@ -291,7 +298,9 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             },
         }).then(function mySuccess(response) {
             $scope.arrayproductprices = response.data.success.entities
-            console.log($scope.arrayproductprices)
+            var Optionprices = $scope.$eval("arrayproductprices | filter:{product_option_group_name:'Turn Around Time'}");
+            $scope.arrayProductprice = Optionprices[0].options
+            console.log(Optionprices[0].options)
             setTimeout(function () {
                 $scope.optionschange()
             }, 500);
@@ -301,42 +310,38 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
     }
 
     $scope.optionschange = function () {
+     //   $("#38d33954-5a42-4112-a905-215eb827e62c").val("13abbda7-1d64-4f25-8bb2-c179b224825d");
         $scope.priceshow = false
-        $scope.productbuiloption = []
-        for (let index = 0; index < $scope.arrayproductprices.length; index++) {
-            const element = $scope.arrayproductprices[index];
-            $scope.productbuiloption.push({
-                option: element.product_option_group_name,
-                id: $("#" + element.product_option_group_uuid + "").val(),
-                name: $("#" + $("#" + element.product_option_group_uuid + "").val() + "").attr("name")
-            })
-        }
-        var Runsize = $scope.$eval("productbuiloption | filter:{option:'Runsize'}");
-        var Colorspec = $scope.$eval("productbuiloption | filter:{option:'Colorspec'}");
-        var TurnAroundTime = $scope.$eval("productbuiloption | filter:{option:'Turn Around Time'}");
+      
         var TurnAroundTimes = $scope.$eval("arrayproductprices | filter:'Turn Around Time'");
-        $scope.Runsize = Runsize[0].id
-        $scope.Colorspec = Colorspec[0].id
-        $scope.TurnAroundTime = TurnAroundTime[0].id
         $scope.productTurnAroundTime = TurnAroundTimes[0].options
-        $scope.optionstring = JSON.stringify($scope.productbuiloption, null, "")
-        console.log($scope.productbuiloption)
+       
         $scope.builderprice()
+       
     }
 
 
 
     $scope.builderprice = function (params) {
+            $scope.Colorspec = $("#38d33954-5a42-4112-a905-215eb827e62c").val()
+            $scope.Runsize = $("#87e09691-ef33-4cf4-8f17-48af06ce84f4").val()
+            $scope.TurnAroundTime = $("#f80e8179-b264-42ce-9f80-bb258a09a1fe").val()
+            $scope.$apply()
+           
         for (let index = 0; index < $scope.productbaseprice.length; index++) {
             const priceloop = $scope.productbaseprice[index];
             if (priceloop.colorspec_uuid == $scope.Colorspec && priceloop.runsize_uuid == $scope.Runsize) {
+                console.log(priceloop.product_baseprice)
                 $scope.firtprice = priceloop.product_baseprice
             }
-
         }
         $scope.builderTurnAround()
     }
     $scope.builderTurnAround = function () {
+        $scope.Colorspec = $("#38d33954-5a42-4112-a905-215eb827e62c").val()
+            $scope.Runsize = $("#87e09691-ef33-4cf4-8f17-48af06ce84f4").val()
+            $scope.TurnAroundTime = $("#f80e8179-b264-42ce-9f80-bb258a09a1fe").val()
+ 
         for (let index = 0; index < $scope.productTurnAroundTime.length; index++) {
             if ($scope.productTurnAroundTime[index].colorspec_uuid == $scope.Colorspec && $scope.productTurnAroundTime[index].runsize_uuid == $scope.Runsize && $scope.productTurnAroundTime[index].option_uuid == $scope.TurnAroundTime) {
                 $scope.TurnAroundTimeprice($scope.productTurnAroundTime[index].option_prices)
@@ -346,7 +351,7 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
                 $scope.quantyti = $scope.productTurnAroundTime[index].runsize
                 $scope.side = $scope.productTurnAroundTime[index].colorspec
                 $scope.TurnAroundval = $scope.productTurnAroundTime[index].option_name
-                console.log($scope.productTurnAroundTime[index].option_prices)
+                //console.log($scope.productTurnAroundTime[index].option_prices)
             }
         }
         // $http({
@@ -386,6 +391,17 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             $scope.priceshow = true
             $scope.moreoptions = false
             //$scope.productbaseprice=response.data.success.entities.price;
+            $scope.productbuiloption = []
+            for (let index = 0; index < $scope.arrayproductprices.length; index++) {
+                const element = $scope.arrayproductprices[index];
+                $scope.productbuiloption.push({
+                    option: element.product_option_group_name,
+                    id: $("#" + element.product_option_group_uuid + "").val(),
+                    name: $("#" + $("#" + element.product_option_group_uuid + "").val() + "").attr("name")
+                })
+            }
+            $scope.optionstring = JSON.stringify($scope.productbuiloption, null, "")
+            console.log($scope.productbuiloption);
         }, function myError(response) {
             //console.log(response.statusText);
         });

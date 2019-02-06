@@ -36,7 +36,7 @@
       <div class="Div_allproduct2">
         <ul class="list_dropdown">
           <li><strong>MARKETING PRODUCTS</strong></li>
-
+          <li><a href="{{ route('shop.index', ['category' => 'Business Cards']) }}">Business Cards</a></li>
           @foreach ($Allproducts as $produc)
           <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
           @endforeach

@@ -22,5 +22,8 @@
 	{"Name":"4/0 (4 color front)", "value":"Front Only"},
 	{"Name":"4/4 (4 color both sides)", "value":"Front and Back"},
 	{"Name":"4/1", "value":"---"},
+	{"Name":"4/0", "value":"Front Only"},
+	{"Name":"4/4", "value":"Front and Back"},
+	{"Name":"4/1", "value":"---"},
 	{"Name":"No Spot UV", "value":"No Gloss Uv"}		
   ]

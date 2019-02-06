@@ -4,7 +4,7 @@
   use App\Product;
 
 function getAllProducts(){
-    $allproducts = Product::all();
+    $allproducts = Product::all()->where('type', false);
    
     return $allproducts;
   }

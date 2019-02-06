@@ -26,6 +26,7 @@
                   <div class="row">
                     <div class="col-md-8">
                       <ul class="list_dropdown list_dropdown-brake">
+                      <li><a href="{{ route('shop.index', ['category' => 'Business Cards']) }}">Business Cards</a></li>
                         @foreach (getAllProducts() as $produc)
                         <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
                         @endforeach
@@ -209,6 +210,7 @@
                       <div class="row">
                         <div class="col-md-8">
                           <ul class="list_dropdown list_dropdown-brake">
+                          <li><a href="{{ route('shop.index', ['category' => 'Business Cards']) }}">Business Cards</a></li>
                             @foreach (getAllProducts() as $produc)
                             <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
                             @endforeach

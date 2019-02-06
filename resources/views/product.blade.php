@@ -116,8 +116,9 @@
         var apiID = '{!!$product->apiID !!}'                           
         var prtdname = '{!!$product->name !!}'                           
         var prtdStock = '{!!$product->coatings !!}'                           
-        var prtdCoatings = "{!!$product->specs !!}"                           
+        var prtdCoatings = '{!!$product->specs !!}'                          
         </script>
+        
         <div class="product-section-information" Style="position:relative">
           <div id="preloader">
             <div class="flexloader">
@@ -175,15 +176,16 @@
                     </div> <!-- end filter-select -->
                   </div>
                 </div> <!-- end jt_filters -->
+                
                 <div class="jt_filters">
                   <div class="row">
                     <div class="col-md-5 filter_name">
                       <strong> Coating: @{{prdselect3}}</strong>
                     </div> <!-- end filter_name -->
                     <div class="col-md-7 filter_select">
-                     
+                    
                       <select name="coating" id="coating" ng-disabled="@{{Coatingarraylist.length==1}}">
-                        <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist | filter:specs | filter:{product_code:'!16PT-4VBCUV-2X3.5'}">@{{op.option}}</option>
+                        <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist  | filter:{product_code:'!16PT-4VBCUV-2X3.5'} | orderBy:'-option'">@{{CoatingsName(op.option,op.product_code)}}</option>
                       </select>
                     
                     </div> <!-- end filter-select -->
@@ -192,7 +194,7 @@
               </fieldset>
             </form>
             <div>
-              <div class="jt_filters prtd@{{op.product_option_group_uuid}}" ng-repeat="op in arrayproductprices | filter:{product_option_group_uuid:'!ed16daf6-77e4-4133-8d65-3947d5d19f52'}">
+              <div class="jt_filters prtd@{{op.product_option_group_uuid}}" ng-repeat="op in arrayproductprices | filter:{product_option_group_uuid:'!ed16daf6-77e4-4133-8d65-3947d5d19f52'} | filter:{product_option_group_uuid:'!38d33954-5a42-4112-a905-215eb827e62c'} | filter:{product_option_group_uuid:'!87e09691-ef33-4cf4-8f17-48af06ce84f4'} | filter:{product_option_group_uuid:'!f80e8179-b264-42ce-9f80-bb258a09a1fe'}">
                 <div class="row ">
                   <div class="col-md-5 filter_name">
                     <strong>@{{changeoptioname(op.product_option_group_name)}}:</strong>
@@ -204,6 +206,46 @@
                   </div>
                 </div>
               </div>
+
+              <div class="jt_filters prtd@{{op.product_option_group_uuid}}" >
+                <div class="row ">
+                  <div class="col-md-5 filter_name">
+                    <strong>Printed Side:</strong>
+                  </div>
+                  <div class="col-md-7">
+                    <select   name="PrintedSide" id="38d33954-5a42-4112-a905-215eb827e62c" >                    
+                      <option id="@{{op.colorspec_uuid}}" name="@{{op.colorspec}}" value="@{{op.colorspec_uuid}}" ng-repeat="op in arrayProductprice  | unique: 'colorspec' | filter:{colorspec:'!4/1'}" >@{{changeoptioname(op.colorspec)}}</option>
+                    </select>
+                  </div>
+                </div>                
+              </div>
+
+              <div class="jt_filters prtd@{{op.product_option_group_uuid}}" >
+                <div class="row ">
+                  <div class="col-md-5 filter_name">
+                    <strong>Quantity:</strong>
+                  </div>
+                  <div class="col-md-7">
+                    <select   name="Quantity" id="87e09691-ef33-4cf4-8f17-48af06ce84f4">                    
+                    <option id="@{{op.runsize_uuid}}" name="@{{op.runsize}}" value="@{{op.runsize_uuid}}" ng-repeat="op in arrayProductprice  | unique: 'runsize' " >@{{changeoptioname(op.runsize)}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="jt_filters prtd@{{op.product_option_group_uuid}}" >
+                <div class="row ">
+                  <div class="col-md-5 filter_name">
+                    <strong>Printing Time:</strong>
+                  </div>
+                  <div class="col-md-7">
+                    <select   name="PrintingTime" id="f80e8179-b264-42ce-9f80-bb258a09a1fe">                    
+                    <option id="@{{op.option_uuid}}" name="@{{op.option_name}}" value="@{{op.option_uuid}}" ng-repeat="op in arrayProductprice | filter:{runsize_uuid:Runsize} | filter:{colorspec_uuid:Colorspec}" >@{{changeoptioname(op.option_name)}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
             </div>
             <div class="productSectionPrice row">
               <div class="col-md-6">
@@ -220,7 +262,6 @@
           </div>
           @if ($product->quantity > 0)
           <form action="{{route('cart.cartstep',$product)}}" id="fromBtn" name="fromBtn" class="center" method="POST" enctype="multipart/form-data">
-            {{ csrf_field() }}
             {{ csrf_field() }}
             <input hidden type="text" name="prddesc" value="@{{productdesc}}" readonly>
             <input hidden type="text" name="prdtcode" value="@{{productcode}}" readonly>
@@ -245,6 +286,7 @@
           </form>
           @endif
         </div>
+        <!-- <div ng-repeat="op in Coatingarraylist">"@{{op.option}}",</div> -->
          <!-- <button ng-click="categorias()">categotias</button>
         <input type="text" ng-model="busca" >
         <ul>

@@ -20,8 +20,8 @@ class ShopController extends Controller
         $pagination = 9;
         $categories = Category::all();
         //$fouroverproducts = call_4over_curl();
-         $allproducts = Product::all();
-
+         $allproducts = Product::all()->where('type', false);
+//dd($allproducts);
         if (request()->category) {
             $products = Product::with('categories')->whereHas('categories', function ($query) {
                 $query->where('slug', request()->category);

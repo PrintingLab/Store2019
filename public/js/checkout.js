@@ -115,7 +115,7 @@ $scope.computeshipping = function () {
 }
 
 $scope.authOnly = function () {
-
+    $('#processingpayment').show()
     if ($('#ccode').val()!="") {
         $scope.dangermesagge=true
         $http({
@@ -146,11 +146,12 @@ $scope.authOnly = function () {
             if (result.ResultCode=="Error") {
                 $scope.dangermesagge=false
                 $scope.danger=result.Errormessage 
-    
+                $('#processingpayment').hide()
             }
             console.log(result)
         })
     }else{
+        $('#processingpayment').hide()
         $scope.dangermesagge=false
                 $scope.danger="The cvv/cvc provided is invalid" 
     }
