@@ -11,5 +11,5 @@ RewriteRule ^(.*)$ /public/$1
 # Cambiar sudominio.com por su nombre de dominio
 # Cambiar 'subdirectory' por el nombre del subdirectorio que quiere usar
 # followed by / then the main file for your site, index.php, index.html, etc.
-RewriteCond %{HTTP_HOST} ^(www.)?sudominio.com$
+RewriteCond %{HTTP_HOST} ^(www.)?printinglab.com$
 RewriteRule ^(/)?$ public/index.php [L]

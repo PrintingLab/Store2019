@@ -43,9 +43,9 @@ New order recived from printinglab.com.
  Job: {{getdesignemode($product->pivot->jobtype)}} <br>
  </p>
 <div>
-    <a href="http://laravel.printinglab.com/storage/Userfiles/{{$product->pivot->imgF}}" download>Download File Front > </a><br>
+    <a href="http://printinglab.com/storage/Userfiles/{{$product->pivot->imgF}}" download>Download File Front > </a><br>
      @if ($product->pivot->side == '4/4' )
-    <a href="http://laravel.printinglab.com/storage/Userfiles/{{$product->pivot->imgB}}" download>Download File Back ></a>
+    <a href="http://printinglab.com/storage/Userfiles/{{$product->pivot->imgB}}" download>Download File Back ></a>
    @endif
 </div>
 ____________________________________________________________

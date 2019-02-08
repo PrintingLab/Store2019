@@ -13,10 +13,6 @@ return [
     | to have a conventional place to find your various credentials.
     |
     */
-    'paypal' => [
-        'client_id' => 'Client_ID',
-        'secret' => 'Your_secret'
-    ],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

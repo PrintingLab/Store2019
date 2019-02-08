@@ -31,7 +31,7 @@ $res = setcookie($cookie_name, '', time() - 3600);
         ]);
     }
     
-    public function cartstep(Product $product,Request $request)
+   public function cartstep(Product $product,Request $request)
     {
        if ($product->name=="Booklets" || $product->name=="Calendars") {
            $PrtdSide="4/0"; 
@@ -44,8 +44,11 @@ $res = setcookie($cookie_name, '', time() - 3600);
         }
         if ($request->sendbtn=='op3') {
             return view('we-designed')->with(['productID' =>$request->prdtID,'productCODE' =>$request->prdtcode,'productDESCRIPTION' =>$request->prddesc,'productRUNSIZE' =>$request->prdRunsize,'productSIDE' =>$PrtdSide,'productTATIME' =>$request->prdTurnAroundTime,'productPRICE' =>$request->prdtprice,'produto'=>$product,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid,'optionstring' =>$request->optionstring,'op'=>$request->sendbtn]);
-        }      
+        }
+
+       
     }
+
 
     /**
      * Store a newly created resource in storage.

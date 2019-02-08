@@ -1,10 +1,10 @@
 <header>
 
   <div class="barsignage">
-    
+    <img src="/img/signage.svg" alt="">
     <span>ARE YOU LOOKING FOR SIGNAGE, VEHICLE GRAPHICS OR TRADE SHOWS? <a target="_blank" href="http://signslab.com/">CLICK HERE</a>
     </span>
-
+    <img src="/img/signage.svg" alt="">
   </div>
   <div class="haderPc">
     <div class="container">
@@ -38,11 +38,19 @@
                     <div class="col-md-6">
                       <h6><strong>CUSTOM APPAREL</strong></h6>
                       <ul class="list_dropdown">
-                        <li><a href="contact-us">Coming soon...</a></li>
+                        <li><a href="#">Short Sleeve T-shirts</a></li>
+                        <li><a href="#">Long Sleeve T-shirts</a></li>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">Hoodies</a></li>
+                        <li><a href="#">Sweatshirts</a></li>
+                        <li><a href="#">Activewear</a></li>
+                        <li><a href="#">Polos</a></li>
+                        <li><a href="#">Jackets</a></li>
                       </ul>
                       <h6 style="margin-top: 5%;"><strong>LARGE FORMAT</strong></h6>
                       <ul class="list_dropdown">
-                        <li><a href="contact-us">Coming soon...</a></li>
+                        <li><a href="#">Banners</a></li>
+                        <li><a href="#">Vinyl Graphics</a></li>
                       </ul>
                     </div>
                     <div class="col-md-6 img_MenuDrop">
@@ -70,6 +78,7 @@
       </div>
     </div>
   </div>
+
 
   <div class="headerMb">
     <nav class="navbar navbar-default">
@@ -147,6 +156,14 @@
 
               
 
+
+
+
+
+
+
+
+
               </div>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -167,13 +184,21 @@
                 <li class="dropdown center">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CUSTOM APPAREL<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="contact-us">Coming soon...</a></li>
+                    <li><a href="#">Short Sleeve T-shirts</a></li>
+                    <li><a href="#">Long Sleeve T-shirts</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Hoodies</a></li>
+                    <li><a href="#">Sweatshirts</a></li>
+                    <li><a href="#">Activewear</a></li>
+                    <li><a href="#">Polos</a></li>
+                    <li><a href="#">Jackets</a></li>
                   </ul>
                 </li>
                 <li class="dropdown center">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LARGE FORMAT<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="contact-us">Coming soon...</a></li>
+                    <li><a href="#">Banners</a></li>
+                    <li><a href="#">Vinyl Graphics</a></li>
                   </ul>
                 </li>
               </ul>
@@ -211,11 +236,19 @@
                         <div class="col-md-6">
                           <h6><strong>CUSTOM APPAREL</strong></h6>
                           <ul class="list_dropdown">
-                            <li><a href="contact-us">Coming soon...</a></li>
+                            <li><a href="#">Short Sleeve T-shirts</a></li>
+                            <li><a href="#">Long Sleeve T-shirts</a></li>
+                            <li><a href="#">Women</a></li>
+                            <li><a href="#">Hoodies</a></li>
+                            <li><a href="#">Sweatshirts</a></li>
+                            <li><a href="#">Activewear</a></li>
+                            <li><a href="#">Polos</a></li>
+                            <li><a href="#">Jackets</a></li>
                           </ul>
                           <h6 style="margin-top: 5%;"><strong>LARGE FORMAT</strong></h6>
                           <ul class="list_dropdown">
-                            <li><a href="contact-us">Coming soon...</a></li>
+                            <li><a href="#">Banners</a></li>
+                            <li><a href="#">Vinyl Graphics</a></li>
                           </ul>
                         </div>
                         <div class="col-md-6 img_MenuDrop">

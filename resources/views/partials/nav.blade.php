@@ -6,7 +6,7 @@
     </span>
 
   </div>
-  <div class="haderPc">
+  <div class="haderPc"> 
     <div class="container">
       <div class="row" id="menuPrincipal">
         <div class="col-md-2 paddingCero">

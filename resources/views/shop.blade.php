@@ -62,8 +62,10 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-9 col-sm-12">
-      <div id="carouselExampleIndicators" class="carousel slide haderPc" data-ride="carousel">
+     <div class="col-md-9 col-sm-12">
+         @if ($categoryName=='BUSINESS CARDS')
+@else
+<div id="carouselExampleIndicators" class="carousel slide haderPc" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active">
           <a href="{{ route('shop.show', 'BusinesCards') }}">
@@ -88,6 +90,8 @@
           <span class="carousel-control-next-icon"></span>
         </a>
       </div>
+  @endif
+  
       <div class="container-fluid headerMb">
         <div id="carouselExampleIndicatorsMb" class="carousel slide " data-ride="carousel">
           <div class="carousel-inner" role="listbox">

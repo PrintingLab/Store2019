@@ -200,7 +200,7 @@
                     <strong>@{{changeoptioname(op.product_option_group_name)}}:</strong>
                   </div>
                   <div class="col-md-7">
-                    <select   name="" id="@{{op.product_option_group_uuid}}" ng-click="optionschange()" ng-disabled="@{{op.options.length==1}}">                    
+                    <select   name="" id="@{{op.product_option_group_uuid}}" ng-disabled="@{{op.options.length==1}}">                    
                       <option id="@{{op2.option_uuid}}" name="@{{op2.option_name}}" value="@{{op2.option_uuid}}" ng-repeat="op2 in op.options | filter:{option_uuid:'!2fd6ad29-756c-4927-a66f-b0c0116e31f9'} | unique: 'option_name'" >@{{changeoptioname(op2.option_name)}}</option>
                     </select>
                   </div>
@@ -240,7 +240,7 @@
                   </div>
                   <div class="col-md-7">
                     <select   name="PrintingTime" id="f80e8179-b264-42ce-9f80-bb258a09a1fe">                    
-                    <option id="@{{op.option_uuid}}" name="@{{op.option_name}}" value="@{{op.option_uuid}}" ng-repeat="op in arrayProductprice | filter:{runsize_uuid:Runsize} | filter:{colorspec_uuid:Colorspec}" >@{{changeoptioname(op.option_name)}}</option>
+                    <option id="@{{op.option_uuid}}" name="@{{op.option_name}}" value="@{{op.option_uuid}}" ng-repeat="op in arrayProductprice | filter:{runsize_uuid:Runsize} | filter:{colorspec_uuid:Colorspec} | unique: 'option_uuid' " >@{{changeoptioname(op.option_name)}}</option>
                     </select>
                   </div>
                 </div>
@@ -255,7 +255,7 @@
               </div>
               <div class="col-md-6">
                 <img src="{{ asset('img/settings/gif-load-13.gif') }}" alt="" ng-hide="priceshow" >
-                <input id="product-section-price" value="@{{priceformat(buildprice)}}" ng-show="priceshow" readonly disabled>
+                <input id="product-section-price" value="@{{finalprice}}" ng-show="priceshow" readonly disabled>
                 <p style="text-align: right;" ng-show="priceshow">( Only $@{{priceperpiece}} each )</p>
               </div>
             </div>
@@ -286,7 +286,7 @@
           </form>
           @endif
         </div>
-        <!-- <div ng-repeat="op in Coatingarraylist">"@{{op.option}}",</div> -->
+         <div ng-repeat="op in Coatingarraylist">{"Name":"@{{op.option}}","value":"@{{op.option}}"},</div> 
          <!-- <button ng-click="categorias()">categotias</button>
         <input type="text" ng-model="busca" >
         <ul>

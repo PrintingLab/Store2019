@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Upload')
+@section('title', 'Thank You')
 
 @section('extra-css')
 <link rel="stylesheet" href="css/loading-bar.css">

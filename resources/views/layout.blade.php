@@ -25,7 +25,30 @@
   <link rel="stylesheet" href="{{ asset('css/page.css') }}">
 
   @yield('extra-css')
-
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114027193-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-114027193-1');
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "http://printinglab.com",
+      "logo": "http://printinglab.com/favicon.png",
+      "name": "Printing Lab, LLC.",
+      "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-201-305-0404",
+      "contactType": "Customer service, sales",
+      "areaServed": "US",
+      "availableLanguage": "English",
+    }
+  }
+</script>
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/251b2e0553860ed938039c6f1/a47710029600f4f8a8e33cf0f.js");</script>
 
 </head>
 

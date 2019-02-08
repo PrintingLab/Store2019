@@ -21,7 +21,7 @@ class Cart
      *
      * @var \Illuminate\Session\SessionManager
      */
-    private $session;
+    protected $session;
 
     /**
      * Instance of the event dispatcher.
@@ -349,10 +349,13 @@ class Cart
     public function store($identifier)
     {
         $content = $this->getContent();
+        
+        
+        $this->getConnection()
+             ->table($this->getTableName())
+             ->where('identifier', $identifier)
+             ->delete();
 
-        if ($this->storedCartWithIdentifierExists($identifier)) {
-            throw new CartAlreadyStoredException("A cart with identifier {$identifier} was already stored.");
-        }
 
         $this->getConnection()->table($this->getTableName())->insert([
             'identifier' => $identifier,
@@ -395,11 +398,25 @@ class Cart
         $this->session->put($this->instance, $content);
 
         $this->instance($currentInstance);
-
-        $this->getConnection()->table($this->getTableName())
-            ->where('identifier', $identifier)->delete();
+       
     }
 
+    
+    
+    /**
+     * Deletes the stored cart with given identifier
+     *
+     * @param mixed $identifier
+     */
+    protected function deleteStoredCart($identifier) {
+        $this->getConnection()
+             ->table($this->getTableName())
+             ->where('identifier', $identifier)
+             ->delete();
+    }
+    
+    
+    
     /**
      * Magic method to make accessing the total, tax and subtotal properties possible.
      *
@@ -483,7 +500,7 @@ class Cart
      * @param $identifier
      * @return bool
      */
-    private function storedCartWithIdentifierExists($identifier)
+    protected function storedCartWithIdentifierExists($identifier)
     {
         return $this->getConnection()->table($this->getTableName())->where('identifier', $identifier)->exists();
     }
@@ -493,7 +510,7 @@ class Cart
      *
      * @return \Illuminate\Database\Connection
      */
-    private function getConnection()
+    protected function getConnection()
     {
         $connectionName = $this->getConnectionName();
 
@@ -505,7 +522,7 @@ class Cart
      *
      * @return string
      */
-    private function getTableName()
+    protected function getTableName()
     {
         return config('cart.database.table', 'shoppingcart');
     }

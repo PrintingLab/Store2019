@@ -4,7 +4,6 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             method: 'get',
             url: '/jsonconfig',
         }).then(function mySuccess(response) {
-            console.log(response);
             $scope.stoknames = response.data.stokname
             $scope.optioname = response.data.optionsname
             $scope.rangeofprices = response.data.priceprintinglab
@@ -23,8 +22,6 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
     $scope.Coatingarraylist = []
     $scope.roundcorners = $('#roundcorners').val();
     $scope.selectedGenres = ","; 
-    
-
 
     $scope.load4overproducts = function () {
         $scope.getjsonconfig()
@@ -36,25 +33,18 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             data: {endpoint: endurl},
         }).then(function mySuccess(response) {
             $scope.products = response.data.success.entities;
-            console.log($scope.products)
             //$scope.builderchangue()
+            console.log($scope.products)
             setTimeout(function () {
                 $scope.builderbydimencion()
-            }, 500);
+            }, 50);
 
         }, function myError(response) {
             console.log(response.statusText);
         });
     }();
 
-    $scope.pricetransform = function (inprice) {
-        for (let index = 0; index < $scope.rangeofprices.length; index++) {
-            if (inprice >= $scope.rangeofprices[index].Pinicial && inprice <= $scope.rangeofprices[index].Pfinal) {
-                return ((parseFloat(inprice) * parseFloat($scope.rangeofprices[index].porcentaje)) / 100).toFixed(2);
-            }
-        }
-
-    }
+   
     $scope.stockname = function (name) {
         var newname
         var stocknames
@@ -67,7 +57,7 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
                 }
             }
         }else{
-            console.log("empty")
+
         }
         for (let index = 0; index < $scope.stoknames.length; index++) {
             if ($scope.stoknames[index].Name == name) {
@@ -83,7 +73,14 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
     }
 
     $scope.CoatingsName = function(expected,code){
+        var newname
         var CoatingName
+        for (let index = 0; index < $scope.optioname.length; index++) {
+            if ($scope.optioname[index].Name.replace(/ /g, "") == expected.replace(/ /g, "")) {
+                
+                newname = $scope.optioname[index].value
+            }
+        }
         if (prtdCoatings) {
             CoatingName = JSON.parse(prtdCoatings)
              for (let index = 0; index < CoatingName.length; index++) {
@@ -96,7 +93,12 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             
         }
 
-        return expected
+        
+        if (newname) {
+            return newname
+        } else {
+            return expected
+        }
        // $("#coating option[value='" + code + "']").remove();
       }; 
     $scope.changeoptioname = function (name) {
@@ -123,7 +125,6 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             },
         }).then(function mySuccess(response) {
             $scope.productbaseprice = response.data.success.entities;
-            console.log($scope.productbaseprice);
         }, function myError(response) {
             console.log(response.statusText);
         });
@@ -134,20 +135,18 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
         if (matches.length == 0) {
             console.log("null")
         } else {
-            console.log(matches)
             $scope.productuuid = matches[0].product_uuid
             $scope.productcode = matches[0].product_code
             $scope.productdesc = matches[0].product_description
             $scope.baseprice(matches[0].product_base_prices)
             $scope.load4overproductsOptions(matches[0].product_option_groups)
         }
-        console.log($scope.products)
+        
     }
     $scope.builderbydimencion = function () {
         $scope.stockarry = []
-        console.log($scope.products)
+        $scope.Dimensions = $("#dimensions").val()
         var matches = $scope.$eval('products | filter:Dimensions');
-        console.log($scope.Dimensions)
         if (matches.length == 0) {
             console.log("null")
         } else {
@@ -300,10 +299,9 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             $scope.arrayproductprices = response.data.success.entities
             var Optionprices = $scope.$eval("arrayproductprices | filter:{product_option_group_name:'Turn Around Time'}");
             $scope.arrayProductprice = Optionprices[0].options
-            console.log(Optionprices[0].options)
             setTimeout(function () {
                 $scope.optionschange()
-            }, 500);
+            }, 50);
         }, function myError(response) {
             console.log(response.statusText);
         });
@@ -331,7 +329,6 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
         for (let index = 0; index < $scope.productbaseprice.length; index++) {
             const priceloop = $scope.productbaseprice[index];
             if (priceloop.colorspec_uuid == $scope.Colorspec && priceloop.runsize_uuid == $scope.Runsize) {
-                console.log(priceloop.product_baseprice)
                 $scope.firtprice = priceloop.product_baseprice
             }
         }
@@ -365,11 +362,20 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
         //      //   console.log(response.statusText);
         // });
     }
-    $scope.priceformat = function (format) {
 
+    $scope.pricetransform = function (inprice) {
+        for (let index = 0; index < $scope.rangeofprices.length; index++) {
+            if (inprice >= $scope.rangeofprices[index].Pinicial && inprice <= $scope.rangeofprices[index].Pfinal) {
+                return ((parseFloat(inprice) * parseFloat($scope.rangeofprices[index].porcentaje)) / 100).toFixed(2);
+            }
+        }
+
+    }
+    $scope.priceformat = function (format) {
         var price = (parseFloat($scope.pricetransform(format)) + $scope.buildpricewedesing).toFixed(2);
         return "$" + price
     }
+
     $scope.TurnAroundTimeprice = function (endurl) {
         $http({
             method: 'post',
@@ -387,6 +393,7 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
                 $scope.priceperpiece = ($scope.pricetransform($scope.buildprice) / $scope.quantyti).toFixed(2);
                 $scope.btndisigned = false
             }
+            $scope.finalprice= $scope.priceformat($scope.buildprice)
             $('#preloader').hide()
             $scope.priceshow = true
             $scope.moreoptions = false
@@ -401,7 +408,6 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
                 })
             }
             $scope.optionstring = JSON.stringify($scope.productbuiloption, null, "")
-            console.log($scope.productbuiloption);
         }, function myError(response) {
             //console.log(response.statusText);
         });
