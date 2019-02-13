@@ -93,8 +93,11 @@ class CheckoutController extends Controller
 
             Cart::instance('default')->destroy();
             session()->forget('coupon');
-
-            return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
+            return view('thankyou')->with([
+                'success_message' => 'Thank you! Your payment has been successfully accepted!',
+                'successID' => $order->id,
+            ]);
+           // return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
         } catch (CardErrorException $e) {
             $this->addToOrdersTables($request, $e->getMessage());
             return back()->withErrors('Error! ' . $e->getMessage());
@@ -254,7 +257,10 @@ class CheckoutController extends Controller
                 //$this->decreaseQuantities();
                 Cart::instance('default')->destroy();
                 session()->forget('coupon');
-                return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
+                return view('thankyou')->with([
+                    'success_message' => 'Thank you! Your payment has been successfully accepted!',
+                    'successID' => $order->id,
+                ]);
               }
               else
               {
@@ -275,6 +281,39 @@ class CheckoutController extends Controller
 
             //return back()->withErrors('An error occurred with the message: '.$result->message);
 }
+
+
+public function CashCheckout(Request $request)
+    {
+      //  dd($request);
+              if ($request)
+              {
+                $order = $this->addToOrdersTablesCashpay(
+                    $request->email,
+                    $request->name,
+                    null,
+                    $request
+                );
+               // dd($order->id);      
+                Mail::send(new OrderPlaced($order));
+                Mail::send(new OrderRecived($order));
+    
+                Cart::instance('default')->destroy();
+                session()->forget('coupon');
+               return view('thankyou')->with([
+                'success_message' => 'Thank you! Your payment has been successfully accepted!',
+                'successID' => $order->id,
+            ]);
+              }
+              else
+              {
+                    $error =$tresponse->getErrors();
+                    return back()->withErrors('An error occurred: '.$error[0]->getErrorText());
+              }
+            
+         
+}
+
 
 
 
@@ -331,8 +370,11 @@ public function updateShiping(Request $request)
 
             Cart::instance('default')->destroy();
             session()->forget('coupon');
-
-            return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
+            
+            return view('thankyou')->with([
+                'success_message' => 'Thank you! Your payment has been successfully accepted!',
+                'successID' => $order->id,
+            ]);
     }
 
     protected function addToOrdersTables($request, $error,$TransId)
@@ -438,6 +480,58 @@ public function updateShiping(Request $request)
         return $order;
     }
 
+
+    protected function addToOrdersTablesCashpay($email, $name, $error,$request)
+    {
+        // Insert into orders table
+        $order = Order::create([
+            'user_id' => auth()->user() ? auth()->user()->id : null,
+            'billing_email' => $request->email,
+            'billing_name' => $request->name,
+            'billing_name_on_card' => $name,
+            'billing_address' => $request->address,
+            'billing_city' => $request->city,
+            'billing_province' => $request->province,
+            'billing_postalcode' => $request->postalcode,
+            'billing_phone' => $request->phone,
+            'shipping_Type' => $request->Shippingmethod,
+            'shipping_Value' => getNumbers()->get('shiping'),
+            'billing_discount' => getNumbers()->get('discount'),
+            'billing_discount_code' => getNumbers()->get('code'),
+            'billing_subtotal' => getNumbers()->get('newSubtotal'),
+            'billing_tax' => getNumbers()->get('newTax'),
+            'billing_total' => getNumbers()->get('newTotal'),
+            'error' => $error,
+            'payment_gateway' => 'Cash Payment',
+            'payment_id' =>  $request->payment_method_nonce,
+        ]);
+
+        // Insert into order_product table
+        foreach (Cart::content() as $item) {
+            OrderProduct::create([
+                'order_id' => $order->id,
+                'product_id' => $item->id,
+                'price' => $item->price,
+                'jobtype' => $item->options->typeitem,
+                'product_decription' => $item->options->decription,
+                'quantity' => $item->options->quantity,
+                'colorspecuuid' => $item->options->colorspecuuid,
+                'imgF' => $item->options->imgF,
+                'imgB' => $item->options->imgB,
+                'optionuuid' => $item->options->optionuuid,
+                'produtcode' => $item->options->produtcode,
+                'produtid' => $item->options->produtid,
+                'runsizeuuid' => $item->options->runsizeuuid,
+                'side' => $item->options->side,
+                'tat' => $item->options->tat,
+                'Proofing' => $item->options->ProofingOption,
+                'comment' => $item->options->coment,
+                'Optionstring' => $item->options->optionstring,
+            ]);
+        }
+        return $order;
+    }
+
     protected function decreaseQuantities()
     {
         foreach (Cart::content() as $item) {
@@ -458,3 +552,70 @@ public function updateShiping(Request $request)
     //     return false;
     // }
 }
+
+
+
+
+
+
+
+// sftpkey
+// 5npUGT2vozn9
+
+
+
+
+// Generating public/private rsa key pair.
+// Enter passphrase (empty for no passphrase): 
+// Enter same passphrase again: 
+// Your identification has been saved in /home1/printinglab/.ssh/sftpkey.
+// Your public key has been saved in /home1/printinglab/.ssh/sftpkey.pub.
+// The key fingerprint is:
+// 6d:dd:ac:45:e0:de:66:32:1a:4a:36:c6:97:6e:a5:92 
+// The key's randomart image is:
+// +--[ RSA 2048]----+
+// |            .    |
+// |           . .   |
+// |            . .  |
+// |       . . + =   |
+// |        S * * B  |
+// |       + B = B   |
+// |        E = .    |
+// |         o       |
+// |                 |
+// +-----------------+
+
+
+
+
+
+// -----BEGIN RSA PRIVATE KEY-----
+// Proc-Type: 4,ENCRYPTED
+// DEK-Info: DES-EDE3-CBC,DE68D431A50305AD
+
+// z4GXJRHrdRMPYQKVByxAwJIsHoGBGkcKPU3KZ6Ea++moVF31+Qlr9Q6DDplpw0gq
+// cxhdCFFcYQTPra0ZGhThB/hRPJ+ok1WDrL5psInG1qzr4yx8KP0KZOReyF8vucpE
+// ljJ9FF/7oFVNhy2jolKaejqWwAz+b1htkA1ARU5MgaRgZOoqD0j/OWK8ctUvWBUd
+// xth35pKqcMnFH1gTw7K/Ur3UbtnVN2cw+fktsxSAGzY4M2qGMrcJE3KPwiy7yszE
+// WA0WOy8mg3Uu1aAYJ5ENiJ+jJ7dllPbPRtwq6My+OcXwgDtLJpOAPE615r/Q7dv5
+// 0dpcF3QsYk34NHGogeum0nV/GoTvYy287QFbdFktOksMUzH3TnsQVgBMkaZFW3CS
+// EEfZSfbGBCkG3xTvnOmyi3IAp7H4R2Z+2Iwz0qfNL30SE9TBnzC00X6BuV709qdB
+// 3LOSNXJoquzHF92ZfA1Fu89ZVWHWxeJ6tzkSxusA7PlKPU23aQrw4PVCQPodNAVq
+// 4wkMW51eHODFa3io0/x6LIvHFOQyusM+JbexG0+8juczGxbbJzGzGk5ikNUtOinh
+// +y2MTGpT0PTmLcUg8Wgl2kjhw6epiuxygICSAviRJO4CyPupqxFtOB17Byb1lTe4
+// gj79eG0o08V5d25ccIvVG0zzPVciU86JN4gd7dLvF4przyqsKF/1XWYnsbN+oVS6
+// hJEplhfL7quD7mle4i8oNBS7bCX4MsPXPH0G/H6v2WHkHvp1GCPBIFqEGs6QiXCG
+// I9VInXolXVBxQt6Xk3jpGBhznfPRpSxvE9sZmKVs6SXAWCqEaqnmvB6DYJ0lYklk
+// tvPnoyLpEi4VNI+XvxHReFXl7NT7CCUM1yd38jvq+H3fKYKiMStHS8XaWez3eh+k
+// sJK+Q7n7zQohfIhtZ/bJ/tJqH1F58gon2YRKOqm0xIA+xTJEi0HDq2Mx61imUzoZ
+// gq2b9jQPjU+bXxQq/dGejoWm0eSe5akOwoDBK/JDQGQEcTi4fx4Exnng2w+SmySY
+// gxspCfpYG45DhId82hZyCsbvNjR3y/yqWD1KdOFnzJyYWUfOLAm1vKsTfB+SvrUM
+// 7Bu6ur+XOA1SVY+7n95q79y6NOTSbs9oxu5yYnorg2MikXHInwU/iLBAGSm7FSId
+// rFhjNzlrdN3QlZlBi+msZj4Db+taYHToXJZZlei6DRZNLpT1RNMCI55DnD3IQ3zW
+// iEu2a1TLcdJRPOHiAuZNB5HvYeXH1s4tzFZqZr9HYovsZ2CMk8RsqZQVFEVjS4b3
+// PwmY+09aPG5KTQYpkGZ0soTpolGEA2zXTcai21+ILBP30I3mfaX0ixDUyMJJmhVH
+// 1fN2dij77atTiTmHI3GZlcj8WNlnglkq3jALAlCzHc0B7fXk+XPYxkRTats+0i2M
+// 27cg85t0Y39YkK85PsO2svs0ms6RNjBGnfZYoULCMxbFEPMiz+xDoF7e9ZXEiUZM
+// M5/iwVxvRriiuAww3EFqDJSYtRjZ0PS8L8M4Q3vyrzRKV9S/boiWVj6q8scm1zow
+// OpCGhVcJLGpGUQGdJ2M6gRpacnUTU/lL6eZMMpQxNfoqsa7J2WscbA==
+// -----END RSA PRIVATE KEY-----

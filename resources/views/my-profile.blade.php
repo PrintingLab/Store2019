@@ -34,7 +34,6 @@
 
 <div class="products-section container">
     <div class="sidebar">
-
         <ul>
             <li class="active"><a href="{{ route('users.edit') }}">My Profile</a></li>
             <li><a href="{{ route('orders.index') }}">My Orders</a></li>

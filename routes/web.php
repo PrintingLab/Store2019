@@ -24,6 +24,8 @@ Route::post('/paypal-checkout', 'CheckoutController@paypalCheckout')->name('chec
 Route::post('/checkoutAuthorize', 'CheckoutController@AuthorizeCheckout')->name('checkoutAuthorize');
 Route::post('/AuthorizeAuthOnly', 'CheckoutController@AuthorizeauthOnly')->name('AuthorizeAuthOnly');
 
+Route::post('/checkoutCash', 'CheckoutController@CashCheckout')->name('checkoutCash');
+
 Route::get('/guestCheckout', 'CheckoutController@index')->name('guestCheckout.index');
 
 
@@ -56,7 +58,8 @@ Route::post('/shipingupdate', 'CheckoutController@updateShiping')->name('shiping
 Route::post('/4overproducts', 'ShopController@call_4over_curl')->name('4overproducts');
 Route::post('/computeshipping', 'ShopController@Getshipingquotes')->name('computeshipping');
 Route::get('/search-algolia', 'ShopController@searchAlgolia')->name('search-algolia');
-
+Route::get('/order-satatus', 'OrdersController@ordersatatus')->name('order-satatus');
+Route::post('/Order-search', 'OrdersController@Ordersearch')->name('Order-search');
 Route::get('/mailable',function(){
     $order = App\Order::find(1);
     return new App\Mail\OrderPlaced($order);
@@ -68,4 +71,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/my-orders', 'OrdersController@index')->name('orders.index');
     Route::get('/my-orders/{order}', 'OrdersController@show')->name('orders.show');
+    
 });

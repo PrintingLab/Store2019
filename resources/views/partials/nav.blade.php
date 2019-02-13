@@ -107,6 +107,7 @@
                 <div class="dropdown-menu center">
                   <li><a href="{{ route('register') }}">Sign Up</a></li>
                   <li><a href="{{ route('login') }}">Login</a></li>
+                  <li><a href="{{ route('order-satatus') }}">Order Search</a></li>
                 </div>
               </div>
             </div>

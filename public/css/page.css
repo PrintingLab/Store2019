@@ -190,7 +190,9 @@ text-indent: 13px;
 
 /*fin*/
 
-
+.thank-you-section {
+  margin-top: 150px;
+}
 
 
 
@@ -338,6 +340,11 @@ button:focus  {
   font-weight: bold;
 }
 @media (max-width:709px){
+  .product_-brake{
+    height: 100%;
+  }
+
+
   #telefonoMb p{
     font-size: 75%;
   }
