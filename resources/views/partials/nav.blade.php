@@ -1,7 +1,7 @@
 <header>
 
   <div class="barsignage">
-    
+
     <span>ARE YOU LOOKING FOR SIGNAGE, VEHICLE GRAPHICS OR TRADE SHOWS? <a target="_blank" href="http://signslab.com/">CLICK HERE</a>
     </span>
 
@@ -94,7 +94,7 @@
             </div>
 
             @guest
-            <div class="Btn_Account col-sm-6 col-8 paddingCero">
+            <div class="Btn_Account divCountNull col-sm-6 col-8 paddingCero">
               <div class="col-sm-2 paddingCero">
                 <img class="imgUserbtn" src="/img/user-login-printing-lab.png" alt="">
               </div>

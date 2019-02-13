@@ -233,7 +233,7 @@
 </div>
 
 <div class="container  headerMb" >
-  <h2 class="center">SOME OF OUR CLIENTS</h2>
+  <h2 class="center HmobilTxt">SOME OF OUR CLIENTS</h2>
   <div class="row">
     <div class="col-md-12">
       <div class="carousel slide" data-ride="carousel" >
@@ -349,7 +349,7 @@
 </div>
 
 <div class="container">
-  <h2 class="center">REASONS TO TRUST IN US</h2>
+  <h2 class="center HmobilTxt">REASONS TO TRUST IN US</h2>
   <div class="row reasons">
     <div class="col-md-4 col-sm-4 row">
       <div class="col-md-3 ">

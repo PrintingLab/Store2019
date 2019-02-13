@@ -264,6 +264,9 @@ button:focus  {
 
 
 /*meida query header*/
+.divCountNull{
+  padding-bottom: 7px;
+}
 
 .btn_hamburguesaMB{
   width: 100px;
@@ -325,27 +328,12 @@ button:focus  {
   }
 }
 
+
 @media (max-width:450px){
-
-
-  .btn_3topMovil{
-    /* display: -webkit-inline-box; */
-  }
 
   .Btn_Account{
     display: flex;
   }
-
-  /* #telefonoMb{
-  max-width: 12%;
-}
-
-.Btn_Account{
-max-width: 76%;
-}
-.btnCartMb{
-max-width: 12%;
-} */
 
 #telefonoMb p{
   display: none;
@@ -671,6 +659,11 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
     padding: 15px 19px;
   }
 }
+@media (max-width:467px) {
+  .textSlideMail h1,.HmobilTxt{
+    font-size: 23px ;
+  }
+}
 @media(max-width:575px){
   .divsproductsMbI{
     padding: 0 15px;
@@ -678,13 +671,15 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
 }
 @media(max-width:768px){
 
+.Slide_GrandeIndex{
+  height: 400px;
+}
   .reasons .col-md-4{
     margin-top: 20px;
   }
   .reasons .col-md-3, .reasons .col-md-9{
     text-align: center;
   }
-
   .reasons img {
     width: auto;
   }
