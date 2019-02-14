@@ -48,19 +48,19 @@
             <div class="col-6 col-sm-6 col-md-6">
               @if ((extensioImg($item->options->imgF) =='jpg')||(extensioImg($item->options->imgF) =='png'))
               <label for="">Front</label>
-              <img src="storage/Userfiles/{{$item->options->imgF}}" alt="item" class="cart-table-img">
+              <img src="img/Userfiles/{{$item->options->imgF}}" alt="item" class="cart-table-img">
               @else
               <label for="">Front</label>
-              <embed src="storage/Userfiles/{{$item->options->imgF}}" type="application/pdf"   height="100%" width="100%">
+              <embed src="img/Userfiles/{{$item->options->imgF}}" type="application/pdf"   height="100%" width="100%">
                 @endif
               </div>
               <div class="col-6 col-sm-6 col-md-6">
                 @if ((extensioImg($item->options->imgB) =='jpg')||(extensioImg($item->options->imgB) =='png'))
                 <label for="">Back</label>
-                <img src="storage/Userfiles/{{$item->options->imgB}}" alt="item" class="cart-table-img">
+                <img src="img/Userfiles/{{$item->options->imgB}}" alt="item" class="cart-table-img">
                 @else
                 <label for="">Back</label>
-                <embed src="storage/Userfiles/{{$item->options->imgB}}" type="application/pdf"   height="100%" width="100%">
+                <embed src="img/Userfiles/{{$item->options->imgB}}" type="application/pdf"   height="100%" width="100%">
                   @endif
                 </div>
               </div>
@@ -68,10 +68,10 @@
               <div class="col-md-12">
                 @if ((extensioImg($item->options->imgF) =='jpg')||(extensioImg($item->options->imgF) =='png'))
                 <label for="">Front</label>
-                <img src="storage/Userfiles/{{$item->options->imgF}}" alt="item" class="cart-table-img">
+                <img src="img/Userfiles/{{$item->options->imgF}}" alt="item" class="cart-table-img">
                 @else
                 <label for="">Front</label>
-                <embed src="storage/Userfiles/{{$item->options->imgF}}" type="application/pdf"   height="100%" width="100%">
+                <embed src="img/Userfiles/{{$item->options->imgF}}" type="application/pdf"   height="100%" width="100%">
                   @endif
                 </div>
                 @endif

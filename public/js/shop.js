@@ -37,14 +37,21 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             console.log($scope.products)
             setTimeout(function () {
                 $scope.builderbydimencion()
-            }, 50);
+            }, 500);
 
         }, function myError(response) {
             console.log(response.statusText);
         });
     }();
 
-   
+    $scope.pricetransform = function (inprice) {
+        for (let index = 0; index < $scope.rangeofprices.length; index++) {
+            if (inprice >= $scope.rangeofprices[index].Pinicial && inprice <= $scope.rangeofprices[index].Pfinal) {
+                return ((parseFloat(inprice) * parseFloat($scope.rangeofprices[index].porcentaje)) / 100).toFixed(2);
+            }
+        }
+
+    }
     $scope.stockname = function (name) {
         var newname
         var stocknames
@@ -200,7 +207,7 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
                     product_option_groups: matches[index].product_option_groups,
                     product_description: matches[index].product_description,
                     product_code: matches[index].product_code,
-                    option: matches[index].product_description.toUpperCase().replace($scope.Stock.toUpperCase(), '').replace($scope.Dimensions.toUpperCase(), '').replace('ROUND', '').replace('CORNER', '').replace('RC', '').replace('COVER', '').replace('BUSINESS', '').replace('CARDS', '').replace('CARD', '').replace('WITH', '').replace('18PT C1S', '').replace('UV', 'FULL GLOSS').replace('100LB', '').replace('SPOT', '').replace('UV', 'FULL GLOSS').replace('BC', '').replace('14PT', '').replace('LINEN', '').replace('32PT', '').replace('SADDLE STITCH CALENDAR ON', '').replace('CALENDAR ON', '').replace('-', '').replace('#', '').replace('FLYERS', '').replace('FLYER', '').replace('AQ', 'AQUEOUS COATING').replace('SOCIAL', '').replace('POST', '')
+                    option: matches[index].product_description.toUpperCase().replace($scope.Stock.toUpperCase(), '').replace($scope.Dimensions.toUpperCase(), '').replace('ROUND', '').replace('CORNER', '').replace('RC', '').replace('COVER', '').replace('BUSINESS', '').replace('CARDS', '').replace('CARD', '').replace('WITH', '').replace('18PT C1S', '').replace('UV', 'FULL GLOSS').replace('100LB', '').replace('SPOT', '').replace('UV', 'FULL GLOSS').replace('BC', '').replace('14PT', '').replace('LINEN', '').replace('32PT', '').replace('SADDLE STITCH CALENDAR ON', '').replace('CALENDAR ON', '').replace('-', '').replace('#', '').replace('FLYERS', '').replace('FLYER', '').replace('AQ', 'AKUAFOIL').replace('SOCIAL', '').replace('POST', '')
                 })
                 $scope.$apply()
             }
@@ -262,8 +269,9 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
         $scope.btndisigned = true
         $scope.roundcorners = $(this).val()
         $scope.$apply()
+        $scope.builderbyStock()
         $scope.roundcornerfilter()
-        $scope.builderprice()
+       // $scope.builderprice()
     });
 
     $('#38d33954-5a42-4112-a905-215eb827e62c').change(function () {
@@ -301,7 +309,7 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
             $scope.arrayProductprice = Optionprices[0].options
             setTimeout(function () {
                 $scope.optionschange()
-            }, 50);
+            }, 500);
         }, function myError(response) {
             console.log(response.statusText);
         });
@@ -362,20 +370,11 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
         //      //   console.log(response.statusText);
         // });
     }
-
-    $scope.pricetransform = function (inprice) {
-        for (let index = 0; index < $scope.rangeofprices.length; index++) {
-            if (inprice >= $scope.rangeofprices[index].Pinicial && inprice <= $scope.rangeofprices[index].Pfinal) {
-                return ((parseFloat(inprice) * parseFloat($scope.rangeofprices[index].porcentaje)) / 100).toFixed(2);
-            }
-        }
-
-    }
     $scope.priceformat = function (format) {
+
         var price = (parseFloat($scope.pricetransform(format)) + $scope.buildpricewedesing).toFixed(2);
         return "$" + price
     }
-
     $scope.TurnAroundTimeprice = function (endurl) {
         $http({
             method: 'post',
@@ -393,7 +392,6 @@ shopApp.controller('shopcontroller', function ($scope, $http, $document) {
                 $scope.priceperpiece = ($scope.pricetransform($scope.buildprice) / $scope.quantyti).toFixed(2);
                 $scope.btndisigned = false
             }
-            $scope.finalprice= $scope.priceformat($scope.buildprice)
             $('#preloader').hide()
             $scope.priceshow = true
             $scope.moreoptions = false

@@ -183,7 +183,7 @@
                                             <div class="preview-container">
                                                 <a href="#largerPreview-MZKQF-45A54-1H1" class="view-larger"
                                                     data-toggle="modal" data-target="#ex{{$product->pivot->product_id}}">
-                                                    <img src="../storage/Userfiles/{{$product->pivot->imgF}}" alt="Product Image"
+                                                    <img src="../img/Userfiles/{{$product->pivot->imgF}}" alt="Product Image"
                                                         style="border: 1px #e4e4e4 solid;">
                                                     <div class="overlay-wrapper">
                                                         <div class="overlay" adocid="MZKQF-45A54-1H1">
@@ -233,14 +233,14 @@
                                                                                 </div>
                                                                                 <div class="tabs-contents">
                                                                                     <div id="previewTabFront" class="">
-                                                                                        <img src="../storage/Userfiles/{{$product->pivot->imgF}}"
+                                                                                        <img src="../img/Userfiles/{{$product->pivot->imgF}}"
                                                                                             alt="Product Image">
                                                                                     </div>
                                                                                     <div id="previewTabBack" class="tab-selected"
                                                                                         >
                                                                                         @if ($product->pivot->side ==
                                                                                         '4/4' )
-                                                                                        <img src="../storage/Userfiles/{{$product->pivot->imgB}}"
+                                                                                        <img src="../img/Userfiles/{{$product->pivot->imgB}}"
                                                                                             alt="Product Image">
                                                                                         @endif
                                                                                     </div>
@@ -300,9 +300,9 @@
                     </h4>
 
                     <div class="order-product-item" style="border-bottom: 1px #e4e4e4 solid;">
-                        <div><img src="../storage/Userfiles/{{$product->pivot->imgF}}" alt="Product Image">
+                        <div><img src="../img/Userfiles/{{$product->pivot->imgF}}" alt="Product Image">
                             @if ($product->pivot->side == '4/4' )
-                            <img src="../storage/Userfiles/{{$product->pivot->imgB}}" alt="Product Image">
+                            <img src="../img/Userfiles/{{$product->pivot->imgB}}" alt="Product Image">
                             @endif
                         </div>
                         <div class="product_-brake">

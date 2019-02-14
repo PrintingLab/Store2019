@@ -48,9 +48,9 @@ class ShopController extends Controller
 
 
 public function getjsonconfig(){
-        $urloptionsname = public_path()."/storage/jsonconfig/optionsname.json";
-        $urlpriceprintinglab = public_path()."/storage/jsonconfig/priceprintinglab.json";
-        $urlstokname = public_path()."/storage/jsonconfig/stokname.json";
+        $urloptionsname = public_path()."/img/jsonconfig/optionsname.json";
+        $urlpriceprintinglab = public_path()."/img/jsonconfig/priceprintinglab.json";
+        $urlstokname = public_path()."/img/jsonconfig/stokname.json";
         $jsonoptionsname = file_get_contents($urloptionsname);
         $jsonoptionsname_data = json_decode($jsonoptionsname, true);
         $jsonpriceprintinglab = file_get_contents($urlpriceprintinglab);

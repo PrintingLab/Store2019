@@ -71,9 +71,9 @@
                     <div class="order-products">
                         @foreach ($order->products as $product)
                             <div class="order-product-item">
-                                <div><img src="storage/Userfiles/{{$product->pivot->imgF}}" alt="Product Image">
+                                <div><img src="img/Userfiles/{{$product->pivot->imgF}}" alt="Product Image">
                                 @if ($product->pivot->side == '4/4' )
-                                <img src="storage/Userfiles/{{$product->pivot->imgB}}" alt="Product Image">
+                                <img src="img/Userfiles/{{$product->pivot->imgB}}" alt="Product Image">
                                 @endif
                             </div>
                                 <div>

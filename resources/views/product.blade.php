@@ -184,7 +184,7 @@
                     </div> <!-- end filter_name -->
                     <div class="col-md-7 filter_select">
                     
-                      <select name="coating" id="coating" ng-disabled="@{{Coatingarraylist.length==1}}">
+                      <select name="coating" id="coating" >
                         <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist  | filter:{product_code:'!16PT-4VBCUV-2X3.5'} | orderBy:'-option'">@{{CoatingsName(op.option,op.product_code)}}</option>
                       </select>
                     
@@ -286,7 +286,7 @@
           </form>
           @endif
         </div>
-         <div ng-repeat="op in Coatingarraylist">{"Name":"@{{op.option}}","value":"@{{op.option}}"},</div> 
+         <!-- <div ng-repeat="op in Coatingarraylist">{"Name":"@{{op.option}}","value":"@{{op.option}}"},</div>  -->
          <!-- <button ng-click="categorias()">categotias</button>
         <input type="text" ng-model="busca" >
         <ul>

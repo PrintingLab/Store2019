@@ -23,7 +23,7 @@ function GetTotalAmout()
 
 function printingPrice($price)
 {
-  $url = public_path()."/storage/jsonconfig/priceprintinglab.json";
+  $url = public_path()."/img/jsonconfig/priceprintinglab.json";
   $json = file_get_contents($url);
   $json_data = json_decode($json, true);
     foreach ($json_data as $value) {
@@ -39,7 +39,7 @@ function printingPrice($price)
 
 function printingtax($postalcode)
 {
-  $url = public_path()."/storage/jsonconfig/zips.json";
+  $url = public_path()."/img/jsonconfig/zips.json";
   $json = file_get_contents($url);
   $json_data = json_decode($json, true);
     foreach ($json_data as $value) {
@@ -55,7 +55,7 @@ return  $taxval;
 function Changeoptioname($iname)
 {
   $outname="";
-  $url = public_path()."/storage/jsonconfig/optionsname.json";
+  $url = public_path()."/img/jsonconfig/optionsname.json";
   $json = file_get_contents($url);
   $json_data = json_decode($json, true);
     foreach ($json_data as $value) {

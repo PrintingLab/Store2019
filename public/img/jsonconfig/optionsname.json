@@ -1,0 +1,302 @@
+[   
+	{
+		"Name": "Stock",
+		"value": "Stock"
+	},
+	{
+		"Name": "Corners",
+		"value": "Corners"
+	},
+	{
+		"Name": "Coating",
+		"value": "Coating"
+	},
+	{
+		"Name": "Product Orientation",
+		"value": "Orientation"
+	},
+	{
+		"Name": "Shape",
+		"value": "Shape"
+	},
+	{
+		"Name": "SPOT UV SIDES",
+		"value": "Gloss uv sides"
+	},
+	{
+		"Name": "Colorspec",
+		"value": "Printed Side"
+	},
+	{
+		"Name": "Runsize",
+		"value": "Quantity"
+	},
+	{
+		"Name": "Turn Around Time",
+		"value": "Printing Time"
+	},
+	{
+		"Name": "Print Method",
+		"value": "Printing Method"
+	},
+	{
+		"Name": "Binding Type",
+		"value": "Binding Type"
+	},
+	{
+		"Name": "Page Count",
+		"value": "Page Count"
+	},
+	{
+		"Name": "Cover Coating",
+		"value": "Cover Coating"
+	},
+	{
+		"Name": "020",
+		"value": "Same Business Day"
+	},
+	{
+		"Name": "121",
+		"value": "Next Business Day"
+	},
+	{
+		"Name": "222",
+		"value": "2 Business Days"
+	},
+	{
+		"Name": "223",
+		"value": "2-3 Business Days"
+	},
+	{
+		"Name": "224",
+		"value": "2-4 Business Days"
+	},
+	{
+		"Name": "527",
+		"value": "5-7 Business Days"
+	},
+	{
+		"Name": "729",
+		"value": "7-9 Business Days"
+	},
+	{
+		"Name": "4/0 (4 color front)",
+		"value": "Front Only"
+	},
+	{
+		"Name": "4/4 (4 color both sides)",
+		"value": "Front and Back"
+	},
+	{
+		"Name": "4/1",
+		"value": "---"
+	},
+	{
+		"Name": "4/0",
+		"value": "Front Only"
+	},
+	{
+		"Name": "4/4",
+		"value": "Front and Back"
+	},
+	{
+		"Name": "4/1",
+		"value": "---"
+	},
+	{
+		"Name": "No Spot UV",
+		"value": "No Gloss Uv"
+	},
+	{
+		"Name": " UNCOATED STIPPLE WHITE",
+		"value": " UNCOATED STIPPLE WHITE"
+	},
+	{
+		"Name": " MATTE/DULL FINISH ",
+		"value": "MATTE"
+	},
+	{
+		"Name": " MATTE/DULL FINISH FULL GLOSS ON FRONT ONLY, NO FULL GLOSS COATING ON THE BACK",
+		"value": " MATTE FULL GLOSS ON FRONT ONLY"
+	},
+	{
+		"Name": " MATTE/DULL FINISH FULL GLOSS ON BOTH SIDES",
+		"value": " MATTE FULL GLOSS ON BOTH SIDES"
+	},
+	{
+		"Name": " MATTE/DULL FINISH W/ FULL GLOSS ON BOTH SIDES",
+		"value": " MATTE FULL GLOSS ON BOTH SIDES"
+	},
+	{
+		"Name": " MATTE/DULL FINISH W/ FULL GLOSS ON BACK ONLY, NO FULL GLOSS ON THE FRONT",
+		"value": " MATTE FULL GLOSS ON BACK ONLY"
+	},
+	{
+		"Name": " MATTE/DULL FINISH W/ FULL GLOSS ON FRONT ONLY, NO FULL GLOSS COATING ON THE BACK",
+		"value": " MATTE FULL GLOSS ON FRONT ONLY"
+	},
+	{
+		"Name": " FULL GLOSS ON BOTH SIDES",
+		"value": " FULL GLOSS ON BOTH SIDES"
+	},
+	{
+		"Name": " FULL GLOSS ON BACK ONLY, FULL FULL GLOSS ON THE FRONT",
+		"value": " FULL GLOSS ON BACK ONLY"
+	},
+	{
+		"Name": " FULL GLOSS ON FRONT ONLY, NO FULL GLOSS COATING ON THE BACK",
+		"value": " FULL GLOSS ON FRONT ONLY"
+	},
+	{
+		"Name": " NO COATING",
+		"value": " NO COATING"
+	},
+	{
+		"Name": " FULL GLOSS ON 4COLOR SIDE(S)",
+		"value": " FULL GLOSS"
+	},
+	{
+		"Name": " FULL FULL GLOSS ON THE FRONT ONLY, NO FULL GLOSS COATING ON THE BACK",
+		"value": " FULL GLOSS ON THE FRONT ONLY, NO COATING ON THE BACK"
+	},
+	{
+		"Name": " UNCOATED ",
+		"value": " UNCOATED "
+	},
+	{
+		"Name": " VERSIONED FULL GLOSS ON 4COLOR SIDE(S)",
+		"value": " VERSIONED FULL GLOSS ON 4COLOR SIDE(S)"
+	},
+	{
+		"Name": " AKUAFOIL",
+		"value": " AKUAFOIL"
+	},
+	{
+		"Name": " LEAF FULL GLOSS ON BOTH SIDES",
+		"value": " LEAF FULL GLOSS ON BOTH SIDES"
+	},
+	{
+		"Name": " LEAF FULL GLOSS ON 4COLOR SIDE(S)",
+		"value": " LEAF FULL GLOSS ON 4COLOR SIDE(S)"
+	},
+	{
+		"Name": " LEAF FULL FULL GLOSS ON THE FRONT ONLY, NO FULL GLOSS COATING ON THE BACK",
+		"value": " LEAF FULL GLOSS ON THE FRONT ONLY"
+	},
+	{
+		"Name": " OVAL MATTE/DULL FINISH",
+		"value": " OVAL MATTE"
+	},
+	{
+		"Name": " OVAL FULL GLOSS ON BOTH SIDES",
+		"value": " OVAL FULL GLOSS ON BOTH SIDES"
+	},
+	{
+		"Name": " SATIN AKUAFOIL",
+		"value": " SATIN AKUAFOIL"
+	},
+	{
+		"Name": " FULL FULL GLOSS ON THE FRONT ONLY, NO FULL GLOSS COATING ON THE BACK",
+		"value": "FULL GLOSS ON THE FRONT ONLY, NO COATING ON THE BACK"
+	},
+	{
+		"Name": " UNCOATED FOLD OVER SCORING INCLUDED",
+		"value": " UNCOATED FOLD OVER"
+	},
+	{
+		"Name": " MATTE/DULL FINISH FOLD OVER SCORING INCLUDED",
+		"value": " MATTE FOLD OVER"
+	},
+	{
+		"Name": " MATTE/DULL FINISH FOLD OVER FULL GLOSS ON BOTH SIDES SCORING INCLUDED",
+		"value": " MATTE FOLD OVER FULL GLOSS ON BOTH SIDES"
+	},
+	{
+		"Name": " MATTE/DULL FINISHFOLD OVER FULL GLOSS ON INSIDE ONLY, FULL FULL GLOSS OUTSIDE SCORING INCLUDED",
+		"value": " MATTE FOLD OVER, FULL GLOSS ON INSIDE ONLY"
+	},
+	{
+		"Name": " MATTE/DULL FINISH FOLD OVER FULL GLOSS ON OUTSIDE ONLY, NO FULL GLOSS COATING INSIDE SCORING INCLUDED",
+		"value": " MATTE FOLD OVER FULL GLOSS ON OUTSIDE ONLY"
+	},
+	{
+		"Name": " FOLD OVER FULL GLOSS ON BOTH SIDES SCORING INCLUDED",
+		"value": " FOLD OVER FULL GLOSS ON BOTH SIDES"
+	},
+	{
+		"Name": " FOLD OVER FULL GLOSS ON INSIDE ONLY, FULL FULL GLOSS OUTSIDE SCORING INCLUDED",
+		"value": " FOLD OVER FULL GLOSS ON INSIDE ONLY"
+	},
+	{
+		"Name": " FOLD OVER FULL GLOSS ON OUTSIDE ONLY, NO FULL GLOSS COATING INSIDE SCORING INCLUDED",
+		"value": " FOLD OVER FULL GLOSS ON OUTSIDE ONLY"
+	},
+	{
+		"Name": " FOLD OVER FULL GLOSS ON 4COLOR SIDE(S) SCORING INCLUDED",
+		"value": " FOLD OVER FULL GLOSS ON 4COLOR SIDE(S)"
+	},
+	{
+		"Name": " FOLD OVER FULL FULL GLOSS ON OUTSIDE ONLY, NO FULL GLOSS COATING INSIDE SCORING INCLUDED",
+		"value": " FOLD OVER FULL GLOSS ON OUTSIDE ONLY"
+	},
+	{
+		"Name": " 20PT CLEAR PLASTIC S",
+		"value": "CLEAR PLASTIC"
+	},
+	{
+		"Name": " 20PT FROSTED PLASTIC S",
+		"value": "FROSTED PLASTIC"
+	},
+	{
+		"Name": " 20PT FROSTED PLASTIC HANG TAGS S",
+		"value": "FROSTED PLASTIC HANG TAGS"
+	},
+	{
+		"Name": " 20PT WHITE PLASTIC S",
+		"value": "WHITE PLASTIC"
+	},
+	{
+		"Name": " 20PT WHITE PLASTIC HANG TAGS S",
+		"value": "WHITE PLASTIC HANG TAGS"
+	},
+	{
+		"Name": " 20PT CLEAR OVAL PLASTIC ",
+		"value": "CLEAR OVAL PLASTIC"
+	},
+	{
+		"Name": " 20PT FROSTED OVAL PLASTIC ",
+		"value": "FROSTED OVAL PLASTIC"
+	},
+	{
+		"Name": " 20PT WHITE OVAL PLASTIC ",
+		"value": "WHITE OVAL PLASTIC"
+	},
+	{
+		"Name": " UNCOATED PAINTED EDGE ",
+		"value": " UNCOATED"
+	},
+	{
+		"Name": " 6 PAGE BOOKLET GLOSS BOOK AQUEOUS COATING ON BOTH SIDES - FLAT SIZE - 25.5 X 11",
+		"value": "GLOSS BOOK AQUEOUS COATING ON BOTH SIDES"
+	},
+	{
+		"Name": " 6 PAGE BROCHURE GLOSS BOOK SATIN AQUEOUS COATING - FLAT SIZE - 25.5 X 11",
+		"value": "GLOSS BOOK SATIN AQUEOUS COATING - FLAT SIZE - 25.5 X 11"
+	},
+	{
+		"Name": " GLOSS BOOK AQUEOUS COATING",
+		"value": " GLOSS BOOK AQUEOUS COATING"
+	},
+	{
+		"Name": " GLOSS BOOK SATIN AQUEOUS COATING",
+		"value": " GLOSS BOOK SATIN AQUEOUS COATING"
+	},
+	{
+		"Name": " GLOSS BOOK NO AQUEOUS COATING",
+		"value": " GLOSS BOOK NO AQUEOUS COATING"
+	},
+	{
+		"Name": " GLOSS BOOK FULL GLOSS COATING ON BOTH SIDES",
+		"value": " GLOSS BOOK FULL GLOSS COATING ON BOTH SIDES"
+	}
+]

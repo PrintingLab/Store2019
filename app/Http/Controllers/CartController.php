@@ -76,7 +76,7 @@ $res = setcookie($cookie_name, '', time() - 3600);
         $imagenA=$request->archivo;
         $nombre_archivoF =$request->archivo->getClientOriginalExtension();
         $nombre_archivoF=$filename.'F.'.$nombre_archivoF;
-        $imagenA->move('storage/Userfiles/',$nombre_archivoF);
+        $imagenA->move('img/Userfiles/',$nombre_archivoF);
         Cart::add($product->id, $product->name, 1, printingPrice($request->prdtprice)+$wedesing,['shiping' =>  0,'shipingTp' => 'N/A','decription' =>  $request->prddesc,'imgF' =>$nombre_archivoF,'imgB' =>'N/A','side' =>$request->prdside,'quantity' =>$request->prdRunsize,'tat' =>$request->prdTurnAroundTime,'produtcode' =>$request->prdtcode,'produtid' =>$request->prdtID,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid,'ProofingOption' =>$request->selectRadios,'coment' =>$request->comentario,'optionstring' =>$request->optionstring,"typeitem"=>$request->op]);
         return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
         }
@@ -89,8 +89,8 @@ $res = setcookie($cookie_name, '', time() - 3600);
             $nombre_archivoB =$request->file22->getClientOriginalExtension();
             $nombre_archivoF=$filename.'F.'.$nombre_archivoF;
             $nombre_archivoB=$filename.'B.'.$nombre_archivoB;
-            $imagenF->move('storage/Userfiles/',$nombre_archivoF);
-            $imagenB->move('storage/Userfiles/',$nombre_archivoB);
+            $imagenF->move('img/Userfiles/',$nombre_archivoF);
+            $imagenB->move('img/Userfiles/',$nombre_archivoB);
             Cart::add($product->id, $product->name, 1, printingPrice($request->prdtprice)+$wedesing,['shiping' => 0,'shipingTp' => 'N/A','decription' =>  $request->prddesc,'imgF' =>$nombre_archivoF,'imgB' =>$nombre_archivoB,'side' =>$request->prdside,'quantity' =>$request->prdRunsize,'tat' =>$request->prdTurnAroundTime,'produtcode' =>$request->prdtcode,'produtid' =>$request->prdtID,'optionuuid' =>$request->option_uuid,'colorspecuuid' =>$request->colorspec_uuid,'runsizeuuid' =>$request->runsize_uuid,'ProofingOption' =>$request->selectRadios,'coment' =>$request->comentario,'optionstring' =>$request->optionstring,"typeitem"=>$request->op]);
         return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
         }    
