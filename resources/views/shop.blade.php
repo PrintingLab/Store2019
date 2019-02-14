@@ -36,7 +36,7 @@
       <div class="Div_allproduct2">
         <ul class="list_dropdown">
           <li><strong>MARKETING PRODUCTS</strong></li>
-
+          <li><a href="{{ route('shop.index', ['category' => 'Business Cards']) }}">Business Cards</a></li>
           @foreach ($Allproducts as $produc)
           <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
           @endforeach
@@ -44,33 +44,43 @@
         </ul>
         <ul class="list_dropdown">
           <li><strong>CUSTOM APPAREL</strong></li>
-          <li><a href="#">Short Sleeve T-shirts</a></li>
+          <li><a href="contact-us">Coming soon...</a></li>
+          <!-- <li><a href="#">Short Sleeve T-shirts</a></li>
           <li><a href="#">Long Sleeve T-shirts</a></li>
           <li><a href="#">Women</a></li>
           <li><a href="#">Hoodies</a></li>
           <li><a href="#">Sweatshirts</a></li>
           <li><a href="#">Activewear</a></li>
           <li><a href="#">Polos</a></li>
-          <li><a href="#">Jackets</a></li>
+          <li><a href="#">Jackets</a></li> -->
         </ul>
         <ul class="list_dropdown">
           <li><strong>LARGE FORMAT</strong></li>
-          <li><a href="#">Banners</a></li>
-          <li><a href="#">Vinyl Graphics</a></li>
+          <li><a href="contact-us">Coming soon...</a></li>
+          <!-- <li><a href="#">Banners</a></li>
+          <li><a href="#">Vinyl Graphics</a></li> -->
         </ul>
       </div>
     </div>
-    <div class="col-md-9 col-sm-12">
-      <div id="carouselExampleIndicators" class="carousel slide haderPc" data-ride="carousel">
+     <div class="col-md-9 col-sm-12">
+         @if ($categoryName=='BUSINESS CARDS')
+@else
+<div id="carouselExampleIndicators" class="carousel slide haderPc" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active">
+          <a href="{{ route('shop.show', 'BusinesCards') }}">
             <img src="/img/Printinglab-banner-home.jpg">
+            </a>
           </div>
           <div class="carousel-item">
+          <a href="{{ route('shop.show', 'Hang Tags') }}">
             <img src="/img/Printinglab-banner-home2.jpg">
+            </a>
           </div>
           <div class="carousel-item">
+          <a href="{{ route('shop.show', 'Notepads') }}">
             <img src="/img/Printinglab-banner-home3.jpg">
+            </a>
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" data-slide="prev">
@@ -80,17 +90,25 @@
           <span class="carousel-control-next-icon"></span>
         </a>
       </div>
+  @endif
+  
       <div class="container-fluid headerMb">
         <div id="carouselExampleIndicatorsMb" class="carousel slide " data-ride="carousel">
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
+            <a href="{{ route('shop.show', 'BusinesCards') }}">
               <img src="/img/mobile-slider-index-printing-lab-1.jpg">
+              </a>
             </div>
             <div class="carousel-item">
+            <a href="{{ route('shop.show', 'Hang Tags') }}">
               <img src="/img/mobile-slider-index-printing-lab-2.jpg">
+            </a>
             </div>
             <div class="carousel-item">
+            <a href="{{ route('shop.show', 'Notepads') }}">
               <img src="/img/mobile-slider-index-printing-lab-3.jpg">
+            </a>
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicatorsMb" data-slide="prev">
@@ -111,7 +129,7 @@
           <div class="container row">
             @forelse ($products as $product)
             <div class="col-md-4 col-sm-4 col-12" >
-              <div class="btnHoverI"  style="width: 100%;height: 175px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
+              <div class="btnHoverI"  style="border-top: 1px #e4e4e4 solid;border-right: 1px #e4e4e4 solid;border-left: 1px #e4e4e4 solid;width: 100%;height: 175px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
                 <div class="btn_info">
                   <a class="a_Shop" href="{{ route('shop.show', $product->slug) }}">SHOP NOW</a>
                 </div>

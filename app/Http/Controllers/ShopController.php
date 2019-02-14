@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Config;
 class ShopController extends Controller
 {
 
-    /**
+    /** 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -20,8 +20,8 @@ class ShopController extends Controller
         $pagination = 9;
         $categories = Category::all();
         //$fouroverproducts = call_4over_curl();
-         $allproducts = Product::all();
-
+         $allproducts = Product::all()->where('type', false);
+//dd($allproducts);
         if (request()->category) {
             $products = Product::with('categories')->whereHas('categories', function ($query) {
                 $query->where('slug', request()->category);
@@ -46,7 +46,21 @@ class ShopController extends Controller
         ]);
     }
 
-    public function Getshipingquotes(Request $request) {
+
+public function getjsonconfig(){
+        $urloptionsname = public_path()."/storage/jsonconfig/optionsname.json";
+        $urlpriceprintinglab = public_path()."/storage/jsonconfig/priceprintinglab.json";
+        $urlstokname = public_path()."/storage/jsonconfig/stokname.json";
+        $jsonoptionsname = file_get_contents($urloptionsname);
+        $jsonoptionsname_data = json_decode($jsonoptionsname, true);
+        $jsonpriceprintinglab = file_get_contents($urlpriceprintinglab);
+        $jsonpriceprintinglab_data = json_decode($jsonpriceprintinglab, true);
+        $jsonstokname = file_get_contents($urlstokname);
+        $jsonstokname_data = json_decode($jsonstokname, true);
+        return response()->json(['optionsname'=>$jsonoptionsname_data,'priceprintinglab'=>$jsonpriceprintinglab_data,'stokname'=>$jsonstokname_data]);
+} 
+
+public function Getshipingquotes(Request $request) {
         $method='POST';
         $separator = '?';
       if ($request->type==1) {
@@ -97,7 +111,7 @@ class ShopController extends Controller
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
         return response()->json(['success'=>$shipers,'taxpercent'=>config('cart.tax')]);
       }
-    }
+}
 
     public function sendtocart(Request $request) {
         $returnHTML = view('cart.index')->with('success_message', 'Item was added to your cart!')->render();

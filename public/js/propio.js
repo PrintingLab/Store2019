@@ -9,12 +9,12 @@ document.getElementById('dropdownMenuButton3').addEventListener("click",Menubott
 function Menubotton(){
   $(".index_container").css({'display':'block','background':'rgba(31, 31, 31, 0.9)','position':'fixed','z-index':'1',
   'top':'0','width':'100%','height':'100vh'});
-  $("body").addClass("no_scroll");
+  //$("body").addClass("no_scroll");
 }
 
 $('.dropdown').on('hidden.bs.dropdown', function () {
   $('.index_container').css({'display':'none'});
-  $("body").removeClass("no_scroll");
+  //$("body").removeClass("no_scroll");
 });
 
 var $win=$(window);
@@ -30,6 +30,9 @@ $win.scroll(function(){
 
 
 $(window).scroll(function() {
+  // $('.dropdown').dropdown('hide')
+  //$('#dropdownMenuButton2').dropdown('hide')
+  $('.index_container').css({'display':'none'});
   if ($(this).scrollTop() > 200) {
     $('.go-top').fadeIn(200);
   } else {

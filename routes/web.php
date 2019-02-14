@@ -21,8 +21,10 @@ Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->mid
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 Route::post('/paypal-checkout', 'CheckoutController@paypalCheckout')->name('checkout.paypal');
 
-Route::post('/checkout-Authorize', 'CheckoutController@AuthorizeCheckout')->name('checkout.Authorize');
+Route::post('/checkoutAuthorize', 'CheckoutController@AuthorizeCheckout')->name('checkoutAuthorize');
+Route::post('/AuthorizeAuthOnly', 'CheckoutController@AuthorizeauthOnly')->name('AuthorizeAuthOnly');
 
+Route::post('/checkoutCash', 'CheckoutController@CashCheckout')->name('checkoutCash');
 
 Route::get('/guestCheckout', 'CheckoutController@index')->name('guestCheckout.index');
 
@@ -46,14 +48,15 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/jsonconfig', 'ShopController@getjsonconfig')->name('jsonconfig');
 Route::get('/search', 'ShopController@search')->name('search');
 Route::post('/sendtocart', 'ShopController@sendtocart')->name('sendtocart');
 Route::post('/shipingupdate', 'CheckoutController@updateShiping')->name('shipingupdate');
 Route::post('/4overproducts', 'ShopController@call_4over_curl')->name('4overproducts');
 Route::post('/computeshipping', 'ShopController@Getshipingquotes')->name('computeshipping');
 Route::get('/search-algolia', 'ShopController@searchAlgolia')->name('search-algolia');
-
+Route::get('/order-satatus', 'OrdersController@ordersatatus')->name('order-satatus');
+Route::post('/Order-search', 'OrdersController@Ordersearch')->name('Order-search');
 Route::get('/mailable',function(){
     $order = App\Order::find(1);
     return new App\Mail\OrderPlaced($order);
@@ -65,4 +68,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/my-orders', 'OrdersController@index')->name('orders.index');
     Route::get('/my-orders/{order}', 'OrdersController@show')->name('orders.show');
+    
 });

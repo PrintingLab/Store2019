@@ -24,8 +24,6 @@ h6 {
   font-size: 1rem;
 }
 
-
-
 :root{
   --magenta:#f4005b;
 }
@@ -49,11 +47,19 @@ header{
 
 
 .product-name{
-  background: #f7f7f9;
+  color: #f4005b;
+    background: #f7f7f9;
+    font-weight: 600;
+    border-right: 1px #e4e4e4 solid;
+    border-left: 1px #e4e4e4 solid
 }
 .product-price{
   background: #f7f7f9;
   margin-bottom: 20px;
+  font-size: smaller;
+  border-bottom: 1px #e4e4e4 solid;
+    border-right: 1px #e4e4e4 solid;
+    border-left: 1px #e4e4e4 solid;
 }
 .barsignage a{
   color: white;
@@ -144,8 +150,10 @@ text-indent: 13px;
 /*union nuevo*/
 .btn_3top a, .btn_3top .btn-myAccount{
   white-space: nowrap;
-  font-size: 100%;
-  font-weight: 600;
+    font-size: 86%;
+    bottom: 6px;
+    position: relative;
+    font-weight: 600;;
 }
 
 .cart-count{
@@ -173,6 +181,7 @@ text-indent: 13px;
 }
 
 .text_Userp{
+  border-right: 1px #c7c7c7 solid;
   white-space: nowrap;
   width: 100%;
   overflow: hidden;
@@ -181,7 +190,9 @@ text-indent: 13px;
 
 /*fin*/
 
-
+.thank-you-section {
+  margin-top: 150px;
+}
 
 
 
@@ -299,12 +310,44 @@ button:focus  {
   font-size: 12px;
   font-weight: 600;
 }
+.Processing{
+  color: #00cc00;
+}
 
+.Shipped{
+  color: #00cc00;
+}
+.Completed{
+  color: #00cc00;
+}
+.Canceled{
+  color: #cc0700;
+}
+
+
+.Btn_Account{
+
+}
+.product_-brake{
+  height: 285px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%
+}
 .headerMb #bs-example-navbar-collapse-1{
   margin-top: 10px;
 }
 
+.product_-brake b{
+  font-weight: bold;
+}
 @media (max-width:709px){
+  .product_-brake{
+    height: 100%;
+  }
+
+
   #telefonoMb p{
     font-size: 75%;
   }
@@ -647,7 +690,6 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   font-size: 14px;
 }
 
-
 /*mobile index*/
 
 .divsproductsMbI{
@@ -670,10 +712,6 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   }
 }
 @media(max-width:768px){
-
-.Slide_GrandeIndex{
-  height: 400px;
-}
   .reasons .col-md-4{
     margin-top: 20px;
   }
@@ -683,6 +721,7 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   .reasons img {
     width: auto;
   }
+
 }
 
 
@@ -785,6 +824,7 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
 
 
 .btn_formProduct{
+  cursor: pointer;
   border: none;
   background: #000;
   color: white;
@@ -792,9 +832,6 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   padding: 15px 10px 15px 10px;
   margin-bottom: 5px;
 }
-
-
-
 
 /*upload*/
 .divfile{
@@ -922,7 +959,12 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
 
   /*cart*/
   .productRow img{
+    max-height: 160px;
     border: 1px #dee2e6 solid;
+  }
+
+  .productRow label{
+    width: 100%
   }
   .containerAlerts{
     margin-top: 2%;
@@ -930,7 +972,7 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
   .productRow{
     border-bottom: 2px solid #ececec;
     margin-top: 1%;
-    padding-top: 6%;
+    padding-top: 3%;
     padding-bottom: 1%;
   }
   .containerCodeCart{
@@ -1015,6 +1057,8 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
     color: white;
     border: none;
     padding: 2%;
+    cursor:pointer;
+    margin-bottom: 15px;
   }
 
   /*fin checkout*/
@@ -1026,9 +1070,10 @@ div#p_BusinesC:hover div.btn_info, div#p_Tshirts:hover div.btn_info,div#p_banner
     margin-bottom: 3%;
   }
 
-  .my-profile input {
-    width: 70%;
-  }
+.my-profile input {
+    width: 100%;
+    margin-bottom: 10px !important;
+}
 
   /*end Profile*/
 

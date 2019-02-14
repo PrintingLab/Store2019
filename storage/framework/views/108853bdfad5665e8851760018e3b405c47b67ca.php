@@ -19,7 +19,7 @@
             <li><a href="<?php echo e(url('privacy-policy')); ?>">Privacy Policy</a> </li>
             <li><a href="<?php echo e(url('terms-and-conditions')); ?>">Terms & Conditions</a></li>
           </div>
-          <div class="col-md-4 col-sm-4 col-6 center">
+          <div class="col-md-4 col-sm-4 col-12 center">
             <h6><strong>WE RECEIVED ALL CARDS.</strong></h6>
             <img src="/img/payments-footer.png" alt="">
             <H5><strong>GET SOCIAL WITH US</strong></H5>

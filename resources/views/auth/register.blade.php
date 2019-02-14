@@ -47,10 +47,10 @@
                     </div> 
                     <div class="half-form">
                         <div class="form-group">
-                            <input placeholder="Postal Code" type="text" class="form-control" id="postalcode" name="postalcode" value="{{ old('postalcode') }}"  required>
+                            <input maxlength="5" placeholder="Postal Code" type="text" class="form-control" id="postalcode" name="postalcode" value="{{ old('postalcode') }}"  required>
                         </div>
                         <div class="form-group">
-                            <input placeholder="Phone" type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" required>
+                            <input placeholder="Phone" type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="12" required>
                         </div>
 
                         </div>
@@ -64,17 +64,18 @@
 
             </form>
         </div>
-
+<script>
+$("input[name='phone']").keyup(function() {
+    $(this).val($(this).val().replace(/^(\d{3})(\d{3})(\d)+$/, "$1-$2-$3"));
+});
+</script>
         <div class="auth-right">
             <h2>New Customer</h2>
             <div class="spacer"></div>
             <p><strong>Save time now.</strong></p>
             <p>Creating an account will allow you to checkout faster in the future, have easy access to order history and customize your experience to suit your preferences.</p>
 
-            &nbsp;
-            <div class="spacer"></div>
-            <p><strong>Loyalty Program</strong></p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt debitis, amet magnam accusamus nisi distinctio eveniet ullam. Facere, cumque architecto.</p>
+            
         </div>
     </div> <!-- end auth-pages -->
 </div>

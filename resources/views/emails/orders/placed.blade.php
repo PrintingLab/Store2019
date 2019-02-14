@@ -21,7 +21,7 @@ Thank you for your order.
 
 **Shipping: ** ${{$order->shipping_Value }}
 
-**Tax: ** ${{$order->billing_tax }}
+**Tax: ** {{presentPrice($order->billing_tax)}}
 
 **Subtotal: ** ${{$order->billing_subtotal }}
 
@@ -29,7 +29,7 @@ Thank you for your order.
 
 **Pay method ID: ** {{$order->payment_id }}
 
-#Order Total: ${{$order->billing_total }}#
+#Order Total: {{presentPrice($order->billing_total)}}#
 
 **-Items Ordered-**
 

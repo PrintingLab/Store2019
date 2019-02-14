@@ -6,7 +6,7 @@
     </span>
 
   </div>
-  <div class="haderPc">
+  <div class="haderPc"> 
     <div class="container">
       <div class="row" id="menuPrincipal">
         <div class="col-md-2 paddingCero">
@@ -26,6 +26,7 @@
                   <div class="row">
                     <div class="col-md-8">
                       <ul class="list_dropdown list_dropdown-brake">
+                      <li><a href="<?php echo e(route('shop.index', ['category' => 'Business Cards'])); ?>">Business Cards</a></li>
                         <?php $__currentLoopData = getAllProducts(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li style="display: -webkit-inline-box;"><a href="<?php echo e(route('shop.show', $produc->slug)); ?>"><?php echo e($produc->name); ?></a></li>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -106,6 +107,7 @@
                 <div class="dropdown-menu center">
                   <li><a href="<?php echo e(route('register')); ?>">Sign Up</a></li>
                   <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
+                  <li><a href="<?php echo e(route('order-satatus')); ?>">Order Search</a></li>
                 </div>
               </div>
             </div>
@@ -199,6 +201,7 @@
                       <div class="row">
                         <div class="col-md-8">
                           <ul class="list_dropdown list_dropdown-brake">
+                          <li><a href="<?php echo e(route('shop.index', ['category' => 'Business Cards'])); ?>">Business Cards</a></li>
                             <?php $__currentLoopData = getAllProducts(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <li style="display: -webkit-inline-box;"><a href="<?php echo e(route('shop.show', $produc->slug)); ?>"><?php echo e($produc->name); ?></a></li>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

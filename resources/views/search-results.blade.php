@@ -37,26 +37,27 @@
         <p class="search-results-count">{{ $products->total() }} result(s) for '{{ request()->input('query') }}'</p>
 
         @if ($products->total() > 0)
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Details</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $product)
-                    <tr>
-                        <th style="width: 30%;"><a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a></th>
-                        <td><a href="{{ route('shop.show', $product->slug) }}"><img style="width: 40%;" src="{{ productImage($product->image) }}" alt="product"></a></td>
-                        <td>{{ str_limit($product->description, 80) }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        {{ $products->appends(request()->input())->links() }}
+        <div class="productSection-Index center" >
+        <div>
+          <div class="container row">
+            @forelse ($products as $product)
+            <div class="col-md-4 col-sm-4 col-12" >
+              <div class="btnHoverI"  style="border-top: 1px #e4e4e4 solid;border-right: 1px #e4e4e4 solid;border-left: 1px #e4e4e4 solid;width: 100%;height: 175px;background-size: cover;background-image: url('{{ productImage($product->image) }}');" >
+                <div class="btn_info">
+                  <a class="a_Shop" href="{{ route('shop.show', $product->slug) }}">SHOP NOW</a>
+                </div>
+              </div>
+              <a href="{{ route('shop.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
+              <div class="product-price">from {{ $product->presentPrice() }}</div>
+            </div>
+            @empty
+            <div style="text-align: left">No items found</div>
+            @endforelse
+          </div> <!-- end products -->
+          <div class="spacer"></div>
+          {{ $products->appends(request()->input())->links() }}
+        </div>
+      </div>
         @endif
     </div> <!-- end search-results-container -->
 

@@ -1,4 +1,4 @@
-Serializing arrays and hashes
+Serailizing arrays and hashes
 =============================
 
 Introduction
@@ -44,4 +44,4 @@ In case of a JSON serialization:
 
 .. note ::
 
-    This applies only for the JSON serialization.
+    This applies only for the JSON and YAML serialization.

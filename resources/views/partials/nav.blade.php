@@ -6,7 +6,7 @@
     </span>
 
   </div>
-  <div class="haderPc">
+  <div class="haderPc"> 
     <div class="container">
       <div class="row" id="menuPrincipal">
         <div class="col-md-2 paddingCero">
@@ -26,6 +26,7 @@
                   <div class="row">
                     <div class="col-md-8">
                       <ul class="list_dropdown list_dropdown-brake">
+                      <li><a href="{{ route('shop.index', ['category' => 'Business Cards']) }}">Business Cards</a></li>
                         @foreach (getAllProducts() as $produc)
                         <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
                         @endforeach
@@ -106,6 +107,7 @@
                 <div class="dropdown-menu center">
                   <li><a href="{{ route('register') }}">Sign Up</a></li>
                   <li><a href="{{ route('login') }}">Login</a></li>
+                  <li><a href="{{ route('order-satatus') }}">Order Search</a></li>
                 </div>
               </div>
             </div>
@@ -209,6 +211,7 @@
                       <div class="row">
                         <div class="col-md-8">
                           <ul class="list_dropdown list_dropdown-brake">
+                          <li><a href="{{ route('shop.index', ['category' => 'Business Cards']) }}">Business Cards</a></li>
                             @foreach (getAllProducts() as $produc)
                             <li style="display: -webkit-inline-box;"><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
                             @endforeach

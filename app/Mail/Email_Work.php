@@ -36,10 +36,19 @@ class Email_Work extends Mailable
   public function build()
   {
 
-    
+    if ($this->datos['ruta']=='sin archivo') {
       return $this->view('emails.work-nofile')
       ->with('datos',$this->datos)
       ->from('contacto@tienda.printinglab.com');
+    }else{
+      return $this->view('emails.work-nofile')
+      ->with('datos',$this->datos)
+      ->attach($this->datos['ruta'])
+      ->from('contacto@tienda.printinglab.com');
+    }
+
+
+
 
 
   }

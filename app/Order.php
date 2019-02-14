@@ -18,6 +18,6 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Product')->withPivot(['quantity','product_decription','colorspecuuid','imgF','imgB','optionuuid','produtcode','produtid','runsizeuuid','side','tat','Optionstring']);
+        return $this->belongsToMany('App\Product')->withPivot(['quantity','jobtype','product_decription','colorspecuuid','imgF','imgB','optionuuid','produtcode','produtid','runsizeuuid','side','tat','Optionstring','Proofing','comment']);
     }
 }
