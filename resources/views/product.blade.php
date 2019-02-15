@@ -232,7 +232,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="jt_filters prtd@{{op.product_option_group_uuid}}" >
                 <div class="row ">
                   <div class="col-md-5 filter_name">
@@ -255,7 +254,7 @@
               </div>
               <div class="col-md-6">
                 <img src="{{ asset('img/settings/gif-load-13.gif') }}" alt="" ng-hide="priceshow" >
-                <input id="product-section-price" value="@{{finalprice}}" ng-show="priceshow" readonly disabled>
+                <input id="product-section-price" value="@{{priceformat(buildprice)}}" ng-show="priceshow" readonly disabled>
                 <p style="text-align: right;" ng-show="priceshow">( Only $@{{priceperpiece}} each )</p>
               </div>
             </div>
