@@ -6,19 +6,19 @@ $('.carousel').carousel({
 //$('#exampleModal').modal();
 
 function modalSignsLab(){
-  alert('ingresa a la funcion');
+  //alert('ingresa a la funcion');
 
-document.cookie = "nombrecookie"+"="+"valorcookie" ; max-age=3600; path=/";
+//document.cookie = "nombrecookie"+"="+"valorcookie" ; max-age=3600; path=/";
 
 
-console.log(getCookie(nombrecookie));
+//console.log(getCookie(nombrecookie));
 }
 
 document.getElementById('dropdownMenuButton2').addEventListener("click",Menubotton)
 document.getElementById('dropdownMenuButton3').addEventListener("click",Menubotton)
 
 function Menubotton(){
-  $(".index_container").css({'display':'block','background':'rgba(31, 31, 31, 0.9)','position':'fixed','z-index':'1',
+  $(".index_container").css({'display':'block','background':'rgba(31, 31, 31, 0.45)','position':'fixed','z-index':'1',
   'top':'0','width':'100%','height':'100vh'});
   //$("body").addClass("no_scroll");
 }

@@ -271,8 +271,23 @@ button:focus  {
   position: fixed;
   bottom: 0;
 }
+.dropright .dropdown-menu {
+  margin-left: 0rem; 
+}
 
-
+.businesscardli:hover .dropdown-menu {
+  display: block;
+}
+.Div_busineecards {
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+      padding: 30px 0px 30px 0px;
+      background: #f7f7f9;
+      border-radius: 0px;
+}
+.Div_busineecards a {
+ margin-bottom: 5px
+}
 
 /*meida query header*/
 .divCountNull{

@@ -163,6 +163,9 @@
                     </div> <!-- end filter-select -->
                   </div>
                 </div> <!-- end jt_filters -->
+                @if($product->name=="Leaf Business Cards" || $product->name=="Oval Business Cards")
+                
+                @else
                 <div class="jt_filters" ng-hide="showcorners">
                   <div class="row">
                     <div class="col-md-5 filter_name">
@@ -176,6 +179,9 @@
                     </div> <!-- end filter-select -->
                   </div>
                 </div> <!-- end jt_filters -->
+                @endif
+
+
 
                 <div class="jt_filters">
                   <div class="row">
@@ -285,12 +291,13 @@
           </form>
           @endif
         </div>
-         <!-- <div ng-repeat="op in Coatingarraylist">{"Name":"@{{op.option}}","value":"@{{op.option}}"},</div>  -->
+          
          <!-- <button ng-click="categorias()">categotias</button>
         <input type="text" ng-model="busca" >
         <ul>
            <li ng-repeat="cat in categoriaslist |filter:busca"><b>@{{cat.category_name}}</li><br>
         </ul>  -->
+        <!-- <div ng-repeat="op in Coatingarraylist">{"Name":"@{{op.option}}","value":"@{{op.option}}"},</div><br>  -->
       </div> <!-- end product-section -->
     </div>
   </div>

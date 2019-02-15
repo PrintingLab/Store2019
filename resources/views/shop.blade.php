@@ -34,8 +34,21 @@
       </div>
       <div class="Div_allproduct2">
         <ul class="list_dropdown">
-          <li><strong>MARKETING PRODUCTS</strong></li>
-          <li><a href="{{ route('shop.index', ['category' => 'Business Cards']) }}">Business Cards</a></li>
+          <li><strong>MARKETING PRODUCTS</strong>
+        </li>
+          <li class="businesscardli dropdown dropright" ><a class="dropdown-toggle" href="{{ route('shop.index', ['category' => 'Business Cards']) }}">Business Cards</a>
+          <div class="dropdown-menu Div_busineecards">
+            <a class="dropdown-item" href="{{ route('shop.show', 'StandardBusinessCards') }}">Standard Business Cards</a>
+          <a class="dropdown-item" href="{{ route('shop.show', 'SlimBusinessCards') }}">Slim Business Cards</a>
+          <a class="dropdown-item" href="{{ route('shop.show', 'SquareBusinessCards') }}">Square Business Cards</a>
+          <a class="dropdown-item" href="{{ route('shop.show', 'OvalBusinessCards') }}">Oval Business Cards</a>
+          <a class="dropdown-item" href="{{ route('shop.show', 'PlasticBusinessCards') }}">Plastic Business Cards</a>
+          <a class="dropdown-item" href="{{ route('shop.show', 'PaintedEdgeBusinessCards') }}">Painted Edge Business Cards</a>
+          <a class="dropdown-item" href="{{ route('shop.show', 'LeafBusinessCards') }}">Leaf Business Cards</a>
+          <a class="dropdown-item" href="{{ route('shop.show', 'SpotUVBusinessCards') }}">Spot UV Business Cards</a>
+          <a class="dropdown-item" href="{{ route('shop.show', 'FoldedBusinessCards') }}">Folded Business Cards</a>
+          </div>  
+        </li>
           @foreach ($Allproducts as $produc)
           <li><a href="{{ route('shop.show', $produc->slug) }}">{{$produc->name}}</a></li>
           @endforeach
