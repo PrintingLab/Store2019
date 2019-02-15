@@ -452,6 +452,9 @@ button:focus  {
 }
 
 /*index*/
+.modal.show .modal-dialog{
+      margin-top: 9em;
+}
 
 .containerGeneral{
   margin-top: 2%;

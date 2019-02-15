@@ -25,7 +25,6 @@
   <?php endif; ?>
 </div>
 
-
 <div class="container containerGeneral" >
   <div class="row">
     <div class="col-md-3 haderPc">
@@ -61,24 +60,24 @@
         </ul>
       </div>
     </div>
-     <div class="col-md-9 col-sm-12">
-         <?php if($categoryName=='BUSINESS CARDS'): ?>
-<?php else: ?>
-<div id="carouselExampleIndicators" class="carousel slide haderPc" data-ride="carousel">
+    <div class="col-md-9 col-sm-12">
+      <?php if($categoryName=='BUSINESS CARDS'): ?>
+      <?php else: ?>
+      <div id="carouselExampleIndicators" class="carousel slide haderPc" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active">
-          <a href="<?php echo e(route('shop.show', 'BusinesCards')); ?>">
-            <img src="/img/Printinglab-banner-home.jpg">
+            <a href="<?php echo e(route('shop.show', 'BusinesCards')); ?>">
+              <img src="/img/Printinglab-banner-home.jpg">
             </a>
           </div>
           <div class="carousel-item">
-          <a href="<?php echo e(route('shop.show', 'Hang Tags')); ?>">
-            <img src="/img/Printinglab-banner-home2.jpg">
+            <a href="<?php echo e(route('shop.show', 'Hang Tags')); ?>">
+              <img src="/img/Printinglab-banner-home2.jpg">
             </a>
           </div>
           <div class="carousel-item">
-          <a href="<?php echo e(route('shop.show', 'Notepads')); ?>">
-            <img src="/img/Printinglab-banner-home3.jpg">
+            <a href="<?php echo e(route('shop.show', 'Notepads')); ?>">
+              <img src="/img/Printinglab-banner-home3.jpg">
             </a>
           </div>
         </div>
@@ -89,25 +88,25 @@
           <span class="carousel-control-next-icon"></span>
         </a>
       </div>
-  <?php endif; ?>
-  
+      <?php endif; ?>
+
       <div class="container-fluid headerMb">
         <div id="carouselExampleIndicatorsMb" class="carousel slide " data-ride="carousel">
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-            <a href="<?php echo e(route('shop.show', 'BusinesCards')); ?>">
-              <img src="/img/mobile-slider-index-printing-lab-1.jpg">
+              <a href="<?php echo e(route('shop.show', 'BusinesCards')); ?>">
+                <img src="/img/mobile-slider-index-printing-lab-1.jpg">
               </a>
             </div>
             <div class="carousel-item">
-            <a href="<?php echo e(route('shop.show', 'Hang Tags')); ?>">
-              <img src="/img/mobile-slider-index-printing-lab-2.jpg">
-            </a>
+              <a href="<?php echo e(route('shop.show', 'Hang Tags')); ?>">
+                <img src="/img/mobile-slider-index-printing-lab-2.jpg">
+              </a>
             </div>
             <div class="carousel-item">
-            <a href="<?php echo e(route('shop.show', 'Notepads')); ?>">
-              <img src="/img/mobile-slider-index-printing-lab-3.jpg">
-            </a>
+              <a href="<?php echo e(route('shop.show', 'Notepads')); ?>">
+                <img src="/img/mobile-slider-index-printing-lab-3.jpg">
+              </a>
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicatorsMb" data-slide="prev">
@@ -120,7 +119,7 @@
       </div>
       <div class="h_featured">
         <h4 class="h4Feature">
-        <?php echo e($categoryName); ?>
+          <?php echo e($categoryName); ?>
 
         </h4>
       </div>
@@ -417,6 +416,24 @@
 </div>
 
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+
+
+      <div class="modal-body">
+        <a href="https://signslab.com/" target="_blank">
+        <img src="/img/mobile-slider-index-printing-lab-1.jpg" alt="">
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('extra-js'); ?>
@@ -426,9 +443,10 @@
 <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
 
 <script src="<?php echo e(asset('js/algolia.js')); ?>"></script>
-<?php $__env->stopSection(); ?>
-<script>
 
+<script>
+modalSignsLab();
 </script>
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -46,25 +46,31 @@
           <div class="row">
             <div class="col-6 col-sm-6 col-md-6">
               <?php if((extensioImg($item->options->imgF) =='jpg')||(extensioImg($item->options->imgF) =='png')): ?>
+              <label for="">Front</label>
               <img src="storage/Userfiles/<?php echo e($item->options->imgF); ?>" alt="item" class="cart-table-img">
               <?php else: ?>
-              <embed src="storage/Userfiles/<?php echo e($item->options->imgF); ?>" type="application/pdf"   height="120px" width="100%">
+              <label for="">Front</label>
+              <embed src="storage/Userfiles/<?php echo e($item->options->imgF); ?>" type="application/pdf"   height="100%" width="100%">
                 <?php endif; ?>
               </div>
               <div class="col-6 col-sm-6 col-md-6">
                 <?php if((extensioImg($item->options->imgB) =='jpg')||(extensioImg($item->options->imgB) =='png')): ?>
+                <label for="">Back</label>
                 <img src="storage/Userfiles/<?php echo e($item->options->imgB); ?>" alt="item" class="cart-table-img">
                 <?php else: ?>
-                <embed src="storage/Userfiles/<?php echo e($item->options->imgB); ?>" type="application/pdf"   height="120px" width="100%">
+                <label for="">Back</label>
+                <embed src="storage/Userfiles/<?php echo e($item->options->imgB); ?>" type="application/pdf"   height="100%" width="100%">
                   <?php endif; ?>
                 </div>
               </div>
               <?php else: ?>
               <div class="col-md-12">
                 <?php if((extensioImg($item->options->imgF) =='jpg')||(extensioImg($item->options->imgF) =='png')): ?>
+                <label for="">Front</label>
                 <img src="storage/Userfiles/<?php echo e($item->options->imgF); ?>" alt="item" class="cart-table-img">
                 <?php else: ?>
-                <embed src="storage/Userfiles/<?php echo e($item->options->imgF); ?>" type="application/pdf"   height="120px" width="100%">
+                <label for="">Front</label>
+                <embed src="storage/Userfiles/<?php echo e($item->options->imgF); ?>" type="application/pdf"   height="100%" width="100%">
                   <?php endif; ?>
                 </div>
                 <?php endif; ?>
@@ -79,6 +85,10 @@
                     <div class="checkout-table-quantity"> <strong>Quantity:</strong> <?php echo e($item->options->quantity); ?></div>
                     <div class="checkout-table-quantity"> <strong>Printed Side:</strong> <?php echo e(getPrintingsides($item->options->side)); ?></div>
                     <div class="checkout-table-quantity"> <strong>Turnaround:</strong> <?php echo e(getPrintingTime($item->options->tat)); ?></div>
+                    <?php if($item->options->ProofingOption=='N/A'): ?>
+                    <?php else: ?>
+                    <div class="checkout-table-quantity"> <strong>Proofing:</strong> <?php echo e($item->options->ProofingOption); ?></div>
+                    <?php endif; ?>
                   </div>
                   <!-- <form action="<?php echo e(route('cart.switchToSaveForLater', $item->rowId)); ?>" method="POST">
                   <?php echo e(csrf_field()); ?>
@@ -137,10 +147,8 @@
               <hr>
               New Subtotal <br>
               <?php endif; ?>
-
               <span class="cart-totals-total"><strong>Total</strong></span>
             </div>
-
             <div class="col-md-2">
               <?php echo e(presentPrice(Cart::subtotal())); ?> <br>
               <?php if(session()->has('coupon')): ?>
