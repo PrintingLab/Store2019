@@ -26,6 +26,7 @@
   @endif
 </div>
 
+
 <div class="container containerGeneral" >
   <div class="row">
     <div class="col-md-3 haderPc">
@@ -81,6 +82,11 @@
               <img src="/img/Printinglab-banner-home3.jpg">
             </a>
           </div>
+          <div class="carousel-item">
+            <a href="https://signslab.com/">
+              <img src="/img/Printinglab-banner-home4.jpg">
+            </a>
+          </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" data-slide="prev">
           <span class="carousel-control-prev-icon"></span>
@@ -107,6 +113,11 @@
             <div class="carousel-item">
               <a href="{{ route('shop.show', 'Notepads') }}">
                 <img src="/img/mobile-slider-index-printing-lab-3.jpg">
+              </a>
+            </div>
+            <div class="carousel-item">
+              <a href="https://signslab.com/">
+                <img src="/img/mobile-slider-index-printing-lab-4.jpg">
               </a>
             </div>
           </div>
@@ -420,15 +431,14 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-
-
-
+      <button type="button" class=" btn btn-default btn-circle btn-xl" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <div class="modal-body">
         <a href="https://signslab.com/" target="_blank">
-        <img src="/img/mobile-slider-index-printing-lab-1.jpg" alt="">
+        <img src="img/mobile-slider-index-printing-lab-4.jpg" alt="">
         </a>
       </div>
-
     </div>
   </div>
 </div>

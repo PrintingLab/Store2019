@@ -3,16 +3,37 @@ $('.carousel').carousel({
   interval: 5000
 });
 
-//$('#exampleModal').modal();
 
 function modalSignsLab(){
-  alert('ingresa a la funcion');
 
-document.cookie = "nombrecookie"+"="+"valorcookie" ; max-age=3600; path=/";
+  if (getCookie('popup')=='' ) {
+    var now = new Date();
+    now.setTime(now.getTime() + 1 * 1800 * 1000);
+    document.cookie = "popup=popup; expires=" + now.toUTCString() + "; path=/";
+    $('#exampleModal').modal();
+  }
 
 
-console.log(getCookie(nombrecookie));
 }
+
+
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 
 document.getElementById('dropdownMenuButton2').addEventListener("click",Menubotton)
 document.getElementById('dropdownMenuButton3').addEventListener("click",Menubotton)

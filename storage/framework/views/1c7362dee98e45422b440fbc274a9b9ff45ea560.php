@@ -186,8 +186,8 @@
                       <strong> Coating: {{prdselect3}}</strong>
                     </div> <!-- end filter_name -->
                     <div class="col-md-7 filter_select">
-
-                      <select name="coating" id="coating" ng-disabled="{{Coatingarraylist.length==1}}">
+                    
+                      <select name="coating" id="coating" >
                         <option value="{{op.product_code}}" ng-repeat="op in Coatingarraylist  | filter:{product_code:'!16PT-4VBCUV-2X3.5'} | orderBy:'-option'">{{CoatingsName(op.option,op.product_code)}}</option>
                       </select>
 
@@ -235,7 +235,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="jt_filters prtd{{op.product_option_group_uuid}}" >
                 <div class="row ">
                   <div class="col-md-5 filter_name">
@@ -258,7 +257,7 @@
               </div>
               <div class="col-md-6">
                 <img src="<?php echo e(asset('img/settings/gif-load-13.gif')); ?>" alt="" ng-hide="priceshow" >
-                <input id="product-section-price" value="{{finalprice}}" ng-show="priceshow" readonly disabled>
+                <input id="product-section-price" value="{{priceformat(buildprice)}}" ng-show="priceshow" readonly disabled>
                 <p style="text-align: right;" ng-show="priceshow">( Only ${{priceperpiece}} each )</p>
               </div>
             </div>
@@ -290,7 +289,7 @@
           </form>
           <?php endif; ?>
         </div>
-         <div ng-repeat="op in Coatingarraylist">{"Name":"{{op.option}}","value":"{{op.option}}"},</div>
+         <!-- <div ng-repeat="op in Coatingarraylist">{"Name":"{{op.option}}","value":"{{op.option}}"},</div>  -->
          <!-- <button ng-click="categorias()">categotias</button>
         <input type="text" ng-model="busca" >
         <ul>
