@@ -6,16 +6,12 @@
 <?php $__env->startSection('content'); ?>
 <div class="container containerProducts">
 
-
-
 	<?php if(session()->has('success_message')): ?>
 	<div class="alert alert-success containerAlerts">
 		<?php echo e(session()->get('success_message')); ?>
 
 	</div>
 	<?php endif; ?>
-
-
 
 	<div class="row">
 		<div class="col-md-8">
