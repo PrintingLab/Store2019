@@ -7,6 +7,7 @@
   <div class="dropdown-menu center">
     <li><a href="<?php echo e(route('register')); ?>">Sign Up</a></li>
     <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
+    <li><a href="<?php echo e(route('order-satatus')); ?>">Order Search</a></li>
   </div>
 </div>
 <?php else: ?>

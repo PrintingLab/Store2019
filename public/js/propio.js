@@ -3,6 +3,17 @@ $('.carousel').carousel({
   interval: 5000
 });
 
+//$('#exampleModal').modal();
+
+function modalSignsLab(){
+  alert('ingresa a la funcion');
+
+document.cookie = "nombrecookie"+"="+"valorcookie" ; max-age=3600; path=/";
+
+
+console.log(getCookie(nombrecookie));
+}
+
 document.getElementById('dropdownMenuButton2').addEventListener("click",Menubotton)
 document.getElementById('dropdownMenuButton3').addEventListener("click",Menubotton)
 

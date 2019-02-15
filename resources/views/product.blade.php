@@ -112,13 +112,13 @@
     <div class="col-md-6">
       <div  class="container containerProductsint" ng-controller="shopcontroller">
         <script>
-        var prtd = '{!!$product !!}'                           
-        var apiID = '{!!$product->apiID !!}'                           
-        var prtdname = '{!!$product->name !!}'                           
-        var prtdStock = '{!!$product->coatings !!}'                           
-        var prtdCoatings = '{!!$product->specs !!}'                          
+        var prtd = '{!!$product !!}'
+        var apiID = '{!!$product->apiID !!}'
+        var prtdname = '{!!$product->name !!}'
+        var prtdStock = '{!!$product->coatings !!}'
+        var prtdCoatings = '{!!$product->specs !!}'
         </script>
-        
+
         <div class="product-section-information" Style="position:relative">
           <div id="preloader">
             <div class="flexloader">
@@ -129,7 +129,7 @@
                 </i>
               </div>
             </div>
-            
+
             <p style="text-align: center;padding-top: 70px;">Loading Options...  This may take a few seconds.</p>
           </div>
           <div ng-hide="moreoptions">
@@ -176,7 +176,7 @@
                     </div> <!-- end filter-select -->
                   </div>
                 </div> <!-- end jt_filters -->
-                
+
                 <div class="jt_filters">
                   <div class="row">
                     <div class="col-md-5 filter_name">
@@ -187,7 +187,7 @@
                       <select name="coating" id="coating" >
                         <option value="@{{op.product_code}}" ng-repeat="op in Coatingarraylist  | filter:{product_code:'!16PT-4VBCUV-2X3.5'} | orderBy:'-option'">@{{CoatingsName(op.option,op.product_code)}}</option>
                       </select>
-                    
+
                     </div> <!-- end filter-select -->
                   </div>
                 </div> <!-- end jt_filters -->
@@ -200,7 +200,7 @@
                     <strong>@{{changeoptioname(op.product_option_group_name)}}:</strong>
                   </div>
                   <div class="col-md-7">
-                    <select   name="" id="@{{op.product_option_group_uuid}}" ng-disabled="@{{op.options.length==1}}">                    
+                    <select   name="" id="@{{op.product_option_group_uuid}}" ng-disabled="@{{op.options.length==1}}">
                       <option id="@{{op2.option_uuid}}" name="@{{op2.option_name}}" value="@{{op2.option_uuid}}" ng-repeat="op2 in op.options | filter:{option_uuid:'!2fd6ad29-756c-4927-a66f-b0c0116e31f9'} | unique: 'option_name'" >@{{changeoptioname(op2.option_name)}}</option>
                     </select>
                   </div>
@@ -213,11 +213,11 @@
                     <strong>Printed Side:</strong>
                   </div>
                   <div class="col-md-7">
-                    <select   name="PrintedSide" id="38d33954-5a42-4112-a905-215eb827e62c" >                    
+                    <select   name="PrintedSide" id="38d33954-5a42-4112-a905-215eb827e62c" >
                       <option id="@{{op.colorspec_uuid}}" name="@{{op.colorspec}}" value="@{{op.colorspec_uuid}}" ng-repeat="op in arrayProductprice  | unique: 'colorspec' | filter:{colorspec:'!4/1'}" >@{{changeoptioname(op.colorspec)}}</option>
                     </select>
                   </div>
-                </div>                
+                </div>
               </div>
 
               <div class="jt_filters prtd@{{op.product_option_group_uuid}}" >
@@ -226,7 +226,7 @@
                     <strong>Quantity:</strong>
                   </div>
                   <div class="col-md-7">
-                    <select   name="Quantity" id="87e09691-ef33-4cf4-8f17-48af06ce84f4">                    
+                    <select   name="Quantity" id="87e09691-ef33-4cf4-8f17-48af06ce84f4">
                     <option id="@{{op.runsize_uuid}}" name="@{{op.runsize}}" value="@{{op.runsize_uuid}}" ng-repeat="op in arrayProductprice  | unique: 'runsize' " >@{{changeoptioname(op.runsize)}}</option>
                     </select>
                   </div>
@@ -238,7 +238,7 @@
                     <strong>Printing Time:</strong>
                   </div>
                   <div class="col-md-7">
-                    <select   name="PrintingTime" id="f80e8179-b264-42ce-9f80-bb258a09a1fe">                    
+                    <select   name="PrintingTime" id="f80e8179-b264-42ce-9f80-bb258a09a1fe">
                     <option id="@{{op.option_uuid}}" name="@{{op.option_name}}" value="@{{op.option_uuid}}" ng-repeat="op in arrayProductprice | filter:{runsize_uuid:Runsize} | filter:{colorspec_uuid:Colorspec} | unique: 'option_uuid' " >@{{changeoptioname(op.option_name)}}</option>
                     </select>
                   </div>
@@ -289,7 +289,7 @@
          <!-- <button ng-click="categorias()">categotias</button>
         <input type="text" ng-model="busca" >
         <ul>
-           <li ng-repeat="cat in categoriaslist |filter:busca"><b>@{{cat.category_name}}</li><br> 
+           <li ng-repeat="cat in categoriaslist |filter:busca"><b>@{{cat.category_name}}</li><br>
         </ul>  -->
       </div> <!-- end product-section -->
     </div>

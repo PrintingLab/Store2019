@@ -28,10 +28,7 @@ Route::post('/checkoutCash', 'CheckoutController@CashCheckout')->name('checkoutC
 
 Route::get('/guestCheckout', 'CheckoutController@index')->name('guestCheckout.index');
 
-
 Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
-
-
 
 Route::get('/about-us','PagesController@Aboutus');
 Route::get('/returns-and-refund','PagesController@ReturnsRefund');

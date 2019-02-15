@@ -25,7 +25,6 @@
   <?php endif; ?>
 </div>
 
-
 <div class="container containerGeneral" >
   <div class="row">
     <div class="col-md-3 haderPc">
@@ -35,7 +34,7 @@
       <div class="Div_allproduct2">
         <ul class="list_dropdown">
           <li><strong>MARKETING PRODUCTS</strong></li>
-          
+          <li><a href="<?php echo e(route('shop.index', ['category' => 'Business Cards'])); ?>">Business Cards</a></li>
           <?php $__currentLoopData = $Allproducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <li><a href="<?php echo e(route('shop.show', $produc->slug)); ?>"><?php echo e($produc->name); ?></a></li>
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -43,33 +42,43 @@
         </ul>
         <ul class="list_dropdown">
           <li><strong>CUSTOM APPAREL</strong></li>
-          <li><a href="#">Short Sleeve T-shirts</a></li>
+          <li><a href="contact-us">Coming soon...</a></li>
+          <!-- <li><a href="#">Short Sleeve T-shirts</a></li>
           <li><a href="#">Long Sleeve T-shirts</a></li>
           <li><a href="#">Women</a></li>
           <li><a href="#">Hoodies</a></li>
           <li><a href="#">Sweatshirts</a></li>
           <li><a href="#">Activewear</a></li>
           <li><a href="#">Polos</a></li>
-          <li><a href="#">Jackets</a></li>
+          <li><a href="#">Jackets</a></li> -->
         </ul>
         <ul class="list_dropdown">
           <li><strong>LARGE FORMAT</strong></li>
-          <li><a href="#">Banners</a></li>
-          <li><a href="#">Vinyl Graphics</a></li>
+          <li><a href="contact-us">Coming soon...</a></li>
+          <!-- <li><a href="#">Banners</a></li>
+          <li><a href="#">Vinyl Graphics</a></li> -->
         </ul>
       </div>
     </div>
     <div class="col-md-9 col-sm-12">
+      <?php if($categoryName=='BUSINESS CARDS'): ?>
+      <?php else: ?>
       <div id="carouselExampleIndicators" class="carousel slide haderPc" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active">
-            <img src="/img/Printinglab-banner-home.jpg">
+            <a href="<?php echo e(route('shop.show', 'BusinesCards')); ?>">
+              <img src="/img/Printinglab-banner-home.jpg">
+            </a>
           </div>
           <div class="carousel-item">
-            <img src="/img/Printinglab-banner-home2.jpg">
+            <a href="<?php echo e(route('shop.show', 'Hang Tags')); ?>">
+              <img src="/img/Printinglab-banner-home2.jpg">
+            </a>
           </div>
           <div class="carousel-item">
-            <img src="/img/Printinglab-banner-home3.jpg">
+            <a href="<?php echo e(route('shop.show', 'Notepads')); ?>">
+              <img src="/img/Printinglab-banner-home3.jpg">
+            </a>
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" data-slide="prev">
@@ -79,17 +88,25 @@
           <span class="carousel-control-next-icon"></span>
         </a>
       </div>
+      <?php endif; ?>
+
       <div class="container-fluid headerMb">
         <div id="carouselExampleIndicatorsMb" class="carousel slide " data-ride="carousel">
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img src="/img/mobile-slider-index-printing-lab-1.jpg">
+              <a href="<?php echo e(route('shop.show', 'BusinesCards')); ?>">
+                <img src="/img/mobile-slider-index-printing-lab-1.jpg">
+              </a>
             </div>
             <div class="carousel-item">
-              <img src="/img/mobile-slider-index-printing-lab-2.jpg">
+              <a href="<?php echo e(route('shop.show', 'Hang Tags')); ?>">
+                <img src="/img/mobile-slider-index-printing-lab-2.jpg">
+              </a>
             </div>
             <div class="carousel-item">
-              <img src="/img/mobile-slider-index-printing-lab-3.jpg">
+              <a href="<?php echo e(route('shop.show', 'Notepads')); ?>">
+                <img src="/img/mobile-slider-index-printing-lab-3.jpg">
+              </a>
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicatorsMb" data-slide="prev">
@@ -102,7 +119,7 @@
       </div>
       <div class="h_featured">
         <h4 class="h4Feature">
-        <?php echo e($categoryName); ?>
+          <?php echo e($categoryName); ?>
 
         </h4>
       </div>
@@ -111,7 +128,7 @@
           <div class="container row">
             <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <div class="col-md-4 col-sm-4 col-12" >
-              <div class="btnHoverI"  style="width: 100%;height: 175px;background-size: cover;background-image: url('<?php echo e(productImage($product->image)); ?>');" >
+              <div class="btnHoverI"  style="border-top: 1px #e4e4e4 solid;border-right: 1px #e4e4e4 solid;border-left: 1px #e4e4e4 solid;width: 100%;height: 175px;background-size: cover;background-image: url('<?php echo e(productImage($product->image)); ?>');" >
                 <div class="btn_info">
                   <a class="a_Shop" href="<?php echo e(route('shop.show', $product->slug)); ?>">SHOP NOW</a>
                 </div>
@@ -234,7 +251,7 @@
 </div>
 
 <div class="container  headerMb" >
-  <h2 class="center">SOME OF OUR CLIENTS</h2>
+  <h2 class="center HmobilTxt">SOME OF OUR CLIENTS</h2>
   <div class="row">
     <div class="col-md-12">
       <div class="carousel slide" data-ride="carousel" >
@@ -350,7 +367,7 @@
 </div>
 
 <div class="container">
-  <h2 class="center">REASONS TO TRUST IN US</h2>
+  <h2 class="center HmobilTxt">REASONS TO TRUST IN US</h2>
   <div class="row reasons">
     <div class="col-md-4 col-sm-4 row">
       <div class="col-md-3 ">
@@ -391,14 +408,31 @@
         <p>
           Have a question or need help placing an order?
           <br>
-          Our printing specialists are available Monday-Fridat
-          and form 8am-5pm.
+          Our printing specialists are available Monday-Friday and form 8am-5pm.
         </p>
       </div>
     </div>
   </div>
 </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+
+
+      <div class="modal-body">
+        <a href="https://signslab.com/" target="_blank">
+        <img src="/img/mobile-slider-index-printing-lab-1.jpg" alt="">
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <?php $__env->stopSection(); ?>
 
@@ -409,9 +443,10 @@
 <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
 
 <script src="<?php echo e(asset('js/algolia.js')); ?>"></script>
-<?php $__env->stopSection(); ?>
-<script>
 
+<script>
+modalSignsLab();
 </script>
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
